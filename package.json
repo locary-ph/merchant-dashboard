@@ -56,9 +56,6 @@
     "reactstrap": "8.9.0"
   },
   "devDependencies": {
-    "eslint": "^7.29.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.23.4"
   },
   "optionalDependencies": {
     "eslint-plugin-flowtype": "5.2.0",
