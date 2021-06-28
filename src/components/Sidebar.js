@@ -92,7 +92,7 @@ const Sidebar = (props) => {
         >
           <span className="navbar-toggler-icon" />
         </button>
-        {/* Brand
+        {/* Brand*/}
         {logo ? (
           <NavbarBrand className="pt-0" {...navbarBrandProps}>
             <img
@@ -102,7 +102,7 @@ const Sidebar = (props) => {
             />
           </NavbarBrand>
         ) : null}
-        */}
+        
         {/* User */}
         <Nav className="align-items-center d-md-none">
           {/* for notifs */}
