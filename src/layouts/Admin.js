@@ -5,11 +5,11 @@ import {
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
-import Navbar from "components/Navbar.js";
-import Footer from "components/Footer.js";
-import Sidebar from "components/Sidebar.js";
+import Navbar from "../components/Navbar.js";
+import Footer from "../components/Footer.js";
+import Sidebar from "../components/Sidebar.js";
 
-import routes from "routes.js";
+import routes from "../routes.js";
 
 const Admin = (props) => {
   const mainContent = React.useRef(null);

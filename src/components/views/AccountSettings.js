@@ -13,7 +13,7 @@ import {
   Col,
 } from "reactstrap";
 
-import Header from "../components/Header";
+import Header from "../Header";
 
 const AccountSettings = () => (
     <>
@@ -31,7 +31,7 @@ const AccountSettings = () => (
                         alt="..."
                         className="rounded-circle"
                         src={
-                          require("../assets/img/theme/team-4-800x800.jpg")
+                          require("../../assets/img/theme/team-4-800x800.jpg")
                             .default
                         }
                       />

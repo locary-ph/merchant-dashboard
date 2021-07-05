@@ -1,10 +1,10 @@
-import Index from "views/Index.js";
-import AccountSettings from "views/AccountSettings.js";
-import Analytics from "views/Analytics.js";
-import Products from "views/Products.js";
-import Orders from "views/Orders.js";
-import Login from "views/Login.js";
-import Register from "views/Register.js";
+import Index from "./components/views/Index.js";
+import AccountSettings from "./components/views/AccountSettings.js";
+import Analytics from "./components/views/Analytics.js";
+import Products from "./components/views/Products.js";
+import Orders from "./components/views/Orders.js";
+import Login from "./components/views/Login.js";
+import Register from "./components/views/Register.js";
 
 const routes = [
   {

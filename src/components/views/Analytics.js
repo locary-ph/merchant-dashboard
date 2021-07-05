@@ -4,7 +4,7 @@ import React from "react";
 import { Card, Container, Row } from "reactstrap";
 
 // core components
-import Header from "components/Header.js";
+import Header from "../Header";
 
 const Analytics = () => (
     <>

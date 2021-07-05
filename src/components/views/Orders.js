@@ -19,7 +19,7 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 // core components
-import Header from "components/Header.js";
+import Header from "../Header";
 
 const Icons = () => (
     <>
