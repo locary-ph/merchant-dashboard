@@ -13,13 +13,11 @@ import {
   Col,
 } from "reactstrap";
 
-import Header from "../Header";
 
 const AccountSettings = () => (
     <>
-      <Header />
       {/* Page content */}
-      <Container className="mt--7" fluid>
+      <Container className="mt-6" fluid>
         <Row>
           <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
             <Card className="card-profile shadow">

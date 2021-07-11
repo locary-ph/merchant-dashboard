@@ -7,21 +7,20 @@ import {
   Row,
   Col
 } from "reactstrap";
-import Header from "../Header";
 import sampleProducts from "../../data/products";
 
 const Products = () => {
+
   const [products, setProducts] = useState([])
 
   useEffect(() => {
     setProducts(sampleProducts)
-  }, []);
-    
+  }, [])
+
   return (
     <>
-      <Header />
       {/* Page content */}
-      <Container className="mt--7" fluid>
+      <Container className="mt-6" fluid>
         <Row>
           {products.map((product, key) => {
             return (

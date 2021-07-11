@@ -27,7 +27,6 @@ import {
   chartExample2,
 } from "variables/charts.js";
 
-import Header from "../Header";
 
 const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);
@@ -45,9 +44,8 @@ const Index = (props) => {
 
   return (
     <>
-      <Header />
       {/* Page content */}
-      <Container className="mt--7" fluid>
+      <Container className="mt-6" fluid>
         <Row>
           <Col className="mb-5 mb-xl-0" xl="8">
             <Card className="bg-gradient-default shadow">

@@ -19,13 +19,11 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 // core components
-import Header from "../Header";
 
 const Icons = () => (
     <>
-      <Header />
       {/* Page content */}
-      <Container className="mt--7" fluid>
+      <Container className="mt-6" fluid>
         {/* Table */}
         <Row>
           <div className="col">
