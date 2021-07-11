@@ -47,16 +47,25 @@ const Sidebar = (props) => {
   };
   // creates the links that appear in the left menu / Sidebar
   const createLinks = (routes) => routes.map((prop, key) => {
-    let iconColor = isRouteActive(prop.path) ? "text-orange" : "text-gray";
+    const active = isRouteActive(prop.path);
+    let iconColor = active ? "text-orange" : "text-gray";
     return (
-      <NavItem key={key}>
+      <NavItem 
+        key={key}
+        style={active ? {
+          "borderRight": "3px solid #f2583e",
+          "backgroundColor": "#FFE0DC"
+          } : {}
+        }
+      >
         <NavLink
           to={prop.layout + prop.path}
           tag={NavLinkRRD}
           onClick={closeCollapse}
           activeClassName="active"
+          className={iconColor}
         >
-          <i className={prop.icon + iconColor} />
+          <i className={prop.icon} />
           {prop.name}
         </NavLink>
       </NavItem>
