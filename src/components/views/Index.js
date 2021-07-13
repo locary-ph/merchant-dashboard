@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 // reactstrap components
 import {
   Button,
@@ -17,18 +16,10 @@ import {
   Col,
 } from "reactstrap";
 
+import OrderTable from "../OrderTable";
+
 const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);
-  const [recentOrders, setRecentOrders] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const {data} = await axios.get("/api/v1/orders/recent");
-      setRecentOrders(data);
-    }
-
-    fetchData();
-  })
 
   return (
     <>
@@ -63,26 +54,7 @@ const Index = (props) => {
                 </Row>
               </CardHeader>
               <CardBody>
-                <Table className="align-items-center" responsive>
-                  <thead className="thead-light">
-                    <tr>
-                      <th scope="col">Name</th>
-                      <th scope="col">Product</th>
-                      <th scope="col">Amount</th>
-                      <th scope="col">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {recentOrders.map((order, key) => {
-                      return (
-                        <tr>
-                          <th scope="row"></th>
-                          <td></td>
-                        </tr>
-                      )
-                    })}
-                  </tbody>
-                </Table>
+                <OrderTable count={5} />
               </CardBody>
             </Card>
           </Col>
