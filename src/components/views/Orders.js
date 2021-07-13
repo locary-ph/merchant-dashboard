@@ -20,10 +20,10 @@ import {
 } from "reactstrap";
 // core components
 
-const Icons = () => (
+const Orders = () => (
     <>
       {/* Page content */}
-      <Container className="mt-6" fluid>
+      <Container className="mt-5" fluid>
         {/* Table */}
         <Row>
           <div className="col">
@@ -104,4 +104,4 @@ const Icons = () => (
     </>
 );
 
-export default Icons;
+export default Orders;
