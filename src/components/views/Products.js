@@ -17,7 +17,7 @@ import sampleProducts from "../../data/products";
 const Products = () => {
 
   // TODO(#1): Stock quantity quick edit
-  // TODO: Copy shop link on button click
+  // TODO(#2): Copy shop link on button click
   //    `Add Product` button on Product.js
   // TODO: Implement add product onclick
 
