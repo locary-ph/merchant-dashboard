@@ -19,7 +19,7 @@ const Products = () => {
   // TODO(#1): Stock quantity quick edit
   // TODO(#2): Copy shop link on button click
   //    `Add Product` button on Product.js
-  // TODO: Implement add product onclick
+  // TODO(#3): Implement add product onclick
 
   const [products, setProducts] = useState([])
 
