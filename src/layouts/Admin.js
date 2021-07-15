@@ -8,6 +8,7 @@ import { Container } from "reactstrap";
 import Navbar from "../components/Navbar.js";
 import Footer from "../components/Footer.js";
 import Sidebar from "../components/Sidebar.js";
+import ProductDetails from "../components/views/ProductDetails.js";
 
 import routes from "../routes.js";
 
@@ -28,6 +29,7 @@ const Admin = (props) => {
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}
+            exact
           />
       );
     }
@@ -64,6 +66,7 @@ const Admin = (props) => {
         />
         <Switch>
           {getRoutes(routes)}
+          <Route exact path="/admin/product/:name" component={ProductDetails} />
           <Redirect from="*" to="/admin/index" />
         </Switch>
         <Container fluid>

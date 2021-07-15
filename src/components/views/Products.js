@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import {
   CardHeader,
   UncontrolledTooltip,
@@ -14,7 +15,8 @@ import {
 } from "reactstrap";
 import sampleProducts from "../../data/products";
 
-const Products = () => {
+const Products = (props) => {
+  const pathname = props.location.pathname;
 
   // TODO(#1): Stock quantity quick edit
   // TODO(#2): Copy shop link on button click
@@ -26,6 +28,10 @@ const Products = () => {
   useEffect(() => {
     setProducts(sampleProducts)
   }, [])
+
+  const handleClick = (e, id) => {
+    console.log(id)
+  }
 
   return (
     <>
@@ -62,16 +68,27 @@ const Products = () => {
               <CardBody className="px-5 py-6">
                 <Row>
                   {products.map((product, key) => {
+                    const name = product.name.toLowerCase().replace(" ", "-");
+
                     return (
-                      <Col lg="6" xl="4" className="mb-4">
+                      <Col key={key} lg="6" xl="4" className="mb-4">
                         <Card className="card-stats mb-4 mb-xl-0 bg-transparent border-0">
-                          <CardImg 
-                            className="mx-auto shadow"
-                            style={{borderRadius: 10, border: "solid 2px #FE634E", width: "58%"}}
-                            top 
-                            src="https://yt3.ggpht.com/a-/AN66SAyk49uNWUtt2mDTTxOdMNy5afiVHK3dFIvPVQ=s900-mo-c-c0xffffffff-rj-k-no" 
-                            alt="Card image cap" 
-                          />
+                          <Link 
+                            className="d-flex" 
+                            to={{
+                              pathname: `/admin/product/${name}`,
+                              state: {product} 
+                            }}
+                          >
+                            <CardImg 
+                              className="mx-auto shadow"
+                              style={{borderRadius: 10, border: "solid 2px #FE634E", width: "58%"}}
+                              top 
+                              src="https://yt3.ggpht.com/a-/AN66SAyk49uNWUtt2mDTTxOdMNy5afiVHK3dFIvPVQ=s900-mo-c-c0xffffffff-rj-k-no" 
+                              alt="Card image cap" 
+                              onClick={e => handleClick(e, product._id)}
+                            />
+                          </Link>
                           <CardBody className="d-flex flex-column align-items-center">
                             <CardTitle className="font-weight-bold mb-0" style={{ fontSize: "1.1rem"}}>{product.name}</CardTitle>
                             <CardText><small>Php {product.price}</small></CardText>
