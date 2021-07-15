@@ -16,6 +16,11 @@ import sampleProducts from "../../data/products";
 
 const Products = () => {
 
+  // TODO: Stock quantity quick edit
+  // TODO: Copy shop link on button click
+  //    `Add Product` button on Product.js
+  // TODO: Implement add product onclick
+
   const [products, setProducts] = useState([])
 
   useEffect(() => {
@@ -35,7 +40,7 @@ const Products = () => {
               justifyContent: "space-between"
             }}
           >
-            <h1 className="text-orange">Manage Inventory</h1>
+            <h1 className="text-black">Manage Inventory</h1>
             <Button color="warning" outline type="button">
               Add Product
             </Button>
@@ -54,22 +59,22 @@ const Products = () => {
                 </div>
               </CardHeader>
               */}
-              <CardBody className="px-5">
+              <CardBody className="px-5 py-6">
                 <Row>
                   {products.map((product, key) => {
                     return (
-                      <Col lg="6" xl="3" className="mb-4">
+                      <Col lg="6" xl="4" className="mb-4">
                         <Card className="card-stats mb-4 mb-xl-0 bg-transparent border-0">
                           <CardImg 
-                            style={{borderRadius: 15, border: "solid 1px #FE634E"}}
+                            className="mx-auto shadow"
+                            style={{borderRadius: 10, border: "solid 2px #FE634E", width: "58%"}}
                             top 
-                            width="100%" 
-                            src="https://hddesktopwallpapers.in/wp-content/uploads/2015/09/yellow-flower-a1.jpg" 
+                            src="https://yt3.ggpht.com/a-/AN66SAyk49uNWUtt2mDTTxOdMNy5afiVHK3dFIvPVQ=s900-mo-c-c0xffffffff-rj-k-no" 
                             alt="Card image cap" 
                           />
                           <CardBody className="d-flex flex-column align-items-center">
-                            <CardTitle className="font-weight-bold mb-1">{product.name}</CardTitle>
-                            <CardText>Php {product.price}</CardText>
+                            <CardTitle className="font-weight-bold mb-0" style={{ fontSize: "1.1rem"}}>{product.name}</CardTitle>
+                            <CardText><small>Php {product.price}</small></CardText>
                           </CardBody>
                         </Card>
                       </Col>
