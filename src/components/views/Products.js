@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import {
+  CardHeader,
+  UncontrolledTooltip,
+  Button,
   Card,
   CardBody,
   CardTitle,
+  CardImg,
+  CardText,
   Container,
   Row,
   Col
@@ -20,21 +25,90 @@ const Products = () => {
   return (
     <>
       {/* Page content */}
-      <Container className="mt-6" fluid>
-        <Row>
-          {products.map((product, key) => {
-            return (
-              <Col lg="6" xl="3" className="mb-4">
-                <Card className="card-stats mb-4 mb-xl-0">
-                  <CardBody>
-                    <CardTitle>{product.name}</CardTitle>
-                  </CardBody>
-                </Card>
-              </Col>
-            )
-          })}
+      <Container className="mt-5" fluid>
+        <Row className="mb-3">
+          <Col 
+            className="mb-3 col-xl px-5"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between"
+            }}
+          >
+            <h1 className="text-orange">Manage Inventory</h1>
+            <Button color="warning" outline type="button">
+              Add Product
+            </Button>
+          </Col>
         </Row>
-      </Container>
+        <Row>
+          <div className="col">
+            <Card className="shadow">
+              {/*
+              <CardHeader className="bg-transparent">
+                <div className="d-flex align-items-center justify-content-between px-5">
+                  <small className="text-gray">10 items</small>
+                  <Button size="sm" color="warning" outline type="button">
+                    Add product
+                  </Button>
+                </div>
+              </CardHeader>
+              */}
+              <CardBody className="px-5">
+                <Row>
+                  {products.map((product, key) => {
+                    return (
+                      <Col lg="6" xl="3" className="mb-4">
+                        <Card className="card-stats mb-4 mb-xl-0 bg-transparent border-0">
+                          <CardImg 
+                            style={{borderRadius: 15, border: "solid 1px #FE634E"}}
+                            top 
+                            width="100%" 
+                            src="https://hddesktopwallpapers.in/wp-content/uploads/2015/09/yellow-flower-a1.jpg" 
+                            alt="Card image cap" 
+                          />
+                          <CardBody className="d-flex flex-column align-items-center">
+                            <CardTitle className="font-weight-bold mb-1">{product.name}</CardTitle>
+                            <CardText>Php {product.price}</CardText>
+                          </CardBody>
+                        </Card>
+                      </Col>
+                    )
+                  })}
+                </Row>
+              </CardBody>
+            </Card>
+          </div>
+        </Row>
+        
+        {/* <Row >
+                  <Col>
+                    <Row>
+                      {products.map((product, key) => {
+                        return (
+                          <Col lg="6" xl="3" className="mb-4">
+                            <Card className="card-stats mb-4 mb-xl-0 p-2 bg-transparent border-0">
+                              <CardImg 
+                                style={{borderRadius: 15, border: "solid 1px #FE634E"}}
+                                top 
+                                width="100%" 
+                                src="https://hddesktopwallpapers.in/wp-content/uploads/2015/09/yellow-flower-a1.jpg" 
+                                alt="Card image cap" 
+                              />
+                              <CardBody className="d-flex flex-column align-items-center">
+                                <CardTitle className="font-weight-bold mb-1">{product.name}</CardTitle>
+                                <CardText>Php {product.price}</CardText>
+                              </CardBody>
+                            </Card>
+                          </Col>
+                        )
+                      })}
+                    </Row>
+                  </Col>
+                </Row>
+        
+
+            */}      </Container>
     </>
   );
 };

@@ -27,14 +27,14 @@ const Index = (props) => {
       <Container className="mt-5" fluid>
         <Row>
           <Col 
-            className="mb-5 col-xl"
+            className="mb-3 col-xl px-5"
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between"
             }}
           >
-            <span>Hello, Maria</span>
+            <h1 className="text-orange">Hello, Maria</h1>
             <Button color="warning" outline type="button">
               Shop Link
             </Button>
