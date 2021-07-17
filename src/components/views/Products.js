@@ -37,14 +37,9 @@ const Products = (props) => {
     <>
       {/* Page content */}
       <Container className="mt-5" fluid>
-        <Row className="mb-3">
+        <Row className="mb-4">
           <Col 
-            className="mb-3 col-xl px-5"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between"
-            }}
+            className="d-flex justify-content-between col-xl px-5"
           >
             <h1 className="text-black">Manage Inventory</h1>
             <Button color="warning" outline type="button">
