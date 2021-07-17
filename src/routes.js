@@ -1,6 +1,5 @@
 import Index from "./components/views/Index.js";
 import AccountSettings from "./components/views/AccountSettings.js";
-import Analytics from "./components/views/Analytics.js";
 import Products from "./components/views/Products.js";
 import Orders from "./components/views/Orders.js";
 import Login from "./components/views/Login.js";
@@ -19,13 +18,6 @@ const routes = [
     name: "Orders",
     icon: "ni ni-cart ",
     component: Orders,
-    layout: "/admin",
-  },
-  {
-    path: "/analytics",
-    name: "Analytics",
-    icon: "ni ni-chart-bar-32 ",
-    component: Analytics,
     layout: "/admin",
   },
   {
