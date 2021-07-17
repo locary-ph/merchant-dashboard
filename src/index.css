@@ -2,3 +2,32 @@
 .navbar-vertical.navbar-expand-md .navbar-nav .nav-link.active::before{
   border-left: none;
 }
+
+/* Product delete button */
+
+button.close {
+	position: absolute;
+	width: 20px;
+	right: 30px;
+	color: #FE634E;
+	background-color: #FFDBD7;
+	padding: 4px;
+	border-radius: 18px;
+	box-sizing: content-box;
+	opacity: 1;
+}
+
+.close > span:not(.sr-only) {
+	color: #fe634e;
+}
+
+.close:hover,
+.close:focus {
+	background-color: #FE634E;
+	color: white;
+}
+
+.close:hover > span:not(.sr-only), 
+.close:focus > span:not(.sr-only) {
+	color: white;
+}

@@ -39,11 +39,11 @@ const Products = (props) => {
       <Container className="mt-5" fluid>
         <Row className="mb-4">
           <Col 
-            className="d-flex justify-content-between col-xl px-5"
+            className="d-lg-flex d-block justify-content-between col-xl px-5"
           >
-            <h1 className="text-black">Manage Inventory</h1>
-            <Button color="warning" outline type="button">
-              Add Product
+            <h1 className="text-black d-none d-lg-block">Manage Inventory</h1>
+            <Button className="w-lg-25 w-100 d-block" color="warning" outline type="button">
+              +  Add new product
             </Button>
           </Col>
         </Row>
@@ -68,6 +68,11 @@ const Products = (props) => {
                     return (
                       <Col key={key} lg="6" xl="4" className="mb-4">
                         <Card className="card-stats mb-4 mb-xl-0 bg-transparent border-0">
+                          <Button 
+                            close 
+                            color="warning"
+                            type="button"
+                          />
                           <Link 
                             className="d-flex" 
                             to={{
@@ -85,7 +90,9 @@ const Products = (props) => {
                             />
                           </Link>
                           <CardBody className="d-flex flex-column align-items-center">
-                            <CardTitle className="font-weight-bold mb-0" style={{ fontSize: "1.1rem"}}>{product.name}</CardTitle>
+                            <CardTitle className="font-weight-bold mb-0" style={{ fontSize: "1.1rem"}}>
+                              {product.name}
+                            </CardTitle>
                             <CardText><small>Php {product.price}</small></CardText>
                           </CardBody>
                         </Card>
