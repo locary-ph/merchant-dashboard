@@ -66,7 +66,7 @@ const Admin = (props) => {
         />
         <Switch>
           {getRoutes(routes)}
-          <Route exact path="/admin/product/:name" component={ProductDetails} />
+          <Route exact path="/admin/products/:name" component={ProductDetails} />
           <Redirect from="*" to="/admin/index" />
         </Switch>
         <Container fluid>
