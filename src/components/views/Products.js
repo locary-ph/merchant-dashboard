@@ -76,7 +76,7 @@ const Products = (props) => {
                           <Link 
                             className="d-flex" 
                             to={{
-                              pathname: `/admin/product/${name}`,
+                              pathname: `/admin/products/${name}`,
                               state: {product} 
                             }}
                           >
