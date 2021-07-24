@@ -75,10 +75,15 @@ function ProductDetails(props) {
                 <div className="pl-lg-4">
                   <Row className="align-items-end py-4">
                     <Col xs="auto">
-                      <img 
-                        style={{borderRadius: 10, border: "solid 2px #FE634E", width: "200px"}}
-                        src={require("../../assets/img/placeholder-img.jpg").default}
-                      />
+                      <div 
+                        className="d-flex align-items-center"
+                        style={{ borderRadius: 10, border: "solid 2px #FE634E", height: 200 }}
+                      >
+                        <img 
+                          style={{ borderRadius: 10, width: "200px" }}
+                          src={require("../../assets/img/placeholder-img.jpg").default}
+                        />
+                      </div>
                     </Col>
                     <Col>
                         <Button style={{ borderRadius: 15 }} color="warning" outline type="button">
