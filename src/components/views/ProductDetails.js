@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from "axios";
 import PropTypes from 'prop-types';
 import {
   Button,
@@ -23,8 +24,39 @@ function ProductDetails(props) {
   
   const handleSubmit = e => {
     e.preventDefault();
+    
+    const action = e.currentTarget.value;
 
-    console.log(e.target.value)
+    console.log(action)
+    switch(action) {
+      case "save":
+        saveProduct(product._id);
+        break;
+      case "delete":
+        deleteProduct(product._id);
+        break;
+    }
+  }
+
+  const saveProduct = async id => {
+    try {
+      await axios.post(`products/${id}`, {
+        name: productName,
+        description,
+        price,
+        qty: stocks
+      })
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  const deleteProduct = async (id) => {
+    try {
+      await axios.delete(`products/${id}`)
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   return (
