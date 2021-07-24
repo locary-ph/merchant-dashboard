@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
+  Button,
   Container,
   Row,
   Col,
@@ -31,15 +32,25 @@ function ProductDetails(props) {
             <CardBody>
               <Form>
                 <div className="pl-lg-4">
-                  <Row>
+                  <Row className="align-items-end py-4">
+                    <Col xs="auto">
+                      <img 
+                        style={{borderRadius: 10, border: "solid 2px #FE634E", width: "200px"}}
+                        src={require("../../assets/img/placeholder-img.jpg").default}
+                      />
+                    </Col>
                     <Col>
+                        <Button style={{ borderRadius: 15 }} color="warning" outline type="button">
                       <label 
-                        className="form-control-label" 
+                        className="m-0" 
                         htmlFor="productImg"
+                        role="button"
                       >
-                        Product image
+                          Upload photo
                       </label>
+                        </Button>
                       <Input 
+                        className="d-none"
                         name="productImg"
                         id="productImg"
                         type="File"
@@ -120,6 +131,20 @@ function ProductDetails(props) {
                           placeholder="0"
                         />
                       </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row className="pt-3">
+                    <Col>
+                    
+                      <Button className="btn-icon btn-3" color="primary" type="button">
+                        <i class="fas fa-save"></i>
+                        <span className="btn-inner--text">Save</span>
+                      </Button>
+                      <Button outline className="btn-icon btn-3" color="danger" type="button">
+                        <i class="fas fa-trash"></i>
+                        <span className="btn-inner--text">Delete</span>
+                      </Button>
+                    
                     </Col>
                   </Row>
                 </div>
