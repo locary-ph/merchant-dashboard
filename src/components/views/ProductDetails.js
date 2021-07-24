@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Button,
@@ -15,8 +15,18 @@ import {
 } from "reactstrap";
 
 function ProductDetails(props) {
-  const { product }= props.location.state;
-  console.log(product)
+  const { product } = props.location.state;
+  const [productName, setProductName] = useState(product.name || "");
+  const [description, setDescription] = useState(product.description || "");
+  const [price, setPrice] = useState(product.price || 0);
+  const [stocks, setStocks] = useState(product.qty || 0);
+  
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    console.log(e.target.value)
+  }
+
   return (
     <Container className="mt-5" fluid>
       <Row>
@@ -75,6 +85,8 @@ function ProductDetails(props) {
                           id="productName"
                           placeholder="Juan dela Cruz Delicacies"
                           type="text"
+                          value={productName}
+                          onChange={e => setProductName(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -93,6 +105,8 @@ function ProductDetails(props) {
                           id="productDescription"
                           type="textarea"
                           rows="4"
+                          value={description}
+                          onChange={e => setDescription(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -112,6 +126,8 @@ function ProductDetails(props) {
                           min="0"
                           type="number"
                           placeholder="0"
+                          value={price}
+                          onChange={e => setPrice(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -129,6 +145,8 @@ function ProductDetails(props) {
                           min="0"
                           type="number"
                           placeholder="0"
+                          value={stocks}
+                          onChange={e => setStocks(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -136,12 +154,25 @@ function ProductDetails(props) {
                   <Row className="pt-3">
                     <Col>
                     
-                      <Button className="btn-icon btn-3" color="primary" type="button">
-                        <i class="fas fa-save"></i>
+                      <Button 
+                        className="btn-icon btn-3" 
+                        color="primary" 
+                        type="submit"
+                        onClick={handleSubmit}
+                        value="save"
+                      >
+                        <i className="fas fa-save"></i>
                         <span className="btn-inner--text">Save</span>
                       </Button>
-                      <Button outline className="btn-icon btn-3" color="danger" type="button">
-                        <i class="fas fa-trash"></i>
+                      <Button 
+                        className="btn-icon btn-3" 
+                        color="danger" 
+                        type="submit"
+                        onClick={handleSubmit}
+                        value="delete"
+                        outline
+                      >
+                        <i className="fas fa-trash"></i>
                         <span className="btn-inner--text">Delete</span>
                       </Button>
                     
