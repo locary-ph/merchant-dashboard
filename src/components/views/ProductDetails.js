@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from "axios";
+import axios from '../../axios.js';
 import PropTypes from 'prop-types';
 import {
   Button,
@@ -27,7 +27,6 @@ function ProductDetails(props) {
     
     const action = e.currentTarget.value;
 
-    console.log(action)
     switch(action) {
       case "save":
         saveProduct(product._id);
