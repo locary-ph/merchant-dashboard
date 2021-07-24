@@ -43,7 +43,8 @@ const Products = (props) => {
           >
             <h1 className="text-black d-none d-lg-block">Manage Inventory</h1>
             <Button className="w-lg-25 w-100 d-block" color="warning" outline type="button">
-              +  Add new product
+              <i className="mr-3 fas fa-plus"></i>
+              Add new product
             </Button>
           </Col>
         </Row>

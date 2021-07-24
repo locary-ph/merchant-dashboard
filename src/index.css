@@ -31,3 +31,13 @@ button.close {
 .close:focus > span:not(.sr-only) {
 	color: white;
 }
+
+/* override Card styles */
+
+.card-header:first-child {
+	border-radius: 1rem 1rem 0 0;
+}
+
+.card {
+	border-radius: 2rem;
+}
