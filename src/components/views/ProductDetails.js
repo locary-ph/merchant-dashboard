@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from '../../axios.js';
+import { IKContext, IKImage, IKUpload } from 'imagekitio-react';
 import PropTypes from 'prop-types';
 import {
   Button,
@@ -15,20 +16,27 @@ import {
   FormText
 } from "reactstrap";
 
+import uploadImage from "../../utils/uploadImage";
+
 function ProductDetails(props) {
   const { product } = props.location.state;
   const [productName, setProductName] = useState(product.name || "");
   const [description, setDescription] = useState(product.description || "");
   const [price, setPrice] = useState(product.price || 0);
   const [stocks, setStocks] = useState(product.qty || 0);
-  
+  const [imageUrl, setImageUrl] = useState(product.thumbnailUrl || "");
+  const [imageFile, setImageFile] = useState({})
+
   const handleSubmit = e => {
     e.preventDefault();
-    
+
     const action = e.currentTarget.value;
 
     switch(action) {
       case "save":
+        uploadImage(imageFile, product)
+        //const url = uploadImage(imageFile, product);
+        //setImageUrl(url);
         saveProduct(product._id);
         break;
       case "delete":
@@ -86,20 +94,22 @@ function ProductDetails(props) {
                       </div>
                     </Col>
                     <Col>
-                        <Button style={{ borderRadius: 15 }} color="warning" outline type="button">
-                      <label 
-                        className="m-0" 
-                        htmlFor="productImg"
-                        role="button"
-                      >
+                      <Button style={{ borderRadius: 15, padding: 0 }} color="warning" outline type="button">
+                        <label 
+                          className="m-0" 
+                          htmlFor="productImg"
+                          role="button"
+                          style={{ padding: "10px 20px" }}
+                        >
                           Upload photo
-                      </label>
-                        </Button>
+                        </label>
+                      </Button>
                       <Input 
                         className="d-none"
                         name="productImg"
                         id="productImg"
                         type="File"
+                        onChange={e => setImageFile(e.target.files[0])}
                       />
                       <FormText>
                         Put text here about what type of image should be uploaded
@@ -189,7 +199,7 @@ function ProductDetails(props) {
                   </Row>
                   <Row className="pt-3">
                     <Col>
-                    
+
                       <Button 
                         className="btn-icon btn-3" 
                         color="primary" 
@@ -211,7 +221,7 @@ function ProductDetails(props) {
                         <i className="fas fa-trash"></i>
                         <span className="btn-inner--text">Delete</span>
                       </Button>
-                    
+
                     </Col>
                   </Row>
                 </div>
