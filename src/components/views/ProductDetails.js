@@ -34,9 +34,9 @@ function ProductDetails(props) {
 
     switch(action) {
       case "save":
-        uploadImage(imageFile, product)
-        //const url = uploadImage(imageFile, product);
-        //setImageUrl(url);
+        uploadImage(imageFile, product, (url) => {
+          setImageUrl(url);
+        });
         saveProduct(product._id);
         break;
       case "delete":
@@ -51,7 +51,8 @@ function ProductDetails(props) {
         name: productName,
         description,
         price,
-        qty: stocks
+        qty: stocks,
+        thumbnailUrl: imageUrl
       })
     } catch (e) {
       console.error(e)
@@ -89,7 +90,7 @@ function ProductDetails(props) {
                       >
                         <img 
                           style={{ borderRadius: 10, width: "200px" }}
-                          src={require("../../assets/img/placeholder-img.jpg").default}
+                          src={imageUrl}
                         />
                       </div>
                     </Col>

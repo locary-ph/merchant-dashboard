@@ -1,8 +1,7 @@
 import imagekit from "../imagekit";
 
-const uploadImage = (image, product) => {
+const uploadImage = (image, product, callback) => {
   const name = product.name.toLowerCase().replace(" ", "-");
-  //const shopName = product.shopName.toLowerCase().replace(" ", "-");
   const fileName = `${name}-locary.jpg`;
 
   imagekit.upload({
@@ -10,12 +9,14 @@ const uploadImage = (image, product) => {
     fileName,
     folder: `/merchant/`
   }, (err, res) => {
-    console.log(imagekit.url({
+    const url = imagekit.url({
       src: res.url,
       transformation: [{ width: 200 }]
-    }));
-  });
+    })
 
+    // https://stackoverflow.com/questions/23339907/returning-a-value-from-callback-function-in-node-js#23340273
+    callback(url);
+  });
 }
 
 export default uploadImage;
