@@ -10,7 +10,7 @@ import {
   DropdownToggle,
 } from "reactstrap";
 
-function OrderList({ count }) {
+function OrderList() {
   const [orders, setOrders] = useState([]);
 
   useEffect(async () => {

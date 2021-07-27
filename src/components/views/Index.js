@@ -16,7 +16,7 @@ import {
   Col,
 } from "reactstrap";
 
-import OrderTable from "../OrderTable";
+import OrderList from "../OrderList";
 
 const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);
@@ -53,9 +53,7 @@ const Index = (props) => {
                   </div>
                 </Row>
               </CardHeader>
-              <CardBody>
-                <OrderTable count={5} />
-              </CardBody>
+                <OrderList />
             </Card>
           </Col>
 
