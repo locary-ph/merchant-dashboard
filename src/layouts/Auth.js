@@ -2,10 +2,9 @@ import React from "react";
 import {
   useLocation, Route, Switch, Redirect
 } from "react-router-dom";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row } from "reactstrap";
 
 import Footer from "../components/Footer.js";
-import routes from "routes.js";
 import Login from "../components/views/Login.js";
 import Register from "../components/views/Register.js";
 
@@ -24,19 +23,6 @@ const Auth = (props) => {
     document.scrollingElement.scrollTop = 0;
     mainContent.current.scrollTop = 0;
   }, [location]);
-
-  const getRoutes = (routes) => routes.map((prop, key) => {
-    if (prop.layout === "/auth") {
-      return (
-          <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
-      );
-    }
-    return null;
-  });
 
   return (
     <>

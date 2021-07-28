@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import {
-  CardHeader,
-  UncontrolledTooltip,
   Button,
   Card,
   CardBody,
@@ -16,8 +14,6 @@ import {
 import sampleProducts from "../../data/products";
 
 const Products = (props) => {
-  const pathname = props.location.pathname;
-
   // TODO(#1): Stock quantity quick edit
   // TODO(#2): Copy shop link on button click
   //    `Add Product` button on Product.js

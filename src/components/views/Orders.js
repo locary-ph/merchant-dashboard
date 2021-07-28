@@ -1,18 +1,9 @@
 import React, { useState } from "react";
 import {
-  Button,
   Card,
   CardHeader,
-  CardFooter,
-  Media,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-  Progress,
-  Table,
   Container,
   Row,
-  UncontrolledTooltip,
 } from "reactstrap";
 
 import OrderList from "../OrderList";

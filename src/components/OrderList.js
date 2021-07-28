@@ -4,10 +4,6 @@ import axios from "../axios";
 import {
   Table,
   Badge,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
 } from "reactstrap";
 
 function OrderList({ filter }) {

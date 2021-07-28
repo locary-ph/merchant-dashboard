@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 // reactstrap components
 import {
   Button,
   Card,
   CardHeader,
   CardBody,
-  NavItem,
-  NavLink,
-  Nav,
-  Progress,
-  Table,
   Container,
   Row,
   Col,
@@ -19,8 +13,6 @@ import {
 import OrderList from "../OrderList";
 
 const Index = (props) => {
-  const [activeNav, setActiveNav] = useState(1);
-
   return (
     <>
       {/* Page content */}

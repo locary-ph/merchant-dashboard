@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from '../../axios.js';
-import { IKContext, IKImage, IKUpload } from 'imagekitio-react';
 import PropTypes from 'prop-types';
 import {
   Button,
