@@ -43,10 +43,8 @@ function OrderList({ filter }) {
   const displayOrders = () => {
     return orders.map(order => {
       const orderStatus = order.orderStatus;
-      console.log("filter", filter)
-      console.log(order.orderStatus.toLowerCase())
 
-      if (filter === "all" || filter === order.orderStatus.toLowerCase()) {
+      if (filter === "all" || filter === orderStatus.toLowerCase()) {
         return (
           <tr>
             <th scope="row">
