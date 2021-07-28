@@ -71,7 +71,7 @@ const Orders = () => {
 
                   <div className="col">
                     <button
-                      className="btn btn-outline-warning btn-sm"
+                      className="btn btn-warning btn-sm"
                       type="button"
                       style={buttonStyles}
                       onClick={handleClick}
