@@ -28,6 +28,14 @@ function OrderList() {
     "Amount"
   ];
 
+  const badgeColor = {
+    PENDING: "warning",
+    ACCEPTED: "primary",
+    DISPATCHED: "info",
+    DELIVERED: "success",
+    CANCELLED: "danger"
+  }
+
   return (
     <Table className="align-items-center table-flush" responsive>
       <thead className="thead-light">
@@ -51,9 +59,9 @@ function OrderList() {
               <td>{new Date(order.createdAt).toLocaleDateString("en-US")}</td>
               <td>{order.buyer.firstName} {order.buyer.lastName}</td>
               <td>Rose Necklace</td>
-              <td>3</td>
+              <td>{order.quantity}</td>
               <td>
-                <Badge color="warning" className="mr-4">
+                <Badge color={badgeColor[order.orderStatus]} className="mr-4">
                   {order.orderStatus}
                 </Badge>
               </td>
