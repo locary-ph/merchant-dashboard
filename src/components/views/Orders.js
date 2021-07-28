@@ -20,6 +20,25 @@ import OrderList from "../OrderList";
 const Orders = () => {
   const [orderStatusFilter, setOrderStatusFilter] = useState("all");
 
+  const handleClick = (e) => {
+    const target = e.target;
+    const btns = target.parentNode.childNodes;
+    const status = target.textContent.toLowerCase();
+    setOrderStatusFilter(status);
+
+    btns.forEach(btn => {
+      if (btn.classList.contains("btn-warning")) {
+        btn.classList.remove("btn-warning");
+        btn.classList.add("btn-outline-warning");
+      }
+    })
+
+    if (target.classList.contains("btn-outline-warning")){
+      target.classList.remove("btn-outline-warning");
+      target.classList.add("btn-warning");
+    } 
+  }
+
   const status = [
     "PENDING",
     "ACCEPTED",
@@ -55,7 +74,7 @@ const Orders = () => {
                       className="btn btn-outline-warning btn-sm"
                       type="button"
                       style={buttonStyles}
-                      onClick={e => setOrderStatusFilter("all")}
+                      onClick={handleClick}
                     >
                       ALL
                     </button>
@@ -65,7 +84,7 @@ const Orders = () => {
                           className="btn btn-outline-warning btn-sm"
                           type="button"
                           style={buttonStyles}
-                          onClick={e => setOrderStatusFilter(stat.toLowerCase())} // optimize uppercase, change in order model
+                          onClick={handleClick} // optimize uppercase, change in order model
                         >
                           {stat}
                         </button>
