@@ -40,15 +40,13 @@ function OrderList() {
     <Table className="align-items-center table-flush" responsive>
       <thead className="thead-light">
         <tr>
-          {headers.map(header => {
-            return (
-            <th scope="col">{header}</th>
-            )
-          })}
+          {headers.map(header => <th scope="col">{header}</th>)}
         </tr>
       </thead>
       <tbody>
         {orders.map(order => {
+          const orderStatus = order.orderStatus;
+
           return (
             <tr>
               <th scope="row">
@@ -61,8 +59,8 @@ function OrderList() {
               <td>Rose Necklace</td>
               <td>{order.quantity}</td>
               <td>
-                <Badge color={badgeColor[order.orderStatus]} className="mr-4">
-                  {order.orderStatus}
+                <Badge color={badgeColor[orderStatus]} className="mr-4">
+                  {orderStatus}
                 </Badge>
               </td>
               <td>
