@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Button,
   Card,
   CardHeader,
   CardFooter,
@@ -16,7 +17,42 @@ import {
 
 import OrderList from "../OrderList";
 
-const Orders = () => (
+const Orders = () => {
+  const [orderStatusFilter, setOrderStatusFilter] = useState("all");
+
+  const handleClick = (e) => {
+    const target = e.target;
+    const btns = target.parentNode.childNodes;
+    const status = target.textContent.toLowerCase();
+    setOrderStatusFilter(status);
+
+    btns.forEach(btn => {
+      if (btn.classList.contains("btn-warning")) {
+        btn.classList.remove("btn-warning");
+        btn.classList.add("btn-outline-warning");
+      }
+    })
+
+    if (target.classList.contains("btn-outline-warning")){
+      target.classList.remove("btn-outline-warning");
+      target.classList.add("btn-warning");
+    } 
+  }
+
+  const status = [
+    "PENDING",
+    "ACCEPTED",
+    "DISPATCHED",
+    "DELIVERED",
+    "CANCELLED"
+  ];
+
+  const buttonStyles = {
+    borderRadius: 10,
+    fontSize: "0.65rem"
+  };
+
+  return (
     <>
       {/* Page content */}
       <Container className="mt-5" fluid>
@@ -32,14 +68,38 @@ const Orders = () => (
                     </h6>
                     <h2 className="text-black mb-0">Manage Orders</h2>
                   </div>
+
+                  <div className="col">
+                    <button
+                      className="btn btn-warning btn-sm"
+                      type="button"
+                      style={buttonStyles}
+                      onClick={handleClick}
+                    >
+                      ALL
+                    </button>
+                    {status.map(stat => {
+                      return (
+                        <button
+                          className="btn btn-outline-warning btn-sm"
+                          type="button"
+                          style={buttonStyles}
+                          onClick={handleClick} // optimize uppercase, change in order model
+                        >
+                          {stat}
+                        </button>
+                      )
+                    })}
+                  </div>
                 </Row>
               </CardHeader>
-              <OrderList />
+              <OrderList filter={orderStatusFilter}/>
             </Card>
           </div>
         </Row>
       </Container>
     </>
-);
+)
+};
 
 export default Orders;
