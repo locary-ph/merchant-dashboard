@@ -10,7 +10,7 @@ import {
   DropdownToggle,
 } from "reactstrap";
 
-function OrderList() {
+function OrderList({ filter }) {
   const [orders, setOrders] = useState([]);
 
   useEffect(async () => {
@@ -36,6 +36,38 @@ function OrderList() {
     CANCELLED: "danger"
   }
 
+  const displayOrders = () => {
+    return orders.map(order => {
+      const orderStatus = order.orderStatus;
+      console.log("filter", filter)
+      console.log(order.orderStatus.toLowerCase())
+
+      if (filter === "all" || filter === order.orderStatus.toLowerCase()) {
+        return (
+          <tr>
+            <th scope="row">
+              <span className="mb-0 text-sm">
+                xxxx-xxx
+              </span>
+            </th>
+            <td>{new Date(order.createdAt).toLocaleDateString("en-US")}</td>
+            <td>{order.buyer.firstName} {order.buyer.lastName}</td>
+            <td>Rose Necklace</td>
+            <td>{order.quantity}</td>
+            <td>
+              <Badge color={badgeColor[orderStatus]} className="mr-4">
+                {orderStatus}
+              </Badge>
+            </td>
+            <td>
+              <span>Php 200</span>
+            </td>
+          </tr>
+        )
+      }
+    })
+  }
+
   return (
     <Table className="align-items-center table-flush" responsive>
       <thead className="thead-light">
@@ -44,42 +76,18 @@ function OrderList() {
         </tr>
       </thead>
       <tbody>
-        {orders.map(order => {
-          const orderStatus = order.orderStatus;
-
-          return (
-            <tr>
-              <th scope="row">
-                <span className="mb-0 text-sm">
-                  xxxx-xxx
-                </span>
-              </th>
-              <td>{new Date(order.createdAt).toLocaleDateString("en-US")}</td>
-              <td>{order.buyer.firstName} {order.buyer.lastName}</td>
-              <td>Rose Necklace</td>
-              <td>{order.quantity}</td>
-              <td>
-                <Badge color={badgeColor[orderStatus]} className="mr-4">
-                  {orderStatus}
-                </Badge>
-              </td>
-              <td>
-                <span>Php 200</span>
-              </td>
-            </tr>
-          )
-        })}
+        {displayOrders()}
       </tbody>
     </Table>
   );
 }
 
 OrderList.defaultProps = {
-  count: null
+  filter: "all"
 };
 
 OrderList.propTypes = {
-  count: PropTypes.number
+  filter: PropTypes.string
 };
 
 export default OrderList;
