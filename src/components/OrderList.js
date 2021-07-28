@@ -13,9 +13,13 @@ import {
 function OrderList({ filter }) {
   const [orders, setOrders] = useState([]);
 
-  useEffect(async () => {
-    const { data } = await axios.get("/orders")
-    setOrders(data);
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await axios.get("/orders")
+      setOrders(data);
+    }
+
+    fetchData();
   }, []);
 
   const headers = [
