@@ -1,3 +1,6 @@
+/**
+ * @format
+ */
 import React from "react";
 // reactstrap components
 import {
@@ -12,18 +15,17 @@ import {
 
 import OrderList from "../OrderList";
 
-const Index = (props) => {
-  return (
+const Index = (props) => (
     <>
       {/* Page content */}
       <Container className="mt-5" fluid>
         <Row>
-          <Col 
+          <Col
             className="mb-3 col-xl px-5"
             style={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "space-between"
+              justifyContent: "space-between",
             }}
           >
             <h1 className="text-orange">Hello, Maria</h1>
@@ -45,7 +47,7 @@ const Index = (props) => {
                   </div>
                 </Row>
               </CardHeader>
-                <OrderList />
+              <OrderList />
             </Card>
           </Col>
 
@@ -63,8 +65,7 @@ const Index = (props) => {
               </CardHeader>
               <CardBody>
                 {/* Chart */}
-                <div className="chart">
-                </div>
+                <div className="chart" />
               </CardBody>
             </Card>
           </Col>
@@ -72,6 +73,5 @@ const Index = (props) => {
       </Container>
     </>
   );
-};
 
 export default Index;

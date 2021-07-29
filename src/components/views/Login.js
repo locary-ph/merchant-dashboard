@@ -13,8 +13,7 @@ import {
   Col,
 } from "reactstrap";
 
-const Login = () => {
-  return (
+const Login = () => (
     <>
       <Col lg="5" md="7">
         <Card className="bg-secondary shadow border-0">
@@ -95,6 +94,5 @@ const Login = () => {
       </Col>
     </>
   );
-};
 
 export default Login;

@@ -4,11 +4,11 @@ import {
 } from "react-router-dom";
 import { Container, Row } from "reactstrap";
 
-import Footer from "../components/Footer.js";
-import Login from "../components/views/Login.js";
-import Register from "../components/views/Register.js";
+import Footer from "../components/Footer";
+import Login from "../components/views/Login";
+import Register from "../components/views/Register";
 
-const Auth = (props) => {
+const Auth = () => {
   const mainContent = React.useRef(null);
   const location = useLocation();
 

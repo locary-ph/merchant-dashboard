@@ -3,17 +3,16 @@ import React from "react";
 // reactstrap components
 import { Button, Container, Row, Col } from "reactstrap";
 
-const UserHeader = () => {
-  return (
+const UserHeader = () => (
     <>
       <div
         className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
         style={{
           minHeight: "600px",
           backgroundImage:
-            "url(" +
-            require("../../assets/img/theme/profile-cover.jpg").default +
-            ")",
+            `url(${ 
+            require("../../assets/img/theme/profile-cover.jpg").default 
+            })`,
           backgroundSize: "cover",
           backgroundPosition: "center top",
         }}
@@ -42,6 +41,5 @@ const UserHeader = () => {
       </div>
     </>
   );
-};
 
 export default UserHeader;
