@@ -37,8 +37,7 @@ function Inventory({  }) {
           </tr>
         </thead>
         <tbody>
-          {products.map(product => {
-            return (
+          {products.map(product => (
               <tr>
                 <th scope="row">
                   <span className="mb-0 text-sm">
@@ -54,8 +53,7 @@ function Inventory({  }) {
                   }
                 </td>
               </tr>
-            )
-          })}
+            ))}
         </tbody>
       </Table>
     </Card>

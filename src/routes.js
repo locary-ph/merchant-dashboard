@@ -1,9 +1,9 @@
-import Index from "./components/views/Index.js";
-import AccountSettings from "./components/views/AccountSettings.js";
-import Products from "./components/views/Products.js";
-import Orders from "./components/views/Orders.js";
-import Login from "./components/views/Login.js";
-import Register from "./components/views/Register.js";
+import Index from "./components/views/Index";
+import AccountSettings from "./components/views/AccountSettings";
+import Products from "./components/views/Products";
+import Orders from "./components/views/Orders";
+import Login from "./components/views/Login";
+import Register from "./components/views/Register";
 
 const routes = [
   {

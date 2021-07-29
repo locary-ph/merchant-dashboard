@@ -13,8 +13,7 @@ const Analytics = () => (
       <Container className="mt--7" fluid>
         <Row>
           <div className="col">
-            <Card className="shadow border-0">
-            </Card>
+            <Card className="shadow border-0" />
           </div>
         </Row>
       </Container>

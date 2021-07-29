@@ -12,7 +12,7 @@ const Orders = () => {
   const [orderStatusFilter, setOrderStatusFilter] = useState("all");
 
   const handleClick = (e) => {
-    const target = e.target;
+    const {target} = e;
     const btns = target.parentNode.childNodes;
     const status = target.textContent.toLowerCase();
     setOrderStatusFilter(status);
@@ -69,8 +69,7 @@ const Orders = () => {
                     >
                       ALL
                     </button>
-                    {status.map(stat => {
-                      return (
+                    {status.map(stat => (
                         <button
                           className="btn btn-outline-warning btn-sm"
                           type="button"
@@ -79,8 +78,7 @@ const Orders = () => {
                         >
                           {stat}
                         </button>
-                      )
-                    })}
+                      ))}
                   </div>
                 </Row>
               </CardHeader>

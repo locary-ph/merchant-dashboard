@@ -13,7 +13,7 @@ import {
 } from "reactstrap";
 import sampleProducts from "../../data/products";
 
-const Products = (props) => {
+const Products = () => {
   // TODO(#1): Stock quantity quick edit
   // TODO(#2): Copy shop link on button click
   //    `Add Product` button on Product.js
@@ -39,7 +39,7 @@ const Products = (props) => {
           >
             <h1 className="text-black d-none d-lg-block">Manage Inventory</h1>
             <Button className="w-lg-25 w-100 d-block" color="warning" outline type="button">
-              <i className="mr-3 fas fa-plus"></i>
+              <i className="mr-3 fas fa-plus" />
               Add new product
             </Button>
           </Col>

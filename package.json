@@ -1,5 +1,5 @@
 {
-  "name": "argon-dashboard-react",
+  "name": "locary-merchant-dashboard",
   "version": "1.2.0",
   "description": "Locary frontend dashboard for merchants",
   "main": "index.js",
@@ -24,15 +24,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "lint": "eslint --max-warnings=0 src/**/*.{js,jsx}",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,css,less,scss,vue,json,gql,md}\"",
     "eject": "react-scripts eject",
-    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
     "compile:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.css",
     "minify:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.min.css --output-style compressed",
     "map:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.css --source-map true",
     "build:scss": "npm run compile:scss && npm run minify:scss && npm run map:scss"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",
@@ -45,10 +43,12 @@
     "axios": "^0.21.1",
     "bootstrap": "4.6.0",
     "chart.js": "2.9.4",
+    "imagekit-javascript": "^1.4.0",
     "imagekitio-react": "^1.0.10",
     "node-sass": "4.14.1",
     "node-sass-package-importer": "5.3.2",
     "nouislider": "14.6.3",
+    "prop-types": "^15.7.2",
     "react": "17.0.1",
     "react-chartjs-2": "2.11.1",
     "react-copy-to-clipboard": "5.0.3",
@@ -62,7 +62,18 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.31.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-only-warn": "^1.0.3",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.3.2"
+  },
   "optionalDependencies": {
     "eslint-plugin-flowtype": "5.2.0",
     "jquery": "3.5.1",

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from '../../axios.js';
 import PropTypes from 'prop-types';
 import {
   Button,
@@ -15,10 +14,12 @@ import {
   FormText
 } from "reactstrap";
 
+import axios from '../../axios';
+
 import uploadImage from "../../utils/uploadImage";
 
-function ProductDetails(props) {
-  const { product } = props.location.state;
+function ProductDetails({ location: { state : { product }}}) {
+
   const [productName, setProductName] = useState(product.name || "");
   const [description, setDescription] = useState(product.description || "");
   const [price, setPrice] = useState(product.price || 0);
@@ -26,23 +27,10 @@ function ProductDetails(props) {
   const [imageUrl, setImageUrl] = useState(product.thumbnailUrl || "");
   const [imageFile, setImageFile] = useState({})
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleSubmit = event => {
+    event.preventDefault();
 
-    const action = e.currentTarget.value;
-
-    switch(action) {
-      case "save":
-        uploadImage(imageFile, product, (url) => {
-          setImageUrl(url);
-        });
-        saveProduct(product._id);
-        break;
-      case "delete":
-        deleteProduct(product._id);
-        break;
-    }
-  }
+    const action = event.currentTarget.value;
 
   const saveProduct = async id => {
     try {
@@ -53,8 +41,8 @@ function ProductDetails(props) {
         qty: stocks,
         thumbnailUrl: imageUrl
       })
-    } catch (e) {
-      console.error(e)
+    } catch (err) {
+      console.error(err)
     }
   }
 
@@ -63,6 +51,20 @@ function ProductDetails(props) {
       await axios.delete(`products/${id}`)
     } catch (e) {
       console.error(e)
+    }
+  }
+    switch(action) {
+      case "save":
+        uploadImage(imageFile, product, (url) => {
+          setImageUrl(url);
+        });
+        saveProduct(product._id);
+        break;
+      case "delete":
+        deleteProduct(product._id);
+        break;
+      default:
+        break;
     }
   }
 
@@ -90,6 +92,7 @@ function ProductDetails(props) {
                         <img 
                           style={{ borderRadius: 10, width: "200px" }}
                           src={imageUrl}
+                          alt="product"
                         />
                       </div>
                     </Col>
@@ -98,7 +101,6 @@ function ProductDetails(props) {
                         <label 
                           className="m-0" 
                           htmlFor="productImg"
-                          role="button"
                           style={{ padding: "10px 20px" }}
                         >
                           Upload photo
@@ -207,7 +209,7 @@ function ProductDetails(props) {
                         onClick={handleSubmit}
                         value="save"
                       >
-                        <i className="fas fa-save"></i>
+                        <i className="fas fa-save" />
                         <span className="btn-inner--text">Save</span>
                       </Button>
                       <Button 
@@ -218,7 +220,7 @@ function ProductDetails(props) {
                         value="delete"
                         outline
                       >
-                        <i className="fas fa-trash"></i>
+                        <i className="fas fa-trash" />
                         <span className="btn-inner--text">Delete</span>
                       </Button>
 
@@ -236,9 +238,16 @@ function ProductDetails(props) {
   );
 }
 
-ProductDetails.defaultProps = {};
+ProductDetails.defaultProps = {
+  location: {}
+}
 
 ProductDetails.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      product: PropTypes.objectOf(PropTypes.node).isRequired
+    })
+  })
 };
 
 export default ProductDetails;
