@@ -11,8 +11,12 @@ function OrderList({ filter }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get("/orders")
-      setOrders(data);
+      try {
+        const { data } = await axios.get("/orders")
+        setOrders(data);
+      } catch (e) {
+        console.error(e)
+      }
     }
 
     fetchData();
