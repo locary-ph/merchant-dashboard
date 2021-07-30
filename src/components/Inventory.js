@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   Badge,
   Card,
@@ -15,7 +14,7 @@ const products = [
   {name: "Aurora Necklace", qty: 30, sold: 10, isAvailable: true},
 ]
 
-function Inventory({  }) {
+function Inventory() {
   const headers = ["Product", "Quantity", "Sold", "Status"];
 
   return (
@@ -59,10 +58,5 @@ function Inventory({  }) {
     </Card>
   );
 }
-
-Inventory.defaultProps = {};
-
-Inventory.propTypes = {
-};
 
 export default Inventory;

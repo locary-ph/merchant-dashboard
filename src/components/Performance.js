@@ -6,9 +6,9 @@ import PropTypes from "prop-types";
 
 import { Card, Col, CardTitle, CardHeader, Row, CardBody } from "reactstrap";
 
-const Stats = ({ title, value, subtitle, iconBgColor, icon }) => {
+const Stats = ({ title, value, iconBgColor, icon }) => {
   return (
-    <Card className="shadow card-stats mb-4 mb-xl-0">
+    <Card className="card-stats mb-4 mb-xl-0">
       <CardBody>
         <Row>
           <div className="col">
@@ -26,7 +26,7 @@ const Stats = ({ title, value, subtitle, iconBgColor, icon }) => {
           </Col>
         </Row>
         <p className="mt-3 mb-0 text-muted text-sm">
-          <span className="text-nowrap">{subtitle}</span>
+          <span className="text-nowrap">Total for the week</span>
         </p>
       </CardBody>
     </Card>
@@ -38,14 +38,12 @@ function Performance() {
     {
       title: "Orders",
       value: "90",
-      subtitle: "Total fo the week",
       iconBgColor: "bg-gradient-info",
       icon: "ni ni-chart-bar-32",
     },
     {
       title: "Sales",
       value: "15,000",
-      subtitle: "Total fo the week",
       iconBgColor: "bg-gradient-orange",
       icon: "ni ni-bag-17",
     },
@@ -64,10 +62,10 @@ function Performance() {
       <CardBody>
         <Row>
           {performanceData.map((data) => {
-            const { title, value, subtitle, iconBgColor, icon } = data;
+            const { title, value, iconBgColor, icon } = data;
             return (
               <Col>
-                <Stats {...{ title, value, subtitle, iconBgColor, icon }} />
+                <Stats {...{ title, value, iconBgColor, icon }} />
               </Col>
             );
           })}

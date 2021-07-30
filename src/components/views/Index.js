@@ -2,15 +2,7 @@
  * @format
  */
 import React from "react";
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
+import { Button, Card, CardHeader, Container, Row, Col } from "reactstrap";
 
 import OrderList from "../OrderList";
 import Inventory from "../Inventory";
@@ -32,7 +24,7 @@ const RecentOrders = () => {
   );
 };
 
-const Index = (props) => (
+const Index = () => (
   <>
     {/* Page content */}
     <Container className="mt-5" fluid>
