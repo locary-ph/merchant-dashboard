@@ -14,9 +14,9 @@ import {
   FormText
 } from "reactstrap";
 
-import axios from '../../axios';
+import axios from '../../../axios';
 
-import uploadImage from "../../utils/uploadImage";
+import uploadImage from "../../../utils/uploadImage";
 
 function ProductDetails({ location: { state : { product }}}) {
 

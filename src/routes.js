@@ -1,16 +1,16 @@
-import Index from "./components/views/Index";
-import AccountSettings from "./components/views/AccountSettings";
-import Products from "./components/views/Products";
-import Orders from "./components/views/Orders";
-import Login from "./components/views/Login";
-import Register from "./components/views/Register";
+import Home from "./pages/home/Home";
+import AccountSettings from "./pages/settings/AccountSettings";
+import Products from "./pages/products/Products";
+import Orders from "./pages/orders/Orders";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 const routes = [
   {
     path: "/index",
     name: "Dashboard",
     icon: "ni ni-tv-2 ",
-    component: Index,
+    component: Home,
     layout: "/admin",
   },
   {

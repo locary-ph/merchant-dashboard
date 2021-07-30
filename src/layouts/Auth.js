@@ -4,9 +4,9 @@ import {
 } from "react-router-dom";
 import { Container, Row } from "reactstrap";
 
-import Footer from "../components/Footer";
-import Login from "../components/views/Login";
-import Register from "../components/views/Register";
+import Footer from "../components/Footer/Footer";
+import Login from "../components/Login";
+import Register from "../components/Register";
 
 const Auth = () => {
   const mainContent = React.useRef(null);
