@@ -5,10 +5,10 @@ import {
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import Sidebar from "../components/Sidebar";
-import ProductDetails from "../components/views/ProductDetails";
+import Navbar from "../components/Navbar/Navbar";
+import Footer from "../components/Footer/Footer";
+import Sidebar from "../components/Sidebar/Sidebar";
+import ProductDetails from "../pages/products/ProductDetails";
 
 import routes from "../routes";
 

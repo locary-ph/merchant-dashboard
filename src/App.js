@@ -13,7 +13,7 @@ function App() {
       <Switch>
         {/* eslint-disable react/jsx-props-no-spreading */}
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-        <Route path="/auth" render={AuthLayout} />
+        <Route path="/auth" component={AuthLayout} />
         <Redirect from="/" to="/admin/index" />
       </Switch>
     </BrowserRouter>

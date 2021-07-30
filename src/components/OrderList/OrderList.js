@@ -4,7 +4,7 @@ import {
   Table,
   Badge,
 } from "reactstrap";
-import axios from "../axios";
+import axios from "../../axios";
 
 function OrderList({ filter }) {
   const [orders, setOrders] = useState([]);

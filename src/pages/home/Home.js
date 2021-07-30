@@ -4,9 +4,9 @@
 import React from "react";
 import { Button, Card, CardHeader, Container, Row, Col } from "reactstrap";
 
-import OrderList from "../OrderList";
-import Inventory from "../Inventory";
-import Performance from "../Performance";
+import OrderList from "../../components/OrderList/OrderList";
+import Inventory from "./Inventory";
+import Performance from "./Performance";
 
 const RecentOrders = () => {
   return (
