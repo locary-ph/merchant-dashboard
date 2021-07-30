@@ -44,6 +44,9 @@
       "controlComponents": ["Input"],
       "depth": 3
     }],
-    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "react/jsx-props-no-spreading": [0, {
+      "explicitSpread": "ignore"
+    }]
   }
 }

@@ -64,7 +64,7 @@ const Products = () => {
 
                     return (
                       <Col key={key} lg="6" xl="4" className="mb-4">
-                        <Card className="card-stats mb-4 mb-xl-0 bg-transparent border-0">
+                        <Card className="mb-4 mb-xl-0 bg-transparent border-0">
                           <Button 
                             close 
                             color="warning"
