@@ -19,15 +19,16 @@ import {
   FormText,
 } from "reactstrap";
 
-import axios from "../../axios";
-
 import uploadImage from "../../utils/uploadImage";
+import {
+  editProduct,
+  addProduct,
+  deleteProduct,
+} from "../../utils/productActions";
 
-const ProductDetails = ({
-  location: {
-    state: { product },
-  },
-}) => {
+const ProductDetails = (props) => {
+  const { product } = props.location.state;
+
   const history = useHistory();
   const { name } = useParams();
 
@@ -42,7 +43,7 @@ const ProductDetails = ({
     event.preventDefault();
     const action = event.currentTarget.value;
 
-    const product = {
+    const currentProduct = {
       name: productName,
       description,
       price,
@@ -50,43 +51,18 @@ const ProductDetails = ({
       thumbnailUrl: imageUrl,
     };
 
-    const saveProduct = async (id) => {
-      try {
-        await axios.post(`products/${id}`, product);
-      } catch (err) {
-        console.error(err);
-      }
-      console.log(product);
-    };
-
-    const deleteProduct = async (id) => {
-      try {
-        await axios.delete(`products/${id}`);
-      } catch (e) {
-        console.error(e);
-      }
-      console.log("delete");
-    };
-
-    const addProduct = async (product) => {
-      try {
-        await axios.post("products/", product);
-      } catch (e) {
-        console.error(e);
-      }
-      console.log(product);
-    };
-
     switch (action) {
       case "save":
-        uploadImage(imageFile, product, (url) => {
+        uploadImage(imageFile, currentProduct, (url) => {
           setImageUrl(url);
         });
+
         if (name === "new") {
-          addProduct(product); // The value here is "new"
+          addProduct(currentProduct);
         } else {
-          saveProduct(product._id);
+          editProduct(product._id, currentProduct);
         }
+
         break;
       case "delete":
         deleteProduct(product._id);
