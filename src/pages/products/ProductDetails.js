@@ -75,9 +75,9 @@ function ProductDetails({ location: { state: { product } } }) {
 
     switch (action) {
       case "save":
-        // uploadImage(imageFile, product, (url) => {
-        //   setImageUrl(url);
-        // });
+        uploadImage(imageFile, product, (url) => {
+          setImageUrl(url);
+        });
         if (name === "new") {
           addProduct(product);  // The value here is "new"
         } else {
