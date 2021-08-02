@@ -3,7 +3,7 @@
  */
 
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Button,
@@ -32,24 +32,27 @@ function ProductDetails({ location: { state: { product } } }) {
   const [imageUrl, setImageUrl] = useState(product.thumbnailUrl || "");
   const [imageFile, setImageFile] = useState({})
   const history = useHistory();
+  const {name} = useParams();
 
   const handleSubmit = event => {
     event.preventDefault();
     const action = event.currentTarget.value;
 
+    let product = {
+      name: productName,
+      description,
+      price,
+      qty: stocks,
+      thumbnailUrl: imageUrl
+    }
+
     const saveProduct = async id => {
       try {
-        await axios.post(`products/${id}`, {
-          name: productName,
-          description,
-          price,
-          qty: stocks,
-          thumbnailUrl: imageUrl
-        })
+        await axios.post(`products/${id}`, product)
       } catch (err) {
         console.error(err)
       }
-      console.log("save");
+      console.log(product);
     }
 
     const deleteProduct = async (id) => {
@@ -61,22 +64,22 @@ function ProductDetails({ location: { state: { product } } }) {
       console.log("delete");
     }
 
-    const addProduct = async () => {
+    const addProduct = async (product) => {
       try {
-        await axios.post(`products/${id}`, product)
+        await axios.post("products/", product)
       } catch (e) {
         console.error(e)
       }
-      console.log("add");
+      console.log(product);
     }
 
     switch (action) {
       case "save":
-        uploadImage(imageFile, product, (url) => {
-          setImageUrl(url);
-        });
-        if (product._id === "new") {
-          addProduct(product._id);  // The value here is "new"
+        // uploadImage(imageFile, product, (url) => {
+        //   setImageUrl(url);
+        // });
+        if (name === "new") {
+          addProduct(product);  // The value here is "new"
         } else {
           saveProduct(product._id);
         }
@@ -137,6 +140,7 @@ function ProductDetails({ location: { state: { product } } }) {
                         id="productImg"
                         type="File"
                         onChange={e => setImageFile(e.target.files[0])}
+                        accept="image/*"
                       />
                       <FormText>
                         Put text here about what type of image should be uploaded
@@ -235,7 +239,7 @@ function ProductDetails({ location: { state: { product } } }) {
                         value="save"
                       >
                         <i className="fas fa-save" />
-                        {product._id === "new" ?
+                        {name === "new" ?
                           <span className="btn-inner--text">Add</span> :
                           <span className="btn-inner--text">Save</span>
                         }
@@ -245,11 +249,11 @@ function ProductDetails({ location: { state: { product } } }) {
                         color="danger"
                         type="submit"
                         onClick={handleSubmit}
-                        value={product._id === "new" ? "cancel" : "delete"}
+                        value={name === "new" ? "cancel" : "delete"}
                         outline
                       >
                         <i className="fas fa-trash" />
-                        {product._id === "new" ?
+                        {name === "new" ?
                           <span className="btn-inner--text">Cancel</span> :
                           <span className="btn-inner--text">Delete</span>
                         }

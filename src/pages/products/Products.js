@@ -35,17 +35,9 @@ const Products = () => {
   }
   const showAddProduct = () => event => {
     event.preventDefault();
-    let product = {
-      _id: "new",
-      name: "",
-      description: "",
-      price: 0,
-      qty: 0,
-      thumbnailUrl: ""
-    }
     history.push({
       pathname: "/admin/products/new",
-      state: { product }
+      state: { product: {}}
     });
   }
 
