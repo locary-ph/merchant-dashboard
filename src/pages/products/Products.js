@@ -33,7 +33,7 @@ const Products = () => {
   const handleClick = (e, id) => {
     console.log(id)
   }
-  const showAddProduct = () => event => {
+  const addProduct = event => {
     event.preventDefault();
     history.push({
       pathname: "/admin/products/new",
@@ -48,7 +48,7 @@ const Products = () => {
           className="d-lg-flex d-block justify-content-between col-xl px-5"
         >
           <h1 className="text-black d-none d-lg-block">Manage Inventory</h1>
-          <Button className="w-lg-25 w-100 d-block" color="warning" outline type="button" onClick={showAddProduct()}>
+          <Button className="w-lg-25 w-100 d-block" color="warning" outline type="button" onClick={e => addProduct(e)}>
             <i className="mr-3 fas fa-plus" />
             Add new product
           </Button>
