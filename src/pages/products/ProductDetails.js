@@ -2,9 +2,9 @@
  * @format
  */
 
-import React, { useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   Button,
   Container,
@@ -16,73 +16,53 @@ import {
   Form,
   FormGroup,
   Input,
-  FormText
+  FormText,
 } from "reactstrap";
 
-import axios from '../../axios';
-
 import uploadImage from "../../utils/uploadImage";
+import {
+  editProduct,
+  addProduct,
+  deleteProduct,
+} from "../../utils/productActions";
 
-function ProductDetails({ location: { state: { product } } }) {
+const ProductDetails = (props) => {
+  const { product } = props.location.state;
+
+  const history = useHistory();
+  const { name } = useParams();
 
   const [productName, setProductName] = useState(product.name || "");
   const [description, setDescription] = useState(product.description || "");
   const [price, setPrice] = useState(product.price || 0);
   const [stocks, setStocks] = useState(product.qty || 0);
   const [imageUrl, setImageUrl] = useState(product.thumbnailUrl || "");
-  const [imageFile, setImageFile] = useState({})
-  const history = useHistory();
-  const {name} = useParams();
+  const [imageFile, setImageFile] = useState({});
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const action = event.currentTarget.value;
 
-    let product = {
+    const currentProduct = {
       name: productName,
       description,
       price,
       qty: stocks,
-      thumbnailUrl: imageUrl
-    }
-
-    const saveProduct = async id => {
-      try {
-        await axios.post(`products/${id}`, product)
-      } catch (err) {
-        console.error(err)
-      }
-      console.log(product);
-    }
-
-    const deleteProduct = async (id) => {
-      try {
-        await axios.delete(`products/${id}`)
-      } catch (e) {
-        console.error(e)
-      }
-      console.log("delete");
-    }
-
-    const addProduct = async (product) => {
-      try {
-        await axios.post("products/", product)
-      } catch (e) {
-        console.error(e)
-      }
-      console.log(product);
-    }
+      thumbnailUrl: imageUrl,
+    };
 
     switch (action) {
       case "save":
-        uploadImage(imageFile, product, (url) => {
+        uploadImage(imageFile, currentProduct, (url) => {
           setImageUrl(url);
         });
+
         if (name === "new") {
-          addProduct(product);  // The value here is "new"
+          addProduct(currentProduct);
         } else {
-          saveProduct(product._id);
+          editProduct(product._id, currentProduct);
         }
+
         break;
       case "delete":
         deleteProduct(product._id);
@@ -91,7 +71,7 @@ function ProductDetails({ location: { state: { product } } }) {
         break;
     }
     history.push("/admin/products");
-  }
+  };
 
   return (
     <Container className="mt-5" fluid>
@@ -112,20 +92,38 @@ function ProductDetails({ location: { state: { product } } }) {
                     <Col xs="auto">
                       <div
                         className="d-flex align-items-center"
-                        style={{ borderRadius: 10, border: "solid 2px #FE634E", height: 200 }}
+                        style={{
+                          borderRadius: 10,
+                          border: "solid 2px #FE634E",
+                          height: 200,
+                        }}
                       >
-                        {imageUrl === "" ?
-                          <p style={{ borderRadius: 10, width: "200px", padding: "30px" }}>No Photo Selected!</p> :
+                        {imageUrl === "" ? (
+                          <p
+                            style={{
+                              borderRadius: 10,
+                              width: "200px",
+                              padding: "30px",
+                            }}
+                          >
+                            No Photo Selected!
+                          </p>
+                        ) : (
                           <img
                             style={{ borderRadius: 10, width: "200px" }}
                             src={imageUrl}
                             alt="product"
                           />
-                        }
+                        )}
                       </div>
                     </Col>
                     <Col>
-                      <Button style={{ borderRadius: 15, padding: 0 }} color="warning" outline type="button">
+                      <Button
+                        style={{ borderRadius: 15, padding: 0 }}
+                        color="warning"
+                        outline
+                        type="button"
+                      >
                         <label
                           className="m-0"
                           htmlFor="productImg"
@@ -139,11 +137,12 @@ function ProductDetails({ location: { state: { product } } }) {
                         name="productImg"
                         id="productImg"
                         type="File"
-                        onChange={e => setImageFile(e.target.files[0])}
+                        onChange={(e) => setImageFile(e.target.files[0])}
                         accept="image/*"
                       />
                       <FormText>
-                        Put text here about what type of image should be uploaded
+                        Put text here about what type of image should be
+                        uploaded
                       </FormText>
                     </Col>
                   </Row>
@@ -163,7 +162,7 @@ function ProductDetails({ location: { state: { product } } }) {
                           placeholder="Juan dela Cruz Delicacies"
                           type="text"
                           value={productName}
-                          onChange={e => setProductName(e.target.value)}
+                          onChange={(e) => setProductName(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -183,7 +182,7 @@ function ProductDetails({ location: { state: { product } } }) {
                           type="textarea"
                           rows="4"
                           value={description}
-                          onChange={e => setDescription(e.target.value)}
+                          onChange={(e) => setDescription(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -204,7 +203,7 @@ function ProductDetails({ location: { state: { product } } }) {
                           type="number"
                           placeholder="0"
                           value={price}
-                          onChange={e => setPrice(e.target.value)}
+                          onChange={(e) => setPrice(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -223,14 +222,13 @@ function ProductDetails({ location: { state: { product } } }) {
                           type="number"
                           placeholder="0"
                           value={stocks}
-                          onChange={e => setStocks(e.target.value)}
+                          onChange={(e) => setStocks(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
                   </Row>
                   <Row className="pt-3">
                     <Col>
-
                       <Button
                         className="btn-icon btn-3"
                         color="primary"
@@ -239,10 +237,11 @@ function ProductDetails({ location: { state: { product } } }) {
                         value="save"
                       >
                         <i className="fas fa-save" />
-                        {name === "new" ?
-                          <span className="btn-inner--text">Add</span> :
+                        {name === "new" ? (
+                          <span className="btn-inner--text">Add</span>
+                        ) : (
                           <span className="btn-inner--text">Save</span>
-                        }
+                        )}
                       </Button>
                       <Button
                         className="btn-icon btn-3"
@@ -253,36 +252,35 @@ function ProductDetails({ location: { state: { product } } }) {
                         outline
                       >
                         <i className="fas fa-trash" />
-                        {name === "new" ?
-                          <span className="btn-inner--text">Cancel</span> :
+                        {name === "new" ? (
+                          <span className="btn-inner--text">Cancel</span>
+                        ) : (
                           <span className="btn-inner--text">Delete</span>
-                        }
+                        )}
                       </Button>
-
                     </Col>
                   </Row>
                 </div>
                 <hr className="my-4" />
               </Form>
             </CardBody>
-
           </Card>
         </Col>
       </Row>
     </Container>
   );
-}
+};
 
 ProductDetails.defaultProps = {
-  location: {}
-}
+  location: {},
+};
 
 ProductDetails.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
-      product: PropTypes.objectOf(PropTypes.node).isRequired
-    })
-  })
+      product: PropTypes.objectOf(PropTypes.node).isRequired,
+    }),
+  }),
 };
 
 export default ProductDetails;
