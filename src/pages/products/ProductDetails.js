@@ -1,4 +1,9 @@
+/**
+ * @format
+ */
+
 import React, { useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Button,
@@ -18,7 +23,7 @@ import axios from '../../axios';
 
 import uploadImage from "../../utils/uploadImage";
 
-function ProductDetails({ location: { state : { product }}}) {
+function ProductDetails({ location: { state: { product } } }) {
 
   const [productName, setProductName] = useState(product.name || "");
   const [description, setDescription] = useState(product.description || "");
@@ -26,39 +31,58 @@ function ProductDetails({ location: { state : { product }}}) {
   const [stocks, setStocks] = useState(product.qty || 0);
   const [imageUrl, setImageUrl] = useState(product.thumbnailUrl || "");
   const [imageFile, setImageFile] = useState({})
+  const history = useHistory();
+  const {name} = useParams();
 
   const handleSubmit = event => {
     event.preventDefault();
-
     const action = event.currentTarget.value;
 
-  const saveProduct = async id => {
-    try {
-      await axios.post(`products/${id}`, {
-        name: productName,
-        description,
-        price,
-        qty: stocks,
-        thumbnailUrl: imageUrl
-      })
-    } catch (err) {
-      console.error(err)
+    let product = {
+      name: productName,
+      description,
+      price,
+      qty: stocks,
+      thumbnailUrl: imageUrl
     }
-  }
 
-  const deleteProduct = async (id) => {
-    try {
-      await axios.delete(`products/${id}`)
-    } catch (e) {
-      console.error(e)
+    const saveProduct = async id => {
+      try {
+        await axios.post(`products/${id}`, product)
+      } catch (err) {
+        console.error(err)
+      }
+      console.log(product);
     }
-  }
-    switch(action) {
+
+    const deleteProduct = async (id) => {
+      try {
+        await axios.delete(`products/${id}`)
+      } catch (e) {
+        console.error(e)
+      }
+      console.log("delete");
+    }
+
+    const addProduct = async (product) => {
+      try {
+        await axios.post("products/", product)
+      } catch (e) {
+        console.error(e)
+      }
+      console.log(product);
+    }
+
+    switch (action) {
       case "save":
         uploadImage(imageFile, product, (url) => {
           setImageUrl(url);
         });
-        saveProduct(product._id);
+        if (name === "new") {
+          addProduct(product);  // The value here is "new"
+        } else {
+          saveProduct(product._id);
+        }
         break;
       case "delete":
         deleteProduct(product._id);
@@ -66,6 +90,7 @@ function ProductDetails({ location: { state : { product }}}) {
       default:
         break;
     }
+    history.push("/admin/products");
   }
 
   return (
@@ -85,33 +110,37 @@ function ProductDetails({ location: { state : { product }}}) {
                 <div className="pl-lg-4">
                   <Row className="align-items-end py-4">
                     <Col xs="auto">
-                      <div 
+                      <div
                         className="d-flex align-items-center"
                         style={{ borderRadius: 10, border: "solid 2px #FE634E", height: 200 }}
                       >
-                        <img 
-                          style={{ borderRadius: 10, width: "200px" }}
-                          src={imageUrl}
-                          alt="product"
-                        />
+                        {imageUrl === "" ?
+                          <p style={{ borderRadius: 10, width: "200px", padding: "30px" }}>No Photo Selected!</p> :
+                          <img
+                            style={{ borderRadius: 10, width: "200px" }}
+                            src={imageUrl}
+                            alt="product"
+                          />
+                        }
                       </div>
                     </Col>
                     <Col>
                       <Button style={{ borderRadius: 15, padding: 0 }} color="warning" outline type="button">
-                        <label 
-                          className="m-0" 
+                        <label
+                          className="m-0"
                           htmlFor="productImg"
                           style={{ padding: "10px 20px" }}
                         >
                           Upload photo
                         </label>
                       </Button>
-                      <Input 
+                      <Input
                         className="d-none"
                         name="productImg"
                         id="productImg"
                         type="File"
                         onChange={e => setImageFile(e.target.files[0])}
+                        accept="image/*"
                       />
                       <FormText>
                         Put text here about what type of image should be uploaded
@@ -202,26 +231,32 @@ function ProductDetails({ location: { state : { product }}}) {
                   <Row className="pt-3">
                     <Col>
 
-                      <Button 
-                        className="btn-icon btn-3" 
-                        color="primary" 
+                      <Button
+                        className="btn-icon btn-3"
+                        color="primary"
                         type="submit"
                         onClick={handleSubmit}
                         value="save"
                       >
                         <i className="fas fa-save" />
-                        <span className="btn-inner--text">Save</span>
+                        {name === "new" ?
+                          <span className="btn-inner--text">Add</span> :
+                          <span className="btn-inner--text">Save</span>
+                        }
                       </Button>
-                      <Button 
-                        className="btn-icon btn-3" 
-                        color="danger" 
+                      <Button
+                        className="btn-icon btn-3"
+                        color="danger"
                         type="submit"
                         onClick={handleSubmit}
-                        value="delete"
+                        value={name === "new" ? "cancel" : "delete"}
                         outline
                       >
                         <i className="fas fa-trash" />
-                        <span className="btn-inner--text">Delete</span>
+                        {name === "new" ?
+                          <span className="btn-inner--text">Cancel</span> :
+                          <span className="btn-inner--text">Delete</span>
+                        }
                       </Button>
 
                     </Col>
