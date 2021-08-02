@@ -16,7 +16,6 @@ import {
   Col
 } from "reactstrap";
 import sampleProducts from "../../data/products";
-import AddProduct from "./AddProduct";
 
 const Products = () => {
   // TODO(#1): Stock quantity quick edit
