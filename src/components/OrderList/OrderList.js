@@ -9,18 +9,18 @@ import axios from "../../axios";
 function OrderList({ filter }) {
   const [orders, setOrders] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get("/orders")
-        setOrders(data);
-      } catch (e) {
-        console.error(e)
-      }
-    }
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const { data } = await axios.get("/orders")
+  //       setOrders(data);
+  //     } catch (e) {
+  //       console.error(e)
+  //     }
+  //   }
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   const headers = [
     "Order ID",

@@ -30,13 +30,13 @@ function ProductDetails({ location: { state: { product } } }) {
   const [price, setPrice] = useState(product.price || 0);
   const [stocks, setStocks] = useState(product.qty || 0);
   const [imageUrl, setImageUrl] = useState(product.thumbnailUrl || "");
-  const [imageFile, setImageFile] = useState({})
+  const [imageFile, setImageFile] = useState("")
+  const [action, setAction] = useState({})
   const history = useHistory();
-  const {name} = useParams();
+  const { name } = useParams();
 
   const handleSubmit = event => {
     event.preventDefault();
-    const action = event.currentTarget.value;
 
     let product = {
       name: productName,
@@ -73,6 +73,8 @@ function ProductDetails({ location: { state: { product } } }) {
       console.log(product);
     }
 
+    if (imageUrl === "" && imageFile === "") return(alert("Image Required!"))
+
     switch (action) {
       case "save":
         uploadImage(imageFile, product, (url) => {
@@ -93,6 +95,10 @@ function ProductDetails({ location: { state: { product } } }) {
     history.push("/admin/products");
   }
 
+  const cancelAction = event => {
+    history.push("/admin/products");
+  }
+
   return (
     <Container className="mt-5" fluid>
       <Row>
@@ -106,7 +112,7 @@ function ProductDetails({ location: { state: { product } } }) {
               </Row>
             </CardHeader>
             <CardBody>
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <div className="pl-lg-4">
                   <Row className="align-items-end py-4">
                     <Col xs="auto">
@@ -114,13 +120,19 @@ function ProductDetails({ location: { state: { product } } }) {
                         className="d-flex align-items-center"
                         style={{ borderRadius: 10, border: "solid 2px #FE634E", height: 200 }}
                       >
-                        {imageUrl === "" ?
-                          <p style={{ borderRadius: 10, width: "200px", padding: "30px" }}>No Photo Selected!</p> :
+                        {imageUrl !== "" ?
                           <img
                             style={{ borderRadius: 10, width: "200px" }}
                             src={imageUrl}
                             alt="product"
-                          />
+                          /> :
+                          imageFile !== "" ?
+                            <img
+                              style={{ borderRadius: 10, width: "200px" }}
+                              src={URL.createObjectURL(imageFile)}
+                              alt="product"
+                            /> :
+                            <p style={{ borderRadius: 10, width: "200px", padding: "30px" }}>No Photo Selected!</p>
                         }
                       </div>
                     </Col>
@@ -164,6 +176,7 @@ function ProductDetails({ location: { state: { product } } }) {
                           type="text"
                           value={productName}
                           onChange={e => setProductName(e.target.value)}
+                          required
                         />
                       </FormGroup>
                     </Col>
@@ -184,6 +197,7 @@ function ProductDetails({ location: { state: { product } } }) {
                           rows="4"
                           value={description}
                           onChange={e => setDescription(e.target.value)}
+                          required
                         />
                       </FormGroup>
                     </Col>
@@ -230,12 +244,11 @@ function ProductDetails({ location: { state: { product } } }) {
                   </Row>
                   <Row className="pt-3">
                     <Col>
-
                       <Button
                         className="btn-icon btn-3"
                         color="primary"
                         type="submit"
-                        onClick={handleSubmit}
+                        onClick={e => setAction(e.target.value)}
                         value="save"
                       >
                         <i className="fas fa-save" />
@@ -244,19 +257,30 @@ function ProductDetails({ location: { state: { product } } }) {
                           <span className="btn-inner--text">Save</span>
                         }
                       </Button>
+                      {name !== "new" ?
+                        <Button
+                          className="btn-icon btn-3"
+                          color="danger"
+                          type="submit"
+                          onClick={e => setAction(e.target.value)}
+                          value={"delete"}
+                          outline
+                        >
+                          <i className="fas fa-trash" />
+                          <span className="btn-inner--text">Delete</span>
+                        </Button> :
+                        null
+                      }
                       <Button
                         className="btn-icon btn-3"
                         color="danger"
                         type="submit"
-                        onClick={handleSubmit}
-                        value={name === "new" ? "cancel" : "delete"}
+                        onClick={e => cancelAction()}
+                        value={"cancel"}
                         outline
                       >
                         <i className="fas fa-trash" />
-                        {name === "new" ?
-                          <span className="btn-inner--text">Cancel</span> :
-                          <span className="btn-inner--text">Delete</span>
-                        }
+                        <span className="btn-inner--text">Cancel</span>
                       </Button>
 
                     </Col>
