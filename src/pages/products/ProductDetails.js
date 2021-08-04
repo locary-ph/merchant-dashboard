@@ -17,6 +17,8 @@ import {
   FormGroup,
   Input,
   FormText,
+  FormFeedback,
+  Alert,
 } from "reactstrap";
 
 import uploadImage from "../../utils/uploadImage";
@@ -37,7 +39,13 @@ const ProductDetails = (props) => {
   const [price, setPrice] = useState(product.price || 0);
   const [stocks, setStocks] = useState(product.qty || 0);
   const [imageUrl, setImageUrl] = useState(product.thumbnailUrl || "");
+  const [error, setError] = useState("");
   const [imageFile, setImageFile] = useState({});
+
+
+  const closeAlert = () => {
+    setError("");
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -50,6 +58,24 @@ const ProductDetails = (props) => {
       qty: stocks,
       thumbnailUrl: imageUrl,
     };
+
+    if (Object.entries(imageFile).length === 0 && imageUrl === "") {
+      setError("No Photo Selected!")
+      return window.scrollTo(0, 0);
+    }
+    // setErrors([...errors, "image"]);
+    if (productName.trim() === "") {
+      setError("No Product Name Inputted!");
+      return window.scrollTo(0, 0);
+    }
+    if (price.trim() === "") {
+      setError("No Price Inputted!");
+      return window.scrollTo(0, 0);
+    }
+    if (stocks.trim() === "") {
+      setError("No Stocks Inputted!");
+      return window.scrollTo(0, 0);
+    }
 
     switch (action) {
       case "save":
@@ -88,6 +114,9 @@ const ProductDetails = (props) => {
             <CardBody>
               <Form>
                 <div className="pl-lg-4">
+                  <Alert color="danger" isOpen={error !== ""} toggle={closeAlert}>
+                    {error}
+                  </Alert>
                   <Row className="align-items-end py-4">
                     <Col xs="auto">
                       <div
@@ -163,7 +192,12 @@ const ProductDetails = (props) => {
                           type="text"
                           value={productName}
                           onChange={(e) => setProductName(e.target.value)}
+                          invalid={productName === ""}
                         />
+                        {productName === "" ?
+                          <FormFeedback>Input Required!</FormFeedback> :
+                          null
+                        }
                       </FormGroup>
                     </Col>
                   </Row>
@@ -204,7 +238,12 @@ const ProductDetails = (props) => {
                           placeholder="0"
                           value={price}
                           onChange={(e) => setPrice(e.target.value)}
+                          invalid={price.toString() === ""}
                         />
+                        {price.toString() === "" ?
+                          <FormFeedback>Input Required!</FormFeedback> :
+                          null
+                        }
                       </FormGroup>
                     </Col>
                     <Col lg="6">
@@ -223,7 +262,12 @@ const ProductDetails = (props) => {
                           placeholder="0"
                           value={stocks}
                           onChange={(e) => setStocks(e.target.value)}
+                          invalid={stocks.toString() === ""}
                         />
+                        {stocks.toString() === "" ?
+                          <FormFeedback>Input Required!</FormFeedback> :
+                          null
+                        }
                       </FormGroup>
                     </Col>
                   </Row>
