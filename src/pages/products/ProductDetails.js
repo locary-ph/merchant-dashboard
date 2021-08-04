@@ -51,6 +51,8 @@ const ProductDetails = (props) => {
     event.preventDefault();
     const action = event.currentTarget.value;
 
+    if (action === "cancel") history.push("/admin/products");
+
     const currentProduct = {
       name: productName,
       description,
