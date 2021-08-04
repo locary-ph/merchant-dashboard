@@ -40,7 +40,7 @@ const ProductDetails = (props) => {
   const [stocks, setStocks] = useState(product.qty || 0);
   const [imageUrl, setImageUrl] = useState(product.thumbnailUrl || "");
   const [error, setError] = useState("");
-  const [imageFile, setImageFile] = useState({});
+  const [imageFile, setImageFile] = useState();
 
 
   const closeAlert = () => {
@@ -59,7 +59,7 @@ const ProductDetails = (props) => {
       thumbnailUrl: imageUrl,
     };
 
-    if (Object.entries(imageFile).length === 0 && imageUrl === "") {
+    if (!imageFile && imageUrl === "") {
       setError("No Photo Selected!")
       return window.scrollTo(0, 0);
     }
