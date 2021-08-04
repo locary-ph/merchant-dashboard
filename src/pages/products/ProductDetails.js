@@ -290,19 +290,9 @@ const ProductDetails = (props) => {
                       <Button
                         className="btn-icon btn-3"
                         color="danger"
-
                         type="submit"
-
                         onClick={handleSubmit}
                         value={name === "new" ? "cancel" : "delete"}
-
-                        onClick={e => cancelAction()}
-                        value={"cancel"}
-                        onClick={handleSubmit}
-                        value={name === "new" ? "cancel" : "delete"}
-
-                        onClick={e => cancelAction()}
-                        value={"cancel"}
                         outline
                       >
                         <i className="fas fa-trash" />
