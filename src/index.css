@@ -63,3 +63,15 @@ button.close {
 	color: #F2583E;
 }
 
+.order-item-header {
+	padding: 1rem 0.5rem 0.5rem 1rem;
+}
+
+.order-item-header:after {
+	content: "";
+	position: absolute;
+	top: 50px;
+	left: 17px;
+	width: 92%;
+	border-top: 2px solid rgba(0,0,0,0.05);
+}

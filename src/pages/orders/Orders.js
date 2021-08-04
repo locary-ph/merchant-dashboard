@@ -2,9 +2,10 @@
  * @format
  */
 import React, { useState } from "react";
-import { Card, CardHeader, Container, Row } from "reactstrap";
+import { Card, CardHeader, Container, Row, Col } from "reactstrap";
 
 import OrderList from "../../components/OrderList/OrderList";
+import OrderItem from "./OrderItem/OrderItem";
 
 const status = ["PENDING", "ACCEPTED", "DISPATCHED", "DELIVERED", "CANCELLED"];
 
@@ -45,14 +46,14 @@ const Orders = () => {
           <Card className="shadow">
             <CardHeader className="bg-transparent">
               <Row className="align-items-center">
-                <div className="col">
+                <Col xs="12" lg="6" className="mb-3 mb-lg-0">
                   <h6 className="text-uppercase text-light ls-1 mb-1">
                     Shop Name
                   </h6>
                   <h2 className="text-black mb-0">Manage Orders</h2>
-                </div>
+                </Col>
 
-                <div className="col">
+                <Col xs="12" lg="6">
                   <button
                     className="btn btn-warning btn-sm"
                     type="button"
@@ -72,10 +73,11 @@ const Orders = () => {
                       {stat}
                     </button>
                   ))}
-                </div>
+                </Col>
               </Row>
             </CardHeader>
             <OrderList filter={orderStatusFilter} />
+            <OrderItem />
           </Card>
         </div>
       </Row>
