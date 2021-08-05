@@ -155,13 +155,13 @@ const ProductDetails = (props) => {
                     <Col>
                       <FormGroup>
                         <label
-                          className="form-control-alternative form-control-label"
+                          className="form-control-label"
                           htmlFor="productName"
                         >
                           Product name
                         </label>
                         <Input
-                          className="w-100 w-lg-50"
+                          className="form-control-alternative w-100 w-lg-50"
                           name="productName"
                           id="productName"
                           placeholder="Juan dela Cruz Delicacies"
