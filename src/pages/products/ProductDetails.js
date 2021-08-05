@@ -51,8 +51,6 @@ const ProductDetails = (props) => {
     event.preventDefault();
     const action = event.currentTarget.value;
 
-    if (action === "cancel") history.push("/admin/products");
-
     const currentProduct = {
       name: productName,
       description,
@@ -61,29 +59,42 @@ const ProductDetails = (props) => {
       thumbnailUrl: imageUrl,
     };
 
-    if (!imageFile && imageUrl === "") {
-      setError("No Photo Selected!")
-      return window.scrollTo(0, 0);
-    }
-    // setErrors([...errors, "image"]);
-    if (productName.trim() === "") {
-      setError("No Product Name Inputted!");
-      return window.scrollTo(0, 0);
-    }
-    if (price.trim() === "") {
-      setError("No Price Inputted!");
-      return window.scrollTo(0, 0);
-    }
-    if (stocks.trim() === "") {
-      setError("No Stocks Inputted!");
-      return window.scrollTo(0, 0);
+    const isComplete = () => {
+      if (!imageFile && imageUrl === "") {
+        setError("No Photo Selected!")
+        return false;
+      }
+      if (productName.trim() === "") {
+        setError("No Product Name Inputted!");
+        return window.scrollTo(0, 0);
+      }
+      if (price.toString().trim() === "") {
+        setError("No Price Inputted!");
+        return window.scrollTo(0, 0);
+      }
+      if (price < 1) {
+        setError("Invalid Price Input!");
+        return window.scrollTo(0, 0);
+      }
+      if (stocks.toString().trim() === "") {
+        setError("No Stocks Inputted!");
+        return window.scrollTo(0, 0);
+      }
+      if (stocks < 0) {
+        setError("Invalid Stocks Input!");
+        return window.scrollTo(0, 0);
+      }
+      return true;
     }
 
     switch (action) {
       case "save":
-        uploadImage(imageFile, currentProduct, (url) => {
-          setImageUrl(url);
-        });
+        if (!isComplete) return window.scrollTo(0, 0);
+        if (imageFile) {
+          uploadImage(imageFile, currentProduct, (url) => {
+            setImageUrl(url);
+          });
+        }
 
         if (name === "new") {
           addProduct(currentProduct);
@@ -93,12 +104,14 @@ const ProductDetails = (props) => {
 
         break;
       case "delete":
+        if (!isComplete) return window.scrollTo(0, 0);
         deleteProduct(product._id);
         break;
+      case "cancel":
+        history.push("/admin/products");
       default:
         break;
     }
-    history.push("/admin/products");
   };
 
   return (
