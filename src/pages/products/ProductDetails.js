@@ -107,11 +107,10 @@ const ProductDetails = (props) => {
         if (!isComplete) return window.scrollTo(0, 0);
         deleteProduct(product._id);
         break;
-      case "cancel":
-        history.push("/admin/products");
       default:
         break;
     }
+    history.push("/admin/products");
   };
 
   return (
