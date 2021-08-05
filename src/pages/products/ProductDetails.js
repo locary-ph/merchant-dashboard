@@ -27,6 +27,7 @@ import {
 } from "../../utils/productActions";
 
 const ProductDetails = (props) => {
+  /* eslint-disable react/destructuring-assignment */
   const { product } = props.location.state;
 
   const history = useHistory();
@@ -38,10 +39,14 @@ const ProductDetails = (props) => {
   const [stocks, setStocks] = useState(product.qty || 0);
   const [imageUrl, setImageUrl] = useState(product.thumbnailUrl || "");
   const [imageFile, setImageFile] = useState({});
+  const [action, setAction] = useState("");
+
+  const handleClick = (evt) => {
+    setAction(evt.currentTarget.value);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const action = event.currentTarget.value;
 
     const currentProduct = {
       name: productName,
@@ -86,7 +91,7 @@ const ProductDetails = (props) => {
               </Row>
             </CardHeader>
             <CardBody>
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <div className="pl-lg-4">
                   <Row className="align-items-end py-4">
                     <Col xs="auto">
@@ -150,13 +155,13 @@ const ProductDetails = (props) => {
                     <Col>
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-alternative form-control-label"
                           htmlFor="productName"
                         >
                           Product name
                         </label>
                         <Input
-                          className="form-control-alternative w-100 w-lg-50"
+                          className="w-100 w-lg-50"
                           name="productName"
                           id="productName"
                           placeholder="Juan dela Cruz Delicacies"
@@ -202,6 +207,7 @@ const ProductDetails = (props) => {
                           min="0"
                           type="number"
                           placeholder="0"
+                          step="0.01"
                           value={price}
                           onChange={(e) => setPrice(e.target.value)}
                         />
@@ -233,8 +239,8 @@ const ProductDetails = (props) => {
                         className="btn-icon btn-3"
                         color="primary"
                         type="submit"
-                        onClick={handleSubmit}
                         value="save"
+                        onClick={handleClick}
                       >
                         <i className="fas fa-save" />
                         {name === "new" ? (
@@ -247,7 +253,7 @@ const ProductDetails = (props) => {
                         className="btn-icon btn-3"
                         color="danger"
                         type="submit"
-                        onClick={handleSubmit}
+                        onClick={handleClick}
                         value={name === "new" ? "cancel" : "delete"}
                         outline
                       >
