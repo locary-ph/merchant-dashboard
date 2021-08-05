@@ -208,6 +208,7 @@ const ProductDetails = (props) => {
                           value={productName}
                           onChange={(e) => setProductName(e.target.value)}
                           invalid={productName === ""}
+                          maxlength="200"
                         />
                         {productName === "" ?
                           <FormFeedback>Input Required!</FormFeedback> :
@@ -232,6 +233,7 @@ const ProductDetails = (props) => {
                           rows="4"
                           value={description}
                           onChange={(e) => setDescription(e.target.value)}
+                          maxlength="1000"
                         />
                       </FormGroup>
                     </Col>
