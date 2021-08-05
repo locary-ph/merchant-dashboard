@@ -108,12 +108,9 @@ const ProductDetails = (props) => {
               </Row>
             </CardHeader>
             <CardBody>
-              {error !== "" ?
-                <Alert color="danger">
+                <Alert color="danger" isOpen={error !== ""} toggle={() => {setError("")}}>
                   {error}
-                </Alert> :
-                null
-              }
+                </Alert>
               <Form onSubmit={handleSubmit}>
                 <div className="pl-lg-4">
                   <Row className="align-items-end py-4">
