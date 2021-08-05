@@ -66,30 +66,30 @@ const ProductDetails = (props) => {
       }
       if (productName.trim() === "") {
         setError("No Product Name Inputted!");
-        return window.scrollTo(0, 0);
+        return false;
       }
       if (price.toString().trim() === "") {
         setError("No Price Inputted!");
-        return window.scrollTo(0, 0);
+        return false;
       }
       if (price < 1) {
         setError("Invalid Price Input!");
-        return window.scrollTo(0, 0);
+        return false;
       }
       if (stocks.toString().trim() === "") {
         setError("No Stocks Inputted!");
-        return window.scrollTo(0, 0);
+        return false;
       }
       if (stocks < 0) {
         setError("Invalid Stocks Input!");
-        return window.scrollTo(0, 0);
+        return false;
       }
       return true;
     }
 
     switch (action) {
       case "save":
-        if (!isComplete) return window.scrollTo(0, 0);
+        if (!isComplete()) return window.scrollTo(0, 0);
         if (imageFile) {
           uploadImage(imageFile, currentProduct, (url) => {
             setImageUrl(url);
@@ -208,7 +208,7 @@ const ProductDetails = (props) => {
                           value={productName}
                           onChange={(e) => setProductName(e.target.value)}
                           invalid={productName === ""}
-                          maxlength="200"
+                          maxLength="200"
                         />
                         {productName === "" ?
                           <FormFeedback>Input Required!</FormFeedback> :
@@ -233,7 +233,7 @@ const ProductDetails = (props) => {
                           rows="4"
                           value={description}
                           onChange={(e) => setDescription(e.target.value)}
-                          maxlength="1000"
+                          maxLength="1000"
                         />
                       </FormGroup>
                     </Col>
