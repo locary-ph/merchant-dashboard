@@ -86,7 +86,6 @@ const ProductDetails = (props) => {
 
         break;
       case "delete":
-        if (!isComplete) return window.scrollTo(0, 0);
         deleteProduct(product._id);
         break;
       default:
@@ -102,15 +101,26 @@ const ProductDetails = (props) => {
           <Card className="bg-secondary shadow">
             <CardHeader className="bg-white border-0">
               <Row className="align-items-center">
+                <Col xs="1">
+                  <Button
+                    className="btn-icon btn-3"
+                    color="secondary"
+                    type="button"
+                    onClick={handleClick("cancel")}
+                  >
+                    <span className="btn-inner--text">Back</span>
+                  </Button>
+                </Col>
                 <Col xs="8">
                   <h3 className="mb-0">Edit product</h3>
                 </Col>
+
               </Row>
             </CardHeader>
             <CardBody>
-                <Alert color="danger" isOpen={error !== ""} toggle={() => {setError("")}}>
-                  {error}
-                </Alert>
+              <Alert color="danger" isOpen={error !== ""} toggle={() => { setError("") }}>
+                {error}
+              </Alert>
               <Form onSubmit={handleSubmit}>
                 <div className="pl-lg-4">
                   <Row className="align-items-end py-4">
@@ -300,15 +310,6 @@ const ProductDetails = (props) => {
                         </Button> :
                         null
                       }
-                      <Button
-                        className="btn-icon btn-3"
-                        color="danger"
-                        type="button"
-                        onClick={handleClick("cancel")}
-                        outline
-                      >
-                        <span className="btn-inner--text">Cancel</span>
-                      </Button>
                     </Col>
                   </Row>
                 </div>
