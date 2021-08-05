@@ -28,7 +28,9 @@ import {
   deleteProduct,
 } from "../../utils/productActions";
 
+
 const ProductDetails = (props) => {
+  /* eslint-disable react/destructuring-assignment */
   const { product } = props.location.state;
 
   const history = useHistory();
@@ -39,17 +41,17 @@ const ProductDetails = (props) => {
   const [price, setPrice] = useState(product.price || 0);
   const [stocks, setStocks] = useState(product.qty || 0);
   const [imageUrl, setImageUrl] = useState(product.thumbnailUrl || "");
-  const [error, setError] = useState("");
   const [imageFile, setImageFile] = useState();
+  const [action, setAction] = useState("");
+  const [error, setError] = useState("");
 
-
-  const closeAlert = () => {
-    setError("");
-  }
+  const handleClick = (action) => () => {
+    if (action === "cancel") return history.push("/admin/products");
+    setAction(action);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const action = event.currentTarget.value;
 
     const currentProduct = {
       name: productName,
@@ -62,26 +64,6 @@ const ProductDetails = (props) => {
     const isComplete = () => {
       if (!imageFile && imageUrl === "") {
         setError("No Photo Selected!")
-        return false;
-      }
-      if (productName.trim() === "") {
-        setError("No Product Name Inputted!");
-        return false;
-      }
-      if (price.toString().trim() === "") {
-        setError("No Price Inputted!");
-        return false;
-      }
-      if (price < 1) {
-        setError("Invalid Price Input!");
-        return false;
-      }
-      if (stocks.toString().trim() === "") {
-        setError("No Stocks Inputted!");
-        return false;
-      }
-      if (stocks < 0) {
-        setError("Invalid Stocks Input!");
         return false;
       }
       return true;
@@ -126,11 +108,14 @@ const ProductDetails = (props) => {
               </Row>
             </CardHeader>
             <CardBody>
-              <Form>
+              {error !== "" ?
+                <Alert color="danger">
+                  {error}
+                </Alert> :
+                null
+              }
+              <Form onSubmit={handleSubmit}>
                 <div className="pl-lg-4">
-                  <Alert color="danger" isOpen={error !== ""} toggle={closeAlert}>
-                    {error}
-                  </Alert>
                   <Row className="align-items-end py-4">
                     <Col xs="auto">
                       <div
@@ -208,6 +193,7 @@ const ProductDetails = (props) => {
                           onChange={(e) => setProductName(e.target.value)}
                           invalid={productName === ""}
                           maxLength="200"
+                          required
                         />
                         {productName === "" ?
                           <FormFeedback>Input Required!</FormFeedback> :
@@ -249,12 +235,14 @@ const ProductDetails = (props) => {
                         <Input
                           className="form-control-alternative"
                           id="productPrice"
-                          min="0"
+                          min="1"
                           type="number"
                           placeholder="0"
+                          step="0.01"
                           value={price}
                           onChange={(e) => setPrice(e.target.value)}
                           invalid={price.toString() === ""}
+                          required
                         />
                         {price.toString() === "" ?
                           <FormFeedback>Input Required!</FormFeedback> :
@@ -293,8 +281,7 @@ const ProductDetails = (props) => {
                         className="btn-icon btn-3"
                         color="primary"
                         type="submit"
-                        onClick={handleSubmit}
-                        value="save"
+                        onClick={handleClick("save")}
                       >
                         <i className="fas fa-save" />
                         {name === "new" ? (
@@ -303,20 +290,27 @@ const ProductDetails = (props) => {
                           <span className="btn-inner--text">Save</span>
                         )}
                       </Button>
+                      {name !== "new" ?
+                        <Button
+                          className="btn-icon btn-3"
+                          color="danger"
+                          type="submit"
+                          onClick={handleClick("delete")}
+                          outline
+                        >
+                          <i className="fas fa-trash" />
+                          <span className="btn-inner--text">Delete</span>
+                        </Button> :
+                        null
+                      }
                       <Button
                         className="btn-icon btn-3"
                         color="danger"
-                        type="submit"
-                        onClick={handleSubmit}
-                        value={name === "new" ? "cancel" : "delete"}
+                        type="button"
+                        onClick={handleClick("cancel")}
                         outline
                       >
-                        <i className="fas fa-trash" />
-                        {name === "new" ? (
-                          <span className="btn-inner--text">Cancel</span>
-                        ) : (
-                          <span className="btn-inner--text">Delete</span>
-                        )}
+                        <span className="btn-inner--text">Cancel</span>
                       </Button>
                     </Col>
                   </Row>
