@@ -17,6 +17,8 @@ import {
   FormGroup,
   Input,
   FormText,
+  FormFeedback,
+  Alert,
 } from "reactstrap";
 
 import uploadImage from "../../utils/uploadImage";
@@ -26,7 +28,9 @@ import {
   deleteProduct,
 } from "../../utils/productActions";
 
+
 const ProductDetails = (props) => {
+  /* eslint-disable react/destructuring-assignment */
   const { product } = props.location.state;
 
   const history = useHistory();
@@ -37,11 +41,17 @@ const ProductDetails = (props) => {
   const [price, setPrice] = useState(product.price || 0);
   const [stocks, setStocks] = useState(product.qty || 0);
   const [imageUrl, setImageUrl] = useState(product.thumbnailUrl || "");
-  const [imageFile, setImageFile] = useState({});
+  const [imageFile, setImageFile] = useState();
+  const [action, setAction] = useState("");
+  const [error, setError] = useState("");
+
+  const handleClick = (action) => () => {
+    if (action === "cancel") return history.push("/admin/products");
+    setAction(action);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const action = event.currentTarget.value;
 
     const currentProduct = {
       name: productName,
@@ -51,11 +61,22 @@ const ProductDetails = (props) => {
       thumbnailUrl: imageUrl,
     };
 
+    const isComplete = () => {
+      if (!imageFile && imageUrl === "") {
+        setError("No Photo Selected!")
+        return false;
+      }
+      return true;
+    }
+
     switch (action) {
       case "save":
-        uploadImage(imageFile, currentProduct, (url) => {
-          setImageUrl(url);
-        });
+        if (!isComplete()) return window.scrollTo(0, 0);
+        if (imageFile) {
+          uploadImage(imageFile, currentProduct, (url) => {
+            setImageUrl(url);
+          });
+        }
 
         if (name === "new") {
           addProduct(currentProduct);
@@ -80,13 +101,27 @@ const ProductDetails = (props) => {
           <Card className="bg-secondary shadow">
             <CardHeader className="bg-white border-0">
               <Row className="align-items-center">
+                <Col xs="1">
+                  <Button
+                    className="btn-icon btn-3"
+                    color="secondary"
+                    type="button"
+                    onClick={handleClick("cancel")}
+                  >
+                    <span className="btn-inner--text">Back</span>
+                  </Button>
+                </Col>
                 <Col xs="8">
                   <h3 className="mb-0">Edit product</h3>
                 </Col>
+
               </Row>
             </CardHeader>
             <CardBody>
-              <Form>
+              <Alert color="danger" isOpen={error !== ""} toggle={() => { setError("") }}>
+                {error}
+              </Alert>
+              <Form onSubmit={handleSubmit}>
                 <div className="pl-lg-4">
                   <Row className="align-items-end py-4">
                     <Col xs="auto">
@@ -163,7 +198,14 @@ const ProductDetails = (props) => {
                           type="text"
                           value={productName}
                           onChange={(e) => setProductName(e.target.value)}
+                          invalid={productName === ""}
+                          maxLength="200"
+                          required
                         />
+                        {productName === "" ?
+                          <FormFeedback>Input Required!</FormFeedback> :
+                          null
+                        }
                       </FormGroup>
                     </Col>
                   </Row>
@@ -183,6 +225,7 @@ const ProductDetails = (props) => {
                           rows="4"
                           value={description}
                           onChange={(e) => setDescription(e.target.value)}
+                          maxLength="1000"
                         />
                       </FormGroup>
                     </Col>
@@ -199,12 +242,19 @@ const ProductDetails = (props) => {
                         <Input
                           className="form-control-alternative"
                           id="productPrice"
-                          min="0"
+                          min="1"
                           type="number"
                           placeholder="0"
+                          step="0.01"
                           value={price}
                           onChange={(e) => setPrice(e.target.value)}
+                          invalid={price.toString() === ""}
+                          required
                         />
+                        {price.toString() === "" ?
+                          <FormFeedback>Input Required!</FormFeedback> :
+                          null
+                        }
                       </FormGroup>
                     </Col>
                     <Col lg="6">
@@ -223,7 +273,12 @@ const ProductDetails = (props) => {
                           placeholder="0"
                           value={stocks}
                           onChange={(e) => setStocks(e.target.value)}
+                          invalid={stocks.toString() === ""}
                         />
+                        {stocks.toString() === "" ?
+                          <FormFeedback>Input Required!</FormFeedback> :
+                          null
+                        }
                       </FormGroup>
                     </Col>
                   </Row>
@@ -233,8 +288,7 @@ const ProductDetails = (props) => {
                         className="btn-icon btn-3"
                         color="primary"
                         type="submit"
-                        onClick={handleSubmit}
-                        value="save"
+                        onClick={handleClick("save")}
                       >
                         <i className="fas fa-save" />
                         {name === "new" ? (
@@ -243,31 +297,19 @@ const ProductDetails = (props) => {
                           <span className="btn-inner--text">Save</span>
                         )}
                       </Button>
-                      <Button
-                        className="btn-icon btn-3"
-                        color="danger"
-
-                        type="submit"
-
-                        onClick={handleSubmit}
-                        value={name === "new" ? "cancel" : "delete"}
-
-                        onClick={e => cancelAction()}
-                        value={"cancel"}
-                        onClick={handleSubmit}
-                        value={name === "new" ? "cancel" : "delete"}
-
-                        onClick={e => cancelAction()}
-                        value={"cancel"}
-                        outline
-                      >
-                        <i className="fas fa-trash" />
-                        {name === "new" ? (
-                          <span className="btn-inner--text">Cancel</span>
-                        ) : (
+                      {name !== "new" ?
+                        <Button
+                          className="btn-icon btn-3"
+                          color="danger"
+                          type="submit"
+                          onClick={handleClick("delete")}
+                          outline
+                        >
+                          <i className="fas fa-trash" />
                           <span className="btn-inner--text">Delete</span>
-                        )}
-                      </Button>
+                        </Button> :
+                        null
+                      }
                     </Col>
                   </Row>
                 </div>
