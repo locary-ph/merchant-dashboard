@@ -3,7 +3,7 @@
  */
 
 import React, { useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   Button,
@@ -35,7 +35,6 @@ const ProductDetails = (props) => {
   const { product } = props.location.state;
 
   const history = useHistory();
-  const { name } = useParams();
 
   const [productName, setProductName] = useState(product.name || "");
   const [description, setDescription] = useState(product.description || "");
@@ -78,7 +77,7 @@ const ProductDetails = (props) => {
           });
         }
 
-        if (name === "new") {
+        if (product._id === "new") {
           addProduct(currentProduct);
         } else {
           editProduct(product._id, currentProduct);
@@ -289,13 +288,13 @@ const ProductDetails = (props) => {
                       >
                         <i className="fas fa-save" />
                         <span className="btn-inner--text">
-                          {name === "new" ? "Add" : "Save"}
+                          {product._id === "new" ? "Add" : "Save"}
                         </span>
                       </Button>
 
                       <Button
                         className={`btn-icon btn-3 ${
-                          name === "new" ? "d-none" : ""
+                          product._id === "new" ? "d-none" : ""
                         }`}
                         color="danger"
                         type="submit"
