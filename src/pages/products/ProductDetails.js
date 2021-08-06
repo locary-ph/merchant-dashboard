@@ -133,23 +133,20 @@ const ProductDetails = (props) => {
                           height: 200,
                         }}
                       >
-                        {imageUrl === "" ? (
-                          <p
-                            style={{
-                              borderRadius: 10,
-                              width: "200px",
-                              padding: "30px",
-                            }}
-                          >
-                            No Photo Selected!
-                          </p>
-                        ) : (
+                        {imageFile ?
                           <img
                             style={{ borderRadius: 10, width: "200px" }}
-                            src={imageUrl}
+                            src={URL.createObjectURL(imageFile)}
                             alt="product"
-                          />
-                        )}
+                          /> :
+                          imageUrl !== "" ?
+                            <img
+                              style={{ borderRadius: 10, width: "200px" }}
+                              src={imageUrl}
+                              alt="product"
+                            /> :
+                            <p style={{ borderRadius: 10, width: "200px", padding: "30px" }}>No Photo Selected!</p>
+                        }
                       </div>
                     </Col>
                     <Col>
