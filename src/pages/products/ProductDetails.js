@@ -138,7 +138,7 @@ const ProductDetails = (props) => {
                           width: 200,
                         }}
                       >
-                        {imageFile && imageUrl !== "" ? (
+                        {imageFile || imageUrl !== "" ? (
                           <img
                             className="mx-auto"
                             style={{
