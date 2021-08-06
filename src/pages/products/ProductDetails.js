@@ -44,9 +44,16 @@ const ProductDetails = (props) => {
   const [action, setAction] = useState("");
   const [error, setError] = useState("");
 
-  const handleClick = (action) => () => {
-    if (action === "cancel") return history.push("/admin/products");
-    setAction(action);
+  const handleClick = (evt) => {
+    setAction(evt.currentTarget.value);
+  };
+
+  const isValid = () => {
+    if (!imageFile && imageUrl === "") {
+      setError("No Photo Selected!");
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = (event) => {
@@ -60,7 +67,7 @@ const ProductDetails = (props) => {
       thumbnailUrl: imageUrl,
     };
 
-    const isComplete = () => {
+    const isValid = () => {
       if (!imageFile && imageUrl === "") {
         setError("No Photo Selected!");
         return false;
@@ -70,7 +77,7 @@ const ProductDetails = (props) => {
 
     switch (action) {
       case "save":
-        if (!isComplete()) return window.scrollTo(0, 0);
+        if (!isValid()) return window.scrollTo(0, 0);
         if (imageFile) {
           uploadImage(imageFile, currentProduct, (url) => {
             setImageUrl(url);
@@ -95,22 +102,16 @@ const ProductDetails = (props) => {
 
   return (
     <Container className="mt-5" fluid>
+      <button className="back-icon">
+        <i className="ni ni-bold-left" />
+        <span>Back</span>
+      </button>
       <Row>
         <Col>
           <Card className="bg-secondary shadow">
             <CardHeader className="bg-white border-0">
               <Row className="align-items-center">
-                <Col xs="1">
-                  <Button
-                    className="btn-icon btn-3"
-                    color="secondary"
-                    type="button"
-                    onClick={handleClick("cancel")}
-                  >
-                    <span className="btn-inner--text">Back</span>
-                  </Button>
-                </Col>
-                <Col xs="8">
+                <Col>
                   <h3 className="mb-0">Edit product</h3>
                 </Col>
               </Row>
@@ -179,7 +180,11 @@ const ProductDetails = (props) => {
                         name="productImg"
                         id="productImg"
                         type="File"
-                        onChange={(e) => setImageFile(e.target.files[0])}
+                        onChange={(e) => {
+                          setImageFile(e.target.files[0]);
+                          const blob = URL.createObjectURL(imageFile);
+                          console.log(blob);
+                        }}
                         accept="image/*"
                       />
                       <FormText>
@@ -254,7 +259,6 @@ const ProductDetails = (props) => {
                           step="0.01"
                           value={price}
                           onChange={(e) => setPrice(e.target.value)}
-                          invalid={price.toString() === ""}
                           required
                         />
                         {price.toString() === "" ? (
@@ -278,7 +282,6 @@ const ProductDetails = (props) => {
                           placeholder="0"
                           value={stocks}
                           onChange={(e) => setStocks(e.target.value)}
-                          invalid={stocks.toString() === ""}
                         />
                         {stocks.toString() === "" ? (
                           <FormFeedback>Input Required!</FormFeedback>
@@ -292,27 +295,28 @@ const ProductDetails = (props) => {
                         className="btn-icon btn-3"
                         color="primary"
                         type="submit"
-                        onClick={handleClick("save")}
+                        value="submit"
+                        onClick={handleClick}
                       >
                         <i className="fas fa-save" />
-                        {name === "new" ? (
-                          <span className="btn-inner--text">Add</span>
-                        ) : (
-                          <span className="btn-inner--text">Save</span>
-                        )}
+                        <span className="btn-inner--text">
+                          {name === "new" ? "Add" : "Save"}
+                        </span>
                       </Button>
-                      {name !== "new" ? (
-                        <Button
-                          className="btn-icon btn-3"
-                          color="danger"
-                          type="submit"
-                          onClick={handleClick("delete")}
-                          outline
-                        >
-                          <i className="fas fa-trash" />
-                          <span className="btn-inner--text">Delete</span>
-                        </Button>
-                      ) : null}
+
+                      <Button
+                        className={`btn-icon btn-3 ${
+                          name === "new" ? "d-none" : ""
+                        }`}
+                        color="danger"
+                        type="submit"
+                        value="delete"
+                        onClick={handleClick}
+                        outline
+                      >
+                        <i className="fas fa-trash" />
+                        <span className="btn-inner--text">Delete</span>
+                      </Button>
                     </Col>
                   </Row>
                 </div>
