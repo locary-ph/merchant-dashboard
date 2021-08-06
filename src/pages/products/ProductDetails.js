@@ -29,6 +29,7 @@ import {
   addProduct,
   deleteProduct,
 } from "../../utils/productActions";
+import displayToastify from "./displayToastify";
 
 const ProductDetails = (props) => {
   /* eslint-disable react/destructuring-assignment */
@@ -69,7 +70,7 @@ const ProductDetails = (props) => {
     };
 
     switch (action) {
-      case "save":
+      case "add":
         if (!isValid()) return window.scrollTo(0, 0);
         if (imageFile) {
           uploadImage(imageFile, currentProduct, (url) => {
@@ -77,19 +78,19 @@ const ProductDetails = (props) => {
           });
         }
 
-        if (product._id === "new") {
-          addProduct(currentProduct);
-        } else {
-          editProduct(product._id, currentProduct);
-        }
-
+        addProduct(currentProduct);
+        break;
+      case "edit":
+        editProduct(product._id, currentProduct);
         break;
       case "delete":
         deleteProduct(product._id);
+        history.goBack();
         break;
       default:
         break;
     }
+    return displayToastify(action);
   };
 
   return (
@@ -119,7 +120,7 @@ const ProductDetails = (props) => {
               <Form onSubmit={handleSubmit}>
                 <div className="pl-lg-4">
                   <ImageInput
-                    onChange={setImageFile}
+                    setImageFile={setImageFile}
                     {...{ imageUrl, imageFile }}
                   />
 
@@ -219,7 +220,8 @@ const ProductDetails = (props) => {
                         className="btn-icon btn-3"
                         color="primary"
                         type="submit"
-                        value="save"
+                        /* the action will be based on the value attribute of the buttons */
+                        value={product._id === "new" ? "add" : "edit"}
                         onClick={handleClick}
                       >
                         <i className="fas fa-save" />
