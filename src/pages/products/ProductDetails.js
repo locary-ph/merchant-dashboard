@@ -21,6 +21,8 @@ import {
   Alert,
 } from "reactstrap";
 
+import BackButton from "../../components/BackButton/BackButton";
+
 import uploadImage from "../../utils/uploadImage";
 import {
   editProduct,
@@ -43,9 +45,16 @@ const ProductDetails = (props) => {
   const [action, setAction] = useState("");
   const [error, setError] = useState("");
 
-  const handleClick = (action) => () => {
-    if (action === "cancel") return history.push("/admin/products");
-    setAction(action);
+  const handleClick = (evt) => {
+    setAction(evt.currentTarget.value);
+  };
+
+  const isValid = () => {
+    if (!imageFile && imageUrl === "") {
+      setError("No Photo Selected!");
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = (event) => {
@@ -59,17 +68,9 @@ const ProductDetails = (props) => {
       thumbnailUrl: imageUrl,
     };
 
-    const isComplete = () => {
-      if (!imageFile && imageUrl === "") {
-        setError("No Photo Selected!");
-        return false;
-      }
-      return true;
-    };
-
     switch (action) {
       case "save":
-        if (!isComplete()) return window.scrollTo(0, 0);
+        if (!isValid()) return window.scrollTo(0, 0);
         if (imageFile) {
           uploadImage(imageFile, currentProduct, (url) => {
             setImageUrl(url);
@@ -89,27 +90,18 @@ const ProductDetails = (props) => {
       default:
         break;
     }
-    history.push("/admin/products");
+    return history.push("/admin/products");
   };
 
   return (
     <Container className="mt-5" fluid>
+      <BackButton />
       <Row>
         <Col>
           <Card className="bg-secondary shadow">
             <CardHeader className="bg-white border-0">
               <Row className="align-items-center">
-                <Col xs="1">
-                  <Button
-                    className="btn-icon btn-3"
-                    color="secondary"
-                    type="button"
-                    onClick={handleClick("cancel")}
-                  >
-                    <span className="btn-inner--text">Back</span>
-                  </Button>
-                </Col>
-                <Col xs="8">
+                <Col>
                   <h3 className="mb-0">Edit product</h3>
                 </Col>
               </Row>
@@ -137,7 +129,7 @@ const ProductDetails = (props) => {
                           width: 200,
                         }}
                       >
-                        {imageFile || imageUrl !== "" ? (
+                        {imageFile || imageUrl ? (
                           <img
                             className="mx-auto"
                             style={{
@@ -169,6 +161,8 @@ const ProductDetails = (props) => {
                           className="m-0"
                           htmlFor="productImg"
                           style={{ padding: "10px 20px" }}
+                          /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
+                          role="button"
                         >
                           Upload photo
                         </label>
@@ -253,7 +247,6 @@ const ProductDetails = (props) => {
                           step="0.01"
                           value={price}
                           onChange={(e) => setPrice(e.target.value)}
-                          invalid={price.toString() === ""}
                           required
                         />
                         {price.toString() === "" ? (
@@ -277,7 +270,6 @@ const ProductDetails = (props) => {
                           placeholder="0"
                           value={stocks}
                           onChange={(e) => setStocks(e.target.value)}
-                          invalid={stocks.toString() === ""}
                         />
                         {stocks.toString() === "" ? (
                           <FormFeedback>Input Required!</FormFeedback>
@@ -291,27 +283,28 @@ const ProductDetails = (props) => {
                         className="btn-icon btn-3"
                         color="primary"
                         type="submit"
-                        onClick={handleClick("save")}
+                        value="submit"
+                        onClick={handleClick}
                       >
                         <i className="fas fa-save" />
-                        {product._id === "new" ? (
-                          <span className="btn-inner--text">Add</span>
-                        ) : (
-                          <span className="btn-inner--text">Save</span>
-                        )}
+                        <span className="btn-inner--text">
+                          {product._id === "new" ? "Add" : "Save"}
+                        </span>
                       </Button>
-                      {product._id !== "new" ? (
-                        <Button
-                          className="btn-icon btn-3"
-                          color="danger"
-                          type="submit"
-                          onClick={handleClick("delete")}
-                          outline
-                        >
-                          <i className="fas fa-trash" />
-                          <span className="btn-inner--text">Delete</span>
-                        </Button>
-                      ) : null}
+
+                      <Button
+                        className={`btn-icon btn-3 ${
+                          product._id === "new" ? "d-none" : ""
+                        }`}
+                        color="danger"
+                        type="submit"
+                        value="delete"
+                        onClick={handleClick}
+                        outline
+                      >
+                        <i className="fas fa-trash" />
+                        <span className="btn-inner--text">Delete</span>
+                      </Button>
                     </Col>
                   </Row>
                 </div>
