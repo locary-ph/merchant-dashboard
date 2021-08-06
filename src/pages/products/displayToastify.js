@@ -16,7 +16,7 @@ function displayToastify(action) {
     text = "Product deleted!";
     type = "error";
   }
-  toastify(3000, type, "top-right", text);
+  toastify(4000, type, "top-right", text);
 }
 
 export default displayToastify;
