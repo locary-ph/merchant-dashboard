@@ -27,13 +27,13 @@ import {
   addProduct,
   deleteProduct,
 } from "../../utils/productActions";
+import products from "data/products";
 
 const ProductDetails = (props) => {
   /* eslint-disable react/destructuring-assignment */
   const { product } = props.location.state;
 
   const history = useHistory();
-  const { name } = useParams();
 
   const [productName, setProductName] = useState(product.name || "");
   const [description, setDescription] = useState(product.description || "");
@@ -77,7 +77,7 @@ const ProductDetails = (props) => {
           });
         }
 
-        if (name === "new") {
+        if (product._id === "new") {
           addProduct(currentProduct);
         } else {
           editProduct(product._id, currentProduct);
@@ -295,13 +295,13 @@ const ProductDetails = (props) => {
                         onClick={handleClick("save")}
                       >
                         <i className="fas fa-save" />
-                        {name === "new" ? (
+                        {product._id === "new" ? (
                           <span className="btn-inner--text">Add</span>
                         ) : (
                           <span className="btn-inner--text">Save</span>
                         )}
                       </Button>
-                      {name !== "new" ? (
+                      {product._id !== "new" ? (
                         <Button
                           className="btn-icon btn-3"
                           color="danger"
