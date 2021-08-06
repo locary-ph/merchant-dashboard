@@ -155,7 +155,7 @@ const ProductDetails = (props) => {
                             alt="product"
                           />
                         ) : (
-                          <p>No Photo Selected!</p>
+                          <p className="mx-auto">No Photo Selected!</p>
                         )}
                       </div>
                     </Col>
