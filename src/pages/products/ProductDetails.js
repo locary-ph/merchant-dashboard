@@ -27,7 +27,6 @@ import {
   addProduct,
   deleteProduct,
 } from "../../utils/productActions";
-import products from "data/products";
 
 const ProductDetails = (props) => {
   /* eslint-disable react/destructuring-assignment */
