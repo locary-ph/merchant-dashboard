@@ -21,6 +21,8 @@ import {
   Alert,
 } from "reactstrap";
 
+import BackButton from "../../components/BackButton/BackButton";
+
 import uploadImage from "../../utils/uploadImage";
 import {
   editProduct,
@@ -67,14 +69,6 @@ const ProductDetails = (props) => {
       thumbnailUrl: imageUrl,
     };
 
-    const isValid = () => {
-      if (!imageFile && imageUrl === "") {
-        setError("No Photo Selected!");
-        return false;
-      }
-      return true;
-    };
-
     switch (action) {
       case "save":
         if (!isValid()) return window.scrollTo(0, 0);
@@ -97,15 +91,12 @@ const ProductDetails = (props) => {
       default:
         break;
     }
-    history.push("/admin/products");
+    return history.push("/admin/products");
   };
 
   return (
     <Container className="mt-5" fluid>
-      <button className="back-icon">
-        <i className="ni ni-bold-left" />
-        <span>Back</span>
-      </button>
+      <BackButton />
       <Row>
         <Col>
           <Card className="bg-secondary shadow">
@@ -139,7 +130,7 @@ const ProductDetails = (props) => {
                           width: 200,
                         }}
                       >
-                        {imageFile || imageUrl !== "" ? (
+                        {imageFile || imageUrl ? (
                           <img
                             className="mx-auto"
                             style={{
@@ -171,6 +162,8 @@ const ProductDetails = (props) => {
                           className="m-0"
                           htmlFor="productImg"
                           style={{ padding: "10px 20px" }}
+                          /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
+                          role="button"
                         >
                           Upload photo
                         </label>
@@ -180,11 +173,7 @@ const ProductDetails = (props) => {
                         name="productImg"
                         id="productImg"
                         type="File"
-                        onChange={(e) => {
-                          setImageFile(e.target.files[0]);
-                          const blob = URL.createObjectURL(imageFile);
-                          console.log(blob);
-                        }}
+                        onChange={(e) => setImageFile(e.target.files[0])}
                         accept="image/*"
                       />
                       <FormText>
