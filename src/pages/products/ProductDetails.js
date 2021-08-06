@@ -16,12 +16,12 @@ import {
   Form,
   FormGroup,
   Input,
-  FormText,
   FormFeedback,
   Alert,
 } from "reactstrap";
 
 import BackButton from "../../components/BackButton/BackButton";
+import ImageInput from "./ImageInput/ImageInput";
 
 import uploadImage from "../../utils/uploadImage";
 import {
@@ -50,7 +50,7 @@ const ProductDetails = (props) => {
   };
 
   const isValid = () => {
-    if (!imageFile && imageUrl === "") {
+    if (!imageFile && !imageUrl) {
       setError("No Photo Selected!");
       return false;
     }
@@ -90,12 +90,12 @@ const ProductDetails = (props) => {
       default:
         break;
     }
-    return history.push("/admin/products");
   };
 
   return (
     <Container className="mt-5" fluid>
       <BackButton />
+
       <Row>
         <Col>
           <Card className="bg-secondary shadow">
@@ -118,69 +118,11 @@ const ProductDetails = (props) => {
               </Alert>
               <Form onSubmit={handleSubmit}>
                 <div className="pl-lg-4">
-                  <Row className="align-items-end py-4">
-                    <Col xs="auto">
-                      <div
-                        className="d-flex align-items-center"
-                        style={{
-                          borderRadius: 10,
-                          border: "solid 2px #FE634E",
-                          height: 200,
-                          width: 200,
-                        }}
-                      >
-                        {imageFile || imageUrl ? (
-                          <img
-                            className="mx-auto"
-                            style={{
-                              borderRadius: 10,
-                              maxWidth: "190px",
-                              maxHeight: "190px",
-                              margin: "10px",
-                            }}
-                            src={
-                              imageFile
-                                ? URL.createObjectURL(imageFile)
-                                : imageUrl
-                            }
-                            alt="product"
-                          />
-                        ) : (
-                          <p className="mx-auto">No Photo Selected!</p>
-                        )}
-                      </div>
-                    </Col>
-                    <Col>
-                      <Button
-                        style={{ borderRadius: 15, padding: 0 }}
-                        color="warning"
-                        outline
-                        type="button"
-                      >
-                        <label
-                          className="m-0"
-                          htmlFor="productImg"
-                          style={{ padding: "10px 20px" }}
-                          /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
-                          role="button"
-                        >
-                          Upload photo
-                        </label>
-                      </Button>
-                      <Input
-                        className="d-none"
-                        name="productImg"
-                        id="productImg"
-                        type="File"
-                        onChange={(e) => setImageFile(e.target.files[0])}
-                        accept="image/*"
-                      />
-                      <FormText>
-                        Put text here about what type of image should be
-                        uploaded
-                      </FormText>
-                    </Col>
-                  </Row>
+                  <ImageInput
+                    onChange={setImageFile}
+                    {...{ imageUrl, imageFile }}
+                  />
+
                   <Row>
                     <Col>
                       <FormGroup>
@@ -203,7 +145,7 @@ const ProductDetails = (props) => {
                           required
                         />
                         {productName === "" ? (
-                          <FormFeedback>Input Required!</FormFeedback>
+                          <FormFeedback>Product name required!</FormFeedback>
                         ) : null}
                       </FormGroup>
                     </Col>
@@ -249,9 +191,6 @@ const ProductDetails = (props) => {
                           onChange={(e) => setPrice(e.target.value)}
                           required
                         />
-                        {price.toString() === "" ? (
-                          <FormFeedback>Input Required!</FormFeedback>
-                        ) : null}
                       </FormGroup>
                     </Col>
                     <Col lg="6">
@@ -271,9 +210,6 @@ const ProductDetails = (props) => {
                           value={stocks}
                           onChange={(e) => setStocks(e.target.value)}
                         />
-                        {stocks.toString() === "" ? (
-                          <FormFeedback>Input Required!</FormFeedback>
-                        ) : null}
                       </FormGroup>
                     </Col>
                   </Row>
@@ -283,7 +219,7 @@ const ProductDetails = (props) => {
                         className="btn-icon btn-3"
                         color="primary"
                         type="submit"
-                        value="submit"
+                        value="save"
                         onClick={handleClick}
                       >
                         <i className="fas fa-save" />
@@ -318,16 +254,12 @@ const ProductDetails = (props) => {
   );
 };
 
-ProductDetails.defaultProps = {
-  location: {},
-};
-
 ProductDetails.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
-      product: PropTypes.objectOf(PropTypes.node).isRequired,
+      product: PropTypes.objectOf(PropTypes.node),
     }),
-  }),
+  }).isRequired,
 };
 
 export default ProductDetails;
