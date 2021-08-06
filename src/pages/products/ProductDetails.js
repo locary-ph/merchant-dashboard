@@ -28,7 +28,6 @@ import {
   deleteProduct,
 } from "../../utils/productActions";
 
-
 const ProductDetails = (props) => {
   /* eslint-disable react/destructuring-assignment */
   const { product } = props.location.state;
@@ -63,11 +62,11 @@ const ProductDetails = (props) => {
 
     const isComplete = () => {
       if (!imageFile && imageUrl === "") {
-        setError("No Photo Selected!")
+        setError("No Photo Selected!");
         return false;
       }
       return true;
-    }
+    };
 
     switch (action) {
       case "save":
@@ -114,11 +113,16 @@ const ProductDetails = (props) => {
                 <Col xs="8">
                   <h3 className="mb-0">Edit product</h3>
                 </Col>
-
               </Row>
             </CardHeader>
             <CardBody>
-              <Alert color="danger" isOpen={error !== ""} toggle={() => { setError("") }}>
+              <Alert
+                color="danger"
+                isOpen={error !== ""}
+                toggle={() => {
+                  setError("");
+                }}
+              >
                 {error}
               </Alert>
               <Form onSubmit={handleSubmit}>
@@ -131,24 +135,27 @@ const ProductDetails = (props) => {
                           borderRadius: 10,
                           border: "solid 2px #FE634E",
                           height: 200,
+                          width: 200,
                         }}
                       >
-                        {imageUrl === "" ? (
-                          <p
+                        {imageFile || imageUrl !== "" ? (
+                          <img
+                            className="mx-auto"
                             style={{
                               borderRadius: 10,
-                              width: "200px",
-                              padding: "30px",
+                              maxWidth: "190px",
+                              maxHeight: "190px",
+                              margin: "10px",
                             }}
-                          >
-                            No Photo Selected!
-                          </p>
-                        ) : (
-                          <img
-                            style={{ borderRadius: 10, width: "200px" }}
-                            src={imageUrl}
+                            src={
+                              imageFile
+                                ? URL.createObjectURL(imageFile)
+                                : imageUrl
+                            }
                             alt="product"
                           />
+                        ) : (
+                          <p className="mx-auto">No Photo Selected!</p>
                         )}
                       </div>
                     </Col>
@@ -202,10 +209,9 @@ const ProductDetails = (props) => {
                           maxLength="200"
                           required
                         />
-                        {productName === "" ?
-                          <FormFeedback>Input Required!</FormFeedback> :
-                          null
-                        }
+                        {productName === "" ? (
+                          <FormFeedback>Input Required!</FormFeedback>
+                        ) : null}
                       </FormGroup>
                     </Col>
                   </Row>
@@ -251,10 +257,9 @@ const ProductDetails = (props) => {
                           invalid={price.toString() === ""}
                           required
                         />
-                        {price.toString() === "" ?
-                          <FormFeedback>Input Required!</FormFeedback> :
-                          null
-                        }
+                        {price.toString() === "" ? (
+                          <FormFeedback>Input Required!</FormFeedback>
+                        ) : null}
                       </FormGroup>
                     </Col>
                     <Col lg="6">
@@ -275,10 +280,9 @@ const ProductDetails = (props) => {
                           onChange={(e) => setStocks(e.target.value)}
                           invalid={stocks.toString() === ""}
                         />
-                        {stocks.toString() === "" ?
-                          <FormFeedback>Input Required!</FormFeedback> :
-                          null
-                        }
+                        {stocks.toString() === "" ? (
+                          <FormFeedback>Input Required!</FormFeedback>
+                        ) : null}
                       </FormGroup>
                     </Col>
                   </Row>
@@ -297,7 +301,7 @@ const ProductDetails = (props) => {
                           <span className="btn-inner--text">Save</span>
                         )}
                       </Button>
-                      {name !== "new" ?
+                      {name !== "new" ? (
                         <Button
                           className="btn-icon btn-3"
                           color="danger"
@@ -307,9 +311,8 @@ const ProductDetails = (props) => {
                         >
                           <i className="fas fa-trash" />
                           <span className="btn-inner--text">Delete</span>
-                        </Button> :
-                        null
-                      }
+                        </Button>
+                      ) : null}
                     </Col>
                   </Row>
                 </div>
