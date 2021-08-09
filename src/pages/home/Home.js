@@ -9,18 +9,18 @@ import Inventory from "./Inventory";
 import Performance from "./Performance";
 
 const RecentOrders = () => (
-    <Card className="shadow">
-      <CardHeader className="bg-transparent">
-        <Row className="align-items-center">
-          <div className="col">
-            <h6 className="text-uppercase text-light ls-1 mb-1">Overview</h6>
-            <h2 className="text-black mb-0">Recent Orders</h2>
-          </div>
-        </Row>
-      </CardHeader>
-      <OrderList />
-    </Card>
-  );
+  <Card className="shadow">
+    <CardHeader className="bg-transparent">
+      <Row className="align-items-center">
+        <div className="col">
+          <h6 className="text-uppercase text-light ls-1 mb-1">Overview</h6>
+          <h2 className="text-black mb-0">Recent Orders</h2>
+        </div>
+      </Row>
+    </CardHeader>
+    <OrderList />
+  </Card>
+);
 
 const Index = () => (
   <>
