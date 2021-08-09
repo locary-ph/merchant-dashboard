@@ -1,7 +1,9 @@
+/**
+ * @format
+ */
+
 import React from "react";
-import {
-  Route, Switch, Redirect
-} from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
@@ -11,6 +13,8 @@ import Sidebar from "../components/Sidebar/Sidebar";
 import ProductDetails from "../pages/products/ProductDetails";
 
 import routes from "../routes";
+
+import locaryLogo from "../assets/img/brand/locary-logo.png";
 
 const Admin = (props) => {
   const { location } = props;
@@ -23,13 +27,9 @@ const Admin = (props) => {
     mainContent.current.scrollTop = 0;
   }, [location]);
 
-
   const getBrandText = (path) => {
     for (let i = 0; i < routes.length; i++) {
-      if (
-        path.indexOf(routes[i].layout + routes[i].path)
-        !== -1
-      ) {
+      if (path.indexOf(routes[i].layout + routes[i].path) !== -1) {
         return routes[i].name;
       }
     }
@@ -43,16 +43,18 @@ const Admin = (props) => {
         routes={routes}
         logo={{
           innerLink: "/admin/index",
-          imgSrc: require("../assets/img/brand/locary-logo.png").default,
+          imgSrc: locaryLogo,
           imgAlt: "...",
         }}
       />
-      <div className="main-content" style={{ backgroundColor: "#F4F6FA" }} ref={mainContent}>
-        <Navbar
-          {...props}
-          brandText={getBrandText(location.pathname)}
-        />
+      <div
+        className="main-content"
+        style={{ backgroundColor: "#F4F6FA" }}
+        ref={mainContent}
+      >
+        <Navbar {...props} brandText={getBrandText(location.pathname)} />
         <Switch>
+          {/* eslint-disable react/no-array-index-key */}
           {routes.map((prop, key) => {
             if (prop.layout === "/admin") {
               return (
@@ -66,7 +68,11 @@ const Admin = (props) => {
             }
             return null;
           })}
-          <Route exact path="/admin/products/:name" component={ProductDetails} />
+          <Route
+            exact
+            path="/admin/products/:name"
+            component={ProductDetails}
+          />
           <Redirect from="*" to="/admin/index" />
         </Switch>
         <Container fluid>

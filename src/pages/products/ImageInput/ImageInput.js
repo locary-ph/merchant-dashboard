@@ -5,6 +5,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Row, Col, Input, Button, FormText } from "reactstrap";
 
+const propTypes = {
+  setImageFile: PropTypes.func.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  imageFile: PropTypes.instanceOf(File).isRequired,
+};
+
 function ImageInput({ setImageFile, imageUrl, imageFile }) {
   return (
     <Row className="align-items-end py-4">
@@ -68,8 +74,6 @@ function ImageInput({ setImageFile, imageUrl, imageFile }) {
   );
 }
 
-ImageInput.defaultProps = {};
-
-ImageInput.propTypes = {};
+ImageInput.propTypes = propTypes;
 
 export default ImageInput;

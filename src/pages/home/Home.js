@@ -8,8 +8,7 @@ import OrderList from "../../components/OrderList/OrderList";
 import Inventory from "./Inventory";
 import Performance from "./Performance";
 
-const RecentOrders = () => {
-  return (
+const RecentOrders = () => (
     <Card className="shadow">
       <CardHeader className="bg-transparent">
         <Row className="align-items-center">
@@ -22,7 +21,6 @@ const RecentOrders = () => {
       <OrderList />
     </Card>
   );
-};
 
 const Index = () => (
   <>

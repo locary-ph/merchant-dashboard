@@ -32,7 +32,7 @@ const Products = () => {
   const handleClick = (e, id) => {
     console.log(id);
   };
-  
+
   const addProduct = (event) => {
     event.preventDefault();
     history.push({
@@ -63,6 +63,7 @@ const Products = () => {
           <Card className="shadow">
             <CardBody className="px-5 py-6">
               <Row>
+                {/* eslint-disable react/no-array-index-key */}
                 {products.map((product, key) => {
                   const name = product.name.toLowerCase().replace(" ", "-");
                   return (
