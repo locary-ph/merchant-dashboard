@@ -63,3 +63,29 @@ button.close {
 	color: #F2583E;
 }
 
+/* icon back */
+.back-icon {
+  border: none;
+  background-color: transparent;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+}
+.back-icon i {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.back-icon:hover i, .back-icon:focus i, .back-icon:active i {
+  -webkit-transform: translateX(-4px);
+  transform: translateX(-4px);
+}

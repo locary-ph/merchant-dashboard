@@ -16,10 +16,12 @@ import {
   Form,
   FormGroup,
   Input,
-  FormText,
   FormFeedback,
   Alert,
 } from "reactstrap";
+
+import BackButton from "../../components/BackButton/BackButton";
+import ImageInput from "./ImageInput/ImageInput";
 
 import uploadImage from "../../utils/uploadImage";
 import {
@@ -27,6 +29,7 @@ import {
   addProduct,
   deleteProduct,
 } from "../../utils/productActions";
+import displayToastify from "./displayToastify";
 
 const ProductDetails = (props) => {
   /* eslint-disable react/destructuring-assignment */
@@ -43,9 +46,16 @@ const ProductDetails = (props) => {
   const [action, setAction] = useState("");
   const [error, setError] = useState("");
 
-  const handleClick = (action) => () => {
-    if (action === "cancel") return history.push("/admin/products");
-    setAction(action);
+  const handleClick = (evt) => {
+    setAction(evt.currentTarget.value);
+  };
+
+  const isValid = () => {
+    if (!imageFile && !imageUrl) {
+      setError("No Photo Selected!");
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = (event) => {
@@ -59,57 +69,40 @@ const ProductDetails = (props) => {
       thumbnailUrl: imageUrl,
     };
 
-    const isComplete = () => {
-      if (!imageFile && imageUrl === "") {
-        setError("No Photo Selected!");
-        return false;
-      }
-      return true;
-    };
-
     switch (action) {
-      case "save":
-        if (!isComplete()) return window.scrollTo(0, 0);
+      case "add":
+        if (!isValid()) return window.scrollTo(0, 0);
         if (imageFile) {
           uploadImage(imageFile, currentProduct, (url) => {
             setImageUrl(url);
           });
         }
 
-        if (product._id === "new") {
-          addProduct(currentProduct);
-        } else {
-          editProduct(product._id, currentProduct);
-        }
-
+        addProduct(currentProduct);
+        break;
+      case "edit":
+        editProduct(product._id, currentProduct);
         break;
       case "delete":
         deleteProduct(product._id);
+        history.goBack();
         break;
       default:
         break;
     }
-    history.push("/admin/products");
+    return displayToastify(action);
   };
 
   return (
     <Container className="mt-5" fluid>
+      <BackButton />
+
       <Row>
         <Col>
           <Card className="bg-secondary shadow">
             <CardHeader className="bg-white border-0">
               <Row className="align-items-center">
-                <Col xs="1">
-                  <Button
-                    className="btn-icon btn-3"
-                    color="secondary"
-                    type="button"
-                    onClick={handleClick("cancel")}
-                  >
-                    <span className="btn-inner--text">Back</span>
-                  </Button>
-                </Col>
-                <Col xs="8">
+                <Col>
                   <h3 className="mb-0">Edit product</h3>
                 </Col>
               </Row>
@@ -126,67 +119,11 @@ const ProductDetails = (props) => {
               </Alert>
               <Form onSubmit={handleSubmit}>
                 <div className="pl-lg-4">
-                  <Row className="align-items-end py-4">
-                    <Col xs="auto">
-                      <div
-                        className="d-flex align-items-center"
-                        style={{
-                          borderRadius: 10,
-                          border: "solid 2px #FE634E",
-                          height: 200,
-                          width: 200,
-                        }}
-                      >
-                        {imageFile || imageUrl !== "" ? (
-                          <img
-                            className="mx-auto"
-                            style={{
-                              borderRadius: 10,
-                              maxWidth: "190px",
-                              maxHeight: "190px",
-                              margin: "10px",
-                            }}
-                            src={
-                              imageFile
-                                ? URL.createObjectURL(imageFile)
-                                : imageUrl
-                            }
-                            alt="product"
-                          />
-                        ) : (
-                          <p className="mx-auto">No Photo Selected!</p>
-                        )}
-                      </div>
-                    </Col>
-                    <Col>
-                      <Button
-                        style={{ borderRadius: 15, padding: 0 }}
-                        color="warning"
-                        outline
-                        type="button"
-                      >
-                        <label
-                          className="m-0"
-                          htmlFor="productImg"
-                          style={{ padding: "10px 20px" }}
-                        >
-                          Upload photo
-                        </label>
-                      </Button>
-                      <Input
-                        className="d-none"
-                        name="productImg"
-                        id="productImg"
-                        type="File"
-                        onChange={(e) => setImageFile(e.target.files[0])}
-                        accept="image/*"
-                      />
-                      <FormText>
-                        Put text here about what type of image should be
-                        uploaded
-                      </FormText>
-                    </Col>
-                  </Row>
+                  <ImageInput
+                    setImageFile={setImageFile}
+                    {...{ imageUrl, imageFile }}
+                  />
+
                   <Row>
                     <Col>
                       <FormGroup>
@@ -209,7 +146,7 @@ const ProductDetails = (props) => {
                           required
                         />
                         {productName === "" ? (
-                          <FormFeedback>Input Required!</FormFeedback>
+                          <FormFeedback>Product name required!</FormFeedback>
                         ) : null}
                       </FormGroup>
                     </Col>
@@ -253,12 +190,8 @@ const ProductDetails = (props) => {
                           step="0.01"
                           value={price}
                           onChange={(e) => setPrice(e.target.value)}
-                          invalid={price.toString() === ""}
                           required
                         />
-                        {price.toString() === "" ? (
-                          <FormFeedback>Input Required!</FormFeedback>
-                        ) : null}
                       </FormGroup>
                     </Col>
                     <Col lg="6">
@@ -277,11 +210,7 @@ const ProductDetails = (props) => {
                           placeholder="0"
                           value={stocks}
                           onChange={(e) => setStocks(e.target.value)}
-                          invalid={stocks.toString() === ""}
                         />
-                        {stocks.toString() === "" ? (
-                          <FormFeedback>Input Required!</FormFeedback>
-                        ) : null}
                       </FormGroup>
                     </Col>
                   </Row>
@@ -291,27 +220,29 @@ const ProductDetails = (props) => {
                         className="btn-icon btn-3"
                         color="primary"
                         type="submit"
-                        onClick={handleClick("save")}
+                        /* the action will be based on the value attribute of the buttons */
+                        value={product._id === "new" ? "add" : "edit"}
+                        onClick={handleClick}
                       >
                         <i className="fas fa-save" />
-                        {product._id === "new" ? (
-                          <span className="btn-inner--text">Add</span>
-                        ) : (
-                          <span className="btn-inner--text">Save</span>
-                        )}
+                        <span className="btn-inner--text">
+                          {product._id === "new" ? "Add" : "Save"}
+                        </span>
                       </Button>
-                      {product._id !== "new" ? (
-                        <Button
-                          className="btn-icon btn-3"
-                          color="danger"
-                          type="submit"
-                          onClick={handleClick("delete")}
-                          outline
-                        >
-                          <i className="fas fa-trash" />
-                          <span className="btn-inner--text">Delete</span>
-                        </Button>
-                      ) : null}
+
+                      <Button
+                        className={`btn-icon btn-3 ${
+                          product._id === "new" ? "d-none" : ""
+                        }`}
+                        color="danger"
+                        type="submit"
+                        value="delete"
+                        onClick={handleClick}
+                        outline
+                      >
+                        <i className="fas fa-trash" />
+                        <span className="btn-inner--text">Delete</span>
+                      </Button>
                     </Col>
                   </Row>
                 </div>
@@ -325,16 +256,12 @@ const ProductDetails = (props) => {
   );
 };
 
-ProductDetails.defaultProps = {
-  location: {},
-};
-
 ProductDetails.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
-      product: PropTypes.objectOf(PropTypes.node).isRequired,
+      product: PropTypes.objectOf(PropTypes.node),
     }),
-  }),
+  }).isRequired,
 };
 
 export default ProductDetails;

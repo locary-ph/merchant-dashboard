@@ -9,7 +9,6 @@ const editProduct = async (id, product) => {
   } catch (err) {
     console.error(err);
   }
-  console.log(product);
 };
 
 const deleteProduct = async (id) => {
@@ -18,7 +17,6 @@ const deleteProduct = async (id) => {
   } catch (e) {
     console.error(e);
   }
-  console.log("delete");
 };
 
 const addProduct = async (product) => {
@@ -27,7 +25,6 @@ const addProduct = async (product) => {
   } catch (e) {
     console.error(e);
   }
-  console.log(product);
 };
 
 export { editProduct, addProduct, deleteProduct };
