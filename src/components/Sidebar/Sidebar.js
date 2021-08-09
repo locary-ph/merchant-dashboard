@@ -43,7 +43,7 @@ const Sidebar = (props) => {
           style={
             active
               ? {
-                  borderRight: "3px solid #f2583e",
+                  borderLeft: "3px solid #f2583e",
                   backgroundColor: "#FFE0DC",
                 }
               : {}
