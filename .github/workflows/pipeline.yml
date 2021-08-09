@@ -1,0 +1,19 @@
+name: pipeline
+on: 
+  push:
+    branches:
+      - pipeline
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - name: install
+        run: npm install
+      - name: lint
+        run: npm run lint
+
