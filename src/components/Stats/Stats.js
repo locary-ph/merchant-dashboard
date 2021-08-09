@@ -4,7 +4,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Card, Col, CardTitle, CardHeader, Row, CardBody } from "reactstrap";
+import { Card, Col, CardTitle, Row, CardBody } from "reactstrap";
 
 const defaultProps = {
   iconBgColor: "bg-orange",
@@ -19,8 +19,7 @@ const propTypes = {
   icon: PropTypes.string,
 };
 
-const Stats = ({ title, value, iconBgColor, icon }) => {
-  return (
+const Stats = ({ title, value, iconBgColor, icon }) => (
     <Card className="card-stats mb-4 mb-xl-0">
       <CardBody>
         <Row>
@@ -44,7 +43,6 @@ const Stats = ({ title, value, iconBgColor, icon }) => {
       </CardBody>
     </Card>
   );
-};
 
 Performance.defaultProps = defaultProps;
 Performance.propTypes = propTypes;

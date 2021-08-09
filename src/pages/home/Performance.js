@@ -2,8 +2,7 @@
  * @format
  */
 import React from "react";
-import PropTypes from "prop-types";
-import { Card, Col, CardTitle, CardHeader, Row, CardBody } from "reactstrap";
+import { Card, Col, CardHeader, Row, CardBody } from "reactstrap";
 
 import Stats from "../../components/Stats/Stats";
 

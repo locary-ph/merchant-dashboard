@@ -2,8 +2,8 @@ import Home from "./pages/home/Home";
 import AccountSettings from "./pages/settings/AccountSettings";
 import Products from "./pages/products/Products";
 import Orders from "./pages/orders/Orders";
-import Login from "./components/Login";
-import Register from "./components/Register";
+// import Login from "./components/Login";
+// import Register from "./components/Register";
 
 const routes = [
   {
