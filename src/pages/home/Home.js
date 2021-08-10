@@ -1,12 +1,14 @@
 /**
  * @format
  */
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Card, CardHeader, Container, Row, Col } from "reactstrap";
 
 import OrderList from "../../components/OrderList/OrderList";
 import Inventory from "./Inventory";
 import Performance from "./Performance";
+
+import LoginContext from "../../contexts/LoginContext";
 
 const RecentOrders = () => (
   <Card className="shadow">
@@ -22,31 +24,35 @@ const RecentOrders = () => (
   </Card>
 );
 
-const Index = () => (
-  <>
-    {/* Page content */}
-    <Container className="mt-5" fluid>
-      <Row>
-        <Col className="d-flex align-items-center justify-content-between mb-3 col-xl px-5">
-          <h1 className="text-orange">Hello, Maria</h1>
-          <Button color="warning" outline type="button">
-            Shop Link
-          </Button>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="mb-5">
-          <RecentOrders />
-        </Col>
-        <Col xl="6">
-          <Inventory />
-        </Col>
-        <Col xl="6">
-          <Performance />
-        </Col>
-      </Row>
-    </Container>
-  </>
-);
+const Home = () => {
+  const { user } = useContext(LoginContext);
 
-export default Index;
+  return (
+    <>
+      {/* Page content */}
+      <Container className="mt-5" fluid>
+        <Row>
+          <Col className="d-flex align-items-center justify-content-between mb-3 col-xl px-5">
+            <h1 className="text-orange">Hello, {user.firstName}</h1>
+            <Button color="warning" outline type="button">
+              Shop Link
+            </Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="mb-5">
+            <RecentOrders />
+          </Col>
+          <Col xl="6">
+            <Inventory />
+          </Col>
+          <Col xl="6">
+            <Performance />
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
+};
+
+export default Home;

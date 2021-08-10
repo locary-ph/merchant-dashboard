@@ -1,7 +1,7 @@
 /**
  * @format
  */
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import {
   Alert,
@@ -16,7 +16,10 @@ import {
 
 import axios from "../../../axios";
 
+import LoginContext from "../../../contexts/LoginContext";
+
 const LoginForm = () => {
+  const { setUser } = useContext(LoginContext);
   const history = useHistory();
 
   const [email, setEmail] = useState("millerdavidson@rockabye.com");
@@ -28,7 +31,11 @@ const LoginForm = () => {
 
     try {
       const res = await axios.post("/auth/login", data);
+
+      setUser(res.data.user);
       localStorage.setItem("token", res.data.token);
+
+      // redirect to Home
       history.push("/");
     } catch (err) {
       setError(err.response.data.message);

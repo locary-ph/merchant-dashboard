@@ -11,8 +11,14 @@ function OrderList({ filter }) {
 
   useEffect(() => {
     const fetchData = async () => {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      }
+
       try {
-        const { data } = await axios.get("/orders")
+        const { data } = await axios.get("/orders", config)
         setOrders(data);
       } catch (e) {
         console.error(e)
