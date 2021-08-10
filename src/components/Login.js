@@ -34,6 +34,7 @@ const LoginForm = () => {
     try {
       const res = await axios.post("/auth/login", data);
       localStorage.setItem("token", res.data.token);
+      history.push("/");
     } catch (err) {
       setError(err.response.data.message);
     }
