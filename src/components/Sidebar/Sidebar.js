@@ -37,6 +37,9 @@ const Sidebar = (props) => {
     linkItems.map((prop) => {
       const active = isRouteActive(prop.path);
       const iconColor = active ? "text-orange" : "text-gray";
+
+      if (prop.layout === "/auth") return null;
+
       return (
         <NavItem
           key={prop.name}
