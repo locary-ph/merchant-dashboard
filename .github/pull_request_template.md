@@ -1,9 +1,13 @@
+<br />
+<br />
+<br />
 
 ***
-Fixes #<!-- (<=== Add issue number here) -->
+<!-- DO NOT EDIT ANYTHING BELOW THIS LINE. JUST ADD THE ISSUE NUMBER AND CHECK THE BOXES -->
+Fixes #<!-- <=== Add issue number here. -->
 
 
-Make sure these boxes are checked before your pull request (PR) is ready to be reviewed and merged. Thanks!
+<!-- Make sure these boxes are checked before your pull request (PR) is ready to be reviewed and merged. Thanks! -->
 
 * [ ] PR is descriptively titled 📑 and links the original issue above 🔗
 * [ ] code is in uniquely-named feature branch and has no merge conflicts 📁

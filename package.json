@@ -26,6 +26,7 @@
     "test": "react-scripts test",
     "lint": "eslint --max-warnings=0 src/**/*.{js,jsx}",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,css,less,scss,vue,json,gql,md}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,ts,css,less,scss,vue,json,gql,md}\"",
     "eject": "react-scripts eject",
     "compile:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.css",
     "minify:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.min.css --output-style compressed",
