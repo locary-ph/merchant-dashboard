@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
+import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLayout from "./layouts/Admin";
 import AuthLayout from "./layouts/Auth";
 import LoginContext from "./contexts/LoginContext";
@@ -21,7 +22,7 @@ function App() {
         <ToastContainer />
         <Switch>
           {/* eslint-disable react/jsx-props-no-spreading */}
-          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+          <ProtectedRoute path="/admin" component={AdminLayout} />
           <Route path="/auth" component={AuthLayout} />
           <Redirect from="/" to="/admin/index" />
         </Switch>
