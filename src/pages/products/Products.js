@@ -118,7 +118,7 @@ const Products = () => {
             <CardBody className="px-5 py-6">
               <Row>
                 {/* eslint-disable react/no-array-index-key */}
-                {products.map((product, key) => (
+                {products.map((product) => (
                   <Product product={product} />
                 ))}
               </Row>

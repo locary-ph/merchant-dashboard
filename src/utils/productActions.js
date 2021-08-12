@@ -5,7 +5,7 @@ import { instance as axios, config } from "../axios";
 
 const editProduct = async (id, product) => {
   try {
-    const res = await axios.put(`products/${id}`, { product }, config);
+    await axios.put(`products/${id}`, { product }, config);
   } catch (err) {
     console.error(err.response.data.message);
   }
@@ -21,7 +21,7 @@ const deleteProduct = async (id) => {
 
 const addProduct = async (product) => {
   try {
-    const res = await axios.post("products/", product, config);
+    await axios.post("products/", product, config);
   } catch (e) {
     console.error(e);
   }
