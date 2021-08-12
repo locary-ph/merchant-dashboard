@@ -14,7 +14,7 @@ import {
   InputGroupAddon,
 } from "reactstrap";
 
-import axios from "../../../axios";
+import { instance as axios } from "../../../axios";
 
 import LoginContext from "../../../contexts/LoginContext";
 

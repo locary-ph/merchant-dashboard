@@ -1,19 +1,19 @@
 /**
  * @format
  */
-import axios from "../axios";
+import { instance as axios, config } from "../axios";
 
 const editProduct = async (id, product) => {
   try {
-    await axios.put(`products/${id}`, product);
+    const res = await axios.put(`products/${id}`, { product }, config);
   } catch (err) {
-    console.error(err);
+    console.error(err.response.data.message);
   }
 };
 
 const deleteProduct = async (id) => {
   try {
-    await axios.delete(`products/${id}`);
+    await axios.delete(`products/${id}`, config);
   } catch (e) {
     console.error(e);
   }
@@ -21,7 +21,7 @@ const deleteProduct = async (id) => {
 
 const addProduct = async (product) => {
   try {
-    await axios.post("products/", product);
+    const res = await axios.post("products/", product, config);
   } catch (e) {
     console.error(e);
   }
