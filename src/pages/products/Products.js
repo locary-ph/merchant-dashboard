@@ -15,7 +15,56 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import sampleProducts from "../../data/products";
+
+import { instance as axios, config } from "../../axios";
+
+const Product = (props) => {
+  const { product } = props;
+  const name = product.name.toLowerCase().replace(" ", "-");
+
+  const handleClick = (e, id) => {
+    console.log(id);
+  };
+
+  return (
+    <Col lg="6" xl="4" className="mb-4">
+      <Card className="mb-4 mb-xl-0 bg-transparent border-0">
+        <Button close color="warning" type="button" />
+        <Link
+          className="d-flex"
+          to={{
+            pathname: `/admin/products/${name}`,
+            state: { product },
+          }}
+        >
+          <CardImg
+            className="mx-auto shadow"
+            style={{
+              borderRadius: 10,
+              border: "solid 2px #FE634E",
+              width: "58%",
+            }}
+            top
+            src={product.thumbnailUrl}
+            alt="Card image cap"
+            onClick={(e) => handleClick(e, product._id)}
+          />
+        </Link>
+        <CardBody className="d-flex flex-column align-items-center">
+          <CardTitle
+            className="font-weight-bold mb-0"
+            style={{ fontSize: "1.1rem" }}
+          >
+            {product.name}
+          </CardTitle>
+          <CardText>
+            <small>Php {product.price}</small>
+          </CardText>
+        </CardBody>
+      </Card>
+    </Col>
+  );
+};
 
 const Products = () => {
   // TODO(#1): Stock quantity quick edit
@@ -26,12 +75,17 @@ const Products = () => {
   const history = useHistory();
 
   useEffect(() => {
-    setProducts(sampleProducts);
-  }, []);
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("products", config);
+        setProducts(res.data);
+      } catch (e) {
+        console.error(e);
+      }
+    };
 
-  const handleClick = (e, id) => {
-    console.log(id);
-  };
+    fetchData();
+  }, []);
 
   const addProduct = (event) => {
     event.preventDefault();
@@ -64,47 +118,9 @@ const Products = () => {
             <CardBody className="px-5 py-6">
               <Row>
                 {/* eslint-disable react/no-array-index-key */}
-                {products.map((product, key) => {
-                  const name = product.name.toLowerCase().replace(" ", "-");
-                  return (
-                    <Col key={key} lg="6" xl="4" className="mb-4">
-                      <Card className="mb-4 mb-xl-0 bg-transparent border-0">
-                        <Button close color="warning" type="button" />
-                        <Link
-                          className="d-flex"
-                          to={{
-                            pathname: `/admin/products/${name}`,
-                            state: { product },
-                          }}
-                        >
-                          <CardImg
-                            className="mx-auto shadow"
-                            style={{
-                              borderRadius: 10,
-                              border: "solid 2px #FE634E",
-                              width: "58%",
-                            }}
-                            top
-                            src="https://yt3.ggpht.com/a-/AN66SAyk49uNWUtt2mDTTxOdMNy5afiVHK3dFIvPVQ=s900-mo-c-c0xffffffff-rj-k-no"
-                            alt="Card image cap"
-                            onClick={(e) => handleClick(e, product._id)}
-                          />
-                        </Link>
-                        <CardBody className="d-flex flex-column align-items-center">
-                          <CardTitle
-                            className="font-weight-bold mb-0"
-                            style={{ fontSize: "1.1rem" }}
-                          >
-                            {product.name}
-                          </CardTitle>
-                          <CardText>
-                            <small>Php {product.price}</small>
-                          </CardText>
-                        </CardBody>
-                      </Card>
-                    </Col>
-                  );
-                })}
+                {products.map((product, key) => (
+                  <Product product={product} />
+                ))}
               </Row>
             </CardBody>
           </Card>
