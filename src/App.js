@@ -5,10 +5,10 @@ import React, { useState } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
+import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLayout from "./layouts/Admin";
 import AuthLayout from "./layouts/Auth";
 import LoginContext from "./contexts/LoginContext";
-import ProtectedRoute from "components/ProtectedRoute";
 
 function App() {
   const [user, setUser] = useState({});
@@ -22,11 +22,11 @@ function App() {
         <ToastContainer />
         <Switch>
           {/* eslint-disable react/jsx-props-no-spreading */}
-          <Route
+          <ProtectedRoute
             path="/admin"
             component={(props) => <AdminLayout {...props} />}
           />
-          <ProtectedRoute path="/auth" component={AuthLayout} />
+          <Route path="/auth" component={AuthLayout} />
           <Redirect from="/" to="/admin/index" />
         </Switch>
       </BrowserRouter>

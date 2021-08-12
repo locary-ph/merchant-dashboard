@@ -11,16 +11,15 @@ export default function ProtectedRoute({ component: Component, ...rest }) {
       {...rest}
       render={(props) => {
         if (localStorage.getItem("token")) {
-          return (
-            <Redirect
-              to={{
-                pathname: "/",
-              }}
-            />
-          );
-        } else {
           return <Component {...props} />;
         }
+        return (
+          <Redirect
+            to={{
+              pathname: "/auth",
+            }}
+          />
+        );
       }}
     />
   );
