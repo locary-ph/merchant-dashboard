@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import AdminLayout from "./layouts/Admin";
 import AuthLayout from "./layouts/Auth";
 import LoginContext from "./contexts/LoginContext";
+import ProtectedRoute from "components/ProtectedRoute";
 
 function App() {
   const [user, setUser] = useState({});
@@ -21,8 +22,11 @@ function App() {
         <ToastContainer />
         <Switch>
           {/* eslint-disable react/jsx-props-no-spreading */}
-          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-          <Route path="/auth" component={AuthLayout} />
+          <Route
+            path="/admin"
+            component={(props) => <AdminLayout {...props} />}
+          />
+          <ProtectedRoute path="/auth" component={AuthLayout} />
           <Redirect from="/" to="/admin/index" />
         </Switch>
       </BrowserRouter>
