@@ -72,6 +72,7 @@ const ProductDetails = (props) => {
     switch (action) {
       case "add":
         if (!isValid()) return window.scrollTo(0, 0);
+
         if (imageFile) {
           uploadImage(imageFile, currentProduct, (url) => {
             setImageUrl(url);
@@ -90,6 +91,7 @@ const ProductDetails = (props) => {
       default:
         break;
     }
+
     return displayToastify(action);
   };
 
@@ -117,6 +119,7 @@ const ProductDetails = (props) => {
               >
                 {error}
               </Alert>
+
               <Form onSubmit={handleSubmit}>
                 <div className="pl-lg-4">
                   <ImageInput
