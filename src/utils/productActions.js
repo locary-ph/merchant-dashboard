@@ -1,7 +1,13 @@
 /**
  * @format
  */
-import { instance as axios, config } from "../axios";
+import { instance as axios, getUserToken } from "../axios";
+
+const config = {
+  headers: {
+    Authorization: `Bearer${getUserToken()}`,
+  },
+};
 
 const editProduct = async (id, product) => {
   try {
