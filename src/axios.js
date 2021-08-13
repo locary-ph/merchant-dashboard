@@ -5,13 +5,9 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:5000/api/v1",
+  baseURL: "https://locary-api.herokuapp.com/api/v1",
 });
 
-const config = {
-  headers: {
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-  },
-};
+const getUserToken = () => localStorage.getItem("token");
 
-export { instance, config };
+export { instance, getUserToken };

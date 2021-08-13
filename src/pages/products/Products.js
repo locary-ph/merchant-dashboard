@@ -16,7 +16,7 @@ import {
   Col,
 } from "reactstrap";
 
-import { instance as axios, config } from "../../axios";
+import { instance as axios, getUserToken } from "../../axios";
 
 const Product = (props) => {
   const { product } = props;
@@ -77,7 +77,9 @@ const Products = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("products", config);
+        const res = await axios.get("products", {
+          headers: { Authorization: `Bearer ${getUserToken()}` },
+        });
         setProducts(res.data);
       } catch (e) {
         console.error(e);
