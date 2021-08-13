@@ -5,7 +5,7 @@ import { instance as axios, getUserToken } from "../axios";
 
 const config = {
   headers: {
-    Authorization: `Bearer${getUserToken()}`,
+    Authorization: `Bearer ${getUserToken()}`,
   },
 };
 
