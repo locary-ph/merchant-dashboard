@@ -1,66 +1,77 @@
+/**
+ * @format
+ */
+
 .navbar-vertical .navbar-nav .nav-link.active::before,
-.navbar-vertical.navbar-expand-md .navbar-nav .nav-link.active::before{
+.navbar-vertical.navbar-expand-md .navbar-nav .nav-link.active::before {
   border-left: none;
+}
+
+/* Nav */
+.active-link {
+  border-left: 3px solid #f2583e;
+  background-color: #ffe0dc;
+  color: #fb6340 !important;
 }
 
 /* Product delete button */
 
 button.close {
-	position: absolute;
-	width: 20px;
-	right: 30px;
-	color: #FE634E;
-	background-color: #FFDBD7;
-	padding: 4px;
-	border-radius: 18px;
-	box-sizing: content-box;
-	opacity: 1;
+  position: absolute;
+  width: 20px;
+  right: 30px;
+  color: #fe634e;
+  background-color: #ffdbd7;
+  padding: 4px;
+  border-radius: 18px;
+  box-sizing: content-box;
+  opacity: 1;
 }
 
 .close > span:not(.sr-only) {
-	color: #fe634e;
+  color: #fe634e;
 }
 
 .close:hover,
 .close:focus {
-	background-color: #FE634E;
-	color: white;
+  background-color: #fe634e;
+  color: white;
 }
 
-.close:hover > span:not(.sr-only), 
+.close:hover > span:not(.sr-only),
 .close:focus > span:not(.sr-only) {
-	color: white;
+  color: white;
 }
 
 /* override Card styles */
 
 .card-header:first-child {
-	border-radius: 1rem 1rem 0 0;
+  border-radius: 1rem 1rem 0 0;
 }
 
 .card {
-	border-radius: 2rem;
+  border-radius: 2rem;
 }
 
 /* performance */
 .card-stats {
-	cursor: pointer;
-	background-color: #F8F9FA;
-	-webkit-transition-duration: 0.3s;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
   -webkit-transition-property: box-shadow, transform;
   transition-property: box-shadow, transform, background-color;
 }
 
 .card-stats:hover {
-	background-color: #fff;
-	box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
 
 .card-stats:hover .h2 {
-	color: #F2583E;
+  color: #f2583e;
 }
 
 /* icon back */
@@ -85,7 +96,9 @@ button.close {
   transition-timing-function: ease-out;
 }
 
-.back-icon:hover i, .back-icon:focus i, .back-icon:active i {
+.back-icon:hover i,
+.back-icon:focus i,
+.back-icon:active i {
   -webkit-transform: translateX(-4px);
   transform: translateX(-4px);
 }
