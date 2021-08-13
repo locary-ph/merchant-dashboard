@@ -16,12 +16,15 @@ import {
   Container,
   Row,
   Col,
+  Dropdown,
+  DropdownToggle,
 } from "reactstrap";
 
 const Sidebar = (props) => {
   const { routes, logo } = props;
 
   const [collapseOpen, setCollapseOpen] = useState();
+  const [settingsOpen, setSettingsOpen] = useState();
 
   // toggles collapse between opened and closed (true/false)
   const toggleCollapse = () => {
@@ -35,6 +38,34 @@ const Sidebar = (props) => {
   const createLinks = (linkItems) =>
     linkItems.map((prop) => {
       if (prop.layout === "/auth") return null;
+
+      if (prop.name === "Settings") {
+        return (
+          <NavItem key={prop.name}>
+            <Dropdown
+              direction={settingsOpen ? "up" : "down"}
+              toggle={() => setSettingsOpen(!settingsOpen)}
+              className="w-100"
+            >
+              <DropdownToggle caret className="w-100">
+                <i className={prop.icon} />
+                {prop.name}
+              </DropdownToggle>
+            </Dropdown>
+            <Collapse isOpen={settingsOpen}>
+              <NavLink
+                to={prop.layout + prop.path}
+                tag={NavLinkRRD}
+                onClick={closeCollapse}
+                activeClassName="active-link"
+              >
+                <i className={prop.icon} />
+                {prop.name}
+              </NavLink>
+            </Collapse>
+          </NavItem>
+        );
+      }
 
       return (
         <NavItem key={prop.name}>
