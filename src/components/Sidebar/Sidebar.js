@@ -22,8 +22,7 @@ const Sidebar = (props) => {
   const { routes, logo } = props;
 
   const [collapseOpen, setCollapseOpen] = useState();
-  // verifies if routeName is the one active (in browser input)
-  const isRouteActive = (path) => props.location.pathname.indexOf(path) > -1;
+
   // toggles collapse between opened and closed (true/false)
   const toggleCollapse = () => {
     setCollapseOpen((data) => !data);
@@ -35,29 +34,15 @@ const Sidebar = (props) => {
   // creates the links that appear in the left menu / Sidebar
   const createLinks = (linkItems) =>
     linkItems.map((prop) => {
-      const active = isRouteActive(prop.path);
-      const iconColor = active ? "text-orange" : "text-gray";
-
       if (prop.layout === "/auth") return null;
 
       return (
-        <NavItem
-          key={prop.name}
-          style={
-            active
-              ? {
-                  borderLeft: "3px solid #f2583e",
-                  backgroundColor: "#FFE0DC",
-                }
-              : {}
-          }
-        >
+        <NavItem key={prop.name}>
           <NavLink
             to={prop.layout + prop.path}
             tag={NavLinkRRD}
             onClick={closeCollapse}
-            activeClassName="active"
-            className={iconColor}
+            activeClassName="active-link"
           >
             <i className={prop.icon} />
             {prop.name}
