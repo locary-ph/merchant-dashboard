@@ -47,7 +47,14 @@ const Sidebar = (props) => {
               toggle={() => setSettingsOpen(!settingsOpen)}
               className="w-100"
             >
-              <DropdownToggle caret className="w-100">
+              <DropdownToggle
+                caret
+                tag="li"
+                data-toggle="dropdown"
+                aria-expanded={settingsOpen}
+                className="nav-link"
+                style={{ cursor: "pointer" }}
+              >
                 <i className={prop.icon} />
                 {prop.name}
               </DropdownToggle>
