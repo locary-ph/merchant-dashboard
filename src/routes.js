@@ -1,11 +1,11 @@
 import Home from "./pages/home/Home";
 import AccountSettings from "./pages/settings/AccountSettings";
+import ShopSettings from "./pages/settings/ShopSettings";
 import PaymentSettings from "./pages/settings/PaymentSettings";
 import Products from "./pages/products/Products";
 import Orders from "./pages/orders/Orders";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import ShopSettings from "pages/settings/ShopSettings";
 
 const routes = [
   {
