@@ -4,151 +4,102 @@
 
 import React from "react";
 import {
+  Button,
   Col,
   Card,
   CardBody,
   CardHeader,
-  Button,
   Form,
-  Row,
   FormGroup,
   Input,
+  Row,
 } from "reactstrap";
 
 function ShopSettings() {
   return (
     <>
-      <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-        <Card className="card-profile shadow">
-          <Row className="justify-content-center">
-            <Col className="order-lg-2" lg="3">
-              <div className="card-profile-image">
-                <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <img alt="..." className="rounded-circle" />
-                </a>
-              </div>
-            </Col>
-          </Row>
-          <CardBody className="pt-0 pt-md-4">
-            <Row>
-              <div className="col">
-                <div className="card-profile-stats d-flex justify-content-center mt-7">
-                  <div>
-                    <span className="heading">22</span>
-                    <span className="description">Products</span>
-                  </div>
-                  <div>
-                    <span className="heading">89</span>
-                    <span className="description">Ambot</span>
-                  </div>
-                </div>
-              </div>
-            </Row>
-            <div className="text-center">
-              <h3>Chic Closet</h3>
-              <div className="h5 font-weight-300">
-                <i className="ni location_pin mr-2" />
-                Bucharest, Romania
-              </div>
-              <hr className="my-4" />
-            </div>
-          </CardBody>
-        </Card>
-      </Col>
-      <Col className="order-xl-1" xl="8">
+      <Col className="order-xl-1" xl="12">
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <Row className="align-items-center">
-              <Col xs="8">
-                <h3 className="mb-0">My account</h3>
-              </Col>
-              <Col className="text-right" xs="4">
-                <Button
-                  color="warning"
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                  size="sm"
-                >
-                  Settings
-                </Button>
-              </Col>
-            </Row>
+            <h3 className="mb-0">Shop Settings</h3>
           </CardHeader>
           <CardBody>
             <Form>
-              <h6 className="heading-small text-muted mb-4">
-                User information
-              </h6>
-              <div className="pl-lg-4">
-                <Row>
-                  <Col lg="6">
-                    <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="input-shopname"
-                      >
-                        Shop Name
-                      </label>
+              <div className="px-lg-4 fluid-container">
+                <Col>
+                  <FormGroup>
+                    <label
+                      className="form-control-label"
+                      htmlFor="input-first-name"
+                    >
+                      Shop Name
+                    </label>
+                    <Input
+                      className="form-control-alternative"
+                      defaultValue="Lucky"
+                      id="input-first-name"
+                      placeholder="First name"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <label
+                      className="form-control-label"
+                      htmlFor="input-last-name"
+                    >
+                      Shop Link
+                    </label>
+                    <Input
+                      className="form-control-alternative"
+                      defaultValue="Jesse"
+                      id="input-last-name"
+                      placeholder="Shop Link"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <label
+                      className="form-control-label"
+                      htmlFor="input-description"
+                    >
+                      Shop Description
+                    </label>
+                    <Input
+                      className="form-control-alternative"
+                      defaultValue="Jesse"
+                      id="input-description"
+                      placeholder="Shop Description"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <label
+                      className="form-control-label"
+                      htmlFor="input-FAQs"
+                    >
+                      FAQs
+                    </label>
+                    <div>
+                      <Input type="select" name="select" id="input-FAQs" value="1">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </Input>
                       <Input
-                        className="form-control-alternative"
-                        id="input-shopname"
-                        placeholder="Juan dela Cruz Delicacies"
+                        className="form-control-alternative mt-1"
+                        id="input-answer"
+                        placeholder="Answer"
                         type="text"
                       />
-                    </FormGroup>
-                  </Col>
-                  <Col lg="6">
-                    <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="input-email"
-                      >
-                        Email address
-                      </label>
-                      <Input
-                        className="form-control-alternative"
-                        id="input-email"
-                        placeholder="jesse@example.com"
-                        type="email"
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col lg="6">
-                    <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="input-first-name"
-                      >
-                        First name
-                      </label>
-                      <Input
-                        className="form-control-alternative"
-                        defaultValue="Lucky"
-                        id="input-first-name"
-                        placeholder="First name"
-                        type="text"
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col lg="6">
-                    <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="input-last-name"
-                      >
-                        Last name
-                      </label>
-                      <Input
-                        className="form-control-alternative"
-                        defaultValue="Jesse"
-                        id="input-last-name"
-                        placeholder="Last name"
-                        type="text"
-                      />
-                    </FormGroup>
-                  </Col>
+                    </div>
+                    <Button outline className="btn-sm mt-1 theme-btn">Add More</Button>
+                  </FormGroup>
+                </Col>
+                <Row className="ml-4">
+                    <Button className="theme-btn theme-border theme-active">Save</Button>
+                    <Button className="theme-btn theme-border">Cancel</Button>
                 </Row>
               </div>
               <hr className="my-4" />
