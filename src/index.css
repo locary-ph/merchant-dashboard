@@ -7,6 +7,16 @@
   border-left: none;
 }
 
+input {
+  color: black !important;
+}
+
+.input-group-text {
+  border: none;
+  background: #6969691c;
+  color: black;
+}
+
 /* Nav */
 .active-link {
   border-left: 3px solid #f2583e;
