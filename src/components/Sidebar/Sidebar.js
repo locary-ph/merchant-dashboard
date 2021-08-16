@@ -37,42 +37,8 @@ const Sidebar = (props) => {
   // creates the links that appear in the left menu / Sidebar
   const createLinks = (linkItems) =>
     linkItems.map((prop) => {
-      if (prop.layout === "/auth") return null;
-
-      if (prop.name === "Settings") {
-        return (
-          <NavItem key={prop.name}>
-            <Dropdown
-              direction={settingsOpen ? "up" : "down"}
-              toggle={() => setSettingsOpen(!settingsOpen)}
-              className="w-100"
-            >
-              <DropdownToggle
-                caret
-                tag="li"
-                data-toggle="dropdown"
-                aria-expanded={settingsOpen}
-                className="nav-link"
-                style={{ cursor: "pointer" }}
-              >
-                <i className={prop.icon} />
-                {prop.name}
-              </DropdownToggle>
-            </Dropdown>
-            <Collapse isOpen={settingsOpen}>
-              <NavLink
-                to={prop.layout + prop.path}
-                tag={NavLinkRRD}
-                onClick={closeCollapse}
-                activeClassName="active-link"
-              >
-                <i className={prop.icon} />
-                {prop.name}
-              </NavLink>
-            </Collapse>
-          </NavItem>
-        );
-      }
+      if (prop.layout === "/auth" || prop.layout === "/admin/settings")
+        return null;
 
       return (
         <NavItem key={prop.name}>
@@ -159,7 +125,46 @@ const Sidebar = (props) => {
             </Row>
           </div>
           {/* Navigation */}
-          <Nav navbar>{createLinks(routes)}</Nav>
+          <Nav navbar>
+            {createLinks(routes)}
+
+            <NavItem>
+              <Dropdown
+                direction={settingsOpen ? "up" : "down"}
+                toggle={() => setSettingsOpen(!settingsOpen)}
+                className="w-100"
+              >
+                <DropdownToggle
+                  caret
+                  tag="li"
+                  data-toggle="dropdown"
+                  aria-expanded={settingsOpen}
+                  className="nav-link"
+                  style={{ cursor: "pointer" }}
+                >
+                  <i className="fas fa-cog" />
+                  Settings
+                </DropdownToggle>
+              </Dropdown>
+              <Collapse isOpen={settingsOpen}>
+                {routes.map((prop) => {
+                  if (prop.layout !== "/admin/settings") return null;
+
+                  return (
+                    <NavLink
+                      to={prop.layout + prop.path}
+                      tag={NavLinkRRD}
+                      onClick={closeCollapse}
+                      activeClassName="active-link"
+                    >
+                      <i className={prop.icon} />
+                      {prop.name}
+                    </NavLink>
+                  );
+                })}
+              </Collapse>
+            </NavItem>
+          </Nav>
         </Collapse>
       </Container>
     </Navbar>
