@@ -5,6 +5,7 @@ import Products from "./pages/products/Products";
 import Orders from "./pages/orders/Orders";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import ShopSettings from "pages/settings/ShopSettings";
 
 const routes = [
   {
@@ -33,6 +34,13 @@ const routes = [
     name: "Account Settings",
     icon: "fas fa-cog ",
     component: AccountSettings,
+    layout: "/admin/settings",
+  },
+  {
+    path: "/shop",
+    name: "Shop Settings",
+    icon: "fas fa-cog ",
+    component: ShopSettings,
     layout: "/admin/settings",
   },
   {
