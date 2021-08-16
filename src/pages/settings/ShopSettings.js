@@ -73,14 +73,16 @@ function ShopSettings() {
                     />
                   </FormGroup>
                   <FormGroup>
-                    <label
-                      className="form-control-label"
-                      htmlFor="input-FAQs"
-                    >
+                    <label className="form-control-label" htmlFor="input-FAQs">
                       FAQs
                     </label>
                     <div>
-                      <Input type="select" name="select" id="input-FAQs" value="1">
+                      <Input
+                        type="select"
+                        name="select"
+                        id="input-FAQs"
+                        value="1"
+                      >
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -94,12 +96,16 @@ function ShopSettings() {
                         type="text"
                       />
                     </div>
-                    <Button outline className="btn-sm mt-1 theme-btn">Add More</Button>
+                    <Button outline className="btn-sm mt-1 theme-btn">
+                      Add More
+                    </Button>
                   </FormGroup>
                 </Col>
                 <Row className="ml-4">
-                    <Button className="theme-btn theme-border theme-active">Save</Button>
-                    <Button className="theme-btn theme-border">Cancel</Button>
+                  <Button className="theme-btn theme-border theme-active">
+                    Save
+                  </Button>
+                  <Button className="theme-btn theme-border">Cancel</Button>
                 </Row>
               </div>
               <hr className="my-4" />
