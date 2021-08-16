@@ -21,7 +21,6 @@ function App() {
         {/* edit options in /src/utils/toastify.js */}
         <ToastContainer />
         <Switch>
-          {/* eslint-disable react/jsx-props-no-spreading */}
           <ProtectedRoute path="/admin" component={AdminLayout} />
           <Route path="/auth" component={AuthLayout} />
           <Redirect from="/" to="/admin/index" />
