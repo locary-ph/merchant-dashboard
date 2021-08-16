@@ -18,103 +18,205 @@ import {
 function PaymentSettings() {
   return (
     <>
-      <Col className="order-xl-1" xl="8">
-        <Card className="bg-secondary shadow">
+      <Col>
+        <Card className="shadow-lg">
           <CardHeader className="bg-white border-0">
             <Row className="align-items-center">
               <Col xs="8">
-                <h3 className="mb-0">My account</h3>
-              </Col>
-              <Col className="text-right" xs="4">
-                <Button
-                  color="warning"
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                  size="sm"
-                >
-                  Settings
-                </Button>
+                <h3 className="mb-0">Payment Options</h3>
               </Col>
             </Row>
           </CardHeader>
-          <CardBody>
+          <CardBody className="bg-secondary px-6">
             <Form>
-              <h6 className="heading-small text-muted mb-4">
-                User information
-              </h6>
-              <div className="pl-lg-4">
-                <Row>
-                  <Col lg="6">
-                    <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="input-shopname"
-                      >
-                        Shop Name
-                      </label>
-                      <Input
-                        className="form-control-alternative"
-                        id="input-shopname"
-                        placeholder="Juan dela Cruz Delicacies"
-                        type="text"
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col lg="6">
-                    <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="input-email"
-                      >
-                        Email address
-                      </label>
-                      <Input
-                        className="form-control-alternative"
-                        id="input-email"
-                        placeholder="jesse@example.com"
-                        type="email"
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col lg="6">
-                    <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="input-first-name"
-                      >
-                        First name
-                      </label>
-                      <Input
-                        className="form-control-alternative"
-                        defaultValue="Lucky"
-                        id="input-first-name"
-                        placeholder="First name"
-                        type="text"
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col lg="6">
-                    <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="input-last-name"
-                      >
-                        Last name
-                      </label>
-                      <Input
-                        className="form-control-alternative"
-                        defaultValue="Jesse"
-                        id="input-last-name"
-                        placeholder="Last name"
-                        type="text"
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
+              <div className="inputGroup mb-4">
+                <h2 className="mb-1">Bank transfer</h2>
+                <h5 className="text-muted mb-4">
+                  Receive payment via your bank account
+                </h5>
+                <div className="pl-lg-4">
+                  <Row>
+                    <Col lg="6">
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="bankName"
+                        >
+                          Bank Name
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="bankName"
+                          placeholder="Bank of the Philippine Islands"
+                          type="text"
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col lg="6">
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="accountNumber"
+                        >
+                          Account number
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="accountNumber"
+                          type="number"
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="accountName"
+                        >
+                          Account Name
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="accountName"
+                          type="text"
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="paymentInstructions"
+                        >
+                          Payment instructions
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="paymentInstructions"
+                          type="text"
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                </div>
               </div>
-              <hr className="my-4" />
+
+              <div className="inputGroup mb-4">
+                <h2 className="mb-1">E-Wallet</h2>
+                <h5 className="text-muted mb-4">
+                  Receive payment via an E-wallet
+                </h5>
+                <div className="pl-lg-4">
+                  <Row>
+                    <Col lg="6">
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="walletName"
+                        >
+                          Select e-wallet
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="walletName"
+                          placeholder="Gcash"
+                          type="text"
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col lg="6">
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="accountNumber"
+                        >
+                          Account number
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="accountNumber"
+                          type="number"
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="accountName"
+                        >
+                          Account Name
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="accountName"
+                          type="text"
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                </div>
+              </div>
+
+              <div className="inputGroup mb-4">
+                <h2 className="mb-1">Cash on pickup</h2>
+                <h5 className="text-muted mb-4">
+                  Receive payment from customers upon pickup
+                </h5>
+
+                <div className="pl-lg-4">
+                  <Row>
+                    <Col>
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="paymentInstructions"
+                        >
+                          Payment instructions
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="paymentInstructions"
+                          type="text"
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                </div>
+              </div>
+
+              <div className="inputGroup mb-4">
+                <h2 className="mb-1">Cash on delivery</h2>
+                <h5 className="text-muted mb-4">
+                  Receive payment from customers upon delivery
+                </h5>
+
+                <div className="pl-lg-4">
+                  <Row>
+                    <Col>
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="paymentInstructions"
+                        >
+                          Payment instructions
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="paymentInstructions"
+                          type="text"
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                </div>
+              </div>
             </Form>
           </CardBody>
         </Card>
