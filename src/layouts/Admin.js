@@ -12,6 +12,8 @@ import Footer from "../components/Footer/Footer";
 import Sidebar from "../components/Sidebar/Sidebar";
 import ProductDetails from "../pages/products/ProductDetails";
 
+import SettingsLayout from "./Settings";
+
 import routes from "../routes";
 
 import locaryLogo from "../assets/img/brand/locary-logo.png";
@@ -68,6 +70,7 @@ const Admin = (props) => {
             }
             return null;
           })}
+          <Route path="/admin/settings" component={SettingsLayout} />
           <Route
             exact
             path="/admin/products/:name"

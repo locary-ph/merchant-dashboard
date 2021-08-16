@@ -28,11 +28,11 @@ const routes = [
     layout: "/admin",
   },
   {
-    path: "/settings",
+    path: "/account",
     name: "Settings",
     icon: "fas fa-cog ",
     component: AccountSettings,
-    layout: "/admin",
+    layout: "/admin/settings",
   },
   {
     path: "/login",
