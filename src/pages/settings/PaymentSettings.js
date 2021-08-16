@@ -2,7 +2,7 @@
  * @format
  */
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Col,
   Button,
@@ -16,6 +16,21 @@ import {
 } from "reactstrap";
 
 function PaymentSettings() {
+  // bank transfer inputs state
+  const [bank, setBank] = useState("");
+  const [bankAccNumber, setBankAccNumber] = useState("");
+  const [bankAccName, setBankAccName] = useState("");
+  const [bankInstructions, setBankInstructions] = useState("");
+
+  // e-wallet inputs state
+  const [ewallet, setEwallet] = useState("");
+  const [ewalletNumber, setEwalletNumber] = useState("");
+  const [ewalletName, setEwalletName] = useState("");
+
+  // COD / COP states
+  const [CODInstructions, setCODInstructions] = useState("");
+  const [COPInstructions, setCOPInstructions] = useState("");
+
   return (
     <>
       <Col>
@@ -49,6 +64,8 @@ function PaymentSettings() {
                           id="bankName"
                           placeholder="Bank of the Philippine Islands"
                           type="text"
+                          value={bank}
+                          onChange={(e) => setBank(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -64,6 +81,8 @@ function PaymentSettings() {
                           className="form-control-alternative"
                           id="accountNumber"
                           type="number"
+                          value={bankAccNumber}
+                          onChange={(e) => setBankAccNumber(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -81,6 +100,8 @@ function PaymentSettings() {
                           className="form-control-alternative"
                           id="accountName"
                           type="text"
+                          value={bankAccName}
+                          onChange={(e) => setBankAccName(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -98,6 +119,8 @@ function PaymentSettings() {
                           className="form-control-alternative"
                           id="paymentInstructions"
                           type="text"
+                          value={bankInstructions}
+                          onChange={(e) => setBankInstructions(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -125,6 +148,8 @@ function PaymentSettings() {
                           id="walletName"
                           placeholder="Gcash"
                           type="text"
+                          value={ewallet}
+                          onChange={(e) => setEwallet(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -140,6 +165,8 @@ function PaymentSettings() {
                           className="form-control-alternative"
                           id="accountNumber"
                           type="number"
+                          value={ewalletNumber}
+                          onChange={(e) => setEwalletNumber(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -157,6 +184,8 @@ function PaymentSettings() {
                           className="form-control-alternative"
                           id="accountName"
                           type="text"
+                          value={ewalletName}
+                          onChange={(e) => setEwalletName(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -184,6 +213,8 @@ function PaymentSettings() {
                           className="form-control-alternative"
                           id="paymentInstructions"
                           type="text"
+                          value={COPInstructions}
+                          onChange={(e) => setCOPInstructions(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -211,11 +242,25 @@ function PaymentSettings() {
                           className="form-control-alternative"
                           id="paymentInstructions"
                           type="text"
+                          value={CODInstructions}
+                          onChange={(e) => setCODInstructions(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
                   </Row>
                 </div>
+              </div>
+
+              <div className="mb-4">
+                <Button
+                  outline
+                  className="btn-icon btn-3"
+                  color="warning"
+                  type="submit"
+                >
+                  <i className="fas fa-save" />
+                  <span className="btn-inner--text">Save</span>
+                </Button>
               </div>
             </Form>
           </CardBody>
