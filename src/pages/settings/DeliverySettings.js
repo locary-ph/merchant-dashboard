@@ -4,6 +4,7 @@
 
 import React, { useState } from "react";
 import {
+  Button,
   Col,
   Row,
   Card,
@@ -17,7 +18,9 @@ import {
   InputGroupAddon,
 } from "reactstrap";
 
-function LocationInput() {
+function LocationInput(props) {
+  const { fee, location, handleInputChange, index, removeInput } = props;
+
   return (
     <>
       <Col lg="6">
@@ -30,12 +33,17 @@ function LocationInput() {
             id="location"
             placeholder="Manila"
             type="text"
+            value={location}
+            onChange={(e) => handleInputChange(e, index)}
           />
         </FormGroup>
       </Col>
-      <Col lg="6" className="mb-3 mb-lg-0">
-        <FormGroup>
-          <label className="form-control-label" htmlFor="shippingFee">
+      <Col
+        lg="6"
+        className="mb-3 mb-lg-0 d-flex align-items-center justify-content-between"
+      >
+        <FormGroup className="w-75">
+          <label className="form-control-label" htmlFor="fee">
             Fee
           </label>
           <InputGroup>
@@ -44,11 +52,24 @@ function LocationInput() {
             </InputGroupAddon>
             <Input
               className="form-control-alternative"
-              id="shippingFee"
+              id="fee"
               type="number"
+              value={fee}
+              onChange={(e) => handleInputChange(e, index)}
             />
           </InputGroup>
         </FormGroup>
+
+        <Button
+          outline
+          className="btn-icon btn-3"
+          color="danger"
+          type="button"
+          style={{ height: "min-content", padding: "2px 4px" }}
+          onClick={() => removeInput(index)}
+        >
+          <i className="ni ni-fat-remove" />
+        </Button>
       </Col>
     </>
   );
@@ -56,6 +77,30 @@ function LocationInput() {
 
 function DeliverySettings() {
   const [address, setAddress] = useState("");
+  const [inputList, setInputList] = useState([
+    { location: "", fee: "" },
+    { location: "", fee: "" },
+  ]);
+
+  // handle input change
+  const handleInputChange = (e, index) => {
+    const { id, value } = e.target;
+    const list = [...inputList];
+    list[index][id] = value;
+    setInputList(list);
+  };
+
+  // handle click event of the Remove button
+  const removeInput = (index) => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
+
+  // handle click event of the Add button
+  const addInput = () => {
+    setInputList([...inputList, { location: "", fee: "" }]);
+  };
 
   return (
     <>
@@ -78,13 +123,30 @@ function DeliverySettings() {
                 </h5>
                 <div>
                   <Row>
-                    <Col lg="6" className="d-flex">
-                      <Row>
-                        <LocationInput />
-                      </Row>
-                    </Col>
+                    {inputList.map((location, i) => (
+                      <Col lg="6" className="d-flex">
+                        <Row>
+                          <LocationInput
+                            fee={location.fee}
+                            location={location.location}
+                            handleInputChange={handleInputChange}
+                            index={i}
+                            removeInput={removeInput}
+                          />
+                        </Row>
+                      </Col>
+                    ))}
                   </Row>
                 </div>
+                <Button
+                  outline
+                  color="warning"
+                  size="sm"
+                  type="button"
+                  onClick={addInput}
+                >
+                  Add
+                </Button>
               </div>
 
               <div className="mb-4">
