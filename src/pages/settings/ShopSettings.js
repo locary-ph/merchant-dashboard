@@ -2,7 +2,7 @@
  * @format
  */
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Col,
@@ -18,6 +18,29 @@ import {
 } from "reactstrap";
 
 function ShopSettings() {
+  const [shopName, setShopName] = useState("");
+  const [shopLink, setShopLink] = useState("");
+  const [shopDesc, setShopDesc] = useState("");
+  const [faq, setFaq] = useState([{ question: "", answer: "" }]);
+
+  const addFaqEntry = () => {
+    setFaq([...faq, { question: "", answer: "" }]);
+  };
+
+  const delFaqEntry = (index) => {
+    const newFaq = [...faq];
+    newFaq.splice(index, 1);
+    setFaq(newFaq);
+  };
+
+  const inputHandle =
+    (index) =>
+    ({ target }) => {
+      const newFaq = [...faq];
+      newFaq[index][target.name] = target.value;
+      setFaq(newFaq);
+    };
+
   return (
     <>
       <Col className="order-xl-1" xl="12">
@@ -39,7 +62,10 @@ function ShopSettings() {
                     <Input
                       className="form-control-alternative"
                       id="input-shop-name"
+                      name="shopName"
                       type="text"
+                      value={shopName}
+                      onChange={(e) => setShopName(e.target.value)}
                     />
                   </FormGroup>
                   <FormGroup>
@@ -52,7 +78,10 @@ function ShopSettings() {
                     <Input
                       className="form-control-alternative"
                       id="input-shop-link"
+                      name="shopLink"
                       type="text"
+                      value={shopLink}
+                      onChange={(e) => setShopLink(e.target.value)}
                     />
                   </FormGroup>
                   <FormGroup>
@@ -66,40 +95,62 @@ function ShopSettings() {
                       className="form-control-alternative"
                       id="input-description"
                       type="text"
+                      value={shopDesc}
+                      onChange={(e) => setShopDesc(e.target.value)}
                     />
                   </FormGroup>
                   <FormGroup>
                     <h2>FAQs</h2>
                     <h5>Frequently asked questions</h5>
                     <div className="ml-4">
-                      <label
-                        className="form-control-label"
-                        htmlFor="input-FAQs-question"
+                      {faq.map((entry, index) => (
+                        <>
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-FAQs-question"
+                          >
+                            Question
+                          </label>
+                          <InputGroup>
+                            <Input
+                              className="form-control-alternative input-lg"
+                              id="input-FAQs-question"
+                              name="question"
+                              type="text"
+                              value={entry.question}
+                              onChange={inputHandle(index)}
+                            />
+                            <InputGroupAddon addonType="append">
+                              <Button
+                                className="btn-sm btn-warning"
+                                onClick={() => delFaqEntry(index)}
+                              >
+                                Delete
+                              </Button>
+                            </InputGroupAddon>
+                          </InputGroup>
+                          <label
+                            className="form-control-label mt-1"
+                            htmlFor="input-FAQs-answer"
+                          >
+                            Answer
+                          </label>
+                          <Input
+                            className="form-control-alternative"
+                            id="input-FAQs-answer"
+                            name="answer"
+                            type="textfield"
+                            value={entry.answer}
+                            onChange={inputHandle(index)}
+                          />
+                          {faq.length > index + 1 ? <hr /> : null}
+                        </>
+                      ))}
+                      <Button
+                        outline
+                        className="btn-sm mt-1 theme-btn"
+                        onClick={() => addFaqEntry()}
                       >
-                        Question
-                      </label>
-                      <InputGroup>
-                        <Input
-                          className="form-control-alternative"
-                          id="input-FAQs-question"
-                          type="text"
-                        />
-                        <InputGroupAddon addonType="append">
-                          <Button className="btn-sm btn-warning">Delete</Button>
-                        </InputGroupAddon>
-                      </InputGroup>
-                      <label
-                        className="form-control-label mt-1"
-                        htmlFor="input-FAQs-answer"
-                      >
-                        Answer
-                      </label>
-                      <Input
-                        className="form-control-alternative"
-                        id="input-FAQs-answer"
-                        type="textarea"
-                      />
-                      <Button outline className="btn-sm mt-1 theme-btn">
                         Add More
                       </Button>
                     </div>
