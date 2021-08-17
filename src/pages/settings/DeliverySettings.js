@@ -5,7 +5,6 @@
 import React, { useState } from "react";
 import {
   Col,
-  Button,
   Row,
   Card,
   CardHeader,
@@ -55,7 +54,7 @@ function LocationInput() {
   );
 }
 
-function DeliverySettings({}) {
+function DeliverySettings() {
   const [address, setAddress] = useState("");
 
   return (
