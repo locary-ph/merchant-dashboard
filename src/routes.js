@@ -1,5 +1,6 @@
 import Home from "./pages/home/Home";
 import AccountSettings from "./pages/settings/AccountSettings";
+import ShopSettings from "./pages/settings/ShopSettings";
 import PaymentSettings from "./pages/settings/PaymentSettings";
 import DeliverySettings from "./pages/settings/DeliverySettings";
 import Products from "./pages/products/Products";
@@ -34,6 +35,13 @@ const routes = [
     name: "Account Settings",
     icon: "fas fa-cog ",
     component: AccountSettings,
+    layout: "/admin/settings",
+  },
+  {
+    path: "/shop",
+    name: "Shop Settings",
+    icon: "fas fa-cog ",
+    component: ShopSettings,
     layout: "/admin/settings",
   },
   {
