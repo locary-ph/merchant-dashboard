@@ -14,11 +14,18 @@
   color: #fb6340 !important;
 }
 
+/* ============= Shop Settings ============= */
 .theme-btn {
   color: #fe634e;
 }
 .theme-border {
   border-radius: 50px;
+  height: 2rem;
+  width: 8.5rem;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  border-color: #fe634e;
 }
 .theme-active {
   background-color: #ffdbd7;
@@ -27,6 +34,7 @@
 .theme-btn:hover,
 .theme-btn:focus {
   color: hsl(7, 100%, 50%);
+  border-color: #fe634e;
 }
 
 /* Product delete button */

@@ -13,6 +13,8 @@ import {
   FormGroup,
   Input,
   Row,
+  InputGroup,
+  InputGroupAddon,
 } from "reactstrap";
 
 function ShopSettings() {
@@ -77,18 +79,17 @@ function ShopSettings() {
                       FAQs
                     </label>
                     <div>
-                      <Input
-                        type="select"
-                        name="select"
-                        id="input-FAQs"
-                        value="1"
-                      >
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                      </Input>
+                      <InputGroup>
+                        <Input
+                          className="form-control-alternative"
+                          id="input-FAQs"
+                          placeholder="Question"
+                          type="text"
+                        />
+                        <InputGroupAddon addonType="append">
+                          <Button className="btn-sm btn-warning">Delete</Button>
+                        </InputGroupAddon>
+                      </InputGroup>
                       <Input
                         className="form-control-alternative mt-1"
                         id="input-answer"
