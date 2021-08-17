@@ -72,14 +72,19 @@ function ShopSettings() {
                     />
                   </FormGroup>
                   <FormGroup>
-                    <label className="form-control-label" htmlFor="input-FAQs">
-                      FAQs
-                    </label>
-                    <div>
+                    <h2>FAQs</h2>
+                    <h5>Frequently asked questions</h5>
+                    <div className="ml-4">
+                      <label
+                        className="form-control-label"
+                        htmlFor="input-FAQs-question"
+                      >
+                        Question
+                      </label>
                       <InputGroup>
                         <Input
                           className="form-control-alternative"
-                          id="input-FAQs"
+                          id="input-FAQs-question"
                           placeholder="Question"
                           type="text"
                         />
@@ -87,16 +92,22 @@ function ShopSettings() {
                           <Button className="btn-sm btn-warning">Delete</Button>
                         </InputGroupAddon>
                       </InputGroup>
+                      <label
+                        className="form-control-label mt-1"
+                        htmlFor="input-FAQs-answer"
+                      >
+                        Answer
+                      </label>
                       <Input
-                        className="form-control-alternative mt-1"
-                        id="input-answer"
+                        className="form-control-alternative"
+                        id="input-FAQs-answer"
                         placeholder="Answer"
                         type="textfield"
                       />
+                      <Button outline className="btn-sm mt-1 theme-btn">
+                        Add More
+                      </Button>
                     </div>
-                    <Button outline className="btn-sm mt-1 theme-btn">
-                      Add More
-                    </Button>
                   </FormGroup>
                 </Col>
                 <Row className="ml-4">
