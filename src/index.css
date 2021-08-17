@@ -43,8 +43,8 @@ input {
 }
 .theme-btn:hover,
 .theme-btn:focus {
-  color: hsl(7, 100%, 50%);
-  border-color: #fe634e;
+  color: white;
+  background-color: #fe634e;
 }
 
 /* Product delete button */

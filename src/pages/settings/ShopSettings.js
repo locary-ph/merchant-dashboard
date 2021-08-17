@@ -32,14 +32,13 @@ function ShopSettings() {
                   <FormGroup>
                     <label
                       className="form-control-label"
-                      htmlFor="input-first-name"
+                      htmlFor="input-shop-name"
                     >
                       Shop Name
                     </label>
                     <Input
                       className="form-control-alternative"
-                      defaultValue="Lucky"
-                      id="input-first-name"
+                      id="input-shop-name"
                       placeholder="First name"
                       type="text"
                     />
@@ -47,14 +46,13 @@ function ShopSettings() {
                   <FormGroup>
                     <label
                       className="form-control-label"
-                      htmlFor="input-last-name"
+                      htmlFor="input-shop-link"
                     >
                       Shop Link
                     </label>
                     <Input
                       className="form-control-alternative"
-                      defaultValue="Jesse"
-                      id="input-last-name"
+                      id="input-shop-link"
                       placeholder="Shop Link"
                       type="text"
                     />
@@ -68,7 +66,6 @@ function ShopSettings() {
                     </label>
                     <Input
                       className="form-control-alternative"
-                      defaultValue="Jesse"
                       id="input-description"
                       placeholder="Shop Description"
                       type="text"
@@ -94,7 +91,7 @@ function ShopSettings() {
                         className="form-control-alternative mt-1"
                         id="input-answer"
                         placeholder="Answer"
-                        type="text"
+                        type="textfield"
                       />
                     </div>
                     <Button outline className="btn-sm mt-1 theme-btn">
