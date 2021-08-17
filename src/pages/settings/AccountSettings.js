@@ -29,30 +29,6 @@ function AccountSettings() {
               </div>
             </Col>
           </Row>
-          {/*
-              <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                <div className="d-flex justify-content-between">
-                  <Button
-                    className="mr-4"
-                    color="info"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                    size="sm"
-                  >
-                    Connect
-                  </Button>
-                  <Button
-                    className="float-right"
-                    color="default"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                    size="sm"
-                  >
-                    Message
-                  </Button>
-                </div>
-              </CardHeader>
-              */}
           <CardBody className="pt-0 pt-md-4">
             <Row>
               <div className="col">
@@ -63,7 +39,7 @@ function AccountSettings() {
                   </div>
                   <div>
                     <span className="heading">89</span>
-                    <span className="description">Ambot</span>
+                    <span className="description">Orders</span>
                   </div>
                 </div>
               </div>
@@ -86,16 +62,6 @@ function AccountSettings() {
               <Col xs="8">
                 <h3 className="mb-0">My account</h3>
               </Col>
-              <Col className="text-right" xs="4">
-                <Button
-                  color="warning"
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                  size="sm"
-                >
-                  Settings
-                </Button>
-              </Col>
             </Row>
           </CardHeader>
           <CardBody>
@@ -105,23 +71,25 @@ function AccountSettings() {
               </h6>
               <div className="pl-lg-4">
                 <Row>
-                  <Col lg="6">
+                  <Col>
                     <FormGroup>
                       <label
                         className="form-control-label"
                         htmlFor="input-shopname"
                       >
-                        Shop Name
+                        Shop owner
                       </label>
                       <Input
                         className="form-control-alternative"
                         id="input-shopname"
-                        placeholder="Juan dela Cruz Delicacies"
+                        placeholder="Juan dela Cruz"
                         type="text"
                       />
                     </FormGroup>
                   </Col>
-                  <Col lg="6">
+                </Row>
+                <Row>
+                  <Col>
                     <FormGroup>
                       <label
                         className="form-control-label"
@@ -132,49 +100,40 @@ function AccountSettings() {
                       <Input
                         className="form-control-alternative"
                         id="input-email"
-                        placeholder="jesse@example.com"
                         type="email"
                       />
                     </FormGroup>
                   </Col>
                 </Row>
                 <Row>
-                  <Col lg="6">
+                  <Col>
                     <FormGroup>
                       <label
                         className="form-control-label"
                         htmlFor="input-first-name"
                       >
-                        First name
+                        Mobile number
                       </label>
                       <Input
                         className="form-control-alternative"
-                        defaultValue="Lucky"
-                        id="input-first-name"
-                        placeholder="First name"
-                        type="text"
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col lg="6">
-                    <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="input-last-name"
-                      >
-                        Last name
-                      </label>
-                      <Input
-                        className="form-control-alternative"
-                        defaultValue="Jesse"
-                        id="input-last-name"
-                        placeholder="Last name"
-                        type="text"
+                        id="mobile-number"
+                        type="number"
                       />
                     </FormGroup>
                   </Col>
                 </Row>
               </div>
+              <Row className="ml-4">
+                <Button
+                  type="submit"
+                  className="theme-btn theme-border theme-active"
+                >
+                  Save
+                </Button>
+                <Button type="submit" className="theme-btn theme-border">
+                  Cancel
+                </Button>
+              </Row>
               <hr className="my-4" />
             </Form>
           </CardBody>
