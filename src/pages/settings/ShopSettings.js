@@ -97,7 +97,7 @@ function ShopSettings() {
                       <Input
                         className="form-control-alternative"
                         id="input-FAQs-answer"
-                        type="textfield"
+                        type="textarea"
                       />
                       <Button outline className="btn-sm mt-1 theme-btn">
                         Add More

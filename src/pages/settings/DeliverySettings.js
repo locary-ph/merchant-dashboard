@@ -4,6 +4,7 @@
 
 import React, { useState } from "react";
 import {
+  Button,
   Col,
   Row,
   Card,
@@ -12,50 +13,36 @@ import {
   Input,
   Form,
   FormGroup,
-  InputGroup,
-  InputGroupText,
-  InputGroupAddon,
 } from "reactstrap";
 
-function LocationInput() {
-  return (
-    <>
-      <Col lg="6">
-        <FormGroup>
-          <label className="form-control-label" htmlFor="location">
-            Location
-          </label>
-          <Input
-            className="form-control-alternative"
-            id="location"
-            placeholder="Manila"
-            type="text"
-          />
-        </FormGroup>
-      </Col>
-      <Col lg="6" className="mb-3 mb-lg-0">
-        <FormGroup>
-          <label className="form-control-label" htmlFor="shippingFee">
-            Fee
-          </label>
-          <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>Php</InputGroupText>
-            </InputGroupAddon>
-            <Input
-              className="form-control-alternative"
-              id="shippingFee"
-              type="number"
-            />
-          </InputGroup>
-        </FormGroup>
-      </Col>
-    </>
-  );
-}
+import LocationInput from "./LocationInput";
 
 function DeliverySettings() {
   const [address, setAddress] = useState("");
+  const [inputList, setInputList] = useState([
+    { location: "", fee: "" },
+    { location: "", fee: "" },
+  ]);
+
+  // handle input change
+  const handleInputChange = (e, index) => {
+    const { id, value } = e.target;
+    const list = [...inputList];
+    list[index][id] = value;
+    setInputList(list);
+  };
+
+  // handle click event of the Remove button
+  const removeInput = (index) => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
+
+  // handle click event of the Add button
+  const addInput = () => {
+    setInputList([...inputList, { location: "", fee: "" }]);
+  };
 
   return (
     <>
@@ -78,13 +65,30 @@ function DeliverySettings() {
                 </h5>
                 <div>
                   <Row>
-                    <Col lg="6" className="d-flex">
-                      <Row>
-                        <LocationInput />
-                      </Row>
-                    </Col>
+                    {inputList.map((location, i) => (
+                      <Col lg="6" className="d-flex">
+                        <Row>
+                          <LocationInput
+                            fee={location.fee}
+                            location={location.location}
+                            handleInputChange={handleInputChange}
+                            index={i}
+                            removeInput={removeInput}
+                          />
+                        </Row>
+                      </Col>
+                    ))}
                   </Row>
                 </div>
+                <Button
+                  outline
+                  color="warning"
+                  size="sm"
+                  type="button"
+                  onClick={addInput}
+                >
+                  Add
+                </Button>
               </div>
 
               <div className="mb-4">
