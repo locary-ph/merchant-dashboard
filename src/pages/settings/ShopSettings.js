@@ -39,7 +39,6 @@ function ShopSettings() {
                     <Input
                       className="form-control-alternative"
                       id="input-shop-name"
-                      placeholder="First name"
                       type="text"
                     />
                   </FormGroup>
@@ -53,7 +52,6 @@ function ShopSettings() {
                     <Input
                       className="form-control-alternative"
                       id="input-shop-link"
-                      placeholder="Shop Link"
                       type="text"
                     />
                   </FormGroup>
@@ -67,7 +65,6 @@ function ShopSettings() {
                     <Input
                       className="form-control-alternative"
                       id="input-description"
-                      placeholder="Shop Description"
                       type="text"
                     />
                   </FormGroup>
@@ -85,7 +82,6 @@ function ShopSettings() {
                         <Input
                           className="form-control-alternative"
                           id="input-FAQs-question"
-                          placeholder="Question"
                           type="text"
                         />
                         <InputGroupAddon addonType="append">
@@ -101,7 +97,6 @@ function ShopSettings() {
                       <Input
                         className="form-control-alternative"
                         id="input-FAQs-answer"
-                        placeholder="Answer"
                         type="textfield"
                       />
                       <Button outline className="btn-sm mt-1 theme-btn">
