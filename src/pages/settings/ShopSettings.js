@@ -62,7 +62,6 @@ function ShopSettings() {
                     <Input
                       className="form-control-alternative"
                       id="input-shop-name"
-                      name="shopName"
                       type="text"
                       value={shopName}
                       onChange={(e) => setShopName(e.target.value)}
@@ -78,7 +77,6 @@ function ShopSettings() {
                     <Input
                       className="form-control-alternative"
                       id="input-shop-link"
-                      name="shopLink"
                       type="text"
                       value={shopLink}
                       onChange={(e) => setShopLink(e.target.value)}
