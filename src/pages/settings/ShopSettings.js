@@ -21,25 +21,25 @@ function ShopSettings() {
   const [shopName, setShopName] = useState("");
   const [shopLink, setShopLink] = useState("");
   const [shopDesc, setShopDesc] = useState("");
-  const [faq, setFaq] = useState([{ question: "", answer: "" }]);
+  const [faqInputList, setFaqInputList] = useState([
+    { question: "", answer: "" },
+  ]);
 
   const addFaqEntry = () => {
-    setFaq([...faq, { question: "", answer: "" }]);
+    setFaqInputList([...faqInputList, { question: "", answer: "" }]);
   };
 
-  const delFaqEntry = (index) => {
-    const newFaq = [...faq];
+  const deleteFaqEntry = (index) => {
+    const newFaq = [...faqInputList];
     newFaq.splice(index, 1);
-    setFaq(newFaq);
+    setFaqInputList(newFaq);
   };
 
-  const inputHandle =
-    (index) =>
-    ({ target }) => {
-      const newFaq = [...faq];
-      newFaq[index][target.name] = target.value;
-      setFaq(newFaq);
-    };
+  const inputHandle = (index, event) => {
+    const newFaq = [...faqInputList];
+    newFaq[index][event.target.name] = event.target.value;
+    setFaqInputList(newFaq);
+  };
 
   return (
     <>
@@ -101,7 +101,7 @@ function ShopSettings() {
                     <h2>FAQs</h2>
                     <h5>Frequently asked questions</h5>
                     <div className="ml-4">
-                      {faq.map((entry, index) => (
+                      {faqInputList.map((entry, index) => (
                         <>
                           <label
                             className="form-control-label"
@@ -116,12 +116,12 @@ function ShopSettings() {
                               name="question"
                               type="text"
                               value={entry.question}
-                              onChange={inputHandle(index)}
+                              onChange={(e) => inputHandle(index, e)}
                             />
                             <InputGroupAddon addonType="append">
                               <Button
                                 className="btn-sm btn-warning"
-                                onClick={() => delFaqEntry(index)}
+                                onClick={() => deleteFaqEntry(index)}
                               >
                                 Delete
                               </Button>
@@ -139,9 +139,9 @@ function ShopSettings() {
                             name="answer"
                             type="textfield"
                             value={entry.answer}
-                            onChange={inputHandle(index)}
+                            onChange={(e) => inputHandle(index, e)}
                           />
-                          {faq.length > index + 1 ? <hr /> : null}
+                          {faqInputList.length > index + 1 ? <hr /> : null}
                         </>
                       ))}
                       <Button
