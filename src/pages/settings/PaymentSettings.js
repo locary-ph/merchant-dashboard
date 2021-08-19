@@ -42,7 +42,7 @@ function PaymentSettings() {
               </Col>
             </Row>
           </CardHeader>
-          <CardBody className="bg-secondary px-6">
+          <CardBody className="bg-secondary px-lg-6">
             <Form>
               <div className="inputGroup mb-4">
                 <h2 className="mb-1">Bank transfer</h2>
@@ -252,15 +252,10 @@ function PaymentSettings() {
               </div>
 
               <div className="mb-4">
-                <Button
-                  outline
-                  className="btn-icon btn-3"
-                  color="warning"
-                  type="submit"
-                >
-                  <i className="fas fa-save" />
-                  <span className="btn-inner--text">Save</span>
+                <Button className="theme-btn theme-border theme-active">
+                  Save
                 </Button>
+                <Button className="theme-btn theme-border">Cancel</Button>
               </div>
             </Form>
           </CardBody>
