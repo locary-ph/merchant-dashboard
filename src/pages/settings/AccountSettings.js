@@ -26,6 +26,7 @@ function AccountSettings() {
   );
 
   const [modal, setModal] = useState(false);
+  const [fileExtension, setFileExtension] = useState("");
   const [imageFile, setImageFile] = useState("");
 
   const onImageChange = (e) => {
@@ -37,11 +38,15 @@ function AccountSettings() {
     } else if (e.target) {
       files = e.target.files;
     }
+
     const reader = new FileReader();
     reader.onload = () => {
       setImageFile(reader.result);
     };
     reader.readAsDataURL(files[0]);
+
+    const extension = files[0].name.match(/[0-9a-z]+$/i)[0];
+    setFileExtension(extension);
 
     // show modal
     setModal(!modal);
@@ -53,7 +58,9 @@ function AccountSettings() {
 
   return (
     <>
-      <CropperModal {...{ modal, setModal, imageFile, setShopLogo }} />
+      <CropperModal
+        {...{ fileExtension, modal, setModal, imageFile, setShopLogo }}
+      />
       <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
         <Card className="card-profile shadow">
           <Row className="flex-column align-items-center">

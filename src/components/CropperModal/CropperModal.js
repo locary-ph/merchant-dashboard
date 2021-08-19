@@ -11,15 +11,17 @@ const propTypes = {
   modal: PropTypes.bool.isRequired,
   setModal: PropTypes.func.isRequired,
   setShopLogo: PropTypes.func.isRequired,
+  fileExtension: PropTypes.string.isRequired,
 };
 
 function CropperModal(props) {
-  const { modal, setModal, imageFile, setShopLogo } = props;
+  const { fileExtension, modal, setModal, imageFile, setShopLogo } = props;
   const [cropper, setCropper] = useState("");
 
   const toggle = () => {
     setModal(!modal);
-    setShopLogo(cropper.getCroppedCanvas().toDataURL());
+    // https://github.com/fengyuanchen/cropperjs#known-issues
+    setShopLogo(cropper.getCroppedCanvas().toDataURL(`image/${fileExtension}`));
   };
 
   return (
