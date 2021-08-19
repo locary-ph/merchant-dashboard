@@ -29,7 +29,7 @@ function Inventory() {
           </div>
         </Row>
       </CardHeader>
-      <Table>
+      <Table responsive>
         <thead className="thead-light">
           <tr>
             {headers.map(header => <th scope="col">{header}</th>)}
