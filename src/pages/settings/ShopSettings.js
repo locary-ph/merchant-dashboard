@@ -100,7 +100,7 @@ function ShopSettings() {
                   <FormGroup>
                     <h2>FAQs</h2>
                     <h5>Frequently asked questions</h5>
-                    <div className="ml-4">
+                    <div className="ml-0 ml-lg-4">
                       {faqInputList.map((entry, index) => (
                         <>
                           <label
@@ -154,7 +154,7 @@ function ShopSettings() {
                     </div>
                   </FormGroup>
                 </Col>
-                <Row className="ml-4">
+                <Row className="ml-0 ml-lg-4">
                   <Button className="theme-btn theme-border theme-active">
                     Save
                   </Button>

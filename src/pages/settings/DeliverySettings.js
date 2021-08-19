@@ -55,7 +55,7 @@ function DeliverySettings() {
               </Col>
             </Row>
           </CardHeader>
-          <CardBody className="bg-secondary px-6">
+          <CardBody className="bg-secondary px-lg-6">
             <Form>
               <div className="inputGroup mb-4">
                 <h2 className="mb-1">Delivery</h2>
@@ -120,6 +120,12 @@ function DeliverySettings() {
                   </Row>
                 </div>
               </div>
+              <Row className="ml-0 ml-lg-4">
+                <Button className="theme-btn theme-border theme-active">
+                  Save
+                </Button>
+                <Button className="theme-btn theme-border">Cancel</Button>
+              </Row>
             </Form>
           </CardBody>
         </Card>
