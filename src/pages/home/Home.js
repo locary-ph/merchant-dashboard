@@ -40,10 +40,10 @@ const Home = () => {
           </Col>
         </Row>
         <Row>
-          <Col className="mb-5">
+          <Col xl="12" className="mb-5">
             <RecentOrders />
           </Col>
-          <Col xl="6">
+          <Col className="mb-6" xl="6">
             <Inventory />
           </Col>
           <Col xl="6">
