@@ -101,7 +101,7 @@ function AccountSettings() {
               <h3>Chic Closet</h3>
               <div className="h5 font-weight-300">
                 <i className="ni location_pin mr-2" />
-                Bucharest, Romania
+                Manila, PH
               </div>
               <hr className="my-4" />
             </div>

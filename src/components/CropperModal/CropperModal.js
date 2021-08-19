@@ -12,6 +12,7 @@ const propTypes = {
   setModal: PropTypes.func.isRequired,
   setShopLogo: PropTypes.func.isRequired,
   fileExtension: PropTypes.string.isRequired,
+  imageFile: PropTypes.string.isRequired,
 };
 
 function CropperModal(props) {
