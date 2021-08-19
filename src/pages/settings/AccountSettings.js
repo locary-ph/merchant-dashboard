@@ -15,10 +15,42 @@ import {
   Input,
 } from "reactstrap";
 
+import CropperModal from "../../components/CropperModal/CropperModal";
+
 function AccountSettings() {
   const [shopOwner, setShopOwner] = useState("");
   const [email, setEmail] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
+  const [shopLogo, setShopLogo] = useState(
+    "https://i.pinimg.com/originals/bf/f3/c7/bff3c764a203d387ed96f863482c1d58.jpg"
+  );
+
+  const [modal, setModal] = useState(false);
+  const [fileExtension, setFileExtension] = useState("");
+  const [imageFile, setImageFile] = useState("");
+
+  const onImageChange = (e) => {
+    e.preventDefault();
+
+    let files;
+    if (e.dataTransfer) {
+      files = e.dataTransfer.files;
+    } else if (e.target) {
+      files = e.target.files;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImageFile(reader.result);
+    };
+    reader.readAsDataURL(files[0]);
+
+    const extension = files[0].name.match(/[0-9a-z]+$/i)[0];
+    setFileExtension(extension);
+
+    // show modal
+    setModal(!modal);
+  };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -26,21 +58,34 @@ function AccountSettings() {
 
   return (
     <>
+      <CropperModal
+        {...{ fileExtension, modal, setModal, imageFile, setShopLogo }}
+      />
       <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
         <Card className="card-profile shadow">
-          <Row className="justify-content-center">
-            <Col className="order-lg-2" lg="3">
+          <Row className="flex-column align-items-center">
+            <Col>
               <div className="card-profile-image">
-                <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <img alt="..." className="rounded-circle" />
-                </a>
+                <img src={shopLogo} alt="..." className="rounded-circle" />
               </div>
+            </Col>
+            <Col className="position-relative text-center mt-9">
+              <label className="btn btn-outline-warning" htmlFor="logo">
+                Upload logo
+              </label>
+              <input
+                accept="image/*"
+                id="logo"
+                type="file"
+                className="d-none"
+                onChange={onImageChange}
+              />
             </Col>
           </Row>
           <CardBody className="pt-0 pt-md-4">
             <Row>
               <div className="col">
-                <div className="card-profile-stats d-flex justify-content-center mt-7">
+                <div className="card-profile-stats d-flex justify-content-center">
                   <div>
                     <span className="heading">22</span>
                     <span className="description">Products</span>
@@ -56,7 +101,7 @@ function AccountSettings() {
               <h3>Chic Closet</h3>
               <div className="h5 font-weight-300">
                 <i className="ni location_pin mr-2" />
-                Bucharest, Romania
+                Manila, PH
               </div>
               <hr className="my-4" />
             </div>
