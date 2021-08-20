@@ -34,6 +34,7 @@ const LoginForm = () => {
 
       setUser(res.data.user);
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
 
       // redirect to Home
       history.push("/");
@@ -97,7 +98,7 @@ const LoginForm = () => {
             id="customCheckLogin"
             type="checkbox"
           />
-          <label className="custom-control-label" htmlFor=" customCheckLogin">
+          <label className="custom-control-label" htmlFor="customCheckLogin">
             <span className="text-muted">Remember me</span>
           </label>
         </div>

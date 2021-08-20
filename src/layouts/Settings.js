@@ -4,7 +4,6 @@
 
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-// reactstrap components
 import { Container, Row } from "reactstrap";
 
 import routes from "../routes";

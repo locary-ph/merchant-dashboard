@@ -1,7 +1,7 @@
 /**
  * @format
  */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
@@ -14,6 +14,14 @@ function App() {
   const [user, setUser] = useState({});
 
   const value = { user, setUser };
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+    }
+  }, []);
 
   return (
     <LoginContext.Provider value={value}>
