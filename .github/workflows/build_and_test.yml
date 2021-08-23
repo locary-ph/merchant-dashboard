@@ -30,25 +30,3 @@ jobs:
         run: npm install
       - name: build
         run: npm run build
-
-  deploy:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.18'
-
-      - name: install dependencies
-        run: npm install
-
-      - name: build site
-        run: npm run build
-
-      - name: Deploy preview
-        uses: netlify/actions/cli@master
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        with:
-          args: deploy
