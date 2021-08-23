@@ -5,7 +5,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://locary-api.herokuapp.com/api/v1",
+  baseURL: process.env.REST_API_BASE_URL || "http://localhost:5000/api/v1",
 });
 
 const getUserToken = () => localStorage.getItem("token");
