@@ -2,7 +2,7 @@
  * @format
  */
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Button,
   Col,
@@ -17,13 +17,15 @@ import {
   InputGroupAddon,
 } from "reactstrap";
 
+import LoginContext from "../../contexts/LoginContext";
+
 function ShopSettings() {
-  const [shopName, setShopName] = useState("");
-  const [shopLink, setShopLink] = useState("");
-  const [shopDesc, setShopDesc] = useState("");
-  const [faqInputList, setFaqInputList] = useState([
-    { question: "", answer: "" },
-  ]);
+  const { user } = useContext(LoginContext);
+
+  const [shopName, setShopName] = useState(user.shopName);
+  const [shopLink, setShopLink] = useState(user.shopUrl);
+  const [shopDescription, setShopDescription] = useState(user.shopDescription);
+  const [faqInputList, setFaqInputList] = useState(user.faqs);
 
   const addFaqEntry = () => {
     setFaqInputList([...faqInputList, { question: "", answer: "" }]);
@@ -93,8 +95,8 @@ function ShopSettings() {
                       className="form-control-alternative"
                       id="input-description"
                       type="text"
-                      value={shopDesc}
-                      onChange={(e) => setShopDesc(e.target.value)}
+                      value={shopDescription}
+                      onChange={(e) => setShopDescription(e.target.value)}
                     />
                   </FormGroup>
                   <FormGroup>

@@ -2,7 +2,7 @@
  * @format
  */
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Col,
   Card,
@@ -16,11 +16,15 @@ import {
 } from "reactstrap";
 
 import CropperModal from "../../components/CropperModal/CropperModal";
+import LoginContext from "../../contexts/LoginContext";
 
 function AccountSettings() {
-  const [shopOwner, setShopOwner] = useState("");
-  const [email, setEmail] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("");
+  const { user } = useContext(LoginContext);
+
+  const [firstName, setFirstName] = useState(user.firstName);
+  const [lastName, setLastName] = useState(user.lastName);
+  const [email, setEmail] = useState(user.email);
+  const [mobileNumber, setMobileNumber] = useState(user.mobileNumber);
   const [shopLogo, setShopLogo] = useState(
     "https://i.pinimg.com/originals/bf/f3/c7/bff3c764a203d387ed96f863482c1d58.jpg"
   );
@@ -126,20 +130,33 @@ function AccountSettings() {
                 <Row>
                   <Col>
                     <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="input-shopname"
-                      >
-                        Shop owner
+                      <label className="form-control-label" htmlFor="firstName">
+                        First Name
                       </label>
                       <Input
                         required
                         className="form-control-alternative"
-                        id="input-shopname"
-                        placeholder="Juan dela Cruz"
+                        id="firstName"
+                        placeholder="John"
                         type="text"
-                        value={shopOwner}
-                        onChange={(e) => setShopOwner(e.target.value)}
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col>
+                    <FormGroup>
+                      <label className="form-control-label" htmlFor="lastName">
+                        Last Name
+                      </label>
+                      <Input
+                        required
+                        className="form-control-alternative"
+                        id="lastName"
+                        placeholder="Doe"
+                        type="text"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
                       />
                     </FormGroup>
                   </Col>
@@ -177,7 +194,7 @@ function AccountSettings() {
                         required
                         className="form-control-alternative"
                         id="mobile-number"
-                        type="number"
+                        type="text"
                         value={mobileNumber}
                         onChange={(e) => setMobileNumber(e.target.value)}
                       />
