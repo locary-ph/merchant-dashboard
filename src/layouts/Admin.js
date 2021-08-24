@@ -11,7 +11,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import Sidebar from "../components/Sidebar/Sidebar";
 import ProductDetails from "../pages/products/ProductDetails";
-import OrderDetails from "pages/orders/OrderDetails";
+import OrderDetails from "../pages/orders/OrderDetails";
 
 import SettingsLayout from "./Settings";
 

@@ -2,8 +2,7 @@
  * @format
  */
 
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
 import {
   Container,
   Row,
@@ -20,12 +19,6 @@ const OrderDetails = (props) => {
   /* eslint-disable react/destructuring-assignment */
   const { order } = props.location.state;
   const { buyer, deliveryAddress } = order;
-
-  const history = useHistory();
-
-  const handleClick = (evt) => {
-    setAction(evt.currentTarget.value);
-  };
 
   return (
     <Container className="mt-5">
@@ -45,7 +38,7 @@ const OrderDetails = (props) => {
                 className="py-0 align-self-center ml-auto"
                 style={{ height: "2rem" }}
               >
-                <i className="fas fa-download"></i>
+                <i className="fas fa-download" />
               </Button>
             </Col>
           </Row>
@@ -81,7 +74,8 @@ const OrderDetails = (props) => {
                   className="rounded"
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1280px-Image_created_with_a_mobile_phone.png"
                   style={{ maxHeight: "150px", maxWidth: "150px" }}
-                ></img>
+                  alt="product"
+                />
                 <div className="align-self-center ml-2">
                   <h3>Product:</h3>
                   <label className="text-capitalize">
@@ -109,7 +103,7 @@ const OrderDetails = (props) => {
             <hr />
             <h2>Order Tracker</h2>
             <Container>
-              <progress style={{ width: "100%" }}></progress>
+              <progress style={{ width: "100%" }} />
             </Container>
             <div className="d-flex justify-content-center">
               <Button className="theme-border theme-btn theme-active">
