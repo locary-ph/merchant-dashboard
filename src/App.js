@@ -23,6 +23,9 @@ function App() {
     }
   }, []);
 
+  // update user on local storage when user state is modified
+  useEffect(() => localStorage.setItem("user", JSON.stringify(user)), [user]);
+
   return (
     <LoginContext.Provider value={value}>
       <BrowserRouter>
