@@ -2,7 +2,7 @@
  * @format
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Col,
   Button,
@@ -15,7 +15,12 @@ import {
   FormGroup,
 } from "reactstrap";
 
+import LoginContext from "../../contexts/LoginContext";
+import { instance as axios, getUserToken } from "../../axios";
+
 function PaymentSettings() {
+  const { user, setUser } = useContext(LoginContext);
+
   // bank transfer inputs state
   const [bank, setBank] = useState("");
   const [bankAccNumber, setBankAccNumber] = useState("");
@@ -28,8 +33,45 @@ function PaymentSettings() {
   const [ewalletName, setEwalletName] = useState("");
 
   // COD / COP states
-  const [CODInstructions, setCODInstructions] = useState("");
-  const [COPInstructions, setCOPInstructions] = useState("");
+  const [cashOnPickup, setCashOnPickup] = useState("");
+  const [cashOnDelivery, setCashOnDelivery] = useState("");
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getUserToken()}`,
+      },
+    };
+
+    const data = {
+      bankTransfer: {
+        bank,
+        accountNumber: bankAccNumber,
+        accountName: bankAccName,
+        instructions: bankInstructions,
+      },
+      eWallet: {
+        wallet: ewalletName,
+        accountName: ewalletName,
+        accountNumber: ewalletNumber,
+      },
+      cashOnPickup,
+      cashOnDelivery,
+    };
+
+    try {
+      const res = await axios.post(
+        `merchants/paymentMethod/${user._id}`,
+        data,
+        config
+      );
+      console.log(res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <>
@@ -43,7 +85,7 @@ function PaymentSettings() {
             </Row>
           </CardHeader>
           <CardBody className="bg-secondary px-lg-6">
-            <Form>
+            <Form onSubmit={handleFormSubmit}>
               <div className="inputGroup mb-4">
                 <h2 className="mb-1">Bank transfer</h2>
                 <h5 className="text-muted mb-4">
@@ -203,18 +245,15 @@ function PaymentSettings() {
                   <Row>
                     <Col>
                       <FormGroup>
-                        <label
-                          className="form-control-label"
-                          htmlFor="paymentInstructions"
-                        >
+                        <label className="form-control-label" htmlFor="cop">
                           Payment instructions
                         </label>
                         <Input
                           className="form-control-alternative"
-                          id="paymentInstructions"
+                          id="cop"
                           type="text"
-                          value={COPInstructions}
-                          onChange={(e) => setCOPInstructions(e.target.value)}
+                          value={cashOnPickup}
+                          onChange={(e) => setCashOnPickup(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -232,18 +271,15 @@ function PaymentSettings() {
                   <Row>
                     <Col>
                       <FormGroup>
-                        <label
-                          className="form-control-label"
-                          htmlFor="paymentInstructions"
-                        >
+                        <label className="form-control-label" htmlFor="cod">
                           Payment instructions
                         </label>
                         <Input
                           className="form-control-alternative"
-                          id="paymentInstructions"
+                          id="cod"
                           type="text"
-                          value={CODInstructions}
-                          onChange={(e) => setCODInstructions(e.target.value)}
+                          value={cashOnDelivery}
+                          onChange={(e) => setCashOnDelivery(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
