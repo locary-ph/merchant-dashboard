@@ -4,6 +4,7 @@
 
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { Table, Badge } from "reactstrap";
 import { instance as axios, getUserToken } from "../../axios";
 
@@ -48,12 +49,18 @@ function OrderList({ filter }) {
   const displayOrders = () =>
     orders.map((order) => {
       const { orderStatus } = order;
-
       if (filter === "all" || filter === orderStatus.toLowerCase()) {
         return (
           <tr>
             <th scope="row">
-              <span className="mb-0 text-sm">xxxx-xxx</span>
+              <Link
+                to={{
+                  pathname: `/admin/orders/${order._id}`,
+                  state: { order },
+                }}
+              >
+                <span className="mb-0 text-sm">{order._id}</span>
+              </Link>
             </th>
             <td>{new Date(order.createdAt).toLocaleDateString("en-US")}</td>
             <td>
