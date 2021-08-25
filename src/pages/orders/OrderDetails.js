@@ -51,7 +51,9 @@ const OrderDetails = (props) => {
               <Row>
                 <Col xs="6">
                   <h3 className="mb-0">Name: </h3>
-                  <label className="ml-5">{buyer.firstName} {buyer.lastName}</label>
+                  <label className="ml-5">
+                    {buyer.firstName} {buyer.lastName}
+                  </label>
                   <h3 className="mb-0">Email: </h3>
                   <label className="ml-5">{`${buyer.email}`}</label>
                   <h3 className="mb-0">Contact: </h3>
