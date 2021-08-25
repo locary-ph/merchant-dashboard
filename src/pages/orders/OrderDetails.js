@@ -55,15 +55,18 @@ const OrderDetails = (props) => {
                     {buyer.firstName} {buyer.lastName}
                   </label>
                   <h3 className="mb-0">Email: </h3>
-                  <label className="ml-5">{`${buyer.email}`}</label>
+                  <label className="ml-5">{buyer.email}</label>
                   <h3 className="mb-0">Contact: </h3>
-                  <label className="ml-5">{`${buyer.contact}`}</label>
+                  <label className="ml-5">{buyer.contact}</label>
                 </Col>
                 <Col xs="auto">
                   <h3 className="mb-0">Address: </h3>
-                  <label className="ml-5">{`${deliveryAddress.line1}, ${deliveryAddress.city}, ${deliveryAddress.province}, ${deliveryAddress.zipcode}`}</label>
+                  <label className="ml-5">
+                    {deliveryAddress.line1}, {deliveryAddress.city},{" "}
+                    {deliveryAddress.province}, {deliveryAddress.zipcode}
+                  </label>
                   <h3 className="mb-0">Special Instructions: </h3>
-                  <label className="ml-5">{`${order.instruction}`}</label>
+                  <label className="ml-5">{order.instruction}</label>
                 </Col>
               </Row>
             </div>
@@ -88,17 +91,22 @@ const OrderDetails = (props) => {
               <Row>
                 <Col xs="6">
                   <h3 className="mb-0">Date: </h3>
-                  <label className="ml-5">{`${buyer.firstName} ${buyer.lastName}`}</label>
+                  <label className="ml-5">
+                    {buyer.firstName} {buyer.lastName}
+                  </label>
                   <h3 className="mb-0">Time: </h3>
-                  <label className="ml-5">{`${buyer.email}`}</label>
+                  <label className="ml-5">{buyer.email}</label>
                   <h3 className="mb-0">Total: </h3>
-                  <label className="ml-5">{`${order.instruction}`}</label>
+                  <label className="ml-5">{order.instruction}</label>
                 </Col>
                 <Col xs="auto">
                   <h3 className="mb-0">Price: </h3>
-                  <label className="ml-5">{`${deliveryAddress.line1}, ${deliveryAddress.city}, ${deliveryAddress.province}, ${deliveryAddress.zipcode}`}</label>
+                  <label className="ml-5">
+                    {deliveryAddress.line1}, {deliveryAddress.city},{" "}
+                    {deliveryAddress.province}, {deliveryAddress.zipcode}
+                  </label>
                   <h3 className="mb-0">Quantity: </h3>
-                  <label className="ml-5">{`${order.instruction}`}</label>
+                  <label className="ml-5">{order.instruction}</label>
                 </Col>
               </Row>
             </div>
