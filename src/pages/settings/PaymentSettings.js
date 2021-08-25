@@ -3,6 +3,7 @@
  */
 
 import React, { useState, useEffect, useContext } from "react";
+import { useSynchronousState } from "@toolz/use-synchronous-state";
 import {
   Col,
   Button,
@@ -20,13 +21,13 @@ import { instance as axios, getUserToken } from "../../axios";
 
 function PaymentSettings() {
   const { user, setUser } = useContext(LoginContext);
+  const [getBankInfo, setBankInfo] = useSynchronousState({});
+  const [getWalletInfo, setWalletInfo] = useSynchronousState({});
 
   // bank transfer inputs state
-  const [bank, setBank] = useState(
-    user.paymentMethods ? user.paymentMethods.bankTransfer.bank : undefined
-  );
-  const [bankAccNumber, setBankAccNumber] = useState();
-  const [bankAccName, setBankAccName] = useState();
+  const [bank, setBank] = useState();
+  const [bankAccNumber, setAccNum] = useState();
+  const [bankAccName, setAccName] = useState();
   const [bankInstructions, setBankInstructions] = useState();
 
   // e-wallet inputs state
@@ -34,9 +35,46 @@ function PaymentSettings() {
   const [ewalletNumber, setEwalletNumber] = useState();
   const [ewalletName, setEwalletName] = useState();
 
-  // COD / COP states
-  const [cashOnPickup, setCashOnPickup] = useState();
-  const [cashOnDelivery, setCashOnDelivery] = useState();
+  // Cash on delivery / cash on pickup
+  const [getCOP, setCOP] = useSynchronousState();
+  const [getCOD, setCOD] = useSynchronousState();
+
+  const setValues = (data) => {
+    // THIS IS A VERY BAD IMPLEMENTATION, I'M SO DRAINED RIGHT. NOW WILL FIX THIS LATER.
+    setBankInfo(data.bankTransfer);
+    setWalletInfo(data.eWallet);
+
+    const bankInfo = getBankInfo();
+    const walletInfo = getWalletInfo();
+
+    setBank(bankInfo.bank);
+    setAccNum(bankInfo.accountNumber);
+    setAccName(bankInfo.accountName);
+    setBankInstructions(bankInfo.instructions);
+
+    setEwallet(walletInfo.wallet);
+    setEwalletNumber(walletInfo.accountNumber);
+    setEwalletName(walletInfo.accountName);
+
+    setCOP(data.cashOnPickup);
+    setCOD(data.cashOnDelivery);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(
+          `/merchants/paymentMethod/${user.paymentMethodId}`
+        );
+        // think of other implementations aside this one
+        setValues(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchData();
+  }, [user]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -59,8 +97,8 @@ function PaymentSettings() {
         accountName: ewalletName,
         accountNumber: ewalletNumber,
       },
-      cashOnPickup,
-      cashOnDelivery,
+      cashOnPickup: getCOP(),
+      cashOnDelivery: getCOD(),
     };
 
     try {
@@ -69,7 +107,6 @@ function PaymentSettings() {
         data,
         config
       );
-      setUser({ ...user, paymentMethods: res.data });
     } catch (err) {
       console.error(err);
     }
@@ -126,7 +163,7 @@ function PaymentSettings() {
                           id="accountNumber"
                           type="number"
                           value={bankAccNumber}
-                          onChange={(e) => setBankAccNumber(e.target.value)}
+                          onChange={(e) => setAccNum(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -145,7 +182,7 @@ function PaymentSettings() {
                           id="accountName"
                           type="text"
                           value={bankAccName}
-                          onChange={(e) => setBankAccName(e.target.value)}
+                          onChange={(e) => setAccName(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -254,8 +291,8 @@ function PaymentSettings() {
                           className="form-control-alternative"
                           id="cop"
                           type="text"
-                          value={cashOnPickup}
-                          onChange={(e) => setCashOnPickup(e.target.value)}
+                          value={getCOP()}
+                          onChange={(e) => setCOP(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -280,8 +317,8 @@ function PaymentSettings() {
                           className="form-control-alternative"
                           id="cod"
                           type="text"
-                          value={cashOnDelivery}
-                          onChange={(e) => setCashOnDelivery(e.target.value)}
+                          value={getCOD()}
+                          onChange={(e) => setCOD(e.target.value)}
                         />
                       </FormGroup>
                     </Col>
