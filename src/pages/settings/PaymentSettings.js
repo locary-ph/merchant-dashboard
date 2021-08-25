@@ -22,19 +22,21 @@ function PaymentSettings() {
   const { user, setUser } = useContext(LoginContext);
 
   // bank transfer inputs state
-  const [bank, setBank] = useState("");
-  const [bankAccNumber, setBankAccNumber] = useState("");
-  const [bankAccName, setBankAccName] = useState("");
-  const [bankInstructions, setBankInstructions] = useState("");
+  const [bank, setBank] = useState(
+    user.paymentMethods ? user.paymentMethods.bankTransfer.bank : undefined
+  );
+  const [bankAccNumber, setBankAccNumber] = useState();
+  const [bankAccName, setBankAccName] = useState();
+  const [bankInstructions, setBankInstructions] = useState();
 
   // e-wallet inputs state
-  const [ewallet, setEwallet] = useState("");
-  const [ewalletNumber, setEwalletNumber] = useState("");
-  const [ewalletName, setEwalletName] = useState("");
+  const [ewallet, setEwallet] = useState();
+  const [ewalletNumber, setEwalletNumber] = useState();
+  const [ewalletName, setEwalletName] = useState();
 
   // COD / COP states
-  const [cashOnPickup, setCashOnPickup] = useState("");
-  const [cashOnDelivery, setCashOnDelivery] = useState("");
+  const [cashOnPickup, setCashOnPickup] = useState();
+  const [cashOnDelivery, setCashOnDelivery] = useState();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -67,7 +69,7 @@ function PaymentSettings() {
         data,
         config
       );
-      console.log(res.data);
+      setUser({ ...user, paymentMethods: res.data });
     } catch (err) {
       console.error(err);
     }

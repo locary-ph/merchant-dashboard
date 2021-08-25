@@ -11,6 +11,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import Sidebar from "../components/Sidebar/Sidebar";
 import ProductDetails from "../pages/products/ProductDetails";
+import OrderDetails from "../pages/orders/OrderDetails";
 
 import SettingsLayout from "./Settings";
 
@@ -76,6 +77,7 @@ const Admin = (props) => {
             path="/admin/products/:name"
             component={ProductDetails}
           />
+          <Route exact path="/admin/orders/:name" component={OrderDetails} />
           <Redirect from="*" to="/admin/index" />
         </Switch>
         <Container fluid>
