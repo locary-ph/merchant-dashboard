@@ -20,7 +20,7 @@ import LoginContext from "../../contexts/LoginContext";
 import { instance as axios, getUserToken } from "../../axios";
 
 function PaymentSettings() {
-  const { user, setUser } = useContext(LoginContext);
+  const { user } = useContext(LoginContext);
   const [getBankInfo, setBankInfo] = useSynchronousState({});
   const [getWalletInfo, setWalletInfo] = useSynchronousState({});
 
@@ -74,6 +74,7 @@ function PaymentSettings() {
     };
 
     fetchData();
+    // eslint-disable-next-line
   }, [user]);
 
   const handleFormSubmit = async (e) => {
@@ -102,11 +103,7 @@ function PaymentSettings() {
     };
 
     try {
-      const res = await axios.post(
-        `merchants/paymentMethod/${user._id}`,
-        data,
-        config
-      );
+      await axios.post("/merchants/paymentMethod", data, config);
     } catch (err) {
       console.error(err);
     }
