@@ -22,13 +22,11 @@ const OrderDetails = (props) => {
 
   return (
     <Container className="mt-5">
+      <BackButton />
       <Card className="bg-secondary shadow">
         <CardHeader className="bg-white border-0">
           <Row className="d-flex justify-content-between">
-            <Col xs="3">
-              <BackButton />
-            </Col>
-            <Col xs="6" className="d-flex justify-content-center">
+            <Col xs="9">
               <h3 className="text-uppercase align-self-center">
                 Order #{order._id}
               </h3>
