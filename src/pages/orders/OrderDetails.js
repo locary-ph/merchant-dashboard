@@ -47,26 +47,52 @@ const OrderDetails = (props) => {
           <Container fluid>
             {/* Buyer Details */}
             <h2>Buyer Details</h2>
-            <div className="ml-3">
+            <div>
               <Row>
-                <Col xs="6">
+                <Col xl="2">
                   <h3 className="mb-0">Name: </h3>
-                  <label className="ml-5">
+                </Col>
+                <Col xs="10">
+                  <label>
                     {buyer.firstName} {buyer.lastName}
                   </label>
-                  <h3 className="mb-0">Email: </h3>
-                  <label className="ml-5">{buyer.email}</label>
-                  <h3 className="mb-0">Contact: </h3>
-                  <label className="ml-5">{buyer.contact}</label>
                 </Col>
-                <Col xs="auto">
+              </Row>
+              <Row>
+                <Col xl="2">
+                  <h3 className="mb-0">Email: </h3>
+                </Col>
+                <Col xs="10">
+                  <label>{buyer.email}</label>
+                </Col>
+              </Row>
+              <Row>
+                <Col xl="2">
+                  <h3 className="mb-0">Contact: </h3>
+                </Col>
+                <Col xs="10">
+                  <label>{buyer.contact ? buyer.contact : "None"}</label>
+                </Col>
+              </Row>
+              <Row>
+                <Col xl="2">
                   <h3 className="mb-0">Address: </h3>
-                  <label className="ml-5">
+                </Col>
+                <Col xs="10">
+                  <label>
                     {deliveryAddress.line1}, {deliveryAddress.city},{" "}
                     {deliveryAddress.province}, {deliveryAddress.zipcode}
                   </label>
+                </Col>
+              </Row>
+              <Row>
+                <Col xl="3">
                   <h3 className="mb-0">Special Instructions: </h3>
-                  <label className="ml-5">{order.instruction}</label>
+                </Col>
+                <Col xs="9">
+                  <label>
+                    {order.instruction ? order.instruction : "None"}
+                  </label>
                 </Col>
               </Row>
             </div>
