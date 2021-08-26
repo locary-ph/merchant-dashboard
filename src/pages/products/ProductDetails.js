@@ -76,13 +76,19 @@ const ProductDetails = (props) => {
         if (imageFile) {
           uploadImage(imageFile, currentProduct, (url) => {
             setImageUrl(url);
+            currentProduct.thumbnailUrl = url;
+            addProduct(currentProduct);
           });
         }
-
-        addProduct(currentProduct);
         break;
       case "edit":
-        editProduct(product._id, currentProduct);
+        if (imageFile) {
+          uploadImage(imageFile, currentProduct, (url) => {
+            setImageUrl(url);
+            currentProduct.thumbnailUrl = url;
+            editProduct(product._id, currentProduct);
+          });
+        }
         break;
       case "delete":
         deleteProduct(product._id);
