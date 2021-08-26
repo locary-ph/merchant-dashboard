@@ -47,13 +47,13 @@ const OrderDetails = (props) => {
             <h2>Buyer Details</h2>
             <div>
               <div className="d-sm-flex flex-wrap">
-                <h3 className="mb-0 mr-2">Name: </h3>
+                <h3 className="mb-0 mr-4">Name: </h3>
                 <label>
                   {buyer.firstName} {buyer.lastName}
                 </label>
               </div>
               <div className="d-sm-flex flex-wrap">
-                <h3 className="mb-0 mr-2">Email: </h3>
+                <h3 className="mb-0 mr-4">Email: </h3>
                 <label>{buyer.email}</label>
               </div>
               <div className="d-sm-flex flex-wrap">
@@ -63,8 +63,17 @@ const OrderDetails = (props) => {
               <div className="d-sm-flex flex-wrap">
                 <h3 className="mb-0 mr-2">Address: </h3>
                 <label>
-                  {deliveryAddress.line1}, {deliveryAddress.city},{" "}
-                  {deliveryAddress.province}, {deliveryAddress.zipcode}
+                  {deliveryAddress.line1} <br />
+                  {deliveryAddress.line2 ? (
+                    <>
+                      {" "}
+                      {deliveryAddress.line2} <br />{" "}
+                    </>
+                  ) : null}
+                  {deliveryAddress.city} <br />
+                  {deliveryAddress.province}
+                  <br />
+                  {deliveryAddress.zipcode}
                 </label>
               </div>
               <div className="d-sm-flex flex-wrap">
