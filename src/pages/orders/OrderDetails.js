@@ -47,13 +47,13 @@ const OrderDetails = (props) => {
             <h2>Buyer Details</h2>
             <div>
               <div className="d-sm-flex flex-wrap">
-                <h3 className="mb-0 mr-4">Name: </h3>
+                <h3 className="mb-0 mr-2">Name: </h3>
                 <label>
                   {buyer.firstName} {buyer.lastName}
                 </label>
               </div>
               <div className="d-sm-flex flex-wrap">
-                <h3 className="mb-0 mr-4">Email: </h3>
+                <h3 className="mb-0 mr-2">Email: </h3>
                 <label>{buyer.email}</label>
               </div>
               <div className="d-sm-flex flex-wrap">
@@ -76,10 +76,12 @@ const OrderDetails = (props) => {
                   {deliveryAddress.zipcode}
                 </label>
               </div>
-              <div className="d-sm-flex flex-wrap">
-                <h3 className="mb-0 mr-2">Special Instructions: </h3>
-                <label>{order.instruction ? order.instruction : "None"}</label>
-              </div>
+              {order.instruction ? (
+                <div className="d-sm-flex flex-wrap">
+                  <h3 className="mb-0 mr-2">Special Instructions: </h3>
+                  <label>{order.instruction}</label>
+                </div>
+              ) : null}
             </div>
             <hr />
             {/* Order Details */}
