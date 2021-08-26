@@ -11,7 +11,6 @@ const uploadImage = (image, product, callback) => {
   }, (err, res) => {
     const url = imagekit.url({
       src: res.url,
-      transformation: [{ width: 200 }]
     })
 
     // https://stackoverflow.com/questions/23339907/returning-a-value-from-callback-function-in-node-js#23340273
