@@ -43,6 +43,10 @@ function ShopSettings() {
     setFaqInputList(newFaq);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <>
       <Col className="order-xl-1" xl="12">
@@ -51,7 +55,7 @@ function ShopSettings() {
             <h3 className="mb-0">Shop Settings</h3>
           </CardHeader>
           <CardBody>
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <div className="px-lg-4 fluid-container">
                 <Col>
                   <FormGroup>
