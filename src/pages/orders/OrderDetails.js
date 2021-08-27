@@ -22,13 +22,11 @@ const OrderDetails = (props) => {
 
   return (
     <Container className="mt-5">
+      <BackButton />
       <Card className="bg-secondary shadow">
         <CardHeader className="bg-white border-0">
           <Row className="d-flex justify-content-between">
-            <Col xs="3">
-              <BackButton />
-            </Col>
-            <Col xs="6" className="d-flex justify-content-center">
+            <Col xs="9">
               <h3 className="text-uppercase align-self-center">
                 Order #{order._id}
               </h3>
@@ -47,33 +45,48 @@ const OrderDetails = (props) => {
           <Container fluid>
             {/* Buyer Details */}
             <h2>Buyer Details</h2>
-            <div className="ml-3">
-              <Row>
-                <Col xs="6">
-                  <h3 className="mb-0">Name: </h3>
-                  <label className="ml-5">
-                    {buyer.firstName} {buyer.lastName}
-                  </label>
-                  <h3 className="mb-0">Email: </h3>
-                  <label className="ml-5">{buyer.email}</label>
-                  <h3 className="mb-0">Contact: </h3>
-                  <label className="ml-5">{buyer.contact}</label>
-                </Col>
-                <Col xs="auto">
-                  <h3 className="mb-0">Address: </h3>
-                  <label className="ml-5">
-                    {deliveryAddress.line1}, {deliveryAddress.city},{" "}
-                    {deliveryAddress.province}, {deliveryAddress.zipcode}
-                  </label>
-                  <h3 className="mb-0">Special Instructions: </h3>
-                  <label className="ml-5">{order.instruction}</label>
-                </Col>
-              </Row>
+            <div>
+              <div className="d-sm-flex flex-wrap">
+                <h3 className="mb-0 mr-2">Name: </h3>
+                <label>
+                  {buyer.firstName} {buyer.lastName}
+                </label>
+              </div>
+              <div className="d-sm-flex flex-wrap">
+                <h3 className="mb-0 mr-2">Email: </h3>
+                <label>{buyer.email}</label>
+              </div>
+              <div className="d-sm-flex flex-wrap">
+                <h3 className="mb-0 mr-2">Contact: </h3>
+                <label>{buyer.contact ? buyer.contact : "None"}</label>
+              </div>
+              <div className="d-sm-flex flex-wrap">
+                <h3 className="mb-0 mr-2">Address: </h3>
+                <label>
+                  {deliveryAddress.line1} <br />
+                  {deliveryAddress.line2 ? (
+                    <>
+                      {" "}
+                      {deliveryAddress.line2} <br />{" "}
+                    </>
+                  ) : null}
+                  {deliveryAddress.city} <br />
+                  {deliveryAddress.province}
+                  <br />
+                  {deliveryAddress.zipcode}
+                </label>
+              </div>
+              {order.instruction ? (
+                <div className="d-sm-flex flex-wrap">
+                  <h3 className="mb-0 mr-2">Special Instructions: </h3>
+                  <label>{order.instruction}</label>
+                </div>
+              ) : null}
             </div>
             <hr />
             {/* Order Details */}
             <h2>Order Details</h2>
-            <div className="ml-4">
+            <div>
               <div className="d-flex">
                 <img
                   className="rounded"
@@ -89,24 +102,31 @@ const OrderDetails = (props) => {
                 </div>
               </div>
               <Row>
-                <Col xs="6">
-                  <h3 className="mb-0">Date: </h3>
-                  <label className="ml-5">
-                    {buyer.firstName} {buyer.lastName}
-                  </label>
-                  <h3 className="mb-0">Time: </h3>
-                  <label className="ml-5">{buyer.email}</label>
-                  <h3 className="mb-0">Total: </h3>
-                  <label className="ml-5">{order.instruction}</label>
+                <Col>
+                  <div className="d-sm-flex flex-wrap">
+                    <h3 className="mb-0 mr-2">Date: </h3>
+                    <label>
+                      {buyer.firstName} {buyer.lastName}
+                    </label>
+                  </div>
+                  <div className="d-sm-flex flex-wrap">
+                    <h3 className="mb-0 mr-2">Time: </h3>
+                    <label>{buyer.email}</label>
+                  </div>
+                  <div className="d-sm-flex flex-wrap">
+                    <h3 className="mb-0 mr-2">Total: </h3>
+                    <label>{order.orderAmount * order.quantity}</label>
+                  </div>
                 </Col>
-                <Col xs="auto">
-                  <h3 className="mb-0">Price: </h3>
-                  <label className="ml-5">
-                    {deliveryAddress.line1}, {deliveryAddress.city},{" "}
-                    {deliveryAddress.province}, {deliveryAddress.zipcode}
-                  </label>
-                  <h3 className="mb-0">Quantity: </h3>
-                  <label className="ml-5">{order.instruction}</label>
+                <Col>
+                  <div className="d-sm-flex flex-wrap">
+                    <h3 className="mb-0 mr-2">Price: </h3>
+                    <label>{order.orderAmount}</label>
+                  </div>
+                  <div className="d-sm-flex flex-wrap">
+                    <h3 className="mb-0 mr-2">Quantity: </h3>
+                    <label>{order.quantity}</label>
+                  </div>
                 </Col>
               </Row>
             </div>
