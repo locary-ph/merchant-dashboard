@@ -65,6 +65,7 @@ function ShopSettings() {
       try {
         await axios.put("/merchants/shop", data, config);
         setUser({ ...user, ...data });
+        toastify(4000, "success", "top-right", "Shop settings saved!");
       } catch (err) {
         toastify(4000, "error", "top-right", err.response.data.message);
       }
