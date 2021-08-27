@@ -3,28 +3,15 @@
  */
 
 import React, { useState, useContext } from "react";
-import {
-  Col,
-  Card,
-  CardBody,
-  CardHeader,
-  Button,
-  Form,
-  Row,
-  FormGroup,
-  Input,
-} from "reactstrap";
+import { Col, Card, CardBody, CardHeader, Row } from "reactstrap";
 
 import CropperModal from "../../components/CropperModal/CropperModal";
 import LoginContext from "../../contexts/LoginContext";
+import AccountSettingsForm from "./AccountSettingsForm";
 
 function AccountSettings() {
   const { user } = useContext(LoginContext);
 
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [email, setEmail] = useState(user.email);
-  const [mobileNumber, setMobileNumber] = useState(user.mobileNumber);
   const [shopLogo, setShopLogo] = useState(
     "https://i.pinimg.com/originals/bf/f3/c7/bff3c764a203d387ed96f863482c1d58.jpg"
   );
@@ -54,10 +41,6 @@ function AccountSettings() {
 
     // show modal
     setModal(!modal);
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
   };
 
   return (
@@ -102,7 +85,7 @@ function AccountSettings() {
               </div>
             </Row>
             <div className="text-center">
-              <h3>Chic Closet</h3>
+              <h3>{user.shopName}</h3>
               <div className="h5 font-weight-300">
                 <i className="ni location_pin mr-2" />
                 Manila, PH
@@ -122,99 +105,7 @@ function AccountSettings() {
             </Row>
           </CardHeader>
           <CardBody>
-            <Form onSubmit={handleFormSubmit}>
-              <h6 className="heading-small text-muted mb-4">
-                User information
-              </h6>
-              <div className="pl-lg-4">
-                <Row>
-                  <Col>
-                    <FormGroup>
-                      <label className="form-control-label" htmlFor="firstName">
-                        First Name
-                      </label>
-                      <Input
-                        required
-                        className="form-control-alternative"
-                        id="firstName"
-                        placeholder="John"
-                        type="text"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col>
-                    <FormGroup>
-                      <label className="form-control-label" htmlFor="lastName">
-                        Last Name
-                      </label>
-                      <Input
-                        required
-                        className="form-control-alternative"
-                        id="lastName"
-                        placeholder="Doe"
-                        type="text"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="input-email"
-                      >
-                        Email address
-                      </label>
-                      <Input
-                        required
-                        className="form-control-alternative"
-                        id="input-email"
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="input-first-name"
-                      >
-                        Mobile number
-                      </label>
-                      <Input
-                        required
-                        className="form-control-alternative"
-                        id="mobile-number"
-                        type="text"
-                        value={mobileNumber}
-                        onChange={(e) => setMobileNumber(e.target.value)}
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
-              </div>
-              <Row className="ml-4">
-                <Button
-                  type="submit"
-                  className="theme-btn theme-border theme-active"
-                >
-                  Save
-                </Button>
-                <Button type="button" className="theme-btn theme-border">
-                  Cancel
-                </Button>
-              </Row>
-              <hr className="my-4" />
-            </Form>
+            <AccountSettingsForm shopLogo={shopLogo} />
           </CardBody>
         </Card>
       </Col>
