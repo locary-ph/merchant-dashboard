@@ -2,7 +2,7 @@
  * @format
  */
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -28,7 +28,7 @@ function App() {
 
   return (
     <LoginContext.Provider value={value}>
-      <BrowserRouter>
+      <HashRouter>
         {/* edit options in /src/utils/toastify.js */}
         <ToastContainer />
         <Switch>
@@ -36,7 +36,7 @@ function App() {
           <Route path="/auth" component={AuthLayout} />
           <Redirect from="/" to="/admin/index" />
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
     </LoginContext.Provider>
   );
 }
