@@ -17,10 +17,13 @@ import {
   InputGroupAddon,
 } from "reactstrap";
 
+import { instance as axios, getUserToken } from "../../axios";
+import toastify from "../../utils/toastify";
+
 import LoginContext from "../../contexts/LoginContext";
 
 function ShopSettings() {
-  const { user } = useContext(LoginContext);
+  const { user, setUser } = useContext(LoginContext);
 
   const [shopName, setShopName] = useState(user.shopName);
   const [shopLink, setShopLink] = useState(user.shopUrl);
@@ -45,6 +48,29 @@ function ShopSettings() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const updateShopData = async () => {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${getUserToken()}`,
+        },
+      };
+
+      const data = {
+        shopName,
+        shopDescription,
+        faqs: faqInputList,
+      };
+
+      try {
+        await axios.put("/merchants/shop", data, config);
+        setUser({ ...user, ...data });
+      } catch (err) {
+        toastify(4000, "error", "top-right", err.response.data.message);
+      }
+    };
+
+    updateShopData();
   };
 
   return (
