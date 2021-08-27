@@ -33,28 +33,24 @@ const routes = [
   {
     path: "/account",
     name: "Account Settings",
-    icon: "fas fa-cog ",
     component: AccountSettings,
     layout: "/admin/settings",
   },
   {
     path: "/shop",
     name: "Shop Settings",
-    icon: "fas fa-cog ",
     component: ShopSettings,
     layout: "/admin/settings",
   },
   {
     path: "/payment",
     name: "Payment Settings",
-    icon: "fas fa-cog ",
     component: PaymentSettings,
     layout: "/admin/settings",
   },
   {
     path: "/delivery",
     name: "Delivery Options",
-    icon: "fas fa-cog ",
     component: DeliverySettings,
     layout: "/admin/settings",
   },
