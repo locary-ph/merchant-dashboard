@@ -47,6 +47,7 @@ const Sidebar = (props) => {
             tag={NavLinkRRD}
             onClick={closeCollapse}
             activeClassName="active-link"
+            style={{ fontSize: "1.07rem" }}
           >
             <i className={prop.icon} />
             {prop.name}
@@ -140,7 +141,7 @@ const Sidebar = (props) => {
                   data-toggle="dropdown"
                   aria-expanded={settingsOpen}
                   className="nav-link"
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", fontSize: "1.07rem" }}
                 >
                   <i className="fas fa-cog" />
                   Settings
@@ -156,6 +157,10 @@ const Sidebar = (props) => {
                       tag={NavLinkRRD}
                       onClick={closeCollapse}
                       activeClassName="active-link"
+                      style={{
+                        padding: ".3rem 1.5rem",
+                        color: "rgba(0,0,0,0.5)",
+                      }}
                     >
                       <i className={prop.icon} />
                       {prop.name}

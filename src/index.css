@@ -1,10 +1,15 @@
 /**
  * @format
  */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap");
 
 .navbar-vertical .navbar-nav .nav-link.active::before,
 .navbar-vertical.navbar-expand-md .navbar-nav .nav-link.active::before {
   border-left: none;
+}
+
+body {
+  font-family: "Manrope", sans-serif;
 }
 
 input {
@@ -26,6 +31,7 @@ input {
   border-left: 3px solid #f2583e;
   background-color: #ffe0dc;
   color: #fb6340 !important;
+  font-weight: 700;
 }
 
 /* ============= Shop Settings ============= */
