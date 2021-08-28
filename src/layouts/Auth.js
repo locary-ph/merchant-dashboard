@@ -2,7 +2,7 @@
  * @format
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Container, Row } from "reactstrap";
 
@@ -13,8 +13,15 @@ import Loader from "../components/Loader/Loader";
 
 import locaryLogo from "../assets/img/brand/locary-logo.png";
 
-const Auth = () => {
+const Auth = (props) => {
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const user = localStorage.getItem("token");
+    if (user && user !== "undefined") {
+      props.history.push("/");
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
