@@ -2,7 +2,7 @@
  * @format
  */
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Row,
@@ -19,7 +19,7 @@ const OrderDetails = (props) => {
   /* eslint-disable react/destructuring-assignment */
   const { order } = props.location.state;
   const { buyer, deliveryAddress } = order;
-
+  
   return (
     <Container className="mt-5">
       <BackButton />
@@ -45,7 +45,7 @@ const OrderDetails = (props) => {
           <Container fluid>
             {/* Buyer Details */}
             <h2>Buyer Details</h2>
-            <div>
+            <div className="pl-4">
               <div className="d-sm-flex flex-wrap">
                 <h3 className="mb-0 mr-2">Name: </h3>
                 <label>
@@ -86,15 +86,15 @@ const OrderDetails = (props) => {
             <hr />
             {/* Order Details */}
             <h2>Order Details</h2>
-            <div>
-              <div className="d-flex">
+            <div className="pl-4">
+              <div className="d-flex flex-wrap">
                 <img
-                  className="rounded"
+                  className="rounded mr-2"
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1280px-Image_created_with_a_mobile_phone.png"
                   style={{ maxHeight: "150px", maxWidth: "150px" }}
                   alt="product"
                 />
-                <div className="align-self-center ml-2">
+                <div className="align-self-center">
                   <h3>Product:</h3>
                   <label className="text-capitalize">
                     {order.items[0].product.name}
@@ -131,17 +131,18 @@ const OrderDetails = (props) => {
               </Row>
             </div>
             <hr />
-            <h2>Order Tracker</h2>
+            {/* Order Status */}
+            <h2>Order Status</h2>
             <ul className="progressBar pl-0 d-sm-flex justify-content-between flex-wrap">
               <li>
                 <div className="d-flex flex-column align-items-center">
-                  <div className="progressBarNumber progressBarActive">1</div>
+                  <div className={`progressBarNumber ${orderStatus("Order Placed")}`}>1</div>
                   Order Placed
                 </div>
               </li>
               <li>
                 <div className="d-flex flex-column align-items-center">
-                  <div className="progressBarNumber">2</div>Pending
+                  <div className={`progressBarNumber ${orderStatus("Pending")}`}>2</div>Pending
                 </div>
               </li>
               <li>
