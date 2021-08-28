@@ -25,11 +25,13 @@ const deleteProduct = async (id) => {
   }
 };
 
-const addProduct = async (product) => {
+const addProduct = async (product, callback) => {
   try {
     await axios.post("products/", product, config);
   } catch (e) {
     console.error(e);
+  } finally {
+    callback();
   }
 };
 

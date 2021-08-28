@@ -9,6 +9,7 @@ const uploadImage = (image, product, callback) => {
     fileName,
     folder: `/merchant/`
   }, (err, res) => {
+    if (err) console.error(err);
     const url = imagekit.url({
       src: res.url,
     })
