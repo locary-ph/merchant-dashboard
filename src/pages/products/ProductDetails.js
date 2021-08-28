@@ -87,14 +87,23 @@ const ProductDetails = (props) => {
         }
         break;
       case "edit":
+        // new image is uploaded
         if (imageFile) {
           uploadImage(imageFile, currentProduct, (url) => {
             setImageUrl(url);
             currentProduct.thumbnailUrl = url;
-            editProduct(product._id, currentProduct);
+
+            editProduct(product._id, currentProduct, () => {
+              history.push("/admin/products");
+              displayToastify(action);
+            });
+          });
+        } else {
+          editProduct(product._id, currentProduct, () => {
+            history.push("/admin/products");
+            displayToastify(action);
           });
         }
-        displayToastify(action);
         break;
       case "delete":
         deleteProduct(product._id);
