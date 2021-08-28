@@ -18,7 +18,7 @@ import { instance as axios } from "../../../axios";
 
 import LoginContext from "../../../contexts/LoginContext";
 
-const LoginForm = () => {
+const LoginForm = ({ setLoading }) => {
   const { setUser } = useContext(LoginContext);
   const history = useHistory();
 
@@ -27,6 +27,7 @@ const LoginForm = () => {
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
 
     const submitForm = async () => {
@@ -38,11 +39,12 @@ const LoginForm = () => {
         setUser(res.data.user);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
-
-        // redirect to Home
-        history.push("/");
       } catch (err) {
         setError(err.response.data.message);
+      } finally {
+        setLoading(false);
+        // redirect to Home on succesful login
+        if (localStorage.getItem("token")) history.push("/");
       }
     };
 
