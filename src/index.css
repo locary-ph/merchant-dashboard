@@ -57,6 +57,28 @@ input {
   background-color: #fe634e;
 }
 
+/* ============= Order Details ============= */
+.progressBar {
+  text-align: center;
+}
+.progressBar li {
+  display: inline-block;
+}
+.progressBarNumber {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ffdbd7;
+  font-size: 1.3rem;
+}
+.progressBarActive {
+  background-color: #fe634e;
+  color: white;
+}
+
 /* Product delete button */
 
 button.close {

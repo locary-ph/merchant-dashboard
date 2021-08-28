@@ -121,7 +121,7 @@ const OrderDetails = (props) => {
                 <Col>
                   <div className="d-sm-flex flex-wrap">
                     <h3 className="mb-0 mr-2">Price: </h3>
-                    <label>{order.orderAmount}</label>
+                    <label>Php {order.orderAmount}</label>
                   </div>
                   <div className="d-sm-flex flex-wrap">
                     <h3 className="mb-0 mr-2">Quantity: </h3>
@@ -132,9 +132,34 @@ const OrderDetails = (props) => {
             </div>
             <hr />
             <h2>Order Tracker</h2>
-            <Container>
-              <progress style={{ width: "100%" }} />
-            </Container>
+            <ul className="progressBar pl-0">
+              <li>
+                <div className="d-flex px-5 flex-column justify-content-end">
+                  <div className="progressBarNumber progressBarActive">1</div>
+                  Order Placed
+                </div>
+              </li>
+              <li>
+                <div className="d-flex px-5 flex-column justify-content-end">
+                  <div className="progressBarNumber">2</div>Pending
+                </div>
+              </li>
+              <li>
+                <div className="d-flex px-5 flex-column justify-content-end">
+                  <div className="progressBarNumber">3</div>Accepted
+                </div>
+              </li>
+              <li>
+                <div className="d-flex px-5 flex-column justify-content-end">
+                  <div className="progressBarNumber">4</div>Dispatched
+                </div>
+              </li>
+              <li>
+                <div className="d-flex px-5 flex-column justify-content-end">
+                  <div className="progressBarNumber">5</div>Delivered
+                </div>
+              </li>
+            </ul>
             <div className="d-flex justify-content-center">
               <Button className="theme-border theme-btn theme-active">
                 Confirm
