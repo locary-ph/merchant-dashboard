@@ -132,30 +132,30 @@ const OrderDetails = (props) => {
             </div>
             <hr />
             <h2>Order Tracker</h2>
-            <ul className="progressBar pl-0">
+            <ul className="progressBar pl-0 d-sm-flex justify-content-between flex-wrap">
               <li>
-                <div className="d-flex px-5 flex-column justify-content-end">
+                <div className="d-flex flex-column align-items-center">
                   <div className="progressBarNumber progressBarActive">1</div>
                   Order Placed
                 </div>
               </li>
               <li>
-                <div className="d-flex px-5 flex-column justify-content-end">
+                <div className="d-flex flex-column align-items-center">
                   <div className="progressBarNumber">2</div>Pending
                 </div>
               </li>
               <li>
-                <div className="d-flex px-5 flex-column justify-content-end">
+                <div className="d-flex flex-column align-items-center">
                   <div className="progressBarNumber">3</div>Accepted
                 </div>
               </li>
               <li>
-                <div className="d-flex px-5 flex-column justify-content-end">
+                <div className="d-flex flex-column align-items-center">
                   <div className="progressBarNumber">4</div>Dispatched
                 </div>
               </li>
               <li>
-                <div className="d-flex px-5 flex-column justify-content-end">
+                <div className="d-flex flex-column align-items-center">
                   <div className="progressBarNumber">5</div>Delivered
                 </div>
               </li>

@@ -62,7 +62,12 @@ input {
   text-align: center;
 }
 .progressBar li {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+}
+.progressBarContainer {
+  display: flex;
+  flex-direction: column;
 }
 .progressBarNumber {
   display: flex;
