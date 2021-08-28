@@ -2,7 +2,7 @@
  * @format
  */
 
-import React, { useState } from "react";
+import React from "react";
 import {
   Container,
   Row,
@@ -19,19 +19,14 @@ const OrderDetails = (props) => {
   /* eslint-disable react/destructuring-assignment */
   const { order } = props.location.state;
   const { buyer, deliveryAddress } = order;
-  const [orderStatusCheck, setorderStatusCheck] = useState([]);
-  const [statusCheck, setStatusCheck] = useState(false);
-  const orderStatus = (containerName) => {
-    console.log(order.orderStatus, containerName);
-    console.log(containerName === order.orderStatus);
-    if (!statusCheck) {
-      if (containerName === order.orderStatus) {
-        setStatusCheck(true);
-      }
-      return "progressBarActive";
-    }
-    return null;
+  const statusList = {
+    CANCELLED: 0,
+    PENDING: 2,
+    ACCEPTED: 3,
+    DISPATCHED: 4,
+    DELIVERED: 5,
   };
+  const orderStatus = statusList[order.orderStatus];
 
   console.log(order);
 
@@ -152,9 +147,9 @@ const OrderDetails = (props) => {
               <li>
                 <div className="d-flex flex-column align-items-center">
                   <div
-                    className={`progressBarNumber ${orderStatus(
-                      "Order Placed"
-                    )}`}
+                    className={`progressBarNumber ${
+                      orderStatus > 0 ? "progressBarActive" : null
+                    }`}
                   >
                     1
                   </div>
@@ -164,7 +159,9 @@ const OrderDetails = (props) => {
               <li>
                 <div className="d-flex flex-column align-items-center">
                   <div
-                    className={`progressBarNumber ${orderStatus("Pending")}`}
+                    className={`progressBarNumber ${
+                      orderStatus > 1 ? "progressBarActive" : null
+                    }`}
                   >
                     2
                   </div>
@@ -173,17 +170,38 @@ const OrderDetails = (props) => {
               </li>
               <li>
                 <div className="d-flex flex-column align-items-center">
-                  <div className="progressBarNumber">3</div>Accepted
+                  <div
+                    className={`progressBarNumber ${
+                      orderStatus > 2 ? "progressBarActive" : null
+                    }`}
+                  >
+                    3
+                  </div>
+                  Accepted
                 </div>
               </li>
               <li>
                 <div className="d-flex flex-column align-items-center">
-                  <div className="progressBarNumber">4</div>Dispatched
+                  <div
+                    className={`progressBarNumber ${
+                      orderStatus > 3 ? "progressBarActive" : null
+                    }`}
+                  >
+                    4
+                  </div>
+                  Dispatched
                 </div>
               </li>
               <li>
                 <div className="d-flex flex-column align-items-center">
-                  <div className="progressBarNumber">5</div>Delivered
+                  <div
+                    className={`progressBarNumber ${
+                      orderStatus > 4 ? "progressBarActive" : null
+                    }`}
+                  >
+                    5
+                  </div>
+                  Delivered
                 </div>
               </li>
             </ul>
