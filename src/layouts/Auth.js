@@ -1,23 +1,21 @@
+/**
+ * @format
+ */
+
 import React from "react";
-import {
-  useLocation, Route, Switch, Redirect
-} from "react-router-dom";
+import { useLocation, Route, Switch, Redirect } from "react-router-dom";
 import { Container, Row } from "reactstrap";
 
 import Footer from "../components/Footer/Footer";
 import Login from "../components/Login";
 import Register from "../components/Register";
 
+import locaryLogo from "../assets/img/brand/locary-logo.png";
+
 const Auth = () => {
   const mainContent = React.useRef(null);
   const location = useLocation();
 
-  React.useEffect(() => {
-    document.body.classList.add("bg-default");
-    return () => {
-      document.body.classList.remove("bg-default");
-    };
-  }, []);
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
@@ -27,26 +25,18 @@ const Auth = () => {
   return (
     <>
       <div className="main-content" ref={mainContent}>
-        <div className="header bg-gradient-info py-7 py-lg-8">
-          <div className="separator separator-bottom separator-skew zindex-100">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="none"
-              version="1.1"
-              viewBox="0 0 2560 100"
-              x="0"
-              y="0"
-            >
-              <polygon
-                className="fill-default"
-                points="2560 0 2560 100 0 100"
-              />
-            </svg>
-          </div>
-        </div>
         {/* Page content */}
-        <Container className="mt--8 pb-5">
-          <Row className="justify-content-center pt-4">
+        <Container className="mt-6 pb-5">
+          <img
+            className="d-block mx-auto"
+            src={locaryLogo}
+            alt="Locary logo"
+            style={{ width: "12rem" }}
+          />
+          <div className="text-center text-muted mb-4">
+            <small>Welcome back!</small>
+          </div>
+          <Row className="justify-content-center">
             <Switch>
               <Route path="/auth/login" component={Login} />
               <Route path="/auth/signup" component={Register} />
