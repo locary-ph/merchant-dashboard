@@ -16,6 +16,10 @@ input {
   color: black !important;
 }
 
+.loader {
+  width: 6rem;
+}
+
 .input-group-text {
   border: none;
   background: #6969691c;
