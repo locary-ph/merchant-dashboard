@@ -9,11 +9,14 @@ const config = {
   },
 };
 
-const editProduct = async (id, product) => {
+const editProduct = async (id, product, callback) => {
   try {
     await axios.put(`products/${id}`, { product }, config);
+    console.log("edit");
   } catch (err) {
     console.error(err.response.data.message);
+  } finally {
+    callback();
   }
 };
 
