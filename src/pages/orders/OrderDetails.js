@@ -19,7 +19,22 @@ const OrderDetails = (props) => {
   /* eslint-disable react/destructuring-assignment */
   const { order } = props.location.state;
   const { buyer, deliveryAddress } = order;
-  
+  const [orderStatusCheck, setorderStatusCheck] = useState([]);
+  const [statusCheck, setStatusCheck] = useState(false);
+  const orderStatus = (containerName) => {
+    console.log(order.orderStatus, containerName);
+    console.log(containerName === order.orderStatus);
+    if (!statusCheck) {
+      if (containerName === order.orderStatus) {
+        setStatusCheck(true);
+      }
+      return "progressBarActive";
+    }
+    return null;
+  };
+
+  console.log(order);
+
   return (
     <Container className="mt-5">
       <BackButton />
@@ -136,13 +151,24 @@ const OrderDetails = (props) => {
             <ul className="progressBar pl-0 d-sm-flex justify-content-between flex-wrap">
               <li>
                 <div className="d-flex flex-column align-items-center">
-                  <div className={`progressBarNumber ${orderStatus("Order Placed")}`}>1</div>
+                  <div
+                    className={`progressBarNumber ${orderStatus(
+                      "Order Placed"
+                    )}`}
+                  >
+                    1
+                  </div>
                   Order Placed
                 </div>
               </li>
               <li>
                 <div className="d-flex flex-column align-items-center">
-                  <div className={`progressBarNumber ${orderStatus("Pending")}`}>2</div>Pending
+                  <div
+                    className={`progressBarNumber ${orderStatus("Pending")}`}
+                  >
+                    2
+                  </div>
+                  Pending
                 </div>
               </li>
               <li>
