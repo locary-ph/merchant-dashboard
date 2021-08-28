@@ -8,7 +8,6 @@ import { Row, Col, Input, Button, FormText } from "reactstrap";
 const propTypes = {
   setImageFile: PropTypes.func.isRequired,
   imageUrl: PropTypes.string.isRequired,
-  imageFile: PropTypes.instanceOf(File).isRequired,
 };
 
 function ImageInput({ setImageFile, imageUrl, imageFile }) {
