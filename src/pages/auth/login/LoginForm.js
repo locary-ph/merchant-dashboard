@@ -26,25 +26,26 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const submitForm = async () => {
-    const data = { email, password };
-
-    try {
-      const res = await axios.post("/auth/login", data);
-
-      setUser(res.data.user);
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-
-      // redirect to Home
-      history.push("/");
-    } catch (err) {
-      setError(err.response.data.message);
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const submitForm = async () => {
+      const data = { email, password };
+
+      try {
+        const res = await axios.post("/auth/login", data);
+
+        setUser(res.data.user);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+
+        // redirect to Home
+        history.push("/");
+      } catch (err) {
+        setError(err.response.data.message);
+      }
+    };
+
     submitForm();
   };
 
