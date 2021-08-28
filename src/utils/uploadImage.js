@@ -1,4 +1,5 @@
 import imagekit from "../imagekit";
+import toastify from "./toastify";
 
 const uploadImage = (image, product, callback) => {
   const name = product.name.toLowerCase().replace(" ", "-");
@@ -9,7 +10,7 @@ const uploadImage = (image, product, callback) => {
     fileName,
     folder: `/merchant/`
   }, (err, res) => {
-    if (err) console.error(err);
+    if (err) toastify(4000, "error", "top-right", err.response.data.message);
     const url = imagekit.url({
       src: res.url,
     })
