@@ -10,13 +10,7 @@ const Footer = () => (
             <Col xl="6">
               <div className="copyright text-center text-xl-left text-muted">
                 © {new Date().getFullYear()}{" "}
-                <a
-                  className="font-weight-bold ml-1"
-                  href="https://www.creative-tim.com?ref=adr-auth-footer"
-                  target="_blank" rel="noreferrer"
-                >
-                  Locary
-                </a>
+                <span className="text-blue font-weight-bold">Locary</span>
               </div>
             </Col>
             <Col xl="6">
@@ -31,7 +25,7 @@ const Footer = () => (
                 </NavItem>
                 <NavItem>
                   <NavLink
-                    href="https://www.creative-tim.com/presentation?ref=adr-auth-footer"
+                    href="https://www.locary.ph/about"
                     target="_blank"
                   >
                     About Us
