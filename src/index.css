@@ -8,16 +8,19 @@
   border-left: none;
 }
 
-body {
-  font-family: "Manrope", sans-serif;
+/* argon styles overrides */
+
+.btn-outline-danger:hover,
+.btn-outline-danger {
+  border-color: red;
 }
 
-input {
-  color: black !important;
+.btn-outline-danger:hover {
+  background-color: red;
 }
 
-.loader {
-  width: 6rem;
+.btn-outline-danger {
+  color: red;
 }
 
 .input-group-text {
@@ -28,6 +31,18 @@ input {
 
 .input-group {
   box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+}
+
+input {
+  color: black !important;
+}
+
+.loader {
+  width: 6rem;
 }
 
 /* Nav */
