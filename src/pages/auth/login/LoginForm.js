@@ -4,7 +4,6 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import {
-  Alert,
   Button,
   Form,
   FormGroup,
@@ -15,6 +14,7 @@ import {
 } from "reactstrap";
 
 import { instance as axios } from "../../../axios";
+import toastify from "../../../utils/toastify";
 
 import LoginContext from "../../../contexts/LoginContext";
 
@@ -24,7 +24,6 @@ const LoginForm = ({ setLoading }) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     setLoading(true);
@@ -40,10 +39,10 @@ const LoginForm = ({ setLoading }) => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
       } catch (err) {
-        setError(err.response.data.message);
+        toastify(6000, "error", "top-right", err.response.data.message);
       } finally {
-        setLoading(false);
         // redirect to Home on succesful login
+        setLoading(false);
         if (localStorage.getItem("token")) history.push("/");
       }
     };
@@ -53,15 +52,6 @@ const LoginForm = ({ setLoading }) => {
 
   return (
     <>
-      <Alert
-        color="danger"
-        isOpen={!!error}
-        toggle={() => {
-          setError("");
-        }}
-      >
-        {error}
-      </Alert>
       <Form onSubmit={handleSubmit} role="form">
         <label htmlFor="email">
           <small>Email address</small>
