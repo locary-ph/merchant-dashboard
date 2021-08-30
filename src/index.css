@@ -87,6 +87,15 @@ input {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  position: relative;
+}
+.progressBar::before {
+  content: '';
+  position: absolute;
+  width: 50%;
+  height: 2px;
+  background-color: #ccc;
+  top: 35px;
 }
 .progressBar li {
   list-style-type: none;
@@ -103,13 +112,14 @@ input {
   height: 50px;
   border-radius: 50%;
   border: 1px solid;
-  background-color: #fe634e;
-  color: #ffdbd7;
+  background-color: #ffdbd7;
+  color: #fe634e;
   font-size: 1.3rem;
-  opacity: 0.5;
+  z-index: 1;
 }
 .progressBarActive {
-  opacity: 1;
+  background-color: #fe634e;
+  color: #ffdbd7;
 }
 
 /* Product delete button */
