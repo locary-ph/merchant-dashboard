@@ -119,9 +119,7 @@ const OrderDetails = (props) => {
                 <Col>
                   <div className="d-sm-flex flex-wrap">
                     <h3 className="mb-0 mr-2">Date: </h3>
-                    <label>
-                      {buyer.firstName} {buyer.lastName}
-                    </label>
+                    <label>{order.createdAt.split("T")[0]}</label>
                   </div>
                   <div className="d-sm-flex flex-wrap">
                     <h3 className="mb-0 mr-2">Time: </h3>
