@@ -77,11 +77,6 @@ input {
 }
 
 /* ============= Order Details ============= */
-@media (max-width: 486px) {
-  .progressBar {
-    flex-direction: column;
-  }
-}
 .progressBar {
   display: flex;
   align-items: center;
@@ -90,12 +85,41 @@ input {
   position: relative;
 }
 .progressBar::before {
-  content: '';
+  content: "";
   position: absolute;
-  width: 50%;
+  width: 450px;
   height: 2px;
   background-color: #ccc;
   top: 35px;
+}
+@media (max-width: 1025px) {
+  .progressBar::before {
+    width: 400px;
+  }
+}
+@media (max-width: 904px) {
+  .progressBar::before {
+    width: 250px;
+  }
+  .progressBar::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 2px;
+    background-color: #ccc;
+    top: 130px;
+  }
+}
+@media (max-width: 486px) {
+  .progressBar {
+    flex-direction: column;
+  }
+  .progressBar::before {
+    width: 0px;
+  }
+  .progressBar::after {
+    width: 0px;
+  }
 }
 .progressBar li {
   list-style-type: none;
