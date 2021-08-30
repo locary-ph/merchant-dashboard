@@ -28,9 +28,11 @@ const OrderDetails = (props) => {
   };
   const orderStatus = statusList[order.orderStatus];
   const checkStatus = (statusNumber) => {
-    if (orderStatus > statusNumber) return "progressBar progressBarActive";
-    return "progressBar";
+    if (orderStatus > statusNumber)
+      return "progressBarNumber progressBarActive";
+    return "progressBarNumber";
   };
+  const dateTime = new Date(order.createdAt);
 
   console.log(order);
 
@@ -100,6 +102,7 @@ const OrderDetails = (props) => {
             <hr />
             {/* Order Details */}
             <h2>Order Details</h2>
+            {console.log(dateTime, dateTime.getTime())}
             <div className="pl-4">
               <div className="d-flex flex-wrap">
                 <img
@@ -109,24 +112,30 @@ const OrderDetails = (props) => {
                   alt="product"
                 />
                 <div className="align-self-center">
-                  <h3>Product:</h3>
+                  <h3 className="mb-0">Product:</h3>
                   <label className="text-capitalize">
                     {order.items[0].product.name}
                   </label>
                 </div>
               </div>
               <Row>
-                <Col>
+                <Col xl="4" xs="6">
                   <div className="d-sm-flex flex-wrap">
                     <h3 className="mb-0 mr-2">Date: </h3>
-                    <label>{order.createdAt.split("T")[0]}</label>
+                    <label>
+                      {dateTime.getMonth() + 1}/{dateTime.getDate()}/
+                      {dateTime.getFullYear()}
+                    </label>
                   </div>
                   <div className="d-sm-flex flex-wrap">
                     <h3 className="mb-0 mr-2">Time: </h3>
-                    <label>{order.createdAt.split("T")[1].split(".")[0]}</label>
+                    <label>
+                      {dateTime.getHours()}:{dateTime.getMinutes()}:
+                      {dateTime.getSeconds()}
+                    </label>
                   </div>
                 </Col>
-                <Col>
+                <Col xl="4" xs="6">
                   <div className="d-sm-flex flex-wrap">
                     <h3 className="mb-0 mr-2">Price: </h3>
                     <label>Php {order.orderAmount}</label>
@@ -136,7 +145,7 @@ const OrderDetails = (props) => {
                     <label>{order.quantity}</label>
                   </div>
                 </Col>
-                <Col>
+                <Col xl="4" xs="6">
                   <div className="d-sm-flex flex-wrap">
                     <h3 className="mb-0 mr-2">Total: </h3>
                     <label>Php {order.orderAmount * order.quantity}</label>
@@ -147,30 +156,34 @@ const OrderDetails = (props) => {
             <hr />
             {/* Order Status */}
             <h2>Order Status</h2>
-            <ul className="pl-0 d-lg-flex justify-content-center flex-wrap">
-              <li className={checkStatus(0)}>
-                <div className="progressBarNumber">1</div>
-                Order Placed
+            <ul className="progressBar pl-0">
+              <li>
+                <div className="d-flex flex-column align-items-center">
+                  <div className={checkStatus(0)}>1</div>
+                  Order Placed
+                </div>
               </li>
-              <li className={checkStatus(1)}>
-                <div className="progressBarNumber">2</div>
-                Pending
+              <li>
+                <div className="d-flex flex-column align-items-center">
+                  <div className={checkStatus(1)}>2</div>
+                  Pending
+                </div>
               </li>
-              <li className={checkStatus(2)}>
-                <div className="d-flex align-items-center">
-                  <div className="progressBarNumber">3</div>
+              <li>
+                <div className="d-flex flex-column align-items-center">
+                  <div className={checkStatus(2)}>3</div>
                   Accepted
                 </div>
               </li>
-              <li className={checkStatus(3)}>
-                <div className="d-flex align-items-center">
-                  <div className="progressBarNumber">4</div>
+              <li>
+                <div className="d-flex flex-column align-items-center">
+                  <div className={checkStatus(3)}>4</div>
                   Dispatched
                 </div>
               </li>
-              <li className={checkStatus(4)}>
-                <div className="d-flex align-items-center">
-                  <div className="progressBarNumber">5</div>
+              <li>
+                <div className="d-flex flex-column align-items-center">
+                  <div className={checkStatus(4)}>5</div>
                   Delivered
                 </div>
               </li>

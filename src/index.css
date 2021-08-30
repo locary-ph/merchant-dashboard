@@ -77,21 +77,23 @@ input {
 }
 
 /* ============= Order Details ============= */
+@media (max-width: 486px) {
+  .progressBar {
+    flex-direction: column;
+  }
+}
 .progressBar {
   display: flex;
   align-items: center;
-  position: relative;
-  background-color: #ffdbd7;
-  border-radius: 10px;
-  padding: 10px 10px;
-  margin: 5px 5px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-.progressBar div {
-  margin-right: 5px;
-}
-.progressBarActive {
-  background-color: #fe634e;
-  color: white;
+.progressBar li {
+  list-style-type: none;
+  margin: 10px 10px;
+  width: 100px;
+  color: black;
+  font-weight: 500;
 }
 .progressBarNumber {
   display: flex;
@@ -101,9 +103,13 @@ input {
   height: 50px;
   border-radius: 50%;
   border: 1px solid;
-  background-color: #fff;
-  color: black;
+  background-color: #fe634e;
+  color: #ffdbd7;
   font-size: 1.3rem;
+  opacity: 0.5;
+}
+.progressBarActive {
+  opacity: 1;
 }
 
 /* Product delete button */
