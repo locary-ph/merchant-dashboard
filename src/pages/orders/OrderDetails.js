@@ -28,9 +28,8 @@ const OrderDetails = (props) => {
   };
   const orderStatus = statusList[order.orderStatus];
   const checkStatus = (statusNumber) => {
-    if (orderStatus > statusNumber)
-      return "progressBarNumber progressBarActive";
-    return "progressBarNumber";
+    if (orderStatus > statusNumber) return "progressBar progressBarActive";
+    return "progressBar";
   };
 
   console.log(order);
@@ -126,11 +125,7 @@ const OrderDetails = (props) => {
                   </div>
                   <div className="d-sm-flex flex-wrap">
                     <h3 className="mb-0 mr-2">Time: </h3>
-                    <label>{buyer.email}</label>
-                  </div>
-                  <div className="d-sm-flex flex-wrap">
-                    <h3 className="mb-0 mr-2">Total: </h3>
-                    <label>{order.orderAmount * order.quantity}</label>
+                    <label>{order.createdAt.split("T")[1].split(".")[0]}</label>
                   </div>
                 </Col>
                 <Col>
@@ -143,44 +138,46 @@ const OrderDetails = (props) => {
                     <label>{order.quantity}</label>
                   </div>
                 </Col>
+                <Col>
+                  <div className="d-sm-flex flex-wrap">
+                    <h3 className="mb-0 mr-2">Total: </h3>
+                    <label>Php {order.orderAmount * order.quantity}</label>
+                  </div>
+                </Col>
               </Row>
             </div>
             <hr />
             {/* Order Status */}
             <h2>Order Status</h2>
-            <ul className="progressBar pl-0 d-sm-flex justify-content-between flex-wrap">
-              <li>
-                <div className="d-flex flex-column align-items-center">
-                  <div className={checkStatus(0)}>1</div>
-                  Order Placed
-                </div>
+            <ul className="pl-0 d-lg-flex justify-content-center flex-wrap">
+              <li className={checkStatus(0)}>
+                <div className="progressBarNumber">1</div>
+                Order Placed
               </li>
-              <li>
-                <div className="d-flex flex-column align-items-center">
-                  <div className={checkStatus(1)}>2</div>
-                  Pending
-                </div>
+              <li className={checkStatus(1)}>
+                <div className="progressBarNumber">2</div>
+                Pending
               </li>
-              <li>
-                <div className="d-flex flex-column align-items-center">
-                  <div className={checkStatus(2)}>3</div>
+              <li className={checkStatus(2)}>
+                <div className="d-flex align-items-center">
+                  <div className="progressBarNumber">3</div>
                   Accepted
                 </div>
               </li>
-              <li>
-                <div className="d-flex flex-column align-items-center">
-                  <div className={checkStatus(3)}>4</div>
+              <li className={checkStatus(3)}>
+                <div className="d-flex align-items-center">
+                  <div className="progressBarNumber">4</div>
                   Dispatched
                 </div>
               </li>
-              <li>
-                <div className="d-flex flex-column align-items-center">
-                  <div className={checkStatus(4)}>5</div>
+              <li className={checkStatus(4)}>
+                <div className="d-flex align-items-center">
+                  <div className="progressBarNumber">5</div>
                   Delivered
                 </div>
               </li>
             </ul>
-            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center mt-5">
               <Button className="theme-border theme-btn theme-active">
                 Confirm
               </Button>

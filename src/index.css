@@ -78,15 +78,20 @@ input {
 
 /* ============= Order Details ============= */
 .progressBar {
-  text-align: center;
-}
-.progressBar li {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: #ffdbd7;
+  border-radius: 10px;
+  padding: 10px 10px;
+  margin: 5px 5px;
 }
-.progressBarContainer {
-  display: flex;
-  flex-direction: column;
+.progressBar div {
+  margin-right: 5px;
+}
+.progressBarActive {
+  background-color: #fe634e;
+  color: white;
 }
 .progressBarNumber {
   display: flex;
@@ -95,12 +100,10 @@ input {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #ffdbd7;
+  border: 1px solid;
+  background-color: #fff;
+  color: black;
   font-size: 1.3rem;
-}
-.progressBarActive {
-  background-color: #fe634e;
-  color: white;
 }
 
 /* Product delete button */
