@@ -1,61 +1,62 @@
-import React from "react";
-import {
-  useLocation, Route, Switch, Redirect
-} from "react-router-dom";
+/**
+ * @format
+ */
+
+import React, { useState, useEffect } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { Container, Row } from "reactstrap";
 
 import Footer from "../components/Footer/Footer";
 import Login from "../components/Login";
 import Register from "../components/Register";
+import Loader from "../components/Loader/Loader";
 
-const Auth = () => {
-  const mainContent = React.useRef(null);
-  const location = useLocation();
+import locaryLogo from "../assets/img/brand/locary-logo.png";
 
-  React.useEffect(() => {
-    document.body.classList.add("bg-default");
-    return () => {
-      document.body.classList.remove("bg-default");
-    };
-  }, []);
-  React.useEffect(() => {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    mainContent.current.scrollTop = 0;
-  }, [location]);
+const Auth = (props) => {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const user = localStorage.getItem("token");
+    if (user && user !== "undefined") {
+      props.history.push("/");
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
-      <div className="main-content" ref={mainContent}>
-        <div className="header bg-gradient-info py-7 py-lg-8">
-          <div className="separator separator-bottom separator-skew zindex-100">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="none"
-              version="1.1"
-              viewBox="0 0 2560 100"
-              x="0"
-              y="0"
-            >
-              <polygon
-                className="fill-default"
-                points="2560 0 2560 100 0 100"
+      {loading ? (
+        <>
+          <Loader />
+        </>
+      ) : (
+        <>
+          <div className="main-content">
+            {/* Page content */}
+            <Container className="mt-6 pb-5">
+              <img
+                className="d-block mx-auto"
+                src={locaryLogo}
+                alt="Locary logo"
+                style={{ width: "12rem" }}
               />
-            </svg>
+              <div className="text-center text-muted mb-4">
+                <small>Welcome back!</small>
+              </div>
+              <Row className="justify-content-center">
+                <Switch>
+                  <Route path="/auth/login">
+                    <Login setLoading={setLoading} />
+                  </Route>
+                  <Route path="/auth/signup" component={Register} />
+                  <Redirect from="*" to="/auth/login" />
+                </Switch>
+              </Row>
+            </Container>
           </div>
-        </div>
-        {/* Page content */}
-        <Container className="mt--8 pb-5">
-          <Row className="justify-content-center pt-4">
-            <Switch>
-              <Route path="/auth/login" component={Login} />
-              <Route path="/auth/signup" component={Register} />
-              <Redirect from="*" to="/auth/login" />
-            </Switch>
-          </Row>
-        </Container>
-      </div>
-      <Footer />
+          <Footer />
+        </>
+      )}
     </>
   );
 };

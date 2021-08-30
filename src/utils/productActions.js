@@ -3,33 +3,50 @@
  */
 import { instance as axios, getUserToken } from "../axios";
 
-const config = {
-  headers: {
-    Authorization: `Bearer ${getUserToken()}`,
-  },
-};
-
-const editProduct = async (id, product) => {
+const editProduct = async (id, product, callback) => {
   try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getUserToken()}`,
+      },
+    };
+
     await axios.put(`products/${id}`, { product }, config);
+    console.log("edit");
   } catch (err) {
     console.error(err.response.data.message);
+  } finally {
+    callback();
   }
 };
 
 const deleteProduct = async (id) => {
   try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getUserToken()}`,
+      },
+    };
+
     await axios.delete(`products/${id}`, config);
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err.response.data.message);
   }
 };
 
-const addProduct = async (product) => {
+const addProduct = async (product, callback) => {
   try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getUserToken()}`,
+      },
+    };
+
     await axios.post("products/", product, config);
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err.response.data.message);
+  } finally {
+    callback();
   }
 };
 

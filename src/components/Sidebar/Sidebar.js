@@ -4,8 +4,6 @@
 import React, { useState } from "react";
 import { NavLink as NavLinkRRD, Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
-
-// reactstrap components
 import {
   Collapse,
   NavbarBrand,
@@ -19,6 +17,8 @@ import {
   Dropdown,
   DropdownToggle,
 } from "reactstrap";
+
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 const Sidebar = (props) => {
   const { routes, logo } = props;
@@ -169,8 +169,10 @@ const Sidebar = (props) => {
                 })}
               </Collapse>
             </NavItem>
+            <LogoutButton className="mt-5 d-block d-lg-none" />
           </Nav>
         </Collapse>
+        <LogoutButton className="d-none d-lg-block" />
       </Container>
     </Navbar>
   );

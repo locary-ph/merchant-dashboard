@@ -58,6 +58,7 @@ const ProductDetails = (props) => {
     return true;
   };
 
+  // eslint-disable-next-line consistent-return
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -77,28 +78,41 @@ const ProductDetails = (props) => {
           uploadImage(imageFile, currentProduct, (url) => {
             setImageUrl(url);
             currentProduct.thumbnailUrl = url;
-            addProduct(currentProduct);
+
+            addProduct(currentProduct, () => {
+              history.push("/admin/products");
+              displayToastify(action);
+            });
           });
         }
         break;
       case "edit":
+        // new image is uploaded
         if (imageFile) {
           uploadImage(imageFile, currentProduct, (url) => {
             setImageUrl(url);
             currentProduct.thumbnailUrl = url;
-            editProduct(product._id, currentProduct);
+
+            editProduct(product._id, currentProduct, () => {
+              history.push("/admin/products");
+              displayToastify(action);
+            });
+          });
+        } else {
+          editProduct(product._id, currentProduct, () => {
+            history.push("/admin/products");
+            displayToastify(action);
           });
         }
         break;
       case "delete":
         deleteProduct(product._id);
         history.goBack();
+        displayToastify(action);
         break;
       default:
         break;
     }
-
-    return displayToastify(action);
   };
 
   return (
