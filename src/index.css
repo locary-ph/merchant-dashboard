@@ -89,7 +89,7 @@ input {
   position: absolute;
   width: 450px;
   height: 2px;
-  background-color: #ccc;
+  border: dotted 1px #ccc;
   top: 35px;
 }
 @media (max-width: 1025px) {
