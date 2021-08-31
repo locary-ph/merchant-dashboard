@@ -13,6 +13,7 @@ import {
   Button,
 } from "reactstrap";
 
+import DateFormat from "../../utils/dateFormat";
 import BackButton from "../../components/BackButton/BackButton";
 
 const OrderDetails = (props) => {
@@ -32,7 +33,7 @@ const OrderDetails = (props) => {
       return "progressBarNumber progressBarActive";
     return "progressBarNumber";
   };
-  const dateTime = new Date(order.createdAt);
+  const dateTime = new DateFormat(order.createdAt);
 
   console.log(order);
 
@@ -122,17 +123,11 @@ const OrderDetails = (props) => {
                 <Col xl="4" xs="6">
                   <div className="d-sm-flex flex-wrap">
                     <h3 className="mb-0 mr-2">Date: </h3>
-                    <label>
-                      {dateTime.getMonth() + 1}/{dateTime.getDate()}/
-                      {dateTime.getFullYear()}
-                    </label>
+                    <label>{dateTime.getDate()}</label>
                   </div>
                   <div className="d-sm-flex flex-wrap">
                     <h3 className="mb-0 mr-2">Time: </h3>
-                    <label>
-                      {dateTime.getHours()}:{dateTime.getMinutes()}:
-                      {dateTime.getSeconds()}
-                    </label>
+                    <label>{dateTime.getTime()}</label>
                   </div>
                 </Col>
                 <Col xl="4" xs="6">
