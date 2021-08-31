@@ -93,24 +93,6 @@ input {
   top: 35px;
 }
 @media (max-width: 1025px) {
-  .progressBar::before {
-    width: 400px;
-  }
-}
-@media (max-width: 904px) {
-  .progressBar::before {
-    width: 250px;
-  }
-  .progressBar::after {
-    content: "";
-    position: absolute;
-    width: 100px;
-    height: 2px;
-    background-color: #ccc;
-    top: 130px;
-  }
-}
-@media (max-width: 486px) {
   .progressBar {
     flex-direction: column;
   }
@@ -143,7 +125,6 @@ input {
 }
 .progressBarActive {
   background-color: #fe634e;
-  color: #ffdbd7;
 }
 
 /* Product delete button */
