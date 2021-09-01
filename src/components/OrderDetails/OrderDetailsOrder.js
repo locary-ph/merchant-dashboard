@@ -15,7 +15,7 @@ export default function OrderDetailsOrder(props) {
       const itemTotal = Number(item.product.price) * Number(item.quantity);
       return setTotalAmount((e) => (e + itemTotal).toFixed(2));
     });
-  }, []);
+  }, [order]);
 
   return (
     <>
