@@ -35,8 +35,6 @@ const OrderDetails = (props) => {
   };
   const dateTime = new DateFormat(order.createdAt);
 
-  console.log(order);
-
   return (
     <Container className="mt-5">
       <BackButton />
@@ -44,9 +42,10 @@ const OrderDetails = (props) => {
         <CardHeader className="bg-white border-0">
           <Row className="d-flex justify-content-between">
             <Col xs="9">
-              <h3 className="text-uppercase align-self-center">
+              <h6 className="text-uppercase text-light ls-1 mb-1">Summary</h6>
+              <h2 className="text-uppercase text-black mb-0">
                 Order #{order._id}
-              </h3>
+              </h2>
             </Col>
             <Col xs="3" className="d-flex">
               <Button
@@ -61,7 +60,7 @@ const OrderDetails = (props) => {
         <CardBody>
           <Container fluid>
             {/* Buyer Details */}
-            <h2>Buyer Details</h2>
+            <h1 className="mb-3">Buyer Details</h1>
             <div className="pl-4">
               <div className="d-sm-flex flex-wrap">
                 <h3 className="mb-0 mr-2">Name: </h3>
@@ -102,8 +101,8 @@ const OrderDetails = (props) => {
             </div>
             <hr />
             {/* Order Details */}
-            <div className="d-sm-flex flex-wrap justify-content-between">
-              <h2>Order Details</h2>
+            <div className="mb-3 d-sm-flex flex-wrap justify-content-between">
+              <h1>Order Details</h1>
               <h2>Total: Php {order.orderAmount}</h2>
             </div>
             {order.items.map((item) => {
@@ -159,7 +158,7 @@ const OrderDetails = (props) => {
             })}
             <hr />
             {/* Order Status */}
-            <h2>Order Status</h2>
+            <h1 className="mb-3">Order Status</h1>
             <ul className="progressBar pl-0">
               <li>
                 <div className="d-flex flex-column align-items-center">
