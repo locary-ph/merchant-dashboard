@@ -13,12 +13,27 @@ import {
   Button,
 } from "reactstrap";
 
+import DateFormat from "../../utils/dateFormat";
 import BackButton from "../../components/BackButton/BackButton";
 
 const OrderDetails = (props) => {
   /* eslint-disable react/destructuring-assignment */
   const { order } = props.location.state;
   const { buyer, deliveryAddress } = order;
+  const statusList = {
+    CANCELLED: 0,
+    PENDING: 2,
+    ACCEPTED: 3,
+    DISPATCHED: 4,
+    DELIVERED: 5,
+  };
+  const orderStatus = statusList[order.orderStatus];
+  const checkStatus = (statusNumber) => {
+    if (orderStatus > statusNumber)
+      return "progressBarNumber progressBarActive";
+    return "progressBarNumber";
+  };
+  const dateTime = new DateFormat(order.createdAt);
 
   return (
     <Container className="mt-5">
@@ -27,9 +42,10 @@ const OrderDetails = (props) => {
         <CardHeader className="bg-white border-0">
           <Row className="d-flex justify-content-between">
             <Col xs="9">
-              <h3 className="text-uppercase align-self-center">
+              <h6 className="text-uppercase text-light ls-1 mb-1">Summary</h6>
+              <h2 className="text-uppercase text-black mb-0">
                 Order #{order._id}
-              </h3>
+              </h2>
             </Col>
             <Col xs="3" className="d-flex">
               <Button
@@ -44,8 +60,8 @@ const OrderDetails = (props) => {
         <CardBody>
           <Container fluid>
             {/* Buyer Details */}
-            <h2>Buyer Details</h2>
-            <div>
+            <h1 className="mb-3">Buyer Details</h1>
+            <div className="pl-4">
               <div className="d-sm-flex flex-wrap">
                 <h3 className="mb-0 mr-2">Name: </h3>
                 <label>
@@ -85,57 +101,97 @@ const OrderDetails = (props) => {
             </div>
             <hr />
             {/* Order Details */}
-            <h2>Order Details</h2>
-            <div>
-              <div className="d-flex">
-                <img
-                  className="rounded"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1280px-Image_created_with_a_mobile_phone.png"
-                  style={{ maxHeight: "150px", maxWidth: "150px" }}
-                  alt="product"
-                />
-                <div className="align-self-center ml-2">
-                  <h3>Product:</h3>
-                  <label className="text-capitalize">
-                    {order.items[0].product.name}
-                  </label>
-                </div>
-              </div>
-              <Row>
-                <Col>
-                  <div className="d-sm-flex flex-wrap">
-                    <h3 className="mb-0 mr-2">Date: </h3>
-                    <label>
-                      {buyer.firstName} {buyer.lastName}
-                    </label>
-                  </div>
-                  <div className="d-sm-flex flex-wrap">
-                    <h3 className="mb-0 mr-2">Time: </h3>
-                    <label>{buyer.email}</label>
-                  </div>
-                  <div className="d-sm-flex flex-wrap">
-                    <h3 className="mb-0 mr-2">Total: </h3>
-                    <label>{order.orderAmount * order.quantity}</label>
-                  </div>
-                </Col>
-                <Col>
-                  <div className="d-sm-flex flex-wrap">
-                    <h3 className="mb-0 mr-2">Price: </h3>
-                    <label>{order.orderAmount}</label>
-                  </div>
-                  <div className="d-sm-flex flex-wrap">
-                    <h3 className="mb-0 mr-2">Quantity: </h3>
-                    <label>{order.quantity}</label>
-                  </div>
-                </Col>
-              </Row>
+            <div className="mb-3 d-sm-flex flex-wrap justify-content-between">
+              <h1>Order Details</h1>
+              <h2>Total: Php {order.orderAmount}</h2>
             </div>
+            {order.items.map((item) => {
+              const itemPrice = item.product.price.toFixed(2);
+              const itemQuantity = item.quantity;
+              const itemTotal = (itemPrice * itemQuantity).toFixed(2);
+              return (
+                <div className="pl-4 mb-5">
+                  <div className="d-flex flex-wrap">
+                    <img
+                      className="rounded mr-2"
+                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1280px-Image_created_with_a_mobile_phone.png"
+                      style={{ maxHeight: "150px", maxWidth: "150px" }}
+                      alt="product"
+                    />
+                    <div className="align-self-center">
+                      <h3 className="mb-0">Product:</h3>
+                      <label className="text-capitalize">
+                        {item.product.name}
+                      </label>
+                    </div>
+                  </div>
+                  <Row>
+                    <Col xl="4" xs="6">
+                      <div className="d-sm-flex flex-wrap">
+                        <h3 className="mb-0 mr-2">Date: </h3>
+                        <label>{dateTime.getDate()}</label>
+                      </div>
+                      <div className="d-sm-flex flex-wrap">
+                        <h3 className="mb-0 mr-2">Time: </h3>
+                        <label>{dateTime.getTime()}</label>
+                      </div>
+                    </Col>
+                    <Col xl="4" xs="6">
+                      <div className="d-sm-flex flex-wrap">
+                        <h3 className="mb-0 mr-2">Price: </h3>
+                        <label>Php {itemPrice}</label>
+                      </div>
+                      <div className="d-sm-flex flex-wrap">
+                        <h3 className="mb-0 mr-2">Quantity: </h3>
+                        <label>{itemQuantity}</label>
+                      </div>
+                    </Col>
+                    <Col xl="4" xs="6">
+                      <div className="d-sm-flex flex-wrap">
+                        <h3 className="mb-0 mr-2">Total: </h3>
+                        <label>Php {itemTotal}</label>
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
+              );
+            })}
             <hr />
-            <h2>Order Tracker</h2>
-            <Container>
-              <progress style={{ width: "100%" }} />
-            </Container>
-            <div className="d-flex justify-content-center">
+            {/* Order Status */}
+            <h1 className="mb-3">Order Status</h1>
+            <ul className="progressBar pl-0">
+              <li>
+                <div className="d-flex flex-column align-items-center">
+                  <div className={checkStatus(0)}>1</div>
+                  Order Placed
+                </div>
+              </li>
+              <li>
+                <div className="d-flex flex-column align-items-center">
+                  <div className={checkStatus(1)}>2</div>
+                  Pending
+                </div>
+              </li>
+              <li>
+                <div className="d-flex flex-column align-items-center">
+                  <div className={checkStatus(2)}>3</div>
+                  Accepted
+                </div>
+              </li>
+              <li>
+                <div className="d-flex flex-column align-items-center">
+                  <div className={checkStatus(3)}>4</div>
+                  Dispatched
+                </div>
+              </li>
+              <li>
+                <div className="d-flex flex-column align-items-center">
+                  <div className={checkStatus(4)}>5</div>
+                  Delivered
+                </div>
+              </li>
+            </ul>
+            <div className="d-flex justify-content-center mt-5">
               <Button className="theme-border theme-btn theme-active">
                 Confirm
               </Button>
