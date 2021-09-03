@@ -46,13 +46,10 @@ const OrderDetails = (props) => {
         </CardHeader>
         <CardBody>
           <Container fluid>
-            {/* Buyer Details */}
             <OrderDetailsBuyer order={order} />
             <hr />
-            {/* Order Details */}
             <OrderDetailsOrder order={order} />
             <hr />
-            {/* Order Status */}
             <OrderDetailsStatus order={order} />
             <div className="d-flex justify-content-center mt-5">
               <Button className="theme-border theme-btn theme-active">
