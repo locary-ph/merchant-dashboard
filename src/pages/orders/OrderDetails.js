@@ -14,9 +14,9 @@ import {
 } from "reactstrap";
 
 import BackButton from "../../components/BackButton/BackButton";
-import OrderDetailsOrder from "../../components/OrderDetails/OrderDetailsOrder";
-import OrderDetailsBuyer from "../../components/OrderDetails/OrderDetailsBuyer";
-import OrderDetailsStatus from "../../components/OrderDetails/OrderDetailsStatus";
+import OrderDetailsBuyer from "./OrderDetailsBuyer";
+import OrderDetailsOrder from "./OrderDetailsOrder";
+import OrderDetailsStatus from "./OrderDetailsStatus";
 
 const OrderDetails = (props) => {
   /* eslint-disable react/destructuring-assignment */
