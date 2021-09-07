@@ -97,10 +97,10 @@ input {
     flex-direction: column;
   }
   .progressBar::before {
-    width: 0px;
+    border: none;
   }
   .progressBar::after {
-    width: 0px;
+    border: none;
   }
 }
 .progressBar li {
@@ -125,6 +125,10 @@ input {
 }
 .progressBarActive {
   background-color: #fe634e;
+}
+
+.order-details-buyer-label {
+  width: 80px;
 }
 
 /* Product delete button */
