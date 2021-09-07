@@ -51,11 +51,13 @@ const OrderDetails = (props) => {
             <OrderDetailsOrder order={order} />
             <hr />
             <OrderDetailsStatus order={order} />
-            <div className="d-flex justify-content-center mt-5">
-              <Button className="theme-border theme-btn theme-active">
-                Confirm
-              </Button>
-            </div>
+            {order.orderStatus !== "CANCELLED" ? (
+              <div className="d-flex justify-content-center mt-5">
+                <Button className="theme-border theme-btn theme-active">
+                  Confirm
+                </Button>
+              </div>
+            ) : null}
           </Container>
         </CardBody>
       </Card>

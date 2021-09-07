@@ -22,7 +22,7 @@ export default function OrderDetailsStatus(props) {
   };
   return (
     <>
-      <div className="d-sm-flex align-items-center">
+      <div className="d-flex align-items-center">
         <h1>Order Status</h1>
         {orderStatus === 0 ? (
           <Badge color="danger" className="ml-4">
