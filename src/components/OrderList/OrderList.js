@@ -61,9 +61,9 @@ function OrderList({ filter }) {
             <td>
               {order.items.map((item) => (
                 <>
-                  <label className="my-0" style={{ display: "block" }}>
+                  <div className="my-0">
                     {item.product.name} (x{item.quantity})
-                  </label>
+                  </div>
                 </>
               ))}
             </td>
