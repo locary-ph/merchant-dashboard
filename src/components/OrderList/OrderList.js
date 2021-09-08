@@ -28,15 +28,7 @@ function OrderList({ filter }) {
     fetchData();
   }, []);
 
-  const headers = [
-    "Order ID",
-    "Date",
-    "Name",
-    "Item",
-    "Quantity",
-    "Status",
-    "Amount",
-  ];
+  const headers = ["Order ID", "Date", "Name", "Items", "Status", "Amount"];
 
   const badgeColor = {
     PENDING: "warning",
@@ -66,8 +58,15 @@ function OrderList({ filter }) {
             <td>
               {order.buyer.firstName} {order.buyer.lastName}
             </td>
-            <td>Rose Necklace</td>
-            <td>{order.quantity}</td>
+            <td>
+              {order.items.map((item) => (
+                <>
+                  <div className="my-0">
+                    {item.product.name} (x{item.quantity})
+                  </div>
+                </>
+              ))}
+            </td>
             <td>
               <Badge color={badgeColor[orderStatus]} className="mr-4">
                 {orderStatus}
