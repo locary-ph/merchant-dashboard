@@ -76,6 +76,19 @@ input {
   background-color: #fe634e;
 }
 
+/* ============= Orders Page ============= */
+.order-category-div {
+  display: flex;
+}
+.order-category-div button {
+  width: 100%;
+}
+@media (max-width: 1025px) {
+  .order-category-div {
+    flex-direction: column;
+  }
+}
+
 /* ============= Order Details ============= */
 .progressBar {
   display: flex;
