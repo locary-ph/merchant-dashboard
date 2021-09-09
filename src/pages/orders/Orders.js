@@ -8,7 +8,7 @@ import { Card, CardHeader, Container, Row, Col } from "reactstrap";
 import OrderList from "../../components/OrderList/OrderList";
 
 const Orders = () => {
-  const [orderStatusFilter, setOrderStatusFilter] = useState("all");
+  const [orderStatusFilter, setOrderStatusFilter] = useState("ALL");
 
   const checkStatus = (filter) => {
     if (filter === orderStatusFilter) {
