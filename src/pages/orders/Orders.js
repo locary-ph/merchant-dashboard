@@ -18,12 +18,12 @@ const Orders = () => {
   };
 
   const filters = [
-    "all",
-    "pending",
-    "accepted",
-    "dispatched",
-    "delivered",
-    "cancelled",
+    "ALL",
+    "PENDING",
+    "ACCEPTED",
+    "DISPATCHED",
+    "DELIVERED",
+    "CANCELLED",
   ];
 
   const buttonStyles = {
@@ -55,14 +55,14 @@ const Orders = () => {
                         style={buttonStyles}
                         onClick={() => setOrderStatusFilter(filter)} // optimize uppercase, change in order model
                       >
-                        {filter.toUpperCase()}
+                        {filter}
                       </button>
                     ))}
                   </div>
                 </Col>
               </Row>
             </CardHeader>
-            <OrderList filter={orderStatusFilter} />
+            <OrderList filter={orderStatusFilter.toLowerCase()} />
           </Card>
         </div>
       </Row>
