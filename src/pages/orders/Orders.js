@@ -19,11 +19,11 @@ const Orders = () => {
 
   const filters = [
     "all",
-    "PENDING",
-    "ACCEPTED",
-    "DISPATCHED",
-    "DELIVERED",
-    "CANCELLED",
+    "pending",
+    "accepted",
+    "dispatched",
+    "delivered",
+    "cancelled",
   ];
 
   const buttonStyles = {
