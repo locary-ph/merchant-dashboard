@@ -9,7 +9,6 @@ import OrderList from "../../components/OrderList/OrderList";
 
 const Orders = () => {
   const [orderStatusFilter, setOrderStatusFilter] = useState("all");
-  const [showFilter, setShowFilter] = useState(false);
 
   const checkStatus = (filter) => {
     if (filter === orderStatusFilter) {
