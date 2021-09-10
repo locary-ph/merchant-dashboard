@@ -169,7 +169,9 @@ const ProductDetails = (props) => {
                           required
                         />
                         {productName === "" ? (
-                          <FormFeedback>Product name required!</FormFeedback>
+                          <FormFeedback>
+                            Please provide a product name
+                          </FormFeedback>
                         ) : null}
                       </FormGroup>
                     </Col>
