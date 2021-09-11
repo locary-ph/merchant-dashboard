@@ -3,7 +3,7 @@
  */
 import React from "react";
 import PropTypes from "prop-types";
-import { Row, Col, Input, Button, FormText } from "reactstrap";
+import { Row, Col, Input, Button } from "reactstrap";
 
 const propTypes = {
   setImageFile: PropTypes.func.isRequired,
@@ -42,6 +42,7 @@ function ImageInput({ setImageFile, imageUrl, imageFile }) {
       </Col>
       <Col>
         <Button
+          className="mt-1"
           style={{ borderRadius: 15, padding: 0 }}
           color="warning"
           outline
@@ -65,9 +66,6 @@ function ImageInput({ setImageFile, imageUrl, imageFile }) {
           onChange={(e) => setImageFile(e.target.files[0])}
           accept="image/*"
         />
-        <FormText>
-          Put text here about what type of image should be uploaded
-        </FormText>
       </Col>
     </Row>
   );
