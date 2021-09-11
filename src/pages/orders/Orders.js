@@ -1,46 +1,35 @@
+/**
+ * @format
+ */
+
 import React, { useState } from "react";
-import {
-  Card,
-  CardHeader,
-  Container,
-  Row,
-} from "reactstrap";
+import { Card, CardHeader, Container, Row, Col } from "reactstrap";
 
 import OrderList from "../../components/OrderList/OrderList";
 
 const Orders = () => {
-  const [orderStatusFilter, setOrderStatusFilter] = useState("all");
+  const [orderStatusFilter, setOrderStatusFilter] = useState("ALL");
 
-  const handleClick = (e) => {
-    const {target} = e;
-    const btns = target.parentNode.childNodes;
-    const status = target.textContent.toLowerCase();
-    setOrderStatusFilter(status);
+  const checkStatus = (filter) => {
+    if (filter === orderStatusFilter) {
+      return "btn btn-warning btn-sm";
+    }
+    return "btn btn-outline-warning btn-sm hidden";
+  };
 
-    btns.forEach(btn => {
-      if (btn.classList.contains("btn-warning")) {
-        btn.classList.remove("btn-warning");
-        btn.classList.add("btn-outline-warning");
-      }
-    })
-
-    if (target.classList.contains("btn-outline-warning")){
-      target.classList.remove("btn-outline-warning");
-      target.classList.add("btn-warning");
-    } 
-  }
-
-  const status = [
+  const filters = [
+    "ALL",
     "PENDING",
     "ACCEPTED",
     "DISPATCHED",
     "DELIVERED",
-    "CANCELLED"
+    "CANCELLED",
   ];
 
   const buttonStyles = {
     borderRadius: 10,
-    fontSize: "0.65rem"
+    fontSize: "0.65rem",
+    margin: "auto 5px",
   };
 
   return (
@@ -51,41 +40,34 @@ const Orders = () => {
           <Card className="shadow">
             <CardHeader className="bg-transparent">
               <Row className="align-items-center">
-                <div className="col">
+                <Col>
                   <h6 className="text-uppercase text-light ls-1 mb-1">
                     Shop Name
                   </h6>
                   <h2 className="text-black mb-0">Manage Orders</h2>
-                </div>
-
-                <div className="col">
-                  <button
-                    className="btn btn-warning btn-sm"
-                    type="button"
-                    style={buttonStyles}
-                    onClick={handleClick}
-                  >
-                    ALL
-                  </button>
-                  {status.map(stat => (
-                    <button
-                      className="btn btn-outline-warning btn-sm"
-                      type="button"
-                      style={buttonStyles}
-                      onClick={handleClick} // optimize uppercase, change in order model
-                    >
-                      {stat}
-                    </button>
-                  ))}
-                </div>
+                </Col>
+                <Col>
+                  <div className="order-category-div">
+                    {filters.map((filter) => (
+                      <button
+                        className={checkStatus(filter)}
+                        type="button"
+                        style={buttonStyles}
+                        onClick={() => setOrderStatusFilter(filter)} // optimize uppercase, change in order model
+                      >
+                        {filter}
+                      </button>
+                    ))}
+                  </div>
+                </Col>
               </Row>
             </CardHeader>
-            <OrderList filter={orderStatusFilter}/>
+            <OrderList filter={orderStatusFilter.toLowerCase()} />
           </Card>
         </div>
       </Row>
     </Container>
-  )
+  );
 };
 
 export default Orders;
