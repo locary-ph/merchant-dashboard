@@ -47,7 +47,7 @@ function OrderList({ filter }) {
         .toUpperCase();
       let numberID = 1;
       if (orderMap[letterID] !== undefined)
-        orderMap[letterID] = orderMap[letterID] + 1;
+        orderMap[letterID] += 1;
       else orderMap[letterID] = numberID;
       numberID = `00${orderMap[letterID]}`.substring(0, 3);
 
