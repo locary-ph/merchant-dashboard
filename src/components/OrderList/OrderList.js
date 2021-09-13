@@ -30,8 +30,8 @@ function OrderList({ filter }) {
           numberID = `00${orderMap[letterID]}`.substring(0, 3);
           data[index].simplifiedID = `${letterID}${numberID}`;
         });
-        console.log(data)
-        data.reverse()
+        console.log(data);
+        data.reverse();
         setOrders(data);
       } catch (e) {
         console.error(e);
