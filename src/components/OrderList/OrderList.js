@@ -50,7 +50,7 @@ function OrderList({ filter }) {
         orderMap[letterID] = orderMap[letterID] + 1;
       else orderMap[letterID] = numberID;
       numberID = `00${orderMap[letterID]}`.substring(0, 3);
-      
+
       if (filter === "all" || filter === orderStatus.toLowerCase()) {
         return (
           <tr>
