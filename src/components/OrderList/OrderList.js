@@ -38,9 +38,19 @@ function OrderList({ filter }) {
     CANCELLED: "danger",
   };
 
-  const displayOrders = () =>
-    orders.map((order) => {
+  const displayOrders = () => {
+    const orderMap = {};
+    return orders.map((order) => {
       const { orderStatus } = order;
+      const letterID = `${order.buyer.firstName}${order.buyer.lastName}`
+        .substring(0, 3)
+        .toUpperCase();
+      let numberID = 1;
+      if (orderMap[letterID] !== undefined)
+        orderMap[letterID] = orderMap[letterID] + 1;
+      else orderMap[letterID] = numberID;
+      numberID = `00${orderMap[letterID]}`.substring(0, 3);
+      
       if (filter === "all" || filter === orderStatus.toLowerCase()) {
         return (
           <tr>
@@ -51,7 +61,10 @@ function OrderList({ filter }) {
                   state: { order },
                 }}
               >
-                <span className="mb-0 text-sm">{order._id}</span>
+                <span className="mb-0 text-sm">
+                  {letterID}
+                  {numberID}
+                </span>
               </Link>
             </th>
             <td>{new Date(order.createdAt).toLocaleDateString("en-US")}</td>
@@ -80,6 +93,7 @@ function OrderList({ filter }) {
       }
       return null;
     });
+  };
 
   return (
     <Table className="align-items-center table-flush" responsive>
