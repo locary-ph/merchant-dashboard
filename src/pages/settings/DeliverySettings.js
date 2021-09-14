@@ -16,6 +16,7 @@ import {
 } from "reactstrap";
 
 import LocationInput from "./LocationInput";
+import toastify from "../../utils/toastify";
 
 function DeliverySettings() {
   const [address, setAddress] = useState("");
@@ -44,6 +45,17 @@ function DeliverySettings() {
     setInputList([...inputList, { location: "", fee: "" }]);
   };
 
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      toastify(4000, "success", "top-right", "Delivery Settings saved!");
+    } catch (err) {
+      console.error(err);
+      toastify(4000, "error", "top-right", err.response.data.message);
+    }
+  };
+
   return (
     <>
       <Col>
@@ -56,7 +68,7 @@ function DeliverySettings() {
             </Row>
           </CardHeader>
           <CardBody className="bg-secondary px-lg-6">
-            <Form>
+            <Form onSubmit={handleFormSubmit}>
               <div className="inputGroup mb-4">
                 <h2 className="mb-1">Delivery</h2>
                 <h5 className="text-muted mb-4">
@@ -109,6 +121,7 @@ function DeliverySettings() {
                           Pickup address
                         </label>
                         <Input
+                          required
                           className="form-control-alternative"
                           id="pickupAddress"
                           type="text"

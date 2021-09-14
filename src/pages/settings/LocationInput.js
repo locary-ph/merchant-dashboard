@@ -33,6 +33,7 @@ function LocationInput(props) {
             Location
           </label>
           <Input
+            required
             className="form-control-alternative"
             id="location"
             placeholder="Manila"
@@ -55,6 +56,7 @@ function LocationInput(props) {
               <InputGroupText>Php</InputGroupText>
             </InputGroupAddon>
             <Input
+              required
               className="form-control-alternative"
               id="fee"
               type="number"

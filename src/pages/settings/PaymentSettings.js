@@ -15,7 +15,7 @@ import {
   Form,
   FormGroup,
 } from "reactstrap";
-
+import toastify from "../../utils/toastify";
 import LoginContext from "../../contexts/LoginContext";
 import { instance as axios, getUserToken } from "../../axios";
 
@@ -104,8 +104,10 @@ function PaymentSettings() {
 
     try {
       await axios.post("/merchants/paymentMethod", data, config);
+      toastify(4000, "success", "top-right", "Payment Settings saved!");
     } catch (err) {
       console.error(err);
+      toastify(4000, "error", "top-right", err.response.data.message);
     }
   };
 
@@ -138,6 +140,7 @@ function PaymentSettings() {
                           Bank Name
                         </label>
                         <Input
+                          required
                           className="form-control-alternative"
                           id="bankName"
                           placeholder="Bank of the Philippine Islands"
@@ -156,6 +159,7 @@ function PaymentSettings() {
                           Account number
                         </label>
                         <Input
+                          required
                           className="form-control-alternative"
                           id="accountNumber"
                           type="number"
@@ -175,6 +179,7 @@ function PaymentSettings() {
                           Account Name
                         </label>
                         <Input
+                          required
                           className="form-control-alternative"
                           id="accountName"
                           type="text"
@@ -194,6 +199,7 @@ function PaymentSettings() {
                           Payment instructions
                         </label>
                         <Input
+                          required
                           className="form-control-alternative"
                           id="paymentInstructions"
                           type="text"
@@ -222,6 +228,7 @@ function PaymentSettings() {
                           Select e-wallet
                         </label>
                         <Input
+                          required
                           className="form-control-alternative"
                           id="walletName"
                           placeholder="Gcash"
@@ -240,6 +247,7 @@ function PaymentSettings() {
                           Account number
                         </label>
                         <Input
+                          required
                           className="form-control-alternative"
                           id="accountNumber"
                           type="number"
@@ -259,6 +267,7 @@ function PaymentSettings() {
                           Account Name
                         </label>
                         <Input
+                          required
                           className="form-control-alternative"
                           id="accountName"
                           type="text"
@@ -285,6 +294,7 @@ function PaymentSettings() {
                           Payment instructions
                         </label>
                         <Input
+                          required
                           className="form-control-alternative"
                           id="cop"
                           type="text"
@@ -311,6 +321,7 @@ function PaymentSettings() {
                           Payment instructions
                         </label>
                         <Input
+                          required
                           className="form-control-alternative"
                           id="cod"
                           type="text"

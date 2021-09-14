@@ -93,6 +93,7 @@ function ShopSettings() {
                       Shop Name
                     </label>
                     <Input
+                      required
                       className="form-control-alternative"
                       id="input-shop-name"
                       type="text"
@@ -108,6 +109,7 @@ function ShopSettings() {
                       Shop Link
                     </label>
                     <Input
+                      required
                       className="form-control-alternative"
                       id="input-shop-link"
                       type="text"
@@ -123,6 +125,7 @@ function ShopSettings() {
                       Shop Description
                     </label>
                     <Input
+                      required
                       className="form-control-alternative"
                       id="input-description"
                       type="text"
@@ -144,6 +147,7 @@ function ShopSettings() {
                           </label>
                           <InputGroup>
                             <Input
+                              required
                               className="form-control-alternative input-lg"
                               id="input-FAQs-question"
                               name="question"
@@ -167,6 +171,7 @@ function ShopSettings() {
                             Answer
                           </label>
                           <Input
+                            required
                             className="form-control-alternative"
                             id="input-FAQs-answer"
                             name="answer"
