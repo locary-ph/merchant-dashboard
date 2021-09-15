@@ -7,7 +7,6 @@ import { Button, Card, CardHeader, Container, Row, Col } from "reactstrap";
 import OrderList from "../../components/OrderList/OrderList";
 import Inventory from "./Inventory";
 import Performance from "./Performance";
-import toastify from "../../utils/toastify";
 
 import LoginContext from "../../contexts/LoginContext";
 
@@ -31,8 +30,7 @@ const Home = () => {
   console.log(user);
   const copyShopLink = () => {
     const shopLink = `https://locary.ph/${user.shopUrl}`;
-    navigator.clipboard.writeText(shopLink);
-    toastify(4000, "success", "top-right", "Copied Shop URL");
+    window.open(shopLink);
   };
 
   return (
