@@ -38,7 +38,7 @@ const Home = () => {
 
   console.log(user);
   const copyShopLink = () => {
-    const shopLink = `https://locary.ph/${user.shopUrl}`;
+    const shopLink = `https://shop.locary.ph/${user.shopUrl}`;
     navigator.clipboard.writeText(shopLink);
     toastify(4000, "success", "top-right", "Copied Shop Link!");
   };
@@ -55,7 +55,9 @@ const Home = () => {
                 color="warning"
                 outline
                 type="button"
-                onClick={() => window.open(`https://locary.ph/${user.shopUrl}`)}
+                onClick={() =>
+                  window.open(`https://shop.locary.ph/${user.shopUrl}`)
+                }
               >
                 Shop Link
               </Button>
