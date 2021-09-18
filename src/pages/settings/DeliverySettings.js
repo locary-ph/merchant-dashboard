@@ -72,8 +72,7 @@ function DeliverySettings() {
               <div className="inputGroup mb-4">
                 <h2 className="mb-1">Delivery</h2>
                 <h5 className="text-muted mb-4">
-                  Choose locations you can cater and their corresponding
-                  shipping fees
+                  Add delivery options and set a price for each one.
                 </h5>
                 <div>
                   <Row>
@@ -106,8 +105,7 @@ function DeliverySettings() {
               <div className="mb-4">
                 <h2 className="mb-1">Pick-up</h2>
                 <h5 className="text-muted mb-4">
-                  Only applies if your customers choose Cash on Pickup at
-                  checkout.
+                  Add delivery options and set a price for each one.
                 </h5>
 
                 <div>

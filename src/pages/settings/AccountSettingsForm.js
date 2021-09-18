@@ -67,7 +67,7 @@ function AccountSettingsForm({ shopLogo }) {
                 required
                 className="form-control-alternative"
                 id="firstName"
-                placeholder="John"
+                placeholder="Juan"
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -83,7 +83,7 @@ function AccountSettingsForm({ shopLogo }) {
                 required
                 className="form-control-alternative"
                 id="lastName"
-                placeholder="Doe"
+                placeholder="Dela Cruz"
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -100,6 +100,7 @@ function AccountSettingsForm({ shopLogo }) {
               <Input
                 required
                 className="form-control-alternative"
+                placeholder="example@example.com"
                 id="input-email"
                 type="email"
                 value={email}
@@ -116,9 +117,10 @@ function AccountSettingsForm({ shopLogo }) {
               </label>
               <Input
                 required
-                className="form-control-alternative"
+                className="form-control-alternative no-arrows"
+                placeholder="09XXXXXXXXX"
                 id="mobile-number"
-                type="text"
+                type="number"
                 value={mobileNumber}
                 onChange={(e) => setMobileNumber(e.target.value)}
               />

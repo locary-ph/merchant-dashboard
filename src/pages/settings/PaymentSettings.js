@@ -160,7 +160,7 @@ function PaymentSettings() {
                         </label>
                         <Input
                           required
-                          className="form-control-alternative"
+                          className="form-control-alternative no-arrows"
                           id="accountNumber"
                           type="number"
                           value={bankAccNumber}
@@ -181,6 +181,7 @@ function PaymentSettings() {
                         <Input
                           required
                           className="form-control-alternative"
+                          placeholder="Juan Dela Cruz"
                           id="accountName"
                           type="text"
                           value={bankAccName}
@@ -213,9 +214,9 @@ function PaymentSettings() {
               </div>
 
               <div className="inputGroup mb-4">
-                <h2 className="mb-1">E-Wallet</h2>
+                <h2 className="mb-1">eWallet</h2>
                 <h5 className="text-muted mb-4">
-                  Receive payment via an E-wallet
+                  Receive payment via an eWallet
                 </h5>
                 <div className="pl-lg-4">
                   <Row>
@@ -225,7 +226,7 @@ function PaymentSettings() {
                           className="form-control-label"
                           htmlFor="walletName"
                         >
-                          Select e-wallet
+                          Select eWallet
                         </label>
                         <Input
                           required
@@ -248,7 +249,7 @@ function PaymentSettings() {
                         </label>
                         <Input
                           required
-                          className="form-control-alternative"
+                          className="form-control-alternative no-arrows"
                           id="accountNumber"
                           type="number"
                           value={ewalletNumber}
@@ -270,6 +271,7 @@ function PaymentSettings() {
                           required
                           className="form-control-alternative"
                           id="accountName"
+                          placeholder="Juan Dela Cruz"
                           type="text"
                           value={ewalletName}
                           onChange={(e) => setEwalletName(e.target.value)}

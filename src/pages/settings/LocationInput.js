@@ -57,9 +57,10 @@ function LocationInput(props) {
             </InputGroupAddon>
             <Input
               required
-              className="form-control-alternative"
+              className="form-control-alternative no-arrows"
               id="fee"
               type="number"
+              placeholder="50.00"
               value={fee}
               onChange={(e) => handleInputChange(e, index)}
             />
