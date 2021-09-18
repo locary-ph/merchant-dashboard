@@ -19,6 +19,19 @@ function OrderList({ filter }) {
             Authorization: `Bearer ${getUserToken()}`,
           },
         });
+        const orderMap = {};
+        data.forEach((order, index) => {
+          const letterID = `${order.buyer.firstName}${order.buyer.lastName}`
+            .substring(0, 3)
+            .toUpperCase();
+          let numberID = 1;
+          if (orderMap[letterID] !== undefined) orderMap[letterID] += 1;
+          else orderMap[letterID] = numberID;
+          numberID = `00${orderMap[letterID]}`.substring(0, 3);
+          data[index].simplifiedID = `${letterID}${numberID}`;
+        });
+        console.log(data);
+        data.reverse();
         setOrders(data);
       } catch (e) {
         console.error(e);
@@ -51,7 +64,7 @@ function OrderList({ filter }) {
                   state: { order },
                 }}
               >
-                <span className="mb-0 text-sm">{order._id}</span>
+                <span className="mb-0 text-sm">{order.simplifiedID}</span>
               </Link>
             </th>
             <td>{new Date(order.createdAt).toLocaleDateString("en-US")}</td>
