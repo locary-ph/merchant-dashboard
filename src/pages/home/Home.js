@@ -2,13 +2,22 @@
  * @format
  */
 import React, { useContext } from "react";
-import { Button, Card, CardHeader, Container, Row, Col } from "reactstrap";
+import {
+  Button,
+  Card,
+  CardHeader,
+  Container,
+  Row,
+  Col,
+  ButtonGroup,
+} from "reactstrap";
 
 import OrderList from "../../components/OrderList/OrderList";
 import Inventory from "./Inventory";
 import Performance from "./Performance";
 
 import LoginContext from "../../contexts/LoginContext";
+import toastify from "../../utils/toastify";
 
 const RecentOrders = () => (
   <Card className="shadow">
@@ -27,6 +36,13 @@ const RecentOrders = () => (
 const Home = () => {
   const { user } = useContext(LoginContext);
 
+  console.log(user);
+  const copyShopLink = () => {
+    const shopLink = `https://shop.locary.ph/${user.shopUrl}`;
+    navigator.clipboard.writeText(shopLink);
+    toastify(4000, "success", "top-right", "Copied Shop Link!");
+  };
+
   return (
     <>
       {/* Page content */}
@@ -34,9 +50,26 @@ const Home = () => {
         <Row>
           <Col className="d-flex align-items-center justify-content-between mb-3 col-xl px-5">
             <h1 className="text-orange">Hello, {user.firstName}</h1>
-            <Button color="warning" outline type="button">
-              Shop Link
-            </Button>
+            <ButtonGroup>
+              <Button
+                color="warning"
+                outline
+                type="button"
+                onClick={() =>
+                  window.open(`https://shop.locary.ph/${user.shopUrl}`)
+                }
+              >
+                Shop Link
+              </Button>
+              <Button
+                color="warning"
+                outline
+                type="button"
+                onClick={() => copyShopLink()}
+              >
+                <i className="far fa-clipboard" />
+              </Button>
+            </ButtonGroup>
           </Col>
         </Row>
         <Row>
