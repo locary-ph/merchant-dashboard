@@ -7,8 +7,8 @@ import toastify from "../../utils/toastify";
 
 const AdminNavbar = ({ brandText, cachedData, setCachedData }) => {
   const update = () => {
-    setCachedData("hello");
-    toastify(4000, "success", "top-right", "Dashboard is now updated!");
+    setCachedData("Updated!");
+    toastify(4000, "success", "top-right", cachedData);
   };
   return (
     <Navbar
@@ -18,7 +18,7 @@ const AdminNavbar = ({ brandText, cachedData, setCachedData }) => {
     >
       <Container fluid className="d-flex justify-content-between">
         <span className="h4 mb-0 text-black text-uppercase d-inline-block">
-          {brandText} {cachedData}
+          {brandText}
         </span>
         <Button type="button" onClick={() => update()}>
           <i className="fas fa-sync-alt" />
