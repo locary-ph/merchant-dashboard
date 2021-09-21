@@ -2,7 +2,7 @@
  * @format
  */
 
-import React from "react";
+import React, { useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 // reactstrap components
 import { Container } from "reactstrap";
@@ -23,6 +23,8 @@ const Admin = (props) => {
   const { location } = props;
 
   const mainContent = React.useRef(null);
+
+  const [cachedData, setCachedData] = useState("sad");
 
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -55,7 +57,12 @@ const Admin = (props) => {
         style={{ backgroundColor: "#F4F6FA" }}
         ref={mainContent}
       >
-        <Navbar {...props} brandText={getBrandText(location.pathname)} />
+        <Navbar
+          {...props}
+          brandText={getBrandText(location.pathname)}
+          cachedData={cachedData}
+          setCachedData={setCachedData}
+        />
         <Switch>
           {/* eslint-disable react/no-array-index-key */}
           {routes.map((prop, key) => {
