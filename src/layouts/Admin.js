@@ -24,7 +24,7 @@ const Admin = (props) => {
 
   const mainContent = React.useRef(null);
 
-  const [cachedData, setCachedData] = useState("sad");
+  const [cachedData, setCachedData] = useState("Updated!");
 
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
