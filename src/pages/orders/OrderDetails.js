@@ -33,7 +33,7 @@ const OrderDetails = (props) => {
         },
       };
       const data = { orderID };
-      await axios.post("/order/confirm", data, config);
+      await axios.post("/orders/confirm", data, config);
       toastify(4000, "success", "top-right", "Order Confirmed!");
     } catch (err) {
       console.error(err);
