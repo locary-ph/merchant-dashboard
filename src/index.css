@@ -113,9 +113,11 @@ input {
   }
   .progressBar::before {
     border: none;
+    width: 0px;
   }
   .progressBar::after {
     border: none;
+    width: 0px;
   }
 }
 .progressBar li {
@@ -143,11 +145,21 @@ input {
 }
 
 .order-details-buyer-label {
-  width: 80px;
+  width: 200px;
+}
+
+.order-details-items {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  max-width: 600px;
+}
+.order-details-items-label {
+  width: 40%;
+  text-align: center;
 }
 
 /* Product delete button */
-
 button.close {
   position: absolute;
   width: 20px;

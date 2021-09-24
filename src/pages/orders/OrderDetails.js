@@ -42,7 +42,7 @@ const OrderDetails = (props) => {
   };
 
   return (
-    <Container className="mt-5">
+    <Container fluid className="mt-5">
       <BackButton />
       <Card className="bg-secondary shadow">
         <CardHeader className="bg-white border-0">
@@ -50,7 +50,7 @@ const OrderDetails = (props) => {
             <Col xs="9">
               <h6 className="text-uppercase text-light ls-1 mb-1">Summary</h6>
               <h2 className="text-uppercase text-black mb-0">
-                Order #{order._id}
+                Order #{order.simplifiedID}
               </h2>
             </Col>
             <Col xs="3" className="d-flex">
@@ -70,13 +70,16 @@ const OrderDetails = (props) => {
             <OrderDetailsOrder order={order} />
             <hr />
             <OrderDetailsStatus order={order} />
-            {order.orderStatus !== "CANCELLED" ? (
+            {order.orderStatus === "PENDING" ? (
               <div className="d-flex justify-content-center mt-5">
+                <Button className="theme-border theme-btn theme-active">
+                  Reject
+                </Button>
                 <Button
                   className="theme-border theme-btn theme-active"
                   onClick={() => handleConfirm(order._id)}
                 >
-                  Confirm
+                  Accept
                 </Button>
               </div>
             ) : null}
