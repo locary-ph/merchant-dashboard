@@ -51,6 +51,9 @@ input {
   margin: 0;
   -moz-appearance: textfield;
 }
+.no-arrows {
+  -moz-appearance: textfield;
+}
 
 /* Nav */
 .active-link {
