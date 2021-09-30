@@ -17,6 +17,7 @@ import {
   InputGroupAddon,
   InputGroupText,
 } from "reactstrap";
+import { useHistory } from "react-router-dom";
 
 import { instance as axios, getUserToken } from "../../axios";
 import toastify from "../../utils/toastify";
@@ -24,6 +25,7 @@ import toastify from "../../utils/toastify";
 import LoginContext from "../../contexts/LoginContext";
 
 function ShopSettings() {
+  const history = useHistory();
   const { user, setUser } = useContext(LoginContext);
 
   const [shopName, setShopName] = useState(user.shopName);
@@ -206,7 +208,12 @@ function ShopSettings() {
                   <Button className="theme-btn theme-border theme-active">
                     Save
                   </Button>
-                  <Button className="theme-btn theme-border">Cancel</Button>
+                  <Button
+                    className="theme-btn theme-border"
+                    onClick={() => history.push("/admin")}
+                  >
+                    Cancel
+                  </Button>
                 </Row>
               </div>
               <hr className="my-4" />

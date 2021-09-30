@@ -15,11 +15,13 @@ import {
   Form,
   FormGroup,
 } from "reactstrap";
+import { useHistory } from "react-router-dom";
 import toastify from "../../utils/toastify";
 import LoginContext from "../../contexts/LoginContext";
 import { instance as axios, getUserToken } from "../../axios";
 
 function PaymentSettings() {
+  const history = useHistory();
   const { user } = useContext(LoginContext);
   const [getBankInfo, setBankInfo] = useSynchronousState({});
   const [getWalletInfo, setWalletInfo] = useSynchronousState({});
@@ -340,7 +342,12 @@ function PaymentSettings() {
                 <Button className="theme-btn theme-border theme-active">
                   Save
                 </Button>
-                <Button className="theme-btn theme-border">Cancel</Button>
+                <Button
+                  className="theme-btn theme-border"
+                  onClick={() => history.push("/admin")}
+                >
+                  Cancel
+                </Button>
               </div>
             </Form>
           </CardBody>

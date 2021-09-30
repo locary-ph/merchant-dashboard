@@ -14,11 +14,13 @@ import {
   Form,
   FormGroup,
 } from "reactstrap";
+import { useHistory } from "react-router-dom";
 
 import LocationInput from "./LocationInput";
 import toastify from "../../utils/toastify";
 
 function DeliverySettings() {
+  const history = useHistory();
   const [address, setAddress] = useState("");
   const [inputList, setInputList] = useState([
     { location: "", fee: "" },
@@ -135,7 +137,12 @@ function DeliverySettings() {
                 <Button className="theme-btn theme-border theme-active">
                   Save
                 </Button>
-                <Button className="theme-btn theme-border">Cancel</Button>
+                <Button
+                  className="theme-btn theme-border"
+                  onClick={() => history.push("/admin")}
+                >
+                  Cancel
+                </Button>
               </Row>
             </Form>
           </CardBody>
