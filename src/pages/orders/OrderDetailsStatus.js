@@ -3,67 +3,59 @@
  */
 
 import React from "react";
-import { Badge } from "reactstrap";
+import {
+  UncontrolledDropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+} from "reactstrap";
 
 export default function OrderDetailsStatus(props) {
   const { order } = props;
   const statusList = {
-    CANCELLED: 0,
-    PENDING: 2,
-    ACCEPTED: 3,
-    DISPATCHED: 4,
-    DELIVERED: 5,
+    cashless: [
+      "UNPAID",
+      "PAID",
+      "TO DELIVER",
+      "ON THE WAY",
+      "DELIVERED",
+      "CANCELLED",
+    ],
+    cashlessIcons: [
+      "fas fa-solid fa-circle order-details-color-red mr-2 ",
+      "fas fa-solid fa-money-bill-wave mr-2 ",
+      "fas fa-solid fa-box mr-2 ",
+      "fas fa-solid fa-truck mr-2 ",
+      "fas fa-solid fa-check mr-2 ",
+      "fas fas fa-solid fa-ban order-details-color-red mr-2 ",
+    ],
+    cash: ["PENDING APPROVAL", "APPROVED", "REJECT", "DELIVERED", "CANCELLED"],
+    cashIcons: [
+      "na",
+      "na",
+      "na",
+      "fas fa-solid fa-check mr-2 ",
+      "fas fa-solid fa-ban order-details-color-red mr-2 ",
+    ],
   };
-  const orderStatus = statusList[order.orderStatus];
-  const checkStatus = (statusNumber) => {
-    if (orderStatus > statusNumber)
-      return "progressBarNumber progressBarActive";
-    return "progressBarNumber";
-  };
+  const currentStatusIcon =
+    statusList["cashless" + "Icons"][
+      statusList["cashless"].indexOf(order.orderStatus)
+    ];
+  console.log(currentStatusIcon);
   return (
-    <>
-      <div className="d-flex align-items-center">
-        <h1>Order Status</h1>
-        {orderStatus === 0 ? (
-          <Badge color="danger" className="ml-4">
-            CANCELLED
-          </Badge>
-        ) : null}
-      </div>
-      {orderStatus > 0 ? (
-        <ul className="progressBar pl-0">
-          <li>
-            <div className="d-flex flex-column align-items-center">
-              <div className={checkStatus(0)}>1</div>
-              Order Placed
-            </div>
-          </li>
-          <li>
-            <div className="d-flex flex-column align-items-center">
-              <div className={checkStatus(1)}>2</div>
-              Pending
-            </div>
-          </li>
-          <li>
-            <div className="d-flex flex-column align-items-center">
-              <div className={checkStatus(2)}>3</div>
-              Accepted
-            </div>
-          </li>
-          <li>
-            <div className="d-flex flex-column align-items-center">
-              <div className={checkStatus(3)}>4</div>
-              Dispatched
-            </div>
-          </li>
-          <li>
-            <div className="d-flex flex-column align-items-center">
-              <div className={checkStatus(4)}>5</div>
-              Delivered
-            </div>
-          </li>
-        </ul>
-      ) : null}
-    </>
+    <UncontrolledDropdown className="order-details-status">
+      <DropdownToggle caret className="text-capitalize order-details-button">
+        <i className={currentStatusIcon} />
+        {order.orderStatus.toLowerCase()}
+      </DropdownToggle>
+      <DropdownMenu right>
+        {statusList["cash"].map((status) => (
+          <DropdownItem className="text-capitalize">
+            {status.toLowerCase()}
+          </DropdownItem>
+        ))}
+      </DropdownMenu>
+    </UncontrolledDropdown>
   );
 }

@@ -102,62 +102,9 @@ input {
 }
 
 /* ============= Order Details ============= */
-.progressBar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  position: relative;
-}
-.progressBar::before {
-  content: "";
-  position: absolute;
-  width: 450px;
-  height: 2px;
-  border: dotted 1px #ccc;
-  top: 35px;
-}
-@media (max-width: 1025px) {
-  .progressBar {
-    flex-direction: column;
-  }
-  .progressBar::before {
-    border: none;
-    width: 0px;
-  }
-  .progressBar::after {
-    border: none;
-    width: 0px;
-  }
-}
-.progressBar li {
-  list-style-type: none;
-  margin: 10px 10px;
-  width: 100px;
-  color: black;
-  font-weight: 500;
-}
-.progressBarNumber {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #ffe0dc;
-  color: white;
-  font-size: 1.3rem;
-  z-index: 1;
-  margin-bottom: 10px;
-}
-.progressBarActive {
-  background-color: #fe634e;
-}
-
 .order-details-buyer-label {
   width: 200px;
 }
-
 .order-details-items {
   display: flex;
   justify-content: space-between;
@@ -167,6 +114,27 @@ input {
 .order-details-items-label {
   width: 40%;
   text-align: center;
+}
+.order-details-button {
+  border: none;
+  border-radius: 500px;
+  background-color: #ffdcd8;
+}
+.order-details-button:hover {
+  border-radius: 500px;
+  background-color: #fe634e;
+}
+.order-details-status {
+  margin-left: auto;
+  margin-right: 0px;
+}
+@media (max-width: 768px) {
+  .order-details-status {
+    margin-left: 0px;
+  }
+}
+.order-details-color-red {
+  color: red;
 }
 
 /* Product delete button */
