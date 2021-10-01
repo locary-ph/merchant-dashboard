@@ -5,6 +5,7 @@
 import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { Row, Col, Button, Form, FormGroup, Input } from "reactstrap";
+import { useHistory } from "react-router-dom";
 
 import { instance as axios, getUserToken } from "../../axios";
 import toastify from "../../utils/toastify";
@@ -17,7 +18,7 @@ const propTypes = {
 
 function AccountSettingsForm({ shopLogo }) {
   const { user, setUser } = useContext(LoginContext);
-
+  const history = useHistory();
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [email, setEmail] = useState(user.email);
@@ -67,7 +68,7 @@ function AccountSettingsForm({ shopLogo }) {
                 required
                 className="form-control-alternative"
                 id="firstName"
-                placeholder="John"
+                placeholder="Juan"
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -83,7 +84,7 @@ function AccountSettingsForm({ shopLogo }) {
                 required
                 className="form-control-alternative"
                 id="lastName"
-                placeholder="Doe"
+                placeholder="Dela Cruz"
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -100,6 +101,7 @@ function AccountSettingsForm({ shopLogo }) {
               <Input
                 required
                 className="form-control-alternative"
+                placeholder="example@example.com"
                 id="input-email"
                 type="email"
                 value={email}
@@ -116,9 +118,10 @@ function AccountSettingsForm({ shopLogo }) {
               </label>
               <Input
                 required
-                className="form-control-alternative"
+                className="form-control-alternative no-arrows"
+                placeholder="09XXXXXXXXX"
                 id="mobile-number"
-                type="text"
+                type="number"
                 value={mobileNumber}
                 onChange={(e) => setMobileNumber(e.target.value)}
               />
@@ -130,7 +133,11 @@ function AccountSettingsForm({ shopLogo }) {
         <Button type="submit" className="theme-btn theme-border theme-active">
           Save
         </Button>
-        <Button type="button" className="theme-btn theme-border">
+        <Button
+          type="button"
+          className="theme-btn theme-border"
+          onClick={() => history.push("/admin")}
+        >
           Cancel
         </Button>
       </Row>

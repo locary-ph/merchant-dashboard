@@ -25,15 +25,15 @@ const OrderDetails = (props) => {
   /* eslint-disable react/destructuring-assignment */
   const { order } = props.location.state;
 
-  const handleConfirm = async (orderID) => {
+  const handleConfirm = async (orderID, buyerEmail) => {
     try {
       const config = {
         headers: {
           Authorization: `Bearer ${getUserToken()}`,
         },
       };
-      const data = { orderID };
-      await axios.post("/order/confirm", data, config);
+      const data = { orderID, buyerEmail };
+      await axios.post("/orders/confirm", data, config);
       toastify(4000, "success", "top-right", "Order Confirmed!");
     } catch (err) {
       console.error(err);
@@ -77,7 +77,7 @@ const OrderDetails = (props) => {
                 </Button>
                 <Button
                   className="theme-border theme-btn theme-active"
-                  onClick={() => handleConfirm(order._id)}
+                  onClick={() => handleConfirm(order._id, order.buyer.email)}
                 >
                   Accept
                 </Button>

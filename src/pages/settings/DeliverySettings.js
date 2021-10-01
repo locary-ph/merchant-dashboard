@@ -14,11 +14,13 @@ import {
   Form,
   FormGroup,
 } from "reactstrap";
+import { useHistory } from "react-router-dom";
 
 import LocationInput from "./LocationInput";
 import toastify from "../../utils/toastify";
 
 function DeliverySettings() {
+  const history = useHistory();
   const [address, setAddress] = useState("");
   const [inputList, setInputList] = useState([
     { location: "", fee: "" },
@@ -72,8 +74,7 @@ function DeliverySettings() {
               <div className="inputGroup mb-4">
                 <h2 className="mb-1">Delivery</h2>
                 <h5 className="text-muted mb-4">
-                  Choose locations you can cater and their corresponding
-                  shipping fees
+                  Add delivery options and set a price for each one.
                 </h5>
                 <div>
                   <Row>
@@ -106,8 +107,7 @@ function DeliverySettings() {
               <div className="mb-4">
                 <h2 className="mb-1">Pick-up</h2>
                 <h5 className="text-muted mb-4">
-                  Only applies if your customers choose Cash on Pickup at
-                  checkout.
+                  Add delivery options and set a price for each one.
                 </h5>
 
                 <div>
@@ -137,7 +137,12 @@ function DeliverySettings() {
                 <Button className="theme-btn theme-border theme-active">
                   Save
                 </Button>
-                <Button className="theme-btn theme-border">Cancel</Button>
+                <Button
+                  className="theme-btn theme-border"
+                  onClick={() => history.push("/admin")}
+                >
+                  Cancel
+                </Button>
               </Row>
             </Form>
           </CardBody>
