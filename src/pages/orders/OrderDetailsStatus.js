@@ -32,16 +32,16 @@ export default function OrderDetailsStatus(props) {
     ],
     cash: ["PENDING APPROVAL", "APPROVED", "REJECT", "DELIVERED", "CANCELLED"],
     cashIcons: [
-      "na",
-      "na",
-      "na",
+      "fas fa-solid fa-hourglass-end mr-2 ",
+      "fas fa-solid fa-thumbs-up mr-2 ",
+      "fas fa-solid fa-ban order-details-color-red mr-2 ",
       "fas fa-solid fa-check mr-2 ",
       "fas fa-solid fa-ban order-details-color-red mr-2 ",
     ],
   };
   const currentStatusIcon =
     statusList.cashlessIcons[statusList.cashless.indexOf(order.orderStatus)];
-  console.log(currentStatusIcon);
+
   return (
     <UncontrolledDropdown className="order-details-status">
       <DropdownToggle caret className="text-capitalize order-details-button">
@@ -49,8 +49,9 @@ export default function OrderDetailsStatus(props) {
         {order.orderStatus.toLowerCase()}
       </DropdownToggle>
       <DropdownMenu right>
-        {statusList.cashless.map((status) => (
+        {statusList.cashless.map((status, index) => (
           <DropdownItem className="text-capitalize">
+            <i className={statusList.cashlessIcons[index]} />
             {status.toLowerCase()}
           </DropdownItem>
         ))}
