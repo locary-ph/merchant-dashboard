@@ -12,6 +12,7 @@ import {
 
 export default function OrderDetailsStatus(props) {
   const { order } = props;
+
   const statusList = {
     cashless: [
       "UNPAID",
@@ -39,9 +40,7 @@ export default function OrderDetailsStatus(props) {
     ],
   };
   const currentStatusIcon =
-    statusList["cashless" + "Icons"][
-      statusList["cashless"].indexOf(order.orderStatus)
-    ];
+    statusList.cashlessIcons[statusList.cashless.indexOf(order.orderStatus)];
   console.log(currentStatusIcon);
   return (
     <UncontrolledDropdown className="order-details-status">
@@ -50,7 +49,7 @@ export default function OrderDetailsStatus(props) {
         {order.orderStatus.toLowerCase()}
       </DropdownToggle>
       <DropdownMenu right>
-        {statusList["cash"].map((status) => (
+        {statusList.cashless.map((status) => (
           <DropdownItem className="text-capitalize">
             {status.toLowerCase()}
           </DropdownItem>

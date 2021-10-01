@@ -63,7 +63,7 @@ const OrderDetails = (props) => {
           <Container fluid>
             <OrderDetailsBuyer order={order} />
             <hr />
-            <OrderDetailsOrder order={order} />
+            <OrderDetailsOrder order={order} handleConfirm={handleConfirm} />
             <div className="d-flex justify-content-center">
               <Button className="order-details-button">Download Invoice</Button>
             </div>
