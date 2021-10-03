@@ -38,20 +38,20 @@ export default function OrderDetailsStatus(props) {
       "CANCELLED",
     ],
     cashlessIcons: [
-      "fas fa-solid fa-circle order-details-color-red mr-2 ",
+      "fas fa-solid fa-circle text-red mr-2 ",
       "fas fa-solid fa-money-bill-wave mr-2 ",
       "fas fa-solid fa-box mr-2 ",
       "fas fa-solid fa-truck mr-2 ",
       "fas fa-solid fa-check mr-2 ",
-      "fas fa-times order-details-color-red mr-2 ",
+      "fas fa-times text-red mr-2 ",
     ],
     cash: ["PENDING APPROVAL", "APPROVED", "REJECT", "DELIVERED", "CANCELLED"],
     cashIcons: [
       "fas fa-solid fa-hourglass-end mr-2 ",
       "fas fa-solid fa-thumbs-up mr-2 ",
-      "fas fa-solid fa-ban order-details-color-red mr-2 ",
+      "fas fa-solid fa-ban text-red mr-2 ",
       "fas fa-solid fa-check mr-2 ",
-      "fas fa-times order-details-color-red mr-2 ",
+      "fas fa-times text-red mr-2 ",
     ],
   };
   const currentStatusIcon =
