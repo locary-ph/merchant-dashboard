@@ -3,19 +3,8 @@
  */
 
 import React from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  CardBody,
-  CardHeader,
-  Button,
-} from "reactstrap";
+import { Container, Row, Col, Card, CardBody, CardHeader } from "reactstrap";
 
-import { instance as axios, getUserToken } from "../../axios";
-
-import toastify from "../../utils/toastify";
 import BackButton from "../../components/BackButton/BackButton";
 import OrderDetailsBuyer from "./OrderDetailsBuyer";
 import OrderDetailsOrder from "./OrderDetailsOrder";
@@ -25,21 +14,6 @@ const OrderDetails = (props) => {
   /* eslint-disable react/destructuring-assignment */
   const { order } = props.location.state;
 
-  const handleConfirm = async (orderID, buyerEmail) => {
-    try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${getUserToken()}`,
-        },
-      };
-      const data = { orderID, buyerEmail };
-      await axios.post("/orders/confirm", data, config);
-      toastify(4000, "success", "top-right", "Order Confirmed!");
-    } catch (err) {
-      console.error(err);
-      toastify(4000, "error", "top-right", err.response.data.message);
-    }
-  };
   console.log(order);
 
   return (
@@ -63,10 +37,10 @@ const OrderDetails = (props) => {
           <Container fluid>
             <OrderDetailsBuyer order={order} />
             <hr />
-            <OrderDetailsOrder order={order} handleConfirm={handleConfirm} />
-            <div className="d-flex justify-content-center">
+            <OrderDetailsOrder order={order} />
+            {/* <div className="d-flex justify-content-center">
               <Button className="order-details-button">Download Invoice</Button>
-            </div>
+            </div> */}
           </Container>
         </CardBody>
       </Card>

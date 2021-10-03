@@ -40,13 +40,13 @@ export default function OrderDetailsOrder(props) {
           <h3 className="mb-0 mr-2 order-details-buyer-label">
             Payment Method:
           </h3>
-          <p>No database yet</p>
+          <p>{order.paymentMethod}</p>
         </div>
         <div className="d-sm-flex flex-wrap">
           <h3 className="mb-0 mr-2 order-details-buyer-label">
             Delivery Method:
           </h3>
-          <p>No database yet</p>
+          <p>{order.deliveryMethod}</p>
         </div>
         <h3 className="mb-0 mr-2 order-details-buyer-label mb-0">Items: </h3>
         <div>
