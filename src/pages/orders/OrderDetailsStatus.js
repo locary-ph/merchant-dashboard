@@ -64,7 +64,7 @@ export default function OrderDetailsStatus(props) {
     setModal(!modal);
   };
 
-  const handleStatusSubmit = async () => {
+  const changeStatus = async () => {
     try {
       const config = {
         headers: {
@@ -113,7 +113,7 @@ export default function OrderDetailsStatus(props) {
           <Button color="danger" onClick={() => setModal(!modal)}>
             Cancel
           </Button>
-          <Button onClick={() => handleStatusSubmit()}>Confirm</Button>
+          <Button onClick={() => changeStatus()}>Confirm</Button>
         </ModalFooter>
       </Modal>
     </>
