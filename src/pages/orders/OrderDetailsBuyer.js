@@ -14,19 +14,17 @@ export default function OrderDetailsBuyer(props) {
       <div className="pl-0">
         <div className="d-sm-flex">
           <h3 className="mb-0 order-details-buyer-label">Name: </h3>
-          <label className="order-details-buyer-desc">
+          <label>
             {buyer.firstName} {buyer.lastName}
           </label>
         </div>
         <div className="d-sm-flex">
           <h3 className="mb-0 order-details-buyer-label">Email: </h3>
-          <label className="order-details-buyer-desc">{buyer.email}</label>
+          <label>{buyer.email}</label>
         </div>
         <div className="d-sm-flex">
           <h3 className="mb-0 order-details-buyer-label">Contact: </h3>
-          <label className="order-details-buyer-desc">
-            {buyer.contact ? buyer.contact : "None"}
-          </label>
+          <label>{buyer.contact ? buyer.contact : "None"}</label>
         </div>
         <div className="d-sm-flex">
           <h3 className="mb-0 order-details-buyer-label">Address: </h3>
@@ -50,9 +48,7 @@ export default function OrderDetailsBuyer(props) {
             <h3 className="mb-0 order-details-buyer-label">
               Special Instructions:{" "}
             </h3>
-            <label className="order-details-buyer-desc">
-              {order.instruction}
-            </label>
+            <label>{order.instruction}</label>
           </div>
         ) : null}
       </div>
