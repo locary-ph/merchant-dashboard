@@ -13,7 +13,7 @@ const propTypes = {
 };
 
 function ImageInput({ setProductImage, imageUrl, imageFile }) {
-  console.log(imageFile);
+  
   const [modal, setModal] = useState(false);
   const [fileExtension, setFileExtension] = useState("");
   const [image, setImage] = useState("");
