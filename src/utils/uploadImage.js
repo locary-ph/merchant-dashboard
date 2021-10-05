@@ -10,7 +10,12 @@ const uploadImage = (image, product, callback) => {
     fileName,
     folder: `/merchant/`
   }, (err, res) => {
-    if (err) toastify(4000, "error", "top-right", err.response.data.message);
+    if (err) {
+      let message = "";
+      if (err.response && err.response.data.message) message = err.response.data.message;
+      else message = err.message;
+      toastify(4000, "error", "top-right", message);
+    } 
     const url = imagekit.url({
       src: res.url,
     })

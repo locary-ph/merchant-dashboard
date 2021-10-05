@@ -5,7 +5,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Cropper from "react-cropper";
-import { Modal, ModalBody } from "reactstrap";
+import { Modal, ModalBody, ModalFooter, Button } from "reactstrap";
 
 const propTypes = {
   modal: PropTypes.bool.isRequired,
@@ -44,6 +44,11 @@ function CropperModal(props) {
           }}
         />
       </ModalBody>
+      <ModalFooter>
+        <Button color="primary" onClick={toggle}>
+          Crop
+        </Button>
+      </ModalFooter>
     </Modal>
   );
 }
