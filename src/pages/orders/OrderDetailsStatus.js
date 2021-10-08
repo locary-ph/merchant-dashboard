@@ -21,6 +21,7 @@ import toastify from "../../utils/toastify";
 export default function OrderDetailsStatus(props) {
   const { order } = props;
   const [modal, setModal] = useState(false);
+  const [currentStatus, setCurrentStatus] = useState(order.orderStatus);
   const [statusMessage, setStatusMessage] = useState("");
 
   let paymentMethod = "cash";
@@ -45,22 +46,32 @@ export default function OrderDetailsStatus(props) {
       "fas fa-solid fa-check mr-2 ",
       "fas fa-times text-red mr-2 ",
     ],
-    cash: ["PENDING APPROVAL", "APPROVED", "REJECT", "DELIVERED", "CANCELLED"],
+    cash: [
+      "ORDER PLACED",
+      "APPROVED",
+      "REJECT",
+      "TO DELIVER",
+      "ON THE WAY",
+      "DELIVERED",
+      "CANCELLED",
+    ],
     cashIcons: [
       "fas fa-solid fa-hourglass-end mr-2 ",
       "fas fa-solid fa-thumbs-up mr-2 ",
       "fas fa-solid fa-ban text-red mr-2 ",
+      "fas fa-solid fa-box mr-2 ",
+      "fas fa-solid fa-truck mr-2 ",
       "fas fa-solid fa-check mr-2 ",
       "fas fa-times text-red mr-2 ",
     ],
   };
   const currentStatusIcon =
     statusList[`${paymentMethod}Icons`][
-      statusList[paymentMethod].indexOf(order.orderStatus)
+      statusList[paymentMethod].indexOf(currentStatus)
     ];
 
   const handleStatus = (e) => {
-    setStatusMessage(e.target.textContent);
+    setStatusMessage(e.target.textContent.toUpperCase());
     setModal(!modal);
   };
 
@@ -74,11 +85,12 @@ export default function OrderDetailsStatus(props) {
       const data = {
         orderID: order._id,
         buyerEmail: order.buyerEmail,
-        orderStatus: order.orderStatus,
+        orderStatus: statusMessage,
       };
       await axios.post("/orders/status", data, config); // TODO: Need to update the server API soon!
       toastify(4000, "success", "top-right", "Order Status Changed!");
       setModal(!modal);
+      setCurrentStatus(statusMessage);
     } catch (err) {
       console.error(err);
       toastify(4000, "error", "top-right", err.response.data.message);
@@ -90,18 +102,20 @@ export default function OrderDetailsStatus(props) {
       <UncontrolledDropdown className="order-details-status">
         <DropdownToggle caret className="text-capitalize order-details-button">
           <i className={currentStatusIcon} />
-          {order.orderStatus.toLowerCase()}
+          {currentStatus.toLowerCase()}
         </DropdownToggle>
         <DropdownMenu right>
-          {statusList[paymentMethod].map((status, index) => (
-            <DropdownItem
-              className="text-capitalize"
-              onClick={(e) => handleStatus(e)}
-            >
-              <i className={statusList[`${paymentMethod}Icons`][index]} />
-              {status.toLowerCase()}
-            </DropdownItem>
-          ))}
+          {statusList[paymentMethod].map((status, index) =>
+            status !== currentStatus ? (
+              <DropdownItem
+                className="text-capitalize"
+                onClick={(e) => handleStatus(e)}
+              >
+                <i className={statusList[`${paymentMethod}Icons`][index]} />
+                {status.toLowerCase()}
+              </DropdownItem>
+            ) : null
+          )}
         </DropdownMenu>
       </UncontrolledDropdown>
       <Modal isOpen={modal}>
