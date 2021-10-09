@@ -44,11 +44,15 @@ function OrderList({ filter }) {
   const headers = ["Order ID", "Date", "Name", "Items", "Status", "Amount"];
 
   const badgeColor = {
-    PENDING: "warning",
-    ACCEPTED: "primary",
-    DISPATCHED: "info",
+    UNPAID: "warning",
+    ORDER: "warning",
+    PAID: "primary",
+    APPROVED: "primary",
+    TO: "info",
+    ON: "info",
     DELIVERED: "success",
     CANCELLED: "danger",
+    REJECT: "danger",
   };
 
   const displayOrders = () =>
@@ -81,7 +85,10 @@ function OrderList({ filter }) {
               ))}
             </td>
             <td>
-              <Badge color={badgeColor[orderStatus]} className="mr-4">
+              <Badge
+                color={badgeColor[orderStatus.split(" ")[0]]}
+                className="mr-4"
+              >
                 {orderStatus}
               </Badge>
             </td>
