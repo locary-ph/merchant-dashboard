@@ -90,7 +90,7 @@ function ShopSettings() {
                 <Col>
                   <FormGroup>
                     <label
-                      className="form-control-label"
+                      className="form-control-label font-weight-normal"
                       htmlFor="input-shop-name"
                     >
                       Shop Name
@@ -107,7 +107,7 @@ function ShopSettings() {
                   </FormGroup>
                   <FormGroup>
                     <label
-                      className="form-control-label"
+                      className="form-control-label font-weight-normal"
                       htmlFor="input-shop-link"
                     >
                       Shop Link
@@ -131,7 +131,7 @@ function ShopSettings() {
                   </FormGroup>
                   <FormGroup>
                     <label
-                      className="form-control-label"
+                      className="form-control-label font-weight-normal"
                       htmlFor="input-description"
                     >
                       Shop Description
@@ -147,12 +147,14 @@ function ShopSettings() {
                   </FormGroup>
                   <FormGroup>
                     <h2>FAQs</h2>
-                    <h5>Frequently Asked Questions</h5>
+                    <h5 className="font-weight-normal">
+                      Frequently Asked Questions
+                    </h5>
                     <div className="ml-0 ml-lg-4">
                       {faqInputList.map((entry, index) => (
                         <>
                           <label
-                            className="form-control-label"
+                            className="form-control-label font-weight-normal"
                             htmlFor="input-FAQs-question"
                           >
                             Question
@@ -177,7 +179,7 @@ function ShopSettings() {
                             </InputGroupAddon>
                           </InputGroup>
                           <label
-                            className="form-control-label mt-1"
+                            className="form-control-label mt-1 font-weight-normal"
                             htmlFor="input-FAQs-answer"
                           >
                             Answer

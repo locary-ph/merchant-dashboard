@@ -73,7 +73,7 @@ function DeliverySettings() {
             <Form onSubmit={handleFormSubmit}>
               <div className="inputGroup mb-4">
                 <h2 className="mb-1">Delivery</h2>
-                <h5 className="text-muted mb-4">
+                <h5 className="text-muted mb-4 font-weight-normal">
                   Add delivery options and set a price for each one.
                 </h5>
                 <div>
@@ -106,7 +106,7 @@ function DeliverySettings() {
 
               <div className="mb-4">
                 <h2 className="mb-1">Pick-up</h2>
-                <h5 className="text-muted mb-4">
+                <h5 className="text-muted mb-4 font-weight-normal">
                   Add delivery options and set a price for each one.
                 </h5>
 
@@ -115,7 +115,7 @@ function DeliverySettings() {
                     <Col>
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="pickupAddress"
                         >
                           Pickup address
