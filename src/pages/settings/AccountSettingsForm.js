@@ -61,7 +61,10 @@ function AccountSettingsForm({ shopLogo }) {
         <Row>
           <Col>
             <FormGroup>
-              <label className="form-control-label" htmlFor="firstName">
+              <label
+                className="form-control-label font-weight-normal"
+                htmlFor="firstName"
+              >
                 First Name
               </label>
               <Input
@@ -77,7 +80,10 @@ function AccountSettingsForm({ shopLogo }) {
           </Col>
           <Col>
             <FormGroup>
-              <label className="form-control-label" htmlFor="lastName">
+              <label
+                className="form-control-label font-weight-normal"
+                htmlFor="lastName"
+              >
                 Last Name
               </label>
               <Input
@@ -95,7 +101,10 @@ function AccountSettingsForm({ shopLogo }) {
         <Row>
           <Col>
             <FormGroup>
-              <label className="form-control-label" htmlFor="input-email">
+              <label
+                className="form-control-label font-weight-normal"
+                htmlFor="input-email"
+              >
                 Email address
               </label>
               <Input
@@ -113,7 +122,10 @@ function AccountSettingsForm({ shopLogo }) {
         <Row>
           <Col>
             <FormGroup>
-              <label className="form-control-label" htmlFor="input-first-name">
+              <label
+                className="form-control-label font-weight-normal"
+                htmlFor="mobile-number"
+              >
                 Mobile number
               </label>
               <Input

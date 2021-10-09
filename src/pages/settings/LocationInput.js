@@ -29,7 +29,10 @@ function LocationInput(props) {
     <>
       <Col lg="6">
         <FormGroup>
-          <label className="form-control-label" htmlFor="location">
+          <label
+            className="form-control-label font-weight-normal"
+            htmlFor="location"
+          >
             Location
           </label>
           <Input
@@ -48,7 +51,10 @@ function LocationInput(props) {
         className="mb-3 mb-lg-0 d-flex align-items-center justify-content-between"
       >
         <FormGroup className="w-75">
-          <label className="form-control-label" htmlFor="fee">
+          <label
+            className="form-control-label font-weight-normal"
+            htmlFor="fee"
+          >
             Fee
           </label>
           <InputGroup>

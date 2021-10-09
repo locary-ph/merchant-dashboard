@@ -152,7 +152,7 @@ const ProductDetails = (props) => {
                     <Col>
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="productName"
                         >
                           Product name
@@ -181,7 +181,7 @@ const ProductDetails = (props) => {
                     <Col>
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label  font-weight-normal"
                           htmlFor="productDescription"
                         >
                           Product description
@@ -202,7 +202,7 @@ const ProductDetails = (props) => {
                     <Col lg="6">
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="productPrice"
                         >
                           Price
@@ -223,7 +223,7 @@ const ProductDetails = (props) => {
                     <Col lg="6">
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="productStocks"
                         >
                           Stock

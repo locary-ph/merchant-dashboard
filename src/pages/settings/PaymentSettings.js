@@ -128,7 +128,7 @@ function PaymentSettings() {
             <Form onSubmit={handleFormSubmit}>
               <div className="inputGroup mb-4">
                 <h2 className="mb-1">Bank transfer</h2>
-                <h5 className="text-muted mb-4">
+                <h5 className="text-muted mb-4 font-weight-normal">
                   Receive payment via your bank account
                 </h5>
                 <div className="pl-lg-4">
@@ -136,7 +136,7 @@ function PaymentSettings() {
                     <Col lg="6">
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="bankName"
                         >
                           Bank Name
@@ -155,7 +155,7 @@ function PaymentSettings() {
                     <Col lg="6">
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="accountNumber"
                         >
                           Account number
@@ -175,7 +175,7 @@ function PaymentSettings() {
                     <Col>
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="accountName"
                         >
                           Account Name
@@ -196,7 +196,7 @@ function PaymentSettings() {
                     <Col>
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="paymentInstructions"
                         >
                           Payment instructions
@@ -217,7 +217,7 @@ function PaymentSettings() {
 
               <div className="inputGroup mb-4">
                 <h2 className="mb-1">eWallet</h2>
-                <h5 className="text-muted mb-4">
+                <h5 className="text-muted mb-4 font-weight-normal">
                   Receive payment via an eWallet
                 </h5>
                 <div className="pl-lg-4">
@@ -225,7 +225,7 @@ function PaymentSettings() {
                     <Col lg="6">
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="walletName"
                         >
                           Select eWallet
@@ -244,15 +244,15 @@ function PaymentSettings() {
                     <Col lg="6">
                       <FormGroup>
                         <label
-                          className="form-control-label"
-                          htmlFor="accountNumber"
+                          className="form-control-label font-weight-normal"
+                          htmlFor="accountNumberEwallet"
                         >
                           Account number
                         </label>
                         <Input
                           required
                           className="form-control-alternative no-arrows"
-                          id="accountNumber"
+                          id="accountNumberEwallet"
                           type="number"
                           value={ewalletNumber}
                           onChange={(e) => setEwalletNumber(e.target.value)}
@@ -264,7 +264,7 @@ function PaymentSettings() {
                     <Col>
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="accountName"
                         >
                           Account Name
@@ -286,7 +286,7 @@ function PaymentSettings() {
 
               <div className="inputGroup mb-4">
                 <h2 className="mb-1">Cash on pickup</h2>
-                <h5 className="text-muted mb-4">
+                <h5 className="text-muted mb-4 font-weight-normal">
                   Receive payment from customers upon pickup
                 </h5>
 
@@ -294,7 +294,10 @@ function PaymentSettings() {
                   <Row>
                     <Col>
                       <FormGroup>
-                        <label className="form-control-label" htmlFor="cop">
+                        <label
+                          className="form-control-label font-weight-normal"
+                          htmlFor="cop"
+                        >
                           Payment instructions
                         </label>
                         <Input
@@ -313,7 +316,7 @@ function PaymentSettings() {
 
               <div className="inputGroup mb-4">
                 <h2 className="mb-1">Cash on delivery</h2>
-                <h5 className="text-muted mb-4">
+                <h5 className="text-muted mb-4 font-weight-normal">
                   Receive payment from customers upon delivery
                 </h5>
 
@@ -321,7 +324,10 @@ function PaymentSettings() {
                   <Row>
                     <Col>
                       <FormGroup>
-                        <label className="form-control-label" htmlFor="cod">
+                        <label
+                          className="form-control-label font-weight-normal"
+                          htmlFor="cod"
+                        >
                           Payment instructions
                         </label>
                         <Input
