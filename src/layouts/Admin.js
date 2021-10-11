@@ -2,7 +2,7 @@
  * @format
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 // reactstrap components
 import { Container } from "reactstrap";
@@ -19,17 +19,61 @@ import routes from "../routes";
 
 import locaryLogo from "../assets/img/brand/locary-logo.png";
 
+import { instance as axios, getUserToken } from "../axios";
+
 const Admin = (props) => {
   const { location } = props;
 
   const mainContent = React.useRef(null);
 
-  const [cachedData, setCachedData] = useState("Updated!");
+  const [cachedOrders, setCachedOrders] = useState([]);
+  const [cachedInventory, setCachedInventory] = useState([]);
 
-  React.useEffect(() => {
+  const updateCacheData = () => {
+    const fetchOrders = async () => {
+      try {
+        const { data } = await axios.get("/orders", {
+          headers: {
+            Authorization: `Bearer ${getUserToken()}`,
+          },
+        });
+        const orderMap = {};
+        data.forEach((order, index) => {
+          const letterID = `${order.buyer.firstName}${order.buyer.lastName}`
+            .substring(0, 3)
+            .toUpperCase();
+          let numberID = 1;
+          if (orderMap[letterID] !== undefined) orderMap[letterID] += 1;
+          else orderMap[letterID] = numberID;
+          numberID = `00${orderMap[letterID]}`.substring(0, 3);
+          data[index].simplifiedID = `${letterID}${numberID}`;
+        });
+        data.reverse();
+        setCachedOrders(data);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    const fetchInventory = async () => {
+      try {
+        const { data } = await axios.get("products", {
+          headers: { Authorization: `Bearer ${getUserToken()}` },
+        });
+        setCachedInventory(data);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    fetchOrders();
+    fetchInventory();
+  };
+
+  useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     mainContent.current.scrollTop = 0;
+    updateCacheData();
   }, [location]);
 
   const getBrandText = (path) => {
@@ -60,20 +104,19 @@ const Admin = (props) => {
         <Navbar
           {...props}
           brandText={getBrandText(location.pathname)}
-          cachedData={cachedData}
-          setCachedData={setCachedData}
+          updateCacheData={updateCacheData}
         />
         <Switch>
           {/* eslint-disable react/no-array-index-key */}
           {routes.map((prop, key) => {
             if (prop.layout === "/admin") {
               return (
-                <Route
-                  path={prop.layout + prop.path}
-                  component={prop.component}
-                  key={key}
-                  exact
-                />
+                <Route path={prop.layout + prop.path} key={key} exact>
+                  <prop.component
+                    cachedInventory={cachedInventory}
+                    cachedOrders={cachedOrders}
+                  />
+                </Route>
               );
             }
             return null;
@@ -84,7 +127,12 @@ const Admin = (props) => {
             path="/admin/products/:name"
             component={ProductDetails}
           />
-          <Route exact path="/admin/orders/:name" component={OrderDetails} />
+          <Route exact path="/admin/orders/:orderID">
+            <OrderDetails
+              cachedOrders={cachedOrders}
+              setCachedOrders={setCachedOrders}
+            />
+          </Route>
           <Redirect from="*" to="/admin/index" />
         </Switch>
         <Container fluid>

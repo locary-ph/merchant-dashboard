@@ -7,7 +7,7 @@ import { Card, CardHeader, Container, Row, Col } from "reactstrap";
 
 import OrderList from "../../components/OrderList/OrderList";
 
-const Orders = () => {
+const Orders = ({ cachedOrders }) => {
   const [orderStatusFilter, setOrderStatusFilter] = useState("ALL");
 
   const checkStatus = (filter) => {
@@ -62,7 +62,10 @@ const Orders = () => {
                 </Col>
               </Row>
             </CardHeader>
-            <OrderList filter={orderStatusFilter.toLowerCase()} />
+            <OrderList
+              filter={orderStatusFilter.toLowerCase()}
+              cachedOrders={cachedOrders}
+            />
           </Card>
         </div>
       </Row>

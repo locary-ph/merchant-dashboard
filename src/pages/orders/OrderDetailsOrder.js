@@ -2,20 +2,12 @@
  * @format
  */
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import DateFormat from "../../utils/dateFormat";
 
 export default function OrderDetailsOrder(props) {
-  const [totalAmount, setTotalAmount] = useState(0);
   const { order } = props;
   const dateTime = new DateFormat(order.createdAt);
-  useEffect(() => {
-    order.items.map((item) => {
-      const itemTotal = Number(item.product.price) * Number(item.quantity);
-      return setTotalAmount((e) => e + itemTotal);
-    });
-  }, [order]);
-
   return (
     <>
       <div className="d-flex justify-content-between">
@@ -23,7 +15,7 @@ export default function OrderDetailsOrder(props) {
         <div>
           <h3 className="mb-0 text-right">Total:</h3>
           <h2 className="text-right" style={{ color: "#FE634E" }}>
-            PHP {totalAmount}
+            PHP {order.orderAmount}
           </h2>
         </div>
       </div>

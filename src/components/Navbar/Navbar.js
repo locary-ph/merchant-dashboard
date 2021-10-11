@@ -5,10 +5,10 @@ import React from "react";
 import { Navbar, Container, Button } from "reactstrap";
 import toastify from "../../utils/toastify";
 
-const AdminNavbar = ({ brandText, cachedData, setCachedData }) => {
-  const update = () => {
-    setCachedData("Updated!");
-    toastify(4000, "success", "top-right", cachedData);
+const AdminNavbar = ({ brandText, updateCacheData }) => {
+  const update = async () => {
+    await updateCacheData();
+    toastify(4000, "success", "top-right", "Updated!");
   };
   return (
     <Navbar

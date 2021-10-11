@@ -2,7 +2,7 @@
  * @format
  */
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import {
   Button,
@@ -15,8 +15,6 @@ import {
   Row,
   Col,
 } from "reactstrap";
-
-import { instance as axios, getUserToken } from "../../axios";
 
 const Product = (props) => {
   const { product } = props;
@@ -66,28 +64,12 @@ const Product = (props) => {
   );
 };
 
-const Products = () => {
+const Products = ({ cachedInventory }) => {
   // TODO(#1): Stock quantity quick edit
   // TODO(#2): Copy shop link on button click
   //    `Add Product` button on Product.js
 
-  const [products, setProducts] = useState([]);
   const history = useHistory();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get("products", {
-          headers: { Authorization: `Bearer ${getUserToken()}` },
-        });
-        setProducts(res.data);
-      } catch (e) {
-        console.error(e);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const addProduct = (event) => {
     event.preventDefault();
@@ -120,7 +102,7 @@ const Products = () => {
             <CardBody className="px-5 py-6">
               <Row>
                 {/* eslint-disable react/no-array-index-key */}
-                {products.map((product) => (
+                {cachedInventory?.map((product) => (
                   <Product product={product} />
                 ))}
               </Row>
