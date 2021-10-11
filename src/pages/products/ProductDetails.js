@@ -42,7 +42,7 @@ const ProductDetails = (props) => {
   const [price, setPrice] = useState(product.price || 0);
   const [stocks, setStocks] = useState(product.qty || 0);
   const [imageUrl, setImageUrl] = useState(product.thumbnailUrl || "");
-  const [imageFile, setImageFile] = useState();
+  const [productImage, setProductImage] = useState();
   const [action, setAction] = useState("");
   const [error, setError] = useState("");
 
@@ -51,7 +51,7 @@ const ProductDetails = (props) => {
   };
 
   const isValid = () => {
-    if (!imageFile && !imageUrl) {
+    if (!productImage && !imageUrl) {
       setError("No Photo Selected!");
       return false;
     }
@@ -74,8 +74,8 @@ const ProductDetails = (props) => {
       case "add":
         if (!isValid()) return window.scrollTo(0, 0);
 
-        if (imageFile) {
-          uploadImage(imageFile, currentProduct, (url) => {
+        if (productImage) {
+          uploadImage(productImage, currentProduct, (url) => {
             setImageUrl(url);
             currentProduct.thumbnailUrl = url;
 
@@ -88,8 +88,8 @@ const ProductDetails = (props) => {
         break;
       case "edit":
         // new image is uploaded
-        if (imageFile) {
-          uploadImage(imageFile, currentProduct, (url) => {
+        if (productImage) {
+          uploadImage(productImage, currentProduct, (url) => {
             setImageUrl(url);
             currentProduct.thumbnailUrl = url;
 
@@ -143,15 +143,16 @@ const ProductDetails = (props) => {
               <Form onSubmit={handleSubmit}>
                 <div className="pl-lg-4">
                   <ImageInput
-                    setImageFile={setImageFile}
-                    {...{ imageUrl, imageFile }}
+                    setProductImage={setProductImage}
+                    imageUrl={imageUrl}
+                    imageFile={productImage}
                   />
 
                   <Row>
                     <Col>
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="productName"
                         >
                           Product name
@@ -180,7 +181,7 @@ const ProductDetails = (props) => {
                     <Col>
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label  font-weight-normal"
                           htmlFor="productDescription"
                         >
                           Product description
@@ -201,7 +202,7 @@ const ProductDetails = (props) => {
                     <Col lg="6">
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="productPrice"
                         >
                           Price
@@ -222,7 +223,7 @@ const ProductDetails = (props) => {
                     <Col lg="6">
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="productStocks"
                         >
                           Stock

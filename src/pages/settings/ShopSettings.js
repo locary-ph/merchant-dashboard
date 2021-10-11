@@ -15,7 +15,9 @@ import {
   Row,
   InputGroup,
   InputGroupAddon,
+  InputGroupText,
 } from "reactstrap";
+import { useHistory } from "react-router-dom";
 
 import { instance as axios, getUserToken } from "../../axios";
 import toastify from "../../utils/toastify";
@@ -23,6 +25,7 @@ import toastify from "../../utils/toastify";
 import LoginContext from "../../contexts/LoginContext";
 
 function ShopSettings() {
+  const history = useHistory();
   const { user, setUser } = useContext(LoginContext);
 
   const [shopName, setShopName] = useState(user.shopName);
@@ -87,7 +90,7 @@ function ShopSettings() {
                 <Col>
                   <FormGroup>
                     <label
-                      className="form-control-label"
+                      className="form-control-label font-weight-normal"
                       htmlFor="input-shop-name"
                     >
                       Shop Name
@@ -96,6 +99,7 @@ function ShopSettings() {
                       required
                       className="form-control-alternative"
                       id="input-shop-name"
+                      placeholder="Juan's Store"
                       type="text"
                       value={shopName}
                       onChange={(e) => setShopName(e.target.value)}
@@ -103,23 +107,31 @@ function ShopSettings() {
                   </FormGroup>
                   <FormGroup>
                     <label
-                      className="form-control-label"
+                      className="form-control-label font-weight-normal"
                       htmlFor="input-shop-link"
                     >
                       Shop Link
                     </label>
-                    <Input
-                      required
-                      className="form-control-alternative"
-                      id="input-shop-link"
-                      type="text"
-                      value={shopLink}
-                      onChange={(e) => setShopLink(e.target.value)}
-                    />
+                    <InputGroup>
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText className="px-1 mr-1">
+                          shop.locary.ph/
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        required
+                        className="form-control-alternative"
+                        id="input-shop-link"
+                        placeholder="juanstore"
+                        type="text"
+                        value={shopLink}
+                        onChange={(e) => setShopLink(e.target.value)}
+                      />
+                    </InputGroup>
                   </FormGroup>
                   <FormGroup>
                     <label
-                      className="form-control-label"
+                      className="form-control-label font-weight-normal"
                       htmlFor="input-description"
                     >
                       Shop Description
@@ -135,12 +147,14 @@ function ShopSettings() {
                   </FormGroup>
                   <FormGroup>
                     <h2>FAQs</h2>
-                    <h5>Frequently asked questions</h5>
+                    <h5 className="font-weight-normal">
+                      Frequently Asked Questions
+                    </h5>
                     <div className="ml-0 ml-lg-4">
                       {faqInputList.map((entry, index) => (
                         <>
                           <label
-                            className="form-control-label"
+                            className="form-control-label font-weight-normal"
                             htmlFor="input-FAQs-question"
                           >
                             Question
@@ -165,7 +179,7 @@ function ShopSettings() {
                             </InputGroupAddon>
                           </InputGroup>
                           <label
-                            className="form-control-label mt-1"
+                            className="form-control-label mt-1 font-weight-normal"
                             htmlFor="input-FAQs-answer"
                           >
                             Answer
@@ -196,7 +210,12 @@ function ShopSettings() {
                   <Button className="theme-btn theme-border theme-active">
                     Save
                   </Button>
-                  <Button className="theme-btn theme-border">Cancel</Button>
+                  <Button
+                    className="theme-btn theme-border"
+                    onClick={() => history.push("/admin")}
+                  >
+                    Cancel
+                  </Button>
                 </Row>
               </div>
               <hr className="my-4" />

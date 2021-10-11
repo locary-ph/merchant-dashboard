@@ -15,11 +15,13 @@ import {
   Form,
   FormGroup,
 } from "reactstrap";
+import { useHistory } from "react-router-dom";
 import toastify from "../../utils/toastify";
 import LoginContext from "../../contexts/LoginContext";
 import { instance as axios, getUserToken } from "../../axios";
 
 function PaymentSettings() {
+  const history = useHistory();
   const { user } = useContext(LoginContext);
   const [getBankInfo, setBankInfo] = useSynchronousState({});
   const [getWalletInfo, setWalletInfo] = useSynchronousState({});
@@ -126,7 +128,7 @@ function PaymentSettings() {
             <Form onSubmit={handleFormSubmit}>
               <div className="inputGroup mb-4">
                 <h2 className="mb-1">Bank transfer</h2>
-                <h5 className="text-muted mb-4">
+                <h5 className="text-muted mb-4 font-weight-normal">
                   Receive payment via your bank account
                 </h5>
                 <div className="pl-lg-4">
@@ -134,7 +136,7 @@ function PaymentSettings() {
                     <Col lg="6">
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="bankName"
                         >
                           Bank Name
@@ -153,14 +155,14 @@ function PaymentSettings() {
                     <Col lg="6">
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="accountNumber"
                         >
                           Account number
                         </label>
                         <Input
                           required
-                          className="form-control-alternative"
+                          className="form-control-alternative no-arrows"
                           id="accountNumber"
                           type="number"
                           value={bankAccNumber}
@@ -173,7 +175,7 @@ function PaymentSettings() {
                     <Col>
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="accountName"
                         >
                           Account Name
@@ -181,6 +183,7 @@ function PaymentSettings() {
                         <Input
                           required
                           className="form-control-alternative"
+                          placeholder="Juan Dela Cruz"
                           id="accountName"
                           type="text"
                           value={bankAccName}
@@ -193,7 +196,7 @@ function PaymentSettings() {
                     <Col>
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="paymentInstructions"
                         >
                           Payment instructions
@@ -213,19 +216,19 @@ function PaymentSettings() {
               </div>
 
               <div className="inputGroup mb-4">
-                <h2 className="mb-1">E-Wallet</h2>
-                <h5 className="text-muted mb-4">
-                  Receive payment via an E-wallet
+                <h2 className="mb-1">eWallet</h2>
+                <h5 className="text-muted mb-4 font-weight-normal">
+                  Receive payment via an eWallet
                 </h5>
                 <div className="pl-lg-4">
                   <Row>
                     <Col lg="6">
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="walletName"
                         >
-                          Select e-wallet
+                          Select eWallet
                         </label>
                         <Input
                           required
@@ -241,15 +244,15 @@ function PaymentSettings() {
                     <Col lg="6">
                       <FormGroup>
                         <label
-                          className="form-control-label"
-                          htmlFor="accountNumber"
+                          className="form-control-label font-weight-normal"
+                          htmlFor="accountNumberEwallet"
                         >
                           Account number
                         </label>
                         <Input
                           required
-                          className="form-control-alternative"
-                          id="accountNumber"
+                          className="form-control-alternative no-arrows"
+                          id="accountNumberEwallet"
                           type="number"
                           value={ewalletNumber}
                           onChange={(e) => setEwalletNumber(e.target.value)}
@@ -261,7 +264,7 @@ function PaymentSettings() {
                     <Col>
                       <FormGroup>
                         <label
-                          className="form-control-label"
+                          className="form-control-label font-weight-normal"
                           htmlFor="accountName"
                         >
                           Account Name
@@ -270,6 +273,7 @@ function PaymentSettings() {
                           required
                           className="form-control-alternative"
                           id="accountName"
+                          placeholder="Juan Dela Cruz"
                           type="text"
                           value={ewalletName}
                           onChange={(e) => setEwalletName(e.target.value)}
@@ -282,7 +286,7 @@ function PaymentSettings() {
 
               <div className="inputGroup mb-4">
                 <h2 className="mb-1">Cash on pickup</h2>
-                <h5 className="text-muted mb-4">
+                <h5 className="text-muted mb-4 font-weight-normal">
                   Receive payment from customers upon pickup
                 </h5>
 
@@ -290,7 +294,10 @@ function PaymentSettings() {
                   <Row>
                     <Col>
                       <FormGroup>
-                        <label className="form-control-label" htmlFor="cop">
+                        <label
+                          className="form-control-label font-weight-normal"
+                          htmlFor="cop"
+                        >
                           Payment instructions
                         </label>
                         <Input
@@ -309,7 +316,7 @@ function PaymentSettings() {
 
               <div className="inputGroup mb-4">
                 <h2 className="mb-1">Cash on delivery</h2>
-                <h5 className="text-muted mb-4">
+                <h5 className="text-muted mb-4 font-weight-normal">
                   Receive payment from customers upon delivery
                 </h5>
 
@@ -317,7 +324,10 @@ function PaymentSettings() {
                   <Row>
                     <Col>
                       <FormGroup>
-                        <label className="form-control-label" htmlFor="cod">
+                        <label
+                          className="form-control-label font-weight-normal"
+                          htmlFor="cod"
+                        >
                           Payment instructions
                         </label>
                         <Input
@@ -338,7 +348,12 @@ function PaymentSettings() {
                 <Button className="theme-btn theme-border theme-active">
                   Save
                 </Button>
-                <Button className="theme-btn theme-border">Cancel</Button>
+                <Button
+                  className="theme-btn theme-border"
+                  onClick={() => history.push("/admin")}
+                >
+                  Cancel
+                </Button>
               </div>
             </Form>
           </CardBody>
