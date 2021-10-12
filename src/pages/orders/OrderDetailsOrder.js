@@ -3,6 +3,7 @@
  */
 
 import React from "react";
+import { Row, Col } from "reactstrap";
 import DateFormat from "../../utils/dateFormat";
 
 export default function OrderDetailsOrder(props) {
@@ -40,24 +41,30 @@ export default function OrderDetailsOrder(props) {
           </h3>
           <p>{order.deliveryOption}</p>
         </div>
-        <h3 className="mb-0 mr-2 order-details-buyer-label mb-0">Items: </h3>
-        <div>
-          {order.items.map((item) => {
-            const itemPrice = item.product.price.toFixed(2);
-            const itemQuantity = item.quantity;
-            const itemTotal = (itemPrice * itemQuantity).toFixed(2);
-            return (
-              <>
-                <div className="order-details-items">
-                  <p>{itemQuantity}x</p>
-                  <p className="order-details-items-label">
-                    {item.product.name}
-                  </p>
-                  <p className="order-details-items-label">PHP {itemTotal}</p>
-                </div>
-              </>
-            );
-          })}
+        <div className="d-sm-flex flex-wrap">
+          <h3 className="mb-0 mr-2 order-details-buyer-label mb-0">Items: </h3>
+          <div>
+            {order.items.map((item) => {
+              const itemPrice = item.product.price.toFixed(2);
+              const itemQuantity = item.quantity;
+              const itemTotal = (itemPrice * itemQuantity).toFixed(2);
+              return (
+                <>
+                  <Row className="mb-3">
+                    <Col xs="12" sm="2">
+                      {itemQuantity}x
+                    </Col>
+                    <Col xs="12" sm="5" className="text-bold">
+                      {item.product.name}
+                    </Col>
+                    <Col xs="12" sm="5">
+                      PHP {itemTotal}
+                    </Col>
+                  </Row>
+                </>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>

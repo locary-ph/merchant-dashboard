@@ -118,10 +118,11 @@ input {
 .order-details-button {
   border: none;
   border-radius: 500px;
+  color: black;
   background-color: #ffdcd8;
 }
 .order-details-button:hover {
-  border-radius: 500px;
+  color: white;
   background-color: #fe634e;
 }
 .order-details-status {
