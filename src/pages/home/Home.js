@@ -19,7 +19,7 @@ import Performance from "./Performance";
 import LoginContext from "../../contexts/LoginContext";
 import toastify from "../../utils/toastify";
 
-const RecentOrders = ({ cachedOrders }) => (
+const RecentOrders = () => (
   <Card className="shadow">
     <CardHeader className="bg-transparent">
       <Row className="align-items-center">
@@ -29,11 +29,11 @@ const RecentOrders = ({ cachedOrders }) => (
         </div>
       </Row>
     </CardHeader>
-    <OrderList cachedOrders={cachedOrders} />
+    <OrderList />
   </Card>
 );
 
-const Home = ({ cachedOrders }) => {
+const Home = () => {
   const { user } = useContext(LoginContext);
   const copyShopLink = () => {
     const shopLink = `https://shop.locary.ph/${user.shopUrl}`;
@@ -72,7 +72,7 @@ const Home = ({ cachedOrders }) => {
         </Row>
         <Row>
           <Col xl="12" className="mb-5">
-            <RecentOrders cachedOrders={cachedOrders} />
+            <RecentOrders />
           </Col>
           <Col className="mb-6" xl="6">
             <Inventory />

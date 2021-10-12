@@ -2,13 +2,17 @@
  * @format
  */
 
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Table, Badge } from "reactstrap";
 
-function OrderList({ filter, cachedOrders }) {
+import LoginContext from "../../contexts/LoginContext";
+
+function OrderList({ filter }) {
   const headers = ["Order ID", "Date", "Name", "Items", "Status", "Amount"];
+  const { userOrders } = useContext(LoginContext);
+  console.log(userOrders);
 
   const badgeColor = {
     UNPAID: "warning",
@@ -23,7 +27,7 @@ function OrderList({ filter, cachedOrders }) {
   };
 
   const displayOrders = () =>
-    cachedOrders?.map((order, index) => {
+    userOrders?.map((order, index) => {
       const { orderStatus } = order;
       if (filter === "all" || filter === orderStatus.toLowerCase()) {
         return (

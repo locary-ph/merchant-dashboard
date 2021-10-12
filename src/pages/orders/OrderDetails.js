@@ -2,20 +2,22 @@
  * @format
  */
 
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Card, CardBody, CardHeader } from "reactstrap";
+import LoginContext from "../../contexts/LoginContext";
 
 import BackButton from "../../components/BackButton/BackButton";
 import OrderDetailsBuyer from "./OrderDetailsBuyer";
 import OrderDetailsOrder from "./OrderDetailsOrder";
 import OrderDetailsStatus from "./OrderDetailsStatus";
 
-const OrderDetails = ({ cachedOrders }) => {
+const OrderDetails = () => {
   /* eslint-disable react/destructuring-assignment */
   const { orderID } = useParams();
+  const { userOrders } = useContext(LoginContext);
   const orderIndex = orderID.split("-")[1];
-  const order = cachedOrders[orderIndex];
+  const order = userOrders[orderIndex];
   console.log(order);
   if (order)
     return (

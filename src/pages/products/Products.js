@@ -2,7 +2,7 @@
  * @format
  */
 
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import {
   Button,
@@ -15,6 +15,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import LoginContext from "../../contexts/LoginContext";
 
 const Product = (props) => {
   const { product } = props;
@@ -64,12 +65,14 @@ const Product = (props) => {
   );
 };
 
-const Products = ({ cachedInventory }) => {
+const Products = () => {
   // TODO(#1): Stock quantity quick edit
   // TODO(#2): Copy shop link on button click
   //    `Add Product` button on Product.js
 
   const history = useHistory();
+
+  const { userInventory } = useContext(LoginContext);
 
   const addProduct = (event) => {
     event.preventDefault();
@@ -102,7 +105,7 @@ const Products = ({ cachedInventory }) => {
             <CardBody className="px-5 py-6">
               <Row>
                 {/* eslint-disable react/no-array-index-key */}
-                {cachedInventory?.map((product) => (
+                {userInventory?.map((product) => (
                   <Product product={product} />
                 ))}
               </Row>

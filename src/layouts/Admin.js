@@ -2,7 +2,7 @@
  * @format
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 // reactstrap components
 import { Container } from "reactstrap";
@@ -20,14 +20,12 @@ import routes from "../routes";
 import locaryLogo from "../assets/img/brand/locary-logo.png";
 
 import { instance as axios, getUserToken } from "../axios";
+import LoginContext from "../contexts/LoginContext";
 
 const Admin = (props) => {
   const { location } = props;
-
+  const { setUserOrders, setUserInventory } = useContext(LoginContext);
   const mainContent = React.useRef(null);
-
-  const [cachedOrders, setCachedOrders] = useState([]);
-  const [cachedInventory, setCachedInventory] = useState([]);
 
   const updateCacheData = () => {
     const fetchOrders = async () => {
@@ -49,7 +47,7 @@ const Admin = (props) => {
           data[index].simplifiedID = `${letterID}${numberID}`;
         });
         data.reverse();
-        setCachedOrders(data);
+        setUserOrders(data);
       } catch (e) {
         console.error(e);
       }
@@ -59,7 +57,7 @@ const Admin = (props) => {
         const { data } = await axios.get("products", {
           headers: { Authorization: `Bearer ${getUserToken()}` },
         });
-        setCachedInventory(data);
+        setUserInventory(data);
       } catch (e) {
         console.error(e);
       }
@@ -74,6 +72,7 @@ const Admin = (props) => {
     document.scrollingElement.scrollTop = 0;
     mainContent.current.scrollTop = 0;
     updateCacheData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   const getBrandText = (path) => {
@@ -111,12 +110,12 @@ const Admin = (props) => {
           {routes.map((prop, key) => {
             if (prop.layout === "/admin") {
               return (
-                <Route path={prop.layout + prop.path} key={key} exact>
-                  <prop.component
-                    cachedInventory={cachedInventory}
-                    cachedOrders={cachedOrders}
-                  />
-                </Route>
+                <Route
+                  path={prop.layout + prop.path}
+                  key={key}
+                  component={prop.component}
+                  exact
+                />
               );
             }
             return null;
@@ -127,12 +126,7 @@ const Admin = (props) => {
             path="/admin/products/:name"
             component={ProductDetails}
           />
-          <Route exact path="/admin/orders/:orderID">
-            <OrderDetails
-              cachedOrders={cachedOrders}
-              setCachedOrders={setCachedOrders}
-            />
-          </Route>
+          <Route exact path="/admin/orders/:orderID" component={OrderDetails} />
           <Redirect from="*" to="/admin/index" />
         </Switch>
         <Container fluid>
