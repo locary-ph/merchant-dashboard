@@ -21,7 +21,7 @@ const OrderDetails = (props) => {
       <BackButton />
       <Card className="bg-secondary shadow">
         <CardHeader className="bg-white border-0">
-          <Row className="d-flex justify-content-between">
+          <Row>
             <Col xs="12" sm="6">
               <h6 className="text-uppercase text-light ls-1 mb-1">Summary</h6>
               <h2 className="text-uppercase text-black mb-0">

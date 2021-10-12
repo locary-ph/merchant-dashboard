@@ -100,7 +100,11 @@ export default function OrderDetailsStatus(props) {
   return (
     <>
       <UncontrolledDropdown className="order-details-status">
-        <DropdownToggle caret className="text-capitalize order-details-button">
+        <DropdownToggle
+          caret
+          color="warning"
+          className="text-capitalize order-details-button"
+        >
           <i className={currentStatusIcon} />
           {currentStatus.toLowerCase()}
         </DropdownToggle>
