@@ -44,6 +44,7 @@ const Orders = () => {
     borderRadius: 10,
     fontSize: "0.65rem",
     margin: "auto 5px",
+    minWidth: "100px",
   };
 
   return (

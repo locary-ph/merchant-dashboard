@@ -86,13 +86,6 @@ input {
   background-color: #fe634e;
 }
 
-/* ============= Orders Page ============= */
-.order-category-div {
-  display: flex;
-  overflow: auto;
-  padding-bottom: 5px;
-}
-
 /* ============= Order Details ============= */
 .order-details-buyer-label {
   width: 200px;
