@@ -52,7 +52,7 @@ function OrderList({ filter }) {
     ON: "info",
     DELIVERED: "success",
     CANCELLED: "danger",
-    REJECT: "danger",
+    REJECTED: "danger",
   };
 
   const displayOrders = () =>

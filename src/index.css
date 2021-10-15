@@ -92,14 +92,6 @@ input {
   overflow: auto;
   padding-bottom: 5px;
 }
-.order-category-div button {
-  width: 100%;
-}
-@media (max-width: 557px) {
-  .order-category-div button {
-    width: 90px;
-  }
-}
 
 /* ============= Order Details ============= */
 .order-details-buyer-label {

@@ -49,7 +49,7 @@ export default function OrderDetailsStatus(props) {
     cash: [
       "ORDER PLACED",
       "APPROVED",
-      "REJECT",
+      "REJECTED",
       "TO DELIVER",
       "ON THE WAY",
       "DELIVERED",
