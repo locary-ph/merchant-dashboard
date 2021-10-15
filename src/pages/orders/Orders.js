@@ -20,13 +20,6 @@ import OrderList from "../../components/OrderList/OrderList";
 const Orders = () => {
   const [orderStatusFilter, setOrderStatusFilter] = useState("ALL");
 
-  // const checkStatus = (filter) => {
-  //   if (filter === orderStatusFilter) {
-  //     return "btn btn-warning btn-sm";
-  //   }
-  //   return "btn btn-outline-warning btn-sm hidden";
-  // };
-
   const filters = [
     "ALL",
     "UNPAID",
@@ -83,12 +76,6 @@ const Orders = () => {
                           </DropdownItem>
                         );
                       })}
-                      {/* <button
-                          className={checkStatus(filter)}
-                          type="button"
-                          style={buttonStyles}
-                          onClick={() => setOrderStatusFilter(filter)} // optimize uppercase, change in order model
-                        ></button> */}
                     </DropdownMenu>
                   </UncontrolledDropdown>
                 </Col>
