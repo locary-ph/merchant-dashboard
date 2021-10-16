@@ -2,7 +2,7 @@
  * @format
  */
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Button,
   Col,
@@ -17,15 +17,42 @@ import {
 import { useHistory } from "react-router-dom";
 
 import LocationInput from "./LocationInput";
+import LoginContext from "../../contexts/LoginContext";
+import { instance as axios, getUserToken } from "../../axios";
 import toastify from "../../utils/toastify";
 
 function DeliverySettings() {
+  const { user, setUser } = useContext(LoginContext);
   const history = useHistory();
   const [address, setAddress] = useState("");
-  const [inputList, setInputList] = useState([
-    { location: "", fee: "" },
-    { location: "", fee: "" },
-  ]);
+  const [inputList, setInputList] = useState(user.deliveryAreas);
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    const save = async () => {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${getUserToken()}`,
+        },
+      };
+
+      const data = {
+        deliveryAreas: inputList,
+        pickupAddress: address,
+      };
+
+      try {
+        await axios.put("/merchants/delivery", data, config);
+        setUser({ ...user, ...data });
+        toastify(4000, "success", "top-right", "Account settings saved!");
+      } catch (err) {
+        toastify(4000, "error", "top-right", err.response.data.message);
+      }
+    };
+
+    save();
+  };
 
   // handle input change
   const handleInputChange = (e, index) => {
@@ -45,17 +72,6 @@ function DeliverySettings() {
   // handle click event of the Add button
   const addInput = () => {
     setInputList([...inputList, { location: "", fee: "" }]);
-  };
-
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      toastify(4000, "success", "top-right", "Delivery Settings saved!");
-    } catch (err) {
-      console.error(err);
-      toastify(4000, "error", "top-right", err.response.data.message);
-    }
   };
 
   return (
@@ -107,7 +123,8 @@ function DeliverySettings() {
               <div className="mb-4">
                 <h2 className="mb-1">Pick-up</h2>
                 <h5 className="text-muted mb-4 font-weight-normal">
-                  Add delivery options and set a price for each one.
+                  Where do you want the buyer to pickup orders? (Only when they
+                  select pickup on checkout)
                 </h5>
 
                 <div>
@@ -121,7 +138,6 @@ function DeliverySettings() {
                           Pickup address
                         </label>
                         <Input
-                          required
                           className="form-control-alternative"
                           id="pickupAddress"
                           type="text"
