@@ -37,19 +37,24 @@ export default function OrderDetailsOrder(props) {
           </h3>
           <div className="d-flex flex-column">
             <p className="font-weight-bold mb-1">{order.paymentOption}</p>
-            <p className="mb-1">
-              {order.paymentOption === "EWALLET"
-                ? paymentDetails.eWalletMerchant
-                : paymentDetails.bankName}
-            </p>
-            <p className="mb-1">
-              <span className="font-weight-bold">Account name:</span>{" "}
-              {paymentDetails.accountName}
-            </p>
-            <p className="mb-1">
-              <span className="font-weight-bold">Account number:</span>{" "}
-              {paymentDetails.accountNumber}
-            </p>
+            {/* band-aid solution. will fix later */}
+            {order.buyer.paymentDetails ? (
+              <>
+                <p className="mb-1">
+                  {order.paymentOption === "EWALLET"
+                    ? paymentDetails.eWalletMerchant
+                    : paymentDetails.bankName}
+                </p>
+                <p className="mb-1">
+                  <span className="font-weight-bold">Account name:</span>{" "}
+                  {paymentDetails.accountName}
+                </p>
+                <p className="mb-1">
+                  <span className="font-weight-bold">Account number:</span>{" "}
+                  {paymentDetails.accountNumber}
+                </p>
+              </>
+            ) : null}
           </div>
         </div>
         <div className="d-sm-flex flex-wrap">
@@ -60,7 +65,7 @@ export default function OrderDetailsOrder(props) {
         </div>
         <div className="d-sm-flex flex-wrap">
           <h3 className="mb-0 mr-2 order-details-buyer-label mb-0">Items: </h3>
-          <div className="d-flex justify-content-between w-lg-25 w-100">
+          <div className="d-flex justify-content-between w-lg-50 w-100">
             {order.items.map((item) => {
               const itemPrice = item.product.price.toFixed(2);
               const itemQuantity = item.quantity;
@@ -68,7 +73,7 @@ export default function OrderDetailsOrder(props) {
               return (
                 <>
                   <span>{itemQuantity}x</span>
-                  <span>{item.product.name}</span>
+                  <span className="text-center">{item.product.name}</span>
                   <span>PHP {itemTotal}</span>
                 </>
               );
