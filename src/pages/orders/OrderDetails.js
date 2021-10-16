@@ -21,7 +21,7 @@ const OrderDetails = () => {
   console.log(order);
   if (order)
     return (
-      <Container fluid className="mt-5">
+      <Container fluid className="mt-5 w-lg-75 w-100">
         <BackButton />
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">

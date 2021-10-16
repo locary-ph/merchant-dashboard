@@ -3,11 +3,13 @@
  */
 
 import React from "react";
-import { Row, Col } from "reactstrap";
 import DateFormat from "../../utils/dateFormat";
 
 export default function OrderDetailsOrder(props) {
   const { order } = props;
+  const {
+    buyer: { paymentDetails },
+  } = order;
   const dateTime = new DateFormat(order.createdAt);
   return (
     <>
@@ -33,7 +35,22 @@ export default function OrderDetailsOrder(props) {
           <h3 className="mb-0 mr-2 order-details-buyer-label">
             Payment Method:
           </h3>
-          <p>{order.paymentOption}</p>
+          <div className="d-flex flex-column">
+            <p className="font-weight-bold mb-1">{order.paymentOption}</p>
+            <p className="mb-1">
+              {order.paymentOption === "EWALLET"
+                ? paymentDetails.eWalletMerchant
+                : paymentDetails.bankName}
+            </p>
+            <p className="mb-1">
+              <span className="font-weight-bold">Account name:</span>{" "}
+              {paymentDetails.accountName}
+            </p>
+            <p className="mb-1">
+              <span className="font-weight-bold">Account number:</span>{" "}
+              {paymentDetails.accountNumber}
+            </p>
+          </div>
         </div>
         <div className="d-sm-flex flex-wrap">
           <h3 className="mb-0 mr-2 order-details-buyer-label">
@@ -43,24 +60,16 @@ export default function OrderDetailsOrder(props) {
         </div>
         <div className="d-sm-flex flex-wrap">
           <h3 className="mb-0 mr-2 order-details-buyer-label mb-0">Items: </h3>
-          <div>
+          <div className="d-flex justify-content-between w-lg-25 w-100">
             {order.items.map((item) => {
               const itemPrice = item.product.price.toFixed(2);
               const itemQuantity = item.quantity;
               const itemTotal = (itemPrice * itemQuantity).toFixed(2);
               return (
                 <>
-                  <Row className="mb-3">
-                    <Col xs="12" sm="2">
-                      {itemQuantity}x
-                    </Col>
-                    <Col xs="12" sm="5" className="text-bold">
-                      {item.product.name}
-                    </Col>
-                    <Col xs="12" sm="5">
-                      PHP {itemTotal}
-                    </Col>
-                  </Row>
+                  <span>{itemQuantity}x</span>
+                  <span>{item.product.name}</span>
+                  <span>PHP {itemTotal}</span>
                 </>
               );
             })}
