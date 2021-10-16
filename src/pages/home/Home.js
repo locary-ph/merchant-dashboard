@@ -35,8 +35,6 @@ const RecentOrders = () => (
 
 const Home = () => {
   const { user } = useContext(LoginContext);
-
-  console.log(user);
   const copyShopLink = () => {
     const shopLink = `https://shop.locary.ph/${user.shopUrl}`;
     navigator.clipboard.writeText(shopLink);

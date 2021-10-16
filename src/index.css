@@ -10,6 +10,19 @@
 
 /* argon styles overrides */
 
+.custom-control-input:focus ~ .custom-control-label::before {
+  border-color: #fe634e !important;
+  box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0) !important;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #fe634e !important;
+  background-color: #fe634e !important;
+}
+.custom-control-input:active ~ .custom-control-label::before {
+  background-color: #fe634e !important;
+  border-color: #fe634e !important;
+}
+
 .btn-outline-danger:hover,
 .btn-outline-danger {
   border-color: red;
