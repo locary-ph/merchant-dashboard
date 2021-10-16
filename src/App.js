@@ -12,8 +12,17 @@ import LoginContext from "./contexts/LoginContext";
 
 function App() {
   const [user, setUser] = useState({});
+  const [userInventory, setUserInventory] = useState([]);
+  const [userOrders, setUserOrders] = useState([]);
 
-  const value = { user, setUser };
+  const value = {
+    user,
+    setUser,
+    userOrders,
+    setUserOrders,
+    userInventory,
+    setUserInventory,
+  };
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");

@@ -2,46 +2,17 @@
  * @format
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Table, Badge } from "reactstrap";
-import { instance as axios, getUserToken } from "../../axios";
+
+import LoginContext from "../../contexts/LoginContext";
 
 function OrderList({ filter }) {
-  const [orders, setOrders] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get("/orders", {
-          headers: {
-            Authorization: `Bearer ${getUserToken()}`,
-          },
-        });
-        const orderMap = {};
-        data.forEach((order, index) => {
-          const letterID = `${order.buyer.firstName}${order.buyer.lastName}`
-            .substring(0, 3)
-            .toUpperCase();
-          let numberID = 1;
-          if (orderMap[letterID] !== undefined) orderMap[letterID] += 1;
-          else orderMap[letterID] = numberID;
-          numberID = `00${orderMap[letterID]}`.substring(0, 3);
-          data[index].simplifiedID = `${letterID}${numberID}`;
-        });
-        console.log(data);
-        data.reverse();
-        setOrders(data);
-      } catch (e) {
-        console.error(e);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   const headers = ["Order ID", "Date", "Name", "Items", "Status", "Amount"];
+  const { userOrders } = useContext(LoginContext);
+  console.log(userOrders);
 
   const badgeColor = {
     UNPAID: "warning",
@@ -56,7 +27,7 @@ function OrderList({ filter }) {
   };
 
   const displayOrders = () =>
-    orders.map((order) => {
+    userOrders?.map((order, index) => {
       const { orderStatus } = order;
       if (filter === "all" || filter === orderStatus.toLowerCase()) {
         return (
@@ -64,7 +35,7 @@ function OrderList({ filter }) {
             <th scope="row">
               <Link
                 to={{
-                  pathname: `/admin/orders/${order._id}`,
+                  pathname: `/admin/orders/${order.simplifiedID}-${index}`,
                   state: { order },
                 }}
               >
