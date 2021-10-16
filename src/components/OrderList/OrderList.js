@@ -23,13 +23,15 @@ function OrderList({ filter }) {
     ON: "info",
     DELIVERED: "success",
     CANCELLED: "danger",
-    REJECT: "danger",
+    REJECTED: "danger",
   };
 
-  const displayOrders = () =>
-    userOrders?.map((order, index) => {
+  const displayOrders = () => {
+    let isEmpty = true;
+    const orderView = userOrders?.map((order, index) => {
       const { orderStatus } = order;
       if (filter === "all" || filter === orderStatus.toLowerCase()) {
+        isEmpty = false;
         return (
           <tr>
             <th scope="row">
@@ -71,6 +73,17 @@ function OrderList({ filter }) {
       }
       return null;
     });
+    if (isEmpty) {
+      return (
+        <tr>
+          <td colSpan="6" className="text-center">
+            No {filter} orders
+          </td>
+        </tr>
+      );
+    }
+    return orderView;
+  };
 
   return (
     <Table className="align-items-center table-flush" responsive>
