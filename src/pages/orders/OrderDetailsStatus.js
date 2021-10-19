@@ -87,7 +87,7 @@ export default function OrderDetailsStatus(props) {
         buyerEmail: order.buyerEmail,
         orderStatus: statusMessage,
       };
-      await axios.post("/orders/status", data, config); // TODO: Need to update the server API soon!
+      await axios.put("/orders/status", data, config);
       toastify(4000, "success", "top-right", "Order Status Changed!");
       setModal(!modal);
       setCurrentStatus(statusMessage);
