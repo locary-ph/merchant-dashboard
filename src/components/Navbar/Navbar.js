@@ -17,7 +17,7 @@ const AdminNavbar = ({ brandText, updateCacheData }) => {
       style={{ height: "4.8rem" }}
     >
       <Container fluid className="d-flex justify-content-between">
-        <span className="h4 mb-0 text-black text-uppercase d-inline-block">
+        <span className="h4 mb-0 text-black text-capitalize d-inline-block">
           {brandText}
         </span>
         <Button type="button" onClick={() => update()}>
