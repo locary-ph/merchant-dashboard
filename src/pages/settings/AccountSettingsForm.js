@@ -89,7 +89,7 @@ function AccountSettingsForm({ shopLogo }) {
     };
     try {
       await axios.put("/merchants/change-password", data, config);
-      toastify(4000, "success", "top-right", "Account settings saved!");
+      toastify(4000, "success", "top-right", "Account password changed!");
     } catch (err) {
       toastify(4000, "error", "top-right", err.response.data.message);
     }
