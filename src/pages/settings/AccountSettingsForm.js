@@ -4,7 +4,18 @@
 
 import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
-import { Row, Col, Button, Form, FormGroup, Input } from "reactstrap";
+import {
+  Row,
+  Col,
+  Button,
+  Form,
+  FormGroup,
+  Input,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "reactstrap";
 import { useHistory } from "react-router-dom";
 
 import { instance as axios, getUserToken } from "../../axios";
@@ -23,6 +34,10 @@ function AccountSettingsForm({ shopLogo }) {
   const [lastName, setLastName] = useState(user.lastName);
   const [email, setEmail] = useState(user.email);
   const [mobileNumber, setMobileNumber] = useState(user.mobileNumber);
+  const [showResetModal, setShowResetModal] = useState(false);
+  const [currentPass, setCurrentPass] = useState("");
+  const [newPass, setNewPass] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -52,6 +67,32 @@ function AccountSettingsForm({ shopLogo }) {
     };
 
     save();
+  };
+
+  const closeResetModal = () => {
+    setShowResetModal(false);
+    setCurrentPass("");
+    setNewPass("");
+    setConfirmPass("");
+  };
+
+  const changePass = async () => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getUserToken()}`,
+      },
+    };
+    const data = {
+      currentPass,
+      newPass,
+      confirmPass,
+    };
+    try {
+      await axios.put("/merchants/change-password", data, config);
+      toastify(4000, "success", "top-right", "Account settings saved!");
+    } catch (err) {
+      toastify(4000, "error", "top-right", err.response.data.message);
+    }
   };
 
   return (
@@ -138,6 +179,80 @@ function AccountSettingsForm({ shopLogo }) {
                 onChange={(e) => setMobileNumber(e.target.value)}
               />
             </FormGroup>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Button
+              type="button"
+              className="btn-sm btn-link mb-4 px-1"
+              onClick={() => setShowResetModal(true)}
+            >
+              <span className="text-orange">Reset Password</span>
+            </Button>
+            <Modal isOpen={showResetModal}>
+              <ModalHeader>Reset Password</ModalHeader>
+              <ModalBody>
+                <FormGroup>
+                  <label
+                    className="form-control-label font-weight-normal"
+                    htmlFor="current-pass"
+                  >
+                    Current Password
+                  </label>
+                  <Input
+                    required
+                    className="form-control-alternative"
+                    id="current-pass"
+                    type="password"
+                    value={currentPass}
+                    onChange={(e) => setCurrentPass(e.target.value)}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <label
+                    className="form-control-label font-weight-normal"
+                    htmlFor="new-pass"
+                  >
+                    New Password
+                  </label>
+                  <Input
+                    required
+                    className="form-control-alternative"
+                    id="new-pass"
+                    type="password"
+                    value={newPass}
+                    onChange={(e) => setNewPass(e.target.value)}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <label
+                    className="form-control-label font-weight-normal"
+                    htmlFor="confirm-pass"
+                  >
+                    Confirm New Password
+                  </label>
+                  <Input
+                    required
+                    className="form-control-alternative"
+                    id="confirm-pass"
+                    type="password"
+                    value={confirmPass}
+                    onChange={(e) => setConfirmPass(e.target.value)}
+                  />
+                </FormGroup>
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  type="button"
+                  color="primary"
+                  onClick={() => changePass()}
+                >
+                  Confirm
+                </Button>
+                <Button onClick={() => closeResetModal()}>Cancel</Button>
+              </ModalFooter>
+            </Modal>
           </Col>
         </Row>
       </div>
