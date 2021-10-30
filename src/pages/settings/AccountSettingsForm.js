@@ -77,21 +77,31 @@ function AccountSettingsForm({ shopLogo }) {
   };
 
   const changePass = async () => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${getUserToken()}`,
-      },
-    };
-    const data = {
-      currentPass,
-      newPass,
-      confirmPass,
-    };
-    try {
-      await axios.put("/merchants/change-password", data, config);
-      toastify(4000, "success", "top-right", "Account password changed!");
-    } catch (err) {
-      toastify(4000, "error", "top-right", err.response.data.message);
+    if (!currentPass) {
+      toastify(4000, "error", "top-right", "No current password");
+    } else if (!newPass) {
+      toastify(4000, "error", "top-right", "No new password");
+    } else if (!confirmPass) {
+      toastify(4000, "error", "top-right", "No confirm new password");
+    } else if (newPass !== confirmPass) {
+      toastify(4000, "error", "top-right", "Password doesn't match");
+    } else {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${getUserToken()}`,
+        },
+      };
+      const data = {
+        currentPass,
+        newPass,
+        confirmPass,
+      };
+      try {
+        await axios.put("/merchants/change-password", data, config);
+        toastify(4000, "success", "top-right", "Account password changed!");
+      } catch (err) {
+        toastify(4000, "error", "top-right", err.response.data.message);
+      }
     }
   };
 
