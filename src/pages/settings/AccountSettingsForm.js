@@ -11,6 +11,7 @@ import { instance as axios, getUserToken } from "../../axios";
 import toastify from "../../utils/toastify";
 
 import LoginContext from "../../contexts/LoginContext";
+import AccountSettingsPassword from "./AccountSettingsPassword";
 
 const propTypes = {
   shopLogo: PropTypes.string.isRequired,
@@ -138,6 +139,11 @@ function AccountSettingsForm({ shopLogo }) {
                 onChange={(e) => setMobileNumber(e.target.value)}
               />
             </FormGroup>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <AccountSettingsPassword />
           </Col>
         </Row>
       </div>
