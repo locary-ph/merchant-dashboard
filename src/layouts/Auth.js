@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Container, Row } from "reactstrap";
 
+import ForgotPassword from "../components/ForgotPassword";
 import Footer from "../components/Footer/Footer";
 import Login from "../components/Login";
 import Register from "../components/Register";
@@ -49,6 +50,10 @@ const Auth = (props) => {
                     <Login setLoading={setLoading} />
                   </Route>
                   <Route path="/auth/signup" component={Register} />
+                  <Route
+                    path="/auth/forgot-password/:token"
+                    component={ForgotPassword}
+                  />
                   <Redirect from="*" to="/auth/login" />
                 </Switch>
               </Row>
