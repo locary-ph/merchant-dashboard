@@ -49,7 +49,7 @@ export default function LoginForgotModal() {
         email,
       };
       try {
-        await axios.post("/auth/forgot-password", data);
+        await axios.post("/auth/generate-reset-link", data);
         setIsFinish(true);
       } catch (err) {
         setError(err.response.data.message);
