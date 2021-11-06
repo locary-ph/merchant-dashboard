@@ -51,7 +51,7 @@ const Auth = (props) => {
                   </Route>
                   <Route path="/auth/signup" component={Register} />
                   <Route
-                    path="/auth/forgot-password/:token"
+                    path="/auth/forgot-password/:userId/:token"
                     component={ForgotPassword}
                   />
                   <Redirect from="*" to="/auth/login" />
