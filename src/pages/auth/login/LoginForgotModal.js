@@ -24,7 +24,7 @@ export default function LoginForgotModal() {
 
   const closeModal = () => {
     setShowResetModal(false);
-    setError(""); 
+    setError("");
     setEmail("");
   };
 
@@ -34,8 +34,8 @@ export default function LoginForgotModal() {
   }
 
   const sendAgain = () => {
-    setIsFinish(false); 
-    setError(""); 
+    setIsFinish(false);
+    setError("");
     setEmail("");
   }
 
@@ -50,7 +50,6 @@ export default function LoginForgotModal() {
       };
       try {
         await axios.post("/auth/forgot-password", data);
-        closeModal();
         setIsFinish(true);
       } catch (err) {
         setError(err.response.data.message);
@@ -101,11 +100,11 @@ export default function LoginForgotModal() {
           }
         </ModalBody>
         <ModalFooter>
-          {isFinish ? 
-          <div>
-            <Button color="primary" onClick={() => sendAgain()}>Send Again</Button>
-            <Button onClick={() => closeModal()}>Close</Button>
-          </div> :
+          {isFinish ?
+            <div>
+              <Button color="primary" onClick={() => sendAgain()}>Send Again</Button>
+              <Button onClick={() => closeModal()}>Close</Button>
+            </div> :
             <div>
               <Button
                 color="primary"
