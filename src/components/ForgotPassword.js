@@ -15,6 +15,7 @@ import {
 
 import { useParams, useHistory } from 'react-router-dom';
 import { instance as axios } from "../axios";
+import toastify from '../utils/toastify';
 
 export default function ForgotPassword() {
   const [userId, setUserId] = useState("");
@@ -57,9 +58,12 @@ export default function ForgotPassword() {
       };
       const data = {
         newPass,
+        resetToken,
       };
       try {
         axios.post("/merchants/change-password", data, config) // TODO: reconfigure the backend for this
+        history.replace("/auth/login");
+        toastify(4000, "success", "top-right", "Account password changed!");
       } catch (err) {
         console.log(err);
       }
