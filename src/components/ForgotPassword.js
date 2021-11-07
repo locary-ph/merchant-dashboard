@@ -17,29 +17,29 @@ import { useParams, useHistory } from 'react-router-dom';
 import { instance as axios } from "../axios";
 
 export default function ForgotPassword() {
-  const [userID, setUserID] = useState("")
-  const [newPass, setNewPass] = useState("")
-  const [confirmPass, setConfirmPass] = useState("")
+  const [userId, setUserId] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [newPass, setNewPass] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
   const [strength, setStrength] = useState("");
   const [color, setColor] = useState("danger")
   const [error, setError] = useState("");
-  const { token } = useParams();
+  const { resetToken } = useParams();
   const history = useHistory();
 
+  // Validates the current link/token
   useEffect(() => {
     const validateToken = async () => {
       try {
-        axios.get(`/auth/forgot-password`, {
-          token,
-        }).then(res => {
-          setUserID(res.data.userID);
-        }) // TODO: have to finalize this
+        const res = await axios.get(`/auth/validate-reset-token/${resetToken}`)
+        setUserId(res.data.user._id);
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data.message);
       }
+      setIsLoading(false);
     }
     validateToken();
-  }, [token])
+  }, [resetToken])
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -50,19 +50,23 @@ export default function ForgotPassword() {
     } else if (newPass !== confirmPass) {
       setError("Confirm password doesn't match")
     } else {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${resetToken}`,
+        },
+      };
       const data = {
-        userID,
-        token,
         newPass,
       };
       try {
-        axios.put("/merchants/change-password", data) // TODO: reconfigure the backend for this
+        axios.post("/merchants/change-password", data, config) // TODO: reconfigure the backend for this
       } catch (err) {
         console.log(err);
       }
     }
   }
 
+  // Validate if the password is strong or not
   const passwordValidator = (password) => {
     if (password.length > 5) {
       setStrength("weak");
@@ -83,6 +87,7 @@ export default function ForgotPassword() {
     }
   }
 
+  // Updates the variable that connects to the input
   const onChange = (e) => {
     const password = e.target.value.trim();
     setError("");
@@ -96,6 +101,7 @@ export default function ForgotPassword() {
 
   return (
     <div>
+      {isLoading ? <div>loading...</div> :
       <Card className="bg-secondary shadow">
         <CardHeader className="bg-transparent">
           <div className="text-muted text-center">
@@ -106,7 +112,7 @@ export default function ForgotPassword() {
           {error ? <Alert color="danger">
             {error}
           </Alert> : null}
-          {userID ?
+          {userId ?
             <form onSubmit={onSubmit}>
               <FormGroup className="mb-0">
                 <label htmlFor="new-password">New Password:</label>
@@ -158,7 +164,7 @@ export default function ForgotPassword() {
                 </small> : null}
               </div>
               <div className="text-center">
-                <Button className="mt-4" color="danger">
+                <Button onClick={() => {history.replace("/auth/login")}} className="mt-4" color="danger">
                   Cancel
                 </Button>
                 <Button type="submit" className="mt-4" color="primary">
@@ -168,13 +174,13 @@ export default function ForgotPassword() {
             </form> :
             <div className="text-center">
               <h2>Error</h2>
-              <p>It seems that you are trying to access an expired link.</p>
+              <p>It seems that you are trying to access an invalid reset link.</p>
               <Button onClick={() => {history.push("/auth/login")}} className="mt-4">
                 Go back to login
               </Button>
             </div>}
         </CardBody>
-      </Card>
+      </Card>}
     </div>
   )
 }
