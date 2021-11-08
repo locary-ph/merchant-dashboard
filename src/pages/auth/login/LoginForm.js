@@ -17,6 +17,7 @@ import { instance as axios } from "../../../axios";
 import toastify from "../../../utils/toastify";
 
 import LoginContext from "../../../contexts/LoginContext";
+import LoginForgotModal from "./LoginForgotModal";
 
 const LoginForm = ({ setLoading }) => {
   const { setUser } = useContext(LoginContext);
@@ -104,13 +105,7 @@ const LoginForm = ({ setLoading }) => {
               <span className="text-muted">Remember me</span>
             </label>
           </div>
-          <a
-            className="text-orange"
-            href="#pablo"
-            onClick={(e) => e.preventDefault()}
-          >
-            <small>Forgot password?</small>
-          </a>
+          <LoginForgotModal />
         </div>
         <div className="text-center">
           <Button className="my-4 w-100" color="warning" type="submit">
