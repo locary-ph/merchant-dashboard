@@ -42,7 +42,7 @@ export default function ForgotPassword() {
     validateToken();
   }, [resetToken])
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (!newPass || !confirmPass) {
       setError("missing input fields!"); // Just making sure that nothing can bypass
@@ -61,12 +61,13 @@ export default function ForgotPassword() {
         resetToken,
       };
       try {
-        axios.post("/merchants/change-password", data, config) // TODO: reconfigure the backend for this
-        history.replace("/auth/login");
+        await axios.post("/merchants/change-password", data, config)
         toastify(4000, "success", "top-right", "Account password changed!");
       } catch (err) {
         console.log(err);
+        toastify(5000, "danger", "top-right", "INVALID: Your reset link have already been expired!");
       }
+      history.replace("/auth/login");
     }
   }
 
