@@ -65,7 +65,7 @@ export default function ForgotPassword() {
         toastify(4000, "success", "top-right", "Account password changed!");
       } catch (err) {
         console.log(err);
-        toastify(5000, "danger", "top-right", "INVALID: Your reset link have already been expired!");
+        toastify(5000, "error", "top-right", "Error: Your reset link have already been expired!");
       }
       history.replace("/auth/login");
     }
