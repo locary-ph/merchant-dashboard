@@ -28,7 +28,7 @@ function OrderList({ filter }) {
 
   const displayOrders = () => {
     let isEmpty = true;
-    const orderView = userOrders?.map((order, index) => {
+    const orderView = userOrders?.map((order) => {
       const { orderStatus } = order;
       if (filter === "all" || filter === orderStatus.toLowerCase()) {
         isEmpty = false;
