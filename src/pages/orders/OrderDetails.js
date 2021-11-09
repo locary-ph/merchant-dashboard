@@ -16,9 +16,13 @@ const OrderDetails = () => {
   /* eslint-disable react/destructuring-assignment */
   const { orderID } = useParams();
   const { userOrders } = useContext(LoginContext);
-  const orderIndex = orderID.split("-")[1];
-  const order = userOrders[orderIndex];
-  console.log(order);
+  let order;
+  for (let i = 0; i < userOrders.length; i++) {
+    if (userOrders[i].simplifiedID === orderID) {
+      order = userOrders[i];
+      break;
+    }
+  }
   if (order)
     return (
       <Container fluid className="mt-5 w-lg-75 w-100">

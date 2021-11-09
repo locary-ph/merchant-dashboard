@@ -37,8 +37,7 @@ function OrderList({ filter }) {
             <th scope="row">
               <Link
                 to={{
-                  pathname: `/admin/orders/${order.simplifiedID}-${index}`,
-                  state: { order },
+                  pathname: `/admin/orders/${order.simplifiedID}`,
                 }}
               >
                 <span className="mb-0 text-sm">{order.simplifiedID}</span>
