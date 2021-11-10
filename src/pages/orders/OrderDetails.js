@@ -16,13 +16,10 @@ const OrderDetails = () => {
   /* eslint-disable react/destructuring-assignment */
   const { orderID } = useParams();
   const { userOrders } = useContext(LoginContext);
-  let order;
-  for (let i = 0; i < userOrders.length; i++) {
-    if (userOrders[i].simplifiedID === orderID) {
-      order = userOrders[i];
-      break;
-    }
-  }
+
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+  const order = userOrders.find((object) => object.simplifiedID === orderID);
+
   if (order)
     return (
       <Container fluid className="mt-5 w-lg-75 w-100">
