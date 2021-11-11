@@ -4,15 +4,15 @@
 
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Table, Badge } from "reactstrap";
 
 import LoginContext from "../../contexts/LoginContext";
 
 function OrderList({ filter }) {
   const headers = ["Order ID", "Date", "Name", "Items", "Status", "Amount"];
+  const history = useHistory();
   const { userOrders } = useContext(LoginContext);
-  console.log(userOrders);
 
   const badgeColor = {
     UNPAID: "warning",
@@ -33,7 +33,10 @@ function OrderList({ filter }) {
       if (filter === "all" || filter === orderStatus.toLowerCase()) {
         isEmpty = false;
         return (
-          <tr>
+          <tr
+            style={{ cursor: "pointer" }}
+            onClick={() => history.push(`/admin/orders/${order.simplifiedID}`)}
+          >
             <th scope="row">
               <Link
                 to={{
@@ -85,7 +88,7 @@ function OrderList({ filter }) {
   };
 
   return (
-    <Table className="align-items-center table-flush" responsive>
+    <Table className="align-items-center table-flush table-hover" responsive>
       <thead className="thead-light">
         <tr>
           {headers.map((header) => (
