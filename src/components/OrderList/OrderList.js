@@ -38,11 +38,7 @@ function OrderList({ filter }) {
             onClick={() => history.push(`/admin/orders/${order.simplifiedID}`)}
           >
             <th scope="row">
-              <Link
-                to={{
-                  pathname: `/admin/orders/${order.simplifiedID}`,
-                }}
-              >
+              <Link to={`/admin/orders/${order.simplifiedID}`}>
                 <span className="mb-0 text-sm">{order.simplifiedID}</span>
               </Link>
             </th>
